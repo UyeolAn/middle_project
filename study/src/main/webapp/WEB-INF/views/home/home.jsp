@@ -7,14 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- 송민주 10:32gg gggtutyhesrrgargereget
-	as
-	sda
-	sda
-	ada
-	sd
-	a
-	rgaewg
-	kujyfjfjhtd -->
+
 </body>
 </html>
