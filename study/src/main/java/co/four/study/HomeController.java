@@ -18,7 +18,7 @@ public class HomeController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String page = "home/home";
+		String page = "home/home.jsp";
 		ViewResolve.foward(request, response, page);
 	}
 
