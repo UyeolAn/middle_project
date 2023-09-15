@@ -4,52 +4,85 @@
   <html lang="en">
 
   <head>
-    <title>Wish</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Wish shop project">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="client/css/bootstrap4/bootstrap.min.css">
-    <link href="client/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="client/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="client/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-    <link rel="stylesheet" type="text/css" href="client/plugins/OwlCarousel2-2.2.1/animate.css">
-    <link href="client/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="client/css/main_styles.css">
-    <link rel="stylesheet" type="text/css" href="client/css/responsive.css">
-    <link rel="stylesheet" type="text/css" href="client/css/categories.css">
-	<link rel="stylesheet" type="text/css" href="client/css/categories_responsive.css">
-  </head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Male-Fashion | Template</title>
 
-  <body>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
 
-    <div class="super_container">
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="client/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="client/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="client/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="client/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="client/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="client/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="client/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="client/css/style.css" type="text/css">
+</head>
 
-      <!-- Header Start-->
-      <tiles:insertAttribute name="header" />
-      <!-- Header End-->
-
-
-      <!-- Body Start-->
-      <tiles:insertAttribute name="body" />
-      <!-- Body End-->
-
-      
-
-      <!-- Footer Start -->
-	  <tiles:insertAttribute name="footer" />
-      <!-- Footer End -->
-
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
     </div>
 
-    <script src="client/js/jquery-3.2.1.min.js"></script>
-    <script src="client/css/bootstrap4/popper.js"></script>
-    <script src="client/css/bootstrap4/bootstrap.min.js"></script>
-    <script src="client/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="client/plugins/easing/easing.js"></script>
-    <script src="client/plugins/parallax-js-master/parallax.min.js"></script>
-    <script src="client/plugins/colorbox/jquery.colorbox-min.js"></script>
-    <script src="client/js/custom.js"></script>
-  </body>
 
-  </html>
+    <!-- Header Section Begin -->
+      <tiles:insertAttribute name="header"/>
+    <!-- Header Section End -->
+
+
+    <!-- Menu Section Begin -->
+    <section class="shop spad">
+      <div class="container">
+        <div class="row">
+          <tiles:insertAttribute name="menu"/>
+    <!-- Menu Section End -->
+    
+          
+    <!-- Body Section Begin -->
+          <tiles:insertAttribute name="body"/>
+        </div>
+      </div>
+    </section>
+    <!-- Body Section End -->
+
+
+
+    <!-- Footer Section Begin -->
+    <tiles:insertAttribute name="footer"/>
+    <!-- Footer Section End -->
+
+
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="client/js/jquery-3.3.1.min.js"></script>
+    <script src="client/js/bootstrap.min.js"></script>
+    <script src="client/js/jquery.nice-select.min.js"></script>
+    <script src="client/js/jquery.nicescroll.min.js"></script>
+    <script src="client/js/jquery.magnific-popup.min.js"></script>
+    <script src="client/js/jquery.countdown.min.js"></script>
+    <script src="client/js/jquery.slicknav.js"></script>
+    <script src="client/js/mixitup.min.js"></script>
+    <script src="client/js/owl.carousel.min.js"></script>
+    <script src="client/js/main.js"></script>
+</body>
+
+</html>
