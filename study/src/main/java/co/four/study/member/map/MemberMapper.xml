@@ -43,14 +43,5 @@
 
 	</delete>
 
-	<insert id="memberCourse"
-		parameterType="co.four.study.member.service.MemberCourseVO">
-		INSERT INTO MEMBERS
-		VALUES (#{memberId},
-		#{mamberPassword},#{memberName}, #{memberTel},
-		#{memberAddress},
-		#{memberEmail},
-		#{memberEnterDate}, #{memberStopDate}, #{memberAuthor})
-	</insert>
-
+	
 </mapper>
