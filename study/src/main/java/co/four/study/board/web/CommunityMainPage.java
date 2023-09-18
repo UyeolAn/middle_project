@@ -19,6 +19,7 @@ public class CommunityMainPage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = "community/communityMainPage";
+		request.setAttribute("menu", "community");
 		ViewResolve.foward(request, response, page);
 	}
 

@@ -47,7 +47,9 @@
     
           
     <!-- Body Section Begin -->
-          <tiles:insertAttribute name="body"/>
+    	  <div class="col-lg-9">
+          	<tiles:insertAttribute name="body"/>
+          </div>
         </div>
       </div>
     </section>
