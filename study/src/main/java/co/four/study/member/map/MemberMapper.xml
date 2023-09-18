@@ -12,7 +12,7 @@
 		SELET *
 		FROM MEMBERS
 		WHERE MEMBER_ID = #{memberId}
-		<if test='#{memberPassword} != null'>
+		<if test="#{memberPassword} != null">
 			AND MEMBER_PASSWORD = #{memberPassword}
 		</if>
 	</select>

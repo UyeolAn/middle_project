@@ -31,7 +31,8 @@ public class CheckLogin extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		vo.setMemberId(request.getParameter("memberId"));
-		vo.setMemberPassword(Sha256.encrypt(request.getParameter("memberPassword")));
+//		vo.setMemberPassword(Sha256.encrypt(request.getParameter("memberPassword")));
+		vo.setMemberPassword(request.getParameter("memberPassword"));
 		vo.setAuthor(request.getParameter("author"));
 		session.setAttribute("author", vo.getAuthor());
 		vo = dao.memberSelect(vo);
@@ -39,7 +40,7 @@ public class CheckLogin extends HttpServlet {
 		if (vo != null) {
 			session.setAttribute("id", vo.getMemberId());
 			session.setAttribute("name", vo.getMemberName());
-			
+
 		} else {
 			request.setAttribute("message", "비밀번호가 일치하지 않습니다.");
 		}
