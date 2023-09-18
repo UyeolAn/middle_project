@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
   <!DOCTYPE html>
   <html>
 
@@ -12,6 +13,9 @@
 		    font-weight: 700;
 		    text-transform: uppercase;
 		    display: block;
+    	}
+    	.shop__sidebar__categories ul {
+    		height: auto;
     	}
     </style>
   </head>
@@ -40,11 +44,9 @@
                 <div class="card-body">
                   <div class="shop__sidebar__categories">
                     <ul class="nice-scroll">
-                      <li><a href="#">JAVA (20)</a></li>
-                      <li><a href="#">C (20)</a></li>
-                      <li><a href="#">C# (20)</a></li>
-                      <li><a href="#">C++ (20)</a></li>
-                      <li><a href="#">Python (20)</a></li>
+                      <c:forEach items="${it}" var="it" >
+                    	<li><a href="#">${it.courseSubCategory } (${it.subCategoryCount })</a></li>
+                      </c:forEach>
                     </ul>
                   </div>
                 </div>

@@ -8,4 +8,5 @@ public interface CourseService {
 	int courseInsert(CourseVO vo); // 강의 추가
 	int courseUpdate(CourseVO vo); // 강의 수정
 	int courseDelete(CourseVO vo); // 강의 삭제
+	List<CourseVO> courseMenuList(CourseVO vo); // 강의 메뉴조회
 }

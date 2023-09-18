@@ -43,4 +43,11 @@
 		WHERE COURSE_ID = #{courseId}
 	</delete>
 	
+	<select id="courseMenuList" resultType="co.four.study.course.service.CourseVO">
+		SELECT	COURSE_SUB_CATEGORY, COUNT(1) AS SUB_CATEGORY_COUNT
+		FROM	COURSES
+		WHERE	COURSE_MAIN_CATEGORY = UPPER(#{courseMainCategory})
+		GROUP BY COURSE_SUB_CATEGORY
+	</select>
+	
 </mapper>
