@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.four.study.bucket.map.BucketMapper">
 	<select id="bucketSelectList" resultType="co.four.study.bucket.service.BucketVO">
-		select * from bucket;
+		SELECT * FROM BUCKET
 	</select>
 	
 	<select id="bucketSelect" resultType="co.four.study.bucket.service.BucketVO">
-		select * from bucket where member_id = #{memberId}
+		SELECT * FROM BUCKET WHERE MEMBER_ID = #{memberId}
 	</select>
 	
 	<insert id="bucketInsert" parameterType="co.four.study.bucket.service.BucketVO">
-		insert into bucket values (#{memberId}, #{courseId})
+		INSERT INTO BUCKET VALUES (#{memberId}, #{courseId})
 	</insert>
 	
 	<delete id="bucketDelete" parameterType="co.four.study.bucket.service.BucketVO">
-		delete bucket where course_id = #{courseId}
+		DELETE BUCKET WHERE MEMBER_ID = #{memberId} AND COURSE_ID = #{courseId}
 	</delete>
 	
 </mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.four.study.memberCourse.map.MemberCourseMapper">
+	<select id="selectMemberCourseList" resultType="co.four.study.memberCourse.service.MemberCourseVO">
+		SELECT * FROM MEMBERS_COURSES
+	</select>
+	
+	<select id="selectMemberCourse" resultType="co.four.study.memberCourse.service.MemberCourseVO">
+		SELECT * FROM MEMBERS_COURSES WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<insert id="insertMemberCourse" parameterType="co.four.study.memberCourse.service.MemberCourseVO">
+		INSERT INTO MEMBERS_COURSES VALUES (#{memberId}, #{courseId})
+	</insert>
+	
+	<delete id="deleteMemberCourse" parameterType="co.four.study.memberCourse.service.MemberCourseVO">
+		DELETE FROM MEMBERS_COURSES WHERE MEMBER_ID = #{memberId} and course_id = #{courseId}
+	</delete>
+
+</mapper>

@@ -19,7 +19,7 @@
 		</selectKey>
 		INSERT INTO ANSWERS (ANSWER_ID, QUESTION_ID, MEMBER_ID, ANSWER_CONTENT, ANSWER_ENTER_DATE, ANSWER_IMG)
 		VALUES (#{answerId}, #{questionId}, #{memberId}, #{answerContent}, SYSDATE,
-				#{answerImg}, #{answerLike}, #{answerDislike})
+				#{answerImg})
 	</insert>
 	
 	<update id="answerUpdate" parameterType="co.four.study.answer.service.AnswerVO">
