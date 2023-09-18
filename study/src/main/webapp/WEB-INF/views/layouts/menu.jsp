@@ -12,6 +12,9 @@
 	<c:if test="${menu eq 'course'}">
 		<jsp:include page="menu/menuCourse.jsp"></jsp:include>
 	</c:if>
+	<c:if test="${menu eq 'community' }">
+		<jsp:include page="menu/menuCourse.jsp"></jsp:include>
+	</c:if>
   </body>
 
   </html>
