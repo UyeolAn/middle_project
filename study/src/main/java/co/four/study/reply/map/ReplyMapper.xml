@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.four.study.reply.map.ReplyMapper">
+	<select id="replySelectList" resultType="co.four.study.reply.service.ReplyVO">
+		SELECT *
+		FROM replies
+	</select>
+	
+	<select id="replySelect" resultType="co.four.study.reply.service.ReplyVO">
+		SELECT *
+		FROM replies
+		WHERE reply_id = #{replyId}
+	</select>
+	
+	<insert id="replyInsert" parameterType="co.four.study.reply.service.ReplyVO">
+		<selectKey keyProperty="replyId" resultType="int" order="BEFORE">
+        	SELECT NVL(MAX(reply_id), 0) + 1 AS reply_id FROM replies
+      	</selectKey>
+		INSERT INTO replies(reply_id, board_id, member_id, reply_content)
+		VALUES(#{replyId}, #{boardId}, #{memberId}, #{replyContent})
+	</insert>
+	
+	<update id="replyUpdate" parameterType="co.four.study.reply.service.ReplyVO">
+		UPDATE replies
+		<set>
+			<if test="replyContent != null">reply_content = #{replyContent},</if>
+			reply_update_date = SYSDATE;
+		</set>
+		WHERE reply_id = #{replyId}
+	</update>
+	
+	<delete id="replyDelete" parameterType="co.four.study.reply.service.ReplyVO">
+		DELETE FROM replies
+		WHERE reply_id = #{replyId}
+	</delete>
+</mapper>
