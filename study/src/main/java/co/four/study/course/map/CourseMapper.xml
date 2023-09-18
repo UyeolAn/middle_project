@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.four.study.course.map.CoursesMapper">
+
+	<select id="courseSelectList" resultType="co.four.study.course.service.CourseVO">
+		SELECT	*
+		FROM	COURSES
+	</select>
+	
+	<select id="courseSelect" resultType="co.four.study.course.service.CourseVO">
+		SELECT	*
+		FROM	COURSES
+		WHERE	COURSE_ID = #{courseId}
+	</select>
+	
+	<insert id="courseInsert" parameterType="co.four.study.course.service.CourseVO">
+		<selectKey keyProperty="courseId" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(COURSE_ID), 0) + 1 AS COURSE_ID FROM COURSES
+		</selectKey>
+		INSERT INTO COURSES
+		VALUES (#{courseId}, #{courseName}, #{courseScript}, #{coursePrice}, #{courseMainCategory},
+				#{courseSubCategory}, #{courseTeacher}, #{courseGrade}, #{courseImg})
+	</insert>
+	
+	<update id="courseUpdate" parameterType="co.four.study.course.service.CourseVO">
+		UPDATE	COURSES
+		<set>
+			<if test="courseName != null">COURSE_NAME = #{courseName},</if>
+			<if test="coursePrice != -1">COURSE_PRICE = #{coursePrice},</if>
+			<if test="courseMainCategory != null">COURSE_MAIN_CATEGORY = #{courseMainCategory},</if>
+			<if test="courseSubCategory != null">COURSE_SUB_CATEGORY = #{courseSubCategory},</if>
+			<if test="courseTeacher != null">COURSE_TEACHER = #{courseTeacher},</if>
+			<if test="courseGrade != null">COURSE_GRADE = #{courseGrade},</if>
+			<if test="courseGrade != null">COURSE_SCRIPT = #{courseScript},</if>
+			<if test="courseImg != null">COURSE_IMG = #{courseImg},</if>
+			<if test="courseImg == 'delete'">COURSE_IMG = NULL</if>
+		</set>
+		WHERE COURSE_ID = #{courseId}
+	</update>
+	
+	<delete id="courseDelete" parameterType="co.four.study.course.service.CourseVO">
+		DELETE FROM COURSES
+		WHERE COURSE_ID = #{courseId}
+	</delete>
+	
+</mapper>

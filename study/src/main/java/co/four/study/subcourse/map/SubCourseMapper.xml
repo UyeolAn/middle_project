@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.four.study.subcourse.map.SubCourseMapper">
+	
+	<select id="subcourseSelectList" resultType="co.four.study.subcourse.service.SubCourseVO">
+		SELECT	*
+		FROM	SUBCOURSES
+	</select>
+	
+	<select id="subcourseSelect" resultType="co.four.study.subcourse.service.SubCourseVO">
+		SELECT	*
+		FROM	SUBCOURSES
+		WHERE	SUBCOURSE_ID = #{subcourseId}
+		<if test="courseId != null">
+		AND		COURSE_ID = #{courseId}
+		</if>
+	</select>
+	
+	<insert id="subcourseInsert" parameterType="co.four.study.subcourse.service.SubCourseVO">
+		<selectKey keyProperty="subcourseId" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(SUBCOURSE_ID), 0) + 1 AS SUBCOURSE_ID FROM SUBCOURSES
+		</selectKey>
+		INSERT INTO SUBCOURSES
+		VALUES (#{subcourseId}, #{courseId}, #{subcourseName}, #{subcourseLink}, #{subcourseTime})
+	</insert>
+	
+	<update id="subcourseUpdate" parameterType="co.four.study.subcourse.service.SubCourseVO">
+		UPDATE SUBCOURSES
+		<set>
+			<if test="subcourseName != null">SUBCOURSE_NAME = #{subcourseName},</if>
+			<if test="subcourseLink != null">SUBCOURSE_LINK = #{subcourseLink},</if>
+			<if test="subcourseTime != 0">SUBCOURSE_TIME = #{subcourseTime}</if>
+		</set>
+		WHERE SUBCOURSE_ID = #{subcourseId}
+	</update>
+	
+	<delete id="subcourseDelete" parameterType="co.four.study.subcourse.service.SubCourseVO">
+		DELETE FROM SUBCOURSES
+		WHERE SUBCOURSE_ID = #{subcourseId}
+	</delete>
+
+</mapper>

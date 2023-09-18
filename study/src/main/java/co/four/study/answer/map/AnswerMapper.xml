@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.four.study.answer.map.AnswerMapper">
+	
+	<select id="answerSelectList" resultType="co.four.study.answer.service.AnswerVO">
+		SELECT	*
+		FROM	ANSWERS
+	</select>
+	
+	<select id="answerSelect" resultType="co.four.study.answer.service.AnswerVO">
+		SELECT	*
+		FROM	ANSWERS
+		WHERE	ANSWER_ID = #{answerId}
+	</select>
+	
+	<insert id="answerInsert" parameterType="co.four.study.answer.service.AnswerVO">
+		<selectKey keyProperty="answerId" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(ANSWER_ID), 0) + 1 AS ANSWER_ID FROM COURSES
+		</selectKey>
+		INSERT INTO ANSWERS (ANSWER_ID, QUESTION_ID, MEMBER_ID, ANSWER_CONTENT, ANSWER_ENTER_DATE, ANSWER_IMG)
+		VALUES (#{answerId}, #{questionId}, #{memberId}, #{answerContent}, SYSDATE,
+				#{answerImg}, #{answerLike}, #{answerDislike})
+	</insert>
+	
+	<update id="answerUpdate" parameterType="co.four.study.answer.service.AnswerVO">
+		UPDATE ANSWERS
+		<set>
+			<if test="answerContent != null">ANSWER_CONTENT = #{answerContent},</if>
+			ANSWER_UPDATE_DATE = SYSDATE,
+			<if test="answerImg != null">ANSWER_IMG = #{answerImg},</if>
+			<if test="answerImg != 'delete'">ANSWER_IMG = null</if>
+		</set>
+	</update>
+	
+	<delete id="answerDelete" parameterType="co.four.study.answer.service.AnswerVO">
+		DELETE FROM ANSWERS
+		WHERE ANSWER_ID = #{answerId}
+	</delete>
+	
+</mapper>
