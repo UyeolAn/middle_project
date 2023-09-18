@@ -14,7 +14,4 @@ public interface MemberService {
 	
 	int memberDelete(MemberVO vo);
 	
-	List<MemberCourseVO> memberCourse(MemberCourseVO vo);
-	//수강중인 목록 조회
-	
 }
