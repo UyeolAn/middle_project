@@ -27,8 +27,8 @@
 		<hr class="sidebar-divider my-0">
 
 		<!-- Nav Item - Dashboard -->
-		<li class="nav-item active"><a class="nav-link" href="index.html">
-				<i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span>
+		<li class="nav-item active"><a class="nav-link" href="adminhome.do">
+				<i class="fas fa-fw fa-tachometer-alt"></i> <span>HOME</span>
 		</a></li>
 
 		<!-- Divider -->
@@ -41,14 +41,14 @@
 		<li class="nav-item"><a class="nav-link collapsed" href="#"
 			data-toggle="collapse" data-target="#collapseTwo"
 			aria-expanded="true" aria-controls="collapseTwo"> <i
-				class="fas fa-fw fa-cog"></i> <span>Components</span>
+				class="fas fa-fw fa-cog"></i> <span>회원관리</span>
 		</a>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">Custom Components:</h6>
-					<a class="collapse-item" href="buttons.html">Buttons</a> <a
-						class="collapse-item" href="cards.html">Cards</a>
+					<h6 class="collapse-header">Member Management</h6>
+					<a class="collapse-item" href="adminmemberlist.do">회원목록</a> 
+					<a class="collapse-item" href="cards.html">Cards</a>
 				</div>
 			</div></li>
 
