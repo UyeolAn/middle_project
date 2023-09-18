@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.four.study.bucket.map.BucketMapper">
+	<select id="bucketSelectList" resultType="co.four.study.bucket.service.BucketVO">
+		select * from bucket;
+	</select>
+	
+	<select id="bucketSelect" resultType="co.four.study.bucket.service.BucketVO">
+		select * from bucket where member_id = #{memberId}
+	</select>
+	
+	<insert id="bucketInsert" parameterType="co.four.study.bucket.service.BucketVO">
+		insert into bucket values (#{memberId}, #{courseId})
+	</insert>
+	
+	<delete id="bucketDelete" parameterType="co.four.study.bucket.service.BucketVO">
+		delete bucket where course_id = #{courseId}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.four.study.review.map.ReviewMapper">
+	<select id="reviewSelectList" resultType="co.four.study.review.service.ReviewVO">
+		SELECT *
+		FROM REVIEWS
+	</select>
+	
+	<select id="reviewSelect" resultType="co.four.study.review.service.ReviewVO">
+		SELECT * FROM REVIEWS WHERE REVIEW_ID = #{reviewId}
+	</select>
+	
+	<insert id="reviewInsert" parameterType="co.four.study.review.service.ReviewVO">
+		<selectKey keyProperty="reviewId" resultType="int" order="BEFORE">
+         	SELECT NVL(MAX(REVIEW_ID), 0) + 1 AS REVIEW_ID FROM REVIEWS
+      	</selectKey>
+      	INSERT INTO REVIEWS VALUES (#{reviewId}, #{memberId}, #{courseId}, #{reviewContent}, #{reviewStars}, 
+      	SYSDATE, SYSDATE)
+	</insert>
+	
+	<delete id="reviewDelete" parameterType="co.four.study.review.service.ReviewVO">
+		DELETE REVIEWS WHERE REVIEW_ID = #{reviewId}
+	</delete>
+	
+	<update id="reviewUpdate" parameterType="co.four.study.review.service.ReviewVO">
+		UPDATE REVIEWS
+		<set>
+			<if test="reviewContent != null">REVIEW_CONTENT = #{reviewContent},</if>
+			<if test="reviewStars != -1">REVIEW_STARS = #{reviewStars},</if>
+			REVIEW_UPDATE_DATE = SYSDATE
+		</set>
+		WHERE REVIEW_ID = #{reviewId}
+	</update>
+
+</mapper>
