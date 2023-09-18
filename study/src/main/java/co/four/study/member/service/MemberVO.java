@@ -8,7 +8,7 @@ import lombok.Data;
 public class MemberVO {
 	
 	private String memberId;
-	
+
 	private String memberPassword;
 	
 	private String memberName;
@@ -17,12 +17,12 @@ public class MemberVO {
 	
 	private String memberAddress;
 	
-	private String memberEamil;
+	private String memberEmail;
 	
 	private LocalDate memberEnterDate;
 	
 	private LocalDate memberStopDate;
 	
 	private String memberAuthor;
-	
+
 }
