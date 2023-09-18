@@ -23,6 +23,6 @@ public class MemberVO {
 	
 	private LocalDate memberStopDate;
 	
-	private String memberAuthor;
+	private String Author;
 
 }
