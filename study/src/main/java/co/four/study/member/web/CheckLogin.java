@@ -13,7 +13,7 @@ import co.four.study.common.Sha256;
 import co.four.study.common.ViewResolve;
 import co.four.study.member.service.MemberService;
 import co.four.study.member.service.MemberVO;
-import co.four.study.member.service.impl.MemberServiceImpl;
+import co.four.study.member.serviceImpl.MemberServiceImpl;
 
 @WebServlet("/checkLogin.do")
 public class CheckLogin extends HttpServlet {

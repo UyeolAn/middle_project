@@ -2,7 +2,6 @@ package co.four.study.member.map;
 
 import java.util.List;
 
-import co.four.study.member.service.MemberCourseVO;
 import co.four.study.member.service.MemberVO;
 
 public interface MemberMapper {
@@ -18,7 +17,4 @@ public interface MemberMapper {
 	int memberUpdate(MemberVO vo);
 
 	int memberDelete(MemberVO vo);
-
-	List<MemberCourseVO> memberCourse(MemberCourseVO vo);
-	// 수강중인 목록 조회
 }

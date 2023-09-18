@@ -44,7 +44,9 @@
                     <!-- End of Topbar -->
     
                     <!-- Begin Page Content -->
-                    <tiles:insertAttribute name="body"/>
+                    <div class="container-fluid">
+                    	<tiles:insertAttribute name="body"/>
+                    </div>
                     <!-- /.container-fluid -->
     
                 </div>

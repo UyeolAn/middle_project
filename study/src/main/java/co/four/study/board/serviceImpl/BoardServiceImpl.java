@@ -1,4 +1,4 @@
-package co.four.study.board.service.impl;
+package co.four.study.board.serviceImpl;
 
 import java.util.List;
 

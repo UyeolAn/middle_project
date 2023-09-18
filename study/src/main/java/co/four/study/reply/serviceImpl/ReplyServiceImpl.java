@@ -1,4 +1,4 @@
-package co.four.study.reply.service.impl;
+package co.four.study.reply.serviceImpl;
 
 import java.util.List;
 
