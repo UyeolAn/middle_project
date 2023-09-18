@@ -6,13 +6,13 @@ public interface MemberService {
 	
 	List<MemberVO> memberSelectList();
 	//멤버 전체 조회
-	MemberVO memberSearch(MemberVO vo);
+	MemberVO memberSelect(MemberVO vo);
 	//ID값 입력>> 검색
-	MemberVO memberAdd(MemberVO vo);
+	int memberInsert(MemberVO vo);
 	
-	MemberVO memberModify(MemberVO vo);
+	int memberUpdate(MemberVO vo);
 	
-	MemberVO memberDelete(MemberVO vo);
+	int memberDelete(MemberVO vo);
 	
 	List<MemberCourseVO> memberCourse(MemberCourseVO vo);
 	//수강중인 목록 조회

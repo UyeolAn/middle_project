@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.four.study.member.map.MemberMapper">
 
-	<select id="memberList"
+	<select id="memberSelectList"
 		resultType="co.four.study.member.service.MemberVO">
 		SELET * FROM MEMBERS
 	</select>
 
-	<select id="memberSearch"
+	<select id="memberSelect"
 		resultType="co.four.study.member.service.MemberVO">
 		SELET *
 		FROM MEMBERS
@@ -17,7 +17,7 @@
 		</if>
 	</select>
 
-	<insert id="memberAdd"
+	<insert id="memberInsert"
 		parameterType="co.four.study.member.service.MemberVO">
 		INSERT INTO MEMBERS
 		VALUES (#{memberId},
@@ -27,7 +27,7 @@
 		#{memberEnterDate}, #{memberStopDate}, #{memberAuthor})
 	</insert>
 
-	<update id="memberModify"
+	<update id="memberUpdate"
 		parameterType="co.four.study.member.service.MemberVO">
 		UPDATE MEMBERS
 		<if test="membername != null">MEMBER_NAME = #{memberName},</if>

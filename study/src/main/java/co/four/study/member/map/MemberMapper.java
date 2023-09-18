@@ -9,13 +9,16 @@ public interface MemberMapper {
 
 	List<MemberVO> memberSelectList();
 
-	MemberVO memberSearch(MemberVO vo);
+	// 멤버 전체 조회
+	MemberVO memberSelect(MemberVO vo);
 
-	MemberVO memberAdd(MemberVO vo);
+	// ID값 입력>> 검색
+	int memberInsert(MemberVO vo);
 
-	MemberVO memberModify(MemberVO vo);
+	int memberUpdate(MemberVO vo);
 
-	MemberVO memberDelete(MemberVO vo);
-	
+	int memberDelete(MemberVO vo);
+
 	List<MemberCourseVO> memberCourse(MemberCourseVO vo);
+	// 수강중인 목록 조회
 }

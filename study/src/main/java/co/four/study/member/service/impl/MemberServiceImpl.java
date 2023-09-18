@@ -16,36 +16,39 @@ public class MemberServiceImpl implements MemberService {
 	private MemberMapper map = sqlSession.getMapper(MemberMapper.class);
 
 	@Override
-	public List<MemberVO> memberList() {
-
-		return map.memberList();
-	}
-
-	@Override
-	public MemberVO memberSearch(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return map.memberSearch(vo);
-	}
-
-	@Override
-	public MemberVO memberAdd(MemberVO vo) {
-		return map.memberAdd(vo);
-	}
-
-	@Override
-	public MemberVO memberModify(MemberVO vo) {
-		return map.memberModify(vo);
-	}
-
-	@Override
-	public MemberVO memberDelete(MemberVO vo) {
-		return map.memberDelete(vo);
-	}
-
-	@Override
 	public List<MemberCourseVO> memberCourse(MemberCourseVO vo) {
 
 		return map.memberCourse(vo);
+	}
+
+	@Override
+	public List<MemberVO> memberSelectList() {
+
+		return map.memberSelectList();
+	}
+
+	@Override
+	public MemberVO memberSelect(MemberVO vo) {
+
+		return map.memberSelect(vo);
+	}
+
+	@Override
+	public int memberInsert(MemberVO vo) {
+
+		return map.memberInsert(vo);
+	}
+
+	@Override
+	public int memberUpdate(MemberVO vo) {
+
+		return map.memberUpdate(vo);
+	}
+
+	@Override
+	public int memberDelete(MemberVO vo) {
+
+		return memberDelete(vo);
 	}
 
 }
