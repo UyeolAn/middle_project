@@ -7,7 +7,7 @@ import co.four.study.member.service.MemberVO;
 
 public interface MemberMapper {
 
-	List<MemberVO> memberList();
+	List<MemberVO> memberSelectList();
 
 	MemberVO memberSearch(MemberVO vo);
 
