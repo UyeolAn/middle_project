@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
   <!DOCTYPE html>
   <html>
 
@@ -48,28 +49,27 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li><a href="home.do">Home</a></li>
-                            <li class="active"><a href="courseall.do">Course</a>
+                            <li class="<c:if test="${menu eq 'course'}">active</c:if>"><a href="courseall.do">Course</a>
                                 <ul class="dropdown">
                                     <li><a href="./about.html">IT</a></li>
                                     <li><a href="./shop-details.html">English</a></li>
                                     <li><a href="./shopping-cart.html">Computer</a></li>
                                 </ul>
                             </li>
-							<li class="active"><a href="courseall.do">Package</a>
+							<li class="<c:if test="${menu eq 'package'}">active</c:if>"><a href="courseall.do">Package</a>
                                 <ul class="dropdown">
                                     <li><a href="./about.html">초급</a></li>
                                     <li><a href="./shop-details.html">중급</a></li>
                                     <li><a href="./shopping-cart.html">고급</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Community</a>
+                            <li class="<c:if test="${menu eq 'community'}">active</c:if>"><a href="#">Community</a>
                                 <ul class="dropdown">
                                     <li><a href="./about.html">질문게시판</a></li>
                                     <li><a href="./shop-details.html">자유게시판</a></li>
                                     <li><a href="./shopping-cart.html">My Page</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">My Page</a></li>
                         </ul>
                     </nav>
                 </div>

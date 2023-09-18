@@ -123,7 +123,7 @@
                              <li><a href="./shopping-cart.html">My Page</a></li>
                          </ul>
                      </li>
-                     <li><a href="./blog.html">My Page</a></li>
+
                  </ul>
             </nav>
           </div>

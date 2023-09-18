@@ -22,6 +22,7 @@ public class CourseAll extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = "course/courseAll";
+		request.setAttribute("menu", "course");
 		ViewResolve.foward(request, response, page);
 	}
 
