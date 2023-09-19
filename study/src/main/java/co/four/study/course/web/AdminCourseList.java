@@ -27,7 +27,7 @@ public class AdminCourseList extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CourseService dao = new CourseServiceImpl();
-		List<CourseVO> list = dao.courseSelectList();
+		List<CourseVO> list = dao.courseSelectList(null);
 		
 		String page = "admin/course/courselist";
 		
