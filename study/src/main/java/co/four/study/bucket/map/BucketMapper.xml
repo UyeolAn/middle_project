@@ -17,4 +17,9 @@
 		DELETE BUCKET WHERE MEMBER_ID = #{memberId} AND COURSE_ID = #{courseId}
 	</delete>
 	
+	<select id="countBucket" resultType="Integer" parameterType="co.four.study.member.service.MemberVO">
+		SELECT COUNT(*) 
+		FROM BUCKET WHERE MEMBER_ID = #{memberId}
+	</select>
+	
 </mapper>

@@ -31,5 +31,10 @@
 		</set>
 		WHERE REVIEW_ID = #{reviewId}
 	</update>
+	
+	<select id="countReview" resultType="Integer" parameterType="co.four.study.member.service.MemberVO">
+		SELECT COUNT(*) 
+		FROM REVIEWS WHERE MEMBER_ID = #{memberId}
+	</select>
 
 </mapper>

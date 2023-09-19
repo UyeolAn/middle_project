@@ -39,4 +39,9 @@
 		FROM replies
 		WHERE reply_id = #{id}
 	</select>
+	
+	<select id="countReply" resultType="Integer" parameterType="co.four.study.member.service.MemberVO">
+		SELECT COUNT(*) 
+		FROM REPLIES WHERE MEMBER_ID = #{memberId}
+	</select>
 </mapper>

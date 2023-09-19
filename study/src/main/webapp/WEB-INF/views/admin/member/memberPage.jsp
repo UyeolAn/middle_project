@@ -8,22 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
-    <!-- <div class="card shadow mb-4" style="padding: 20px;" >
-            <img src="admin/img/profile.svg" width="100px" style="margin: 20px;">
-            이름 : ${m.memberName}<br>
-            아이디 : ${m.memberId}<br>
-            전화번호 : ${m.memberTel}<br>
-            주소 : ${m.memberAddress}<br>
-            이메일 : ${m.memberEmail}<br>
-            가입일 : ${m.memberEnterDate}<br>
-            정지여부 : 
-            <c:if test="${m.memberStopDate ne null}">Y
-                <br>정지일 : ${m.memberStopDate}
-            </c:if>
-            <c:if test="${m.memberStopDate eq null}">N</c:if>
-    </div> -->
     <section style="background-color: #eee;">
         <div class="container py-5">
           <div class="row">
@@ -64,24 +51,24 @@
                 <div class="card-body p-0">
                   <ul class="list-group list-group-flush rounded-3">
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fas fa-globe fa-lg text-warning"></i>
-                      <p class="mb-0">https://mdbootstrap.com</p>
+                      <span><i class="bi bi-coin fa-lg text-warning"></i> 수강 강의 가격 합</span>
+                      <p class="mb-0">${price}원</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                      <p class="mb-0">mdbootstrap</p>
+                      <span><i class="bi bi-check-all fa-lg" style="color: blue;"></i> 회원이 쓴 후기</span>
+                      <p class="mb-0">${review}개</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                      <p class="mb-0">@mdbootstrap</p>
+                      <span><i class="bi bi-indent fa-lg" style="color: #55acee;"></i> 회원이 쓴 댓글</span>
+                      <p class="mb-0">${reply}개</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                      <p class="mb-0">mdbootstrap</p>
+                      <span><i class="bi bi-question-circle fa-lg" style="color: #ac2bac;"></i> 회원이 쓴 질문</span>
+                      <p class="mb-0">${question}개</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                      <p class="mb-0">mdbootstrap</p>
+                      <span><i class="bi bi-bucket-fill fa-lg" style="color: #3b5998;"></i> 회원이 담은 장바구니</span>
+                      <p class="mb-0">${bucket}개</p>
                     </li>
                   </ul>
                 </div>
@@ -150,68 +137,19 @@
                   <div class="card mb-4">
                     <div class="card-body">
                       <p class="mb-4"><span class="text-primary font-italic me-1">강의 별 진도율</span></p>
-                      <c:forEach items="${courses }" var="c">
-                        <p class="mt-4 mb-1" style="font-size: .77rem;"><span class="cid" name=${c.courseId}>${c.courseName}</span></p>
+                      <c:forEach items="${mclist }" var="c">
+                        <p class="mt-4 mb-1" style="font-size: .77rem;"><span class="cid" name=${c.courseId}>${c.courseName} 
+                          <c:if test="${c.jindo eq null}">(0%)</c:if>
+                          <c:if test="${c.jindo ne NaN}">(${c.jindo}%)</c:if>
+                          </span></p>
                         <div class="progress rounded" style="height: 5px;">
-                          <div class="progress-bar" role="progressbar" style="width: ${c.jindo}" aria-valuenow="80"
+                          <div class="progress-bar" role="progressbar" style="width: ${c.jindo}%" aria-valuenow="80"
                             aria-valuemin="0" aria-valuemax="100" id=${c.courseId}></div>
                         </div>
                       </c:forEach>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="col-xl-12 col-lg-12">
-                        <div class="card shadow mb-12">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-pie pt-4">
-                                    <canvas id="myPieChart"></canvas>
-                                </div>
-                                <hr>
-                                Styling for the donut chart can be found in the
-                                <code>/js/demo/chart-pie-demo.js</code> file.
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                <!-- <div class="col-md-6">
-                  <div class="card mb-4 mb-md-0">
-                    <div class="card-body">
-                      <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                      </p>
-                      <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                      <div class="progress rounded" style="height: 5px;">
-                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                      <div class="progress rounded" style="height: 5px;">
-                        <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                      <div class="progress rounded" style="height: 5px;">
-                        <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                      <div class="progress rounded" style="height: 5px;">
-                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                      <div class="progress rounded mb-2" style="height: 5px;">
-                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
               </div>
             </div>
           </div>
@@ -243,35 +181,9 @@
             location.reload(true);
         })
 
-        // console.log( document.querySelectorAll('span.cid')[1].getAttribute("name"));
-        let cids = [];
-        cids = document.querySelectorAll('span.cid');
-        for(let i = 0; i < cids.length; i++) {
-            let cid = cids[i].getAttribute("name");
-            console.log(cids[i].getAttribute("name"));
-            fetch('coursenameselect.do?cid='+cid)
-            .then(resolve=> resolve.json())
-            .then(result=> inputCourseName(result.course.courseName,cid));
+        let mcList = "${mclist}";
+        console.log(mcList);
 
-            fetch('adminmemberjindo.do?cid='+cid+'&mid='+id)
-            .then(resolve=>resolve.json())
-            .then(result=>inputJindo(result.jindo,cid));
-
-        } 
-  
-        function inputJindo(jindo,cid) {
-            console.log(cid);
-            console.log($(`#`+cid).css("width",jindo+`%`));
-            console.log(jindo);
-            // $('div[name='+cid+']').getAttribute("width");
-            
-        }
-
-        function inputCourseName(name,cid) {
-            console.log(name);
-            // $('span.cid').text(name);
-            $(`span[name=`+cid+']').text(name);
-        }
 
       </script>
       

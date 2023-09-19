@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.four.study.bucket.service.BucketService;
+import co.four.study.bucket.serviceImpl.BucketServiceImpl;
 import co.four.study.common.ViewResolve;
 import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
@@ -19,6 +21,12 @@ import co.four.study.member.serviceImpl.MemberServiceImpl;
 import co.four.study.memberCourse.service.MemberCourseService;
 import co.four.study.memberCourse.service.MemberCourseVO;
 import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
+import co.four.study.question.service.QuestionService;
+import co.four.study.question.serviceImpl.QuestionServiceImpl;
+import co.four.study.reply.service.ReplyService;
+import co.four.study.reply.serviceImpl.ReplyServiceImpl;
+import co.four.study.review.service.ReviewService;
+import co.four.study.review.serviceImpl.ReviewServiceImpl;
 
 
 @WebServlet("/adminmemberpage.do")
@@ -36,39 +44,61 @@ public class AdminMemberPage extends HttpServlet {
 		//회원 아이디 받아옴
 		String mid = request.getParameter("mid");
 		System.out.println(mid);
-		MemberVO memvo = new MemberVO();
 		MemberService dao = new MemberServiceImpl();
 		MemberCourseVO mcvo = new MemberCourseVO();
 		MemberCourseService mcdao = new MemberCourseServiceImpl();
 		CourseService cdao = new CourseServiceImpl();
 		CourseVO cvo = new CourseVO();
+		ReviewService reviewdao = new ReviewServiceImpl();
+		ReplyService replydao = new ReplyServiceImpl();
+		QuestionService Qdao = new QuestionServiceImpl();
+		BucketService bdao = new BucketServiceImpl();
+		
+		
+		MemberVO memvo = new MemberVO();
 		memvo.setMemberId(mid);
 		
 		mcvo.setMemberId(mid);
 		
 		List<MemberCourseVO> mcvolist = mcdao.selectMemberCourseList(memvo);
 		System.out.println(mcvolist);
-//		mcvo = mcdao.selectMemberCourse(mcvo);
-//		for(MemberCourseVO vo : mcvolist) {
-//			//진도가져오ㅡㄴㄱ
-//			//진도율곙산
-//			System.out.println(vo);
-//			mcvo.setCourseId(vo.getCourseId());
-//			mcvo.setMemberId(vo.getMemberId());
-//			mcvo = mcdao.countJindo(vo);
-//			System.out.println(mcvo);
-////			System.out.println(vo.getTcnt());
-//			vo.setJindo(((double)vo.getCount()/vo.getTcnt()) * 100);
-//			cvo.setCourseId(vo.getCourseId());
-//			cvo = cdao.courseSelect(cvo);
-//			String name = cvo.getCourseName();
-//			vo.setCourseName(name);
-//		}
+		
+		for(MemberCourseVO vo : mcvolist) {
+			System.out.println(vo);
+			mcvo.setMemberId(mid);
+			mcvo.setCourseId(vo.getCourseId());
+			System.out.println(mcvo);
+			mcvo = mcdao.countJindo(mcvo);
+			vo.setCount(mcvo.getCount());
+			vo.setTcnt(mcvo.getTcnt());
+			double jindo =  ((double)vo.getCount()/vo.getTcnt()) * 100;
+			if(Double.isNaN(jindo)) jindo = 0;
+			vo.setJindo(jindo);
+			cvo.setCourseId(vo.getCourseId());
+			cvo = cdao.courseSelect(cvo);
+			vo.setCourseName(cvo.getCourseName());
+		}
+		
+		List<String> category = mcdao.category(memvo);
+		
 		
 		//회원정보 조회 함수
 		memvo = dao.memberPage(mid);
+	
+		int price = mcdao.priceSum(memvo);
+		int review = reviewdao.countReview(memvo);
+		int reply = replydao.countReply(memvo);
+		int q = Qdao.countQuestion(memvo);
+		int bucket = bdao.countBucket(memvo);
+		
 		request.setAttribute("m", memvo);
-		request.setAttribute("courses", mcvolist);
+		request.setAttribute("mclist", mcvolist);
+		request.setAttribute("category", category);
+		request.setAttribute("price", price);
+		request.setAttribute("review", review);
+		request.setAttribute("reply", reply);
+		request.setAttribute("question", q);
+		request.setAttribute("bucket", bucket);
 		
 		String page = "admin/member/memberPage";
 		ViewResolve.foward(request, response, page);

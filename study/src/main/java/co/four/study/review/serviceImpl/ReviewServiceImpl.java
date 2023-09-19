@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import co.four.study.common.DataSource;
+import co.four.study.member.service.MemberVO;
 import co.four.study.review.map.ReviewMapper;
 import co.four.study.review.service.ReviewService;
 import co.four.study.review.service.ReviewVO;
@@ -34,6 +35,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int reviewUpdate(ReviewVO vo) {
 		return map.reviewUpdate(vo);
+	}
+	@Override
+	public int countReview(MemberVO vo) {
+		return map.countReview(vo);
 	}
 
 }
