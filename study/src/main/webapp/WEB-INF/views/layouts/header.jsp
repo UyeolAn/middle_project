@@ -63,11 +63,10 @@
                                     <li><a href="./shopping-cart.html">고급</a></li>
                                 </ul>
                             </li>
-                            <li class="<c:if test="${menu eq 'community'}">active</c:if>"><a href="#">Community</a>
+                            <li class="<c:if test="${menu eq 'community'}">active</c:if>"><a href="communitymainpage.do">Community</a>
                                 <ul class="dropdown">
-                                    <li><a href="./about.html">질문게시판</a></li>
-                                    <li><a href="./shop-details.html">자유게시판</a></li>
-                                    <li><a href="./shopping-cart.html">My Page</a></li>
+                                    <li><a href="communityqnapage.do">질문게시판</a></li>
+                                    <li><a href="communityfreepage.do">자유게시판</a></li>
                                 </ul>
                             </li>
                         </ul>
