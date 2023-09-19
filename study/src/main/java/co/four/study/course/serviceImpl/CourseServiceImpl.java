@@ -1,6 +1,7 @@
 package co.four.study.course.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -15,8 +16,8 @@ public class CourseServiceImpl implements CourseService {
 	private CourseMapper map = sqlSession.getMapper(CourseMapper.class);
 
 	@Override
-	public List<CourseVO> courseSelectList() {
-		return map.courseSelectList();
+	public List<CourseVO> courseSelectList(CourseVO vo) {
+		return map.courseSelectList(vo);
 	}
 
 	@Override
@@ -40,7 +41,12 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public List<CourseVO> courseMenuList(CourseVO vo) {
-		return map.courseMenuList(vo);
+	public List<CourseVO> courseSubCategory(CourseVO vo) {
+		return map.courseSubCategory(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> courseMainCategory() {
+		return map.courseMainCategory();
 	}
 }

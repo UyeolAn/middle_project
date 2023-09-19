@@ -18,6 +18,7 @@
     		height: auto;
     	}
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   </head>
 
   <body>
@@ -33,7 +34,7 @@
           <div class="accordion" id="accordionExample">
           	<div class="card">
           	  <div class="course-all">
-	            <a href="#list">전체보기</a>
+	            <a href="courseList.do">전체보기</a>
 	          </div>
           	</div>
             <div class="card">
@@ -45,7 +46,9 @@
                   <div class="shop__sidebar__categories">
                     <ul class="nice-scroll">
                       <c:forEach items="${it}" var="it" >
-                    	<li><a href="#">${it.courseSubCategory } (${it.subCategoryCount })</a></li>
+                    	<li onclick="selectList(this)" data-c="${it.courseSubCategory }">
+                    	  <span>${it.courseSubCategory } (${it.subCategoryCount })</span>
+                    	</li>
                       </c:forEach>
                     </ul>
                   </div>
@@ -58,10 +61,13 @@
               </div>
               <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
                 <div class="card-body">
-                  <div class="shop__sidebar__brand">
-                    <ul>
-                      <li><a href="#">TOEIC</a></li>
-                      <li><a href="#">TOEFL</a></li>
+                  <div class="shop__sidebar__categories">
+                    <ul class="nice-scroll">
+                      <c:forEach items="${english}" var="eng" >
+                    	<li onclick="selectList(this)" data-c="${eng.courseSubCategory }">
+                    	  <span>${eng.courseSubCategory } (${eng.subCategoryCount })</span>
+                    	</li>
+                      </c:forEach>
                     </ul>
                   </div>
                 </div>
@@ -73,7 +79,7 @@
               </div>
               <div id="collapseFour" class="collapse" data-parent="#accordionExample">
                 <div class="card-body">
-                  <div class="shop__sidebar__size">
+                  <div class="shop__sidebar__categories">
                     <label for="xs">초급
                       <input type="radio" id="xs">
                     </label>

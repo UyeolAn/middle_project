@@ -102,14 +102,14 @@
             <nav class="header__menu mobile-menu">
                  <ul>
                      <li class="active"><a href="home.do">Home</a></li>
-                     <li><a href="courseall.do">Course</a>
+                     <li><a href="courseList.do">Course</a>
                          <ul class="dropdown">
                              <li><a href="./about.html">IT</a></li>
                              <li><a href="./shop-details.html">English</a></li>
                              <li><a href="./shopping-cart.html">Computer</a></li>
                          </ul>
                      </li>
-					<li><a href="courseall.do">Package</a>
+					<li><a href="">Package</a>
                          <ul class="dropdown">
                              <li><a href="./about.html">초급</a></li>
                              <li><a href="./shop-details.html">중급</a></li>
