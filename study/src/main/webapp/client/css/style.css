@@ -964,9 +964,9 @@ ol {
 	visibility: visible;
 }
 
-.product__item:hover .product__item__text h6 {
+/*.product__item:hover .product__item__text h6 {
 	opacity: 0;
-}
+}*/
 
 .product__item:hover .product__item__text .product__color__select {
 	opacity: 1;
@@ -2080,10 +2080,22 @@ ol {
 	font-family: "FontAwesome";
 }
 
+/*전유진 course 페이지 추가*/
+.breadcrumb__links span:not(:last-of-type):after {
+	position: absolute;
+	right: -14px;
+	top: 0;
+	content: "";
+	font-family: "FontAwesome";
+}
+
 .breadcrumb__links span {
 	font-size: 15px;
 	color: #b7b7b7;
 	display: inline-block;
+	/*전유진 course 페이지 추가*/
+	margin-right: 18px;
+	position: relative;
 }
 
 /*---------------------

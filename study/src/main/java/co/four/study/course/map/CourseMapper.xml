@@ -5,6 +5,9 @@
 	<select id="courseSelectList" resultType="co.four.study.course.service.CourseVO">
 		SELECT	*
 		FROM	COURSES
+		<if test="courseSubCategory != null">
+		WHERE	COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
+		</if>
 	</select>
 	
 	<select id="courseSelect" resultType="co.four.study.course.service.CourseVO">
@@ -43,11 +46,17 @@
 		WHERE COURSE_ID = #{courseId}
 	</delete>
 	
-	<select id="courseMenuList" resultType="co.four.study.course.service.CourseVO">
-		SELECT	COURSE_SUB_CATEGORY, COUNT(1) AS SUB_CATEGORY_COUNT
+	<select id="courseSubCategory" resultType="co.four.study.course.service.CourseVO">
+		SELECT	UPPER(COURSE_SUB_CATEGORY) COURSE_SUB_CATEGORY, COUNT(1) AS SUB_CATEGORY_COUNT
 		FROM	COURSES
-		WHERE	COURSE_MAIN_CATEGORY = UPPER(#{courseMainCategory})
+		WHERE	COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
 		GROUP BY COURSE_SUB_CATEGORY
+	</select>
+	
+	<select id="courseMainCategory" resultType="map">
+		SELECT	UPPER(COURSE_MAIN_CATEGORY) COURSE_MAIN_CATEGORY
+		FROM	COURSES
+		GROUP BY COURSE_MAIN_CATEGORY
 	</select>
 	
 

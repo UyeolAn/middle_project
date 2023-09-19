@@ -49,14 +49,14 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li><a href="home.do">Home</a></li>
-                            <li class="<c:if test="${menu eq 'course'}">active</c:if>"><a href="courseall.do">Course</a>
+                            <li class="<c:if test="${menu eq 'course'}">active</c:if>"><a href="courseList.do">Course</a>
                                 <ul class="dropdown">
                                     <li><a href="./about.html">IT</a></li>
                                     <li><a href="./shop-details.html">English</a></li>
                                     <li><a href="./shopping-cart.html">Computer</a></li>
                                 </ul>
                             </li>
-							<li class="<c:if test="${menu eq 'package'}">active</c:if>"><a href="courseall.do">Package</a>
+							<li class="<c:if test="${menu eq 'package'}">active</c:if>"><a href="">Package</a>
                                 <ul class="dropdown">
                                     <li><a href="./about.html">초급</a></li>
                                     <li><a href="./shop-details.html">중급</a></li>
@@ -93,8 +93,15 @@
                     <div class="breadcrumb__text">
                         <h4>Course</h4>
                         <div class="breadcrumb__links">
-                            <a href="./index.html">Home</a>
-                            <span>Course</span>
+                            <a href="home.do">Home</a>
+                            <c:if test="${menu eq 'course'}">
+                            	<span>Course</span>
+                            	<span>전체보기</span>
+                            </c:if>
+                            <c:if test="${menu eq 'package'}">
+                            	<span>Package</span>
+                            	<span>전체보기</span>
+                            </c:if>
                         </div>
                     </div>
                 </div>
