@@ -19,6 +19,7 @@ public class CommunityFreePage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = "community/communityFreePage";
+		request.setAttribute("menu", "community");
 		ViewResolve.foward(request, response, page);
 	}
 
