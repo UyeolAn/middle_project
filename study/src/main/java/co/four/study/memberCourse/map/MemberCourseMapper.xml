@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.four.study.memberCourse.map.MemberCourseMapper">
-	<select id="selectMemberCourseList" resultType="co.four.study.memberCourse.service.MemberCourseVO">
-		SELECT * FROM MEMBERS_COURSES
+	<select id="selectMemberCourseList" resultType="co.four.study.memberCourse.service.MemberCourseVO" parameterType="co.four.study.member.service.MemberVO">
+		SELECT * FROM MEMBERS_COURSES WHERE MEMBER_ID = #{memberId}
 	</select>
 	
 	<select id="selectMemberCourse" resultType="co.four.study.memberCourse.service.MemberCourseVO">
@@ -10,11 +10,21 @@
 	</select>
 	
 	<insert id="insertMemberCourse" parameterType="co.four.study.memberCourse.service.MemberCourseVO">
-		INSERT INTO MEMBERS_COURSES VALUES (#{memberId}, #{courseId})
+		INSERT INTO MEMBERS_COURSES VALUES (#{memberId}, #{courseId}, 0)
 	</insert>
 	
 	<delete id="deleteMemberCourse" parameterType="co.four.study.memberCourse.service.MemberCourseVO">
 		DELETE FROM MEMBERS_COURSES WHERE MEMBER_ID = #{memberId} and course_id = #{courseId}
 	</delete>
+	
+	<select id="countJindo" resultType="co.four.study.memberCourse.service.MemberCourseVO">
+		SELECT count,
+		       (SELECT COUNT(1)
+		        FROM subcourses
+		        WHERE course_id = #{courseId}) tcnt
+		FROM members_courses
+		where member_id = #{memberId}
+		and course_id = #{courseId}
+	</select>
 
 </mapper>

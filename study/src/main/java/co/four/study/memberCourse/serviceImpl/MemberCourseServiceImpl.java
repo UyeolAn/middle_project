@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import co.four.study.common.DataSource;
+import co.four.study.member.service.MemberVO;
 import co.four.study.memberCourse.map.MemberCourseMapper;
 import co.four.study.memberCourse.service.MemberCourseService;
 import co.four.study.memberCourse.service.MemberCourseVO;
@@ -15,8 +16,8 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 	private MemberCourseMapper map = sqlSession.getMapper(MemberCourseMapper.class);
 
 	@Override
-	public List<MemberCourseVO> selectMemberCourseList() {
-		return map.selectMemberCourseList();
+	public List<MemberCourseVO> selectMemberCourseList(MemberVO vo) {
+		return map.selectMemberCourseList(vo);
 	}
 
 	@Override
@@ -32,6 +33,11 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 	@Override
 	public int deleteMemberCourse(MemberCourseVO vo) {
 		return map.deleteMemberCourse(vo);
+	}
+
+	@Override
+	public MemberCourseVO countJindo(MemberCourseVO vo) {
+		return map.countJindo(vo);
 	}
 
 }

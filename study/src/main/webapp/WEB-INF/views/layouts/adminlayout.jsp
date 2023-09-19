@@ -21,11 +21,18 @@
     
         <!-- Custom styles for this template-->
         <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
+   		<link href="https://hangeul.pstatic.net/hangeul_static/css/NanumJangMiCe.css" rel="stylesheet">
+        <style>
+            #page-top {
+                font-family: 'NanumSquareRound';
+            }
+        </style>
     
     </head>
     
     <body id="page-top">
-    
+            <script src="admin/vendor/jquery/jquery.min.js"></script>
         <!-- Page Wrapper -->
         <div id="wrapper">
     
@@ -88,7 +95,7 @@
         </div>
     
         <!-- Bootstrap core JavaScript-->
-        <script src="admin/vendor/jquery/jquery.min.js"></script>
+
         <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     
         <!-- Core plugin JavaScript-->

@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -24,7 +29,7 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%"
+				<table class="table table-bordered" id="dataTable"  width="100%"
 					cellspacing="0">
 					<thead>
 						<tr>
@@ -90,6 +95,13 @@
 			<input type="hidden" id="mid" name="mid">
 		</form> 
 	</div>
+	
+    <!-- Page level plugins -->
+    <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="admin/js/demo/datatables-demo.js"></script>
 	<script>
 	//block클래스 - 정지여부체크박스
 	//체크박스를 눌렀을 떄 체크가 되면 차단, 체크 해제되면 차단해제
@@ -124,6 +136,7 @@
 			form.mid.value = this.children[1].getAttribute("id");
 			form.submit();
 		})
+
 
 
 	</script>

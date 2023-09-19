@@ -53,5 +53,9 @@
 	<select id="memberPage" resultType="co.four.study.member.service.MemberVO">
 		select * from members where member_id = #{memberId}
 	</select>
+	
+	<select id="memberList" resultType="co.four.study.member.service.MemberVO">
+		SELECT * FROM MEMBERS WHERE MEMBER_AUTHOR = 'client' ORDER BY MEMBER_NAME
+	</select>
 
 </mapper>

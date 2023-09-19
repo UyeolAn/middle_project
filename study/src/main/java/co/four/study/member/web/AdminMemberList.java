@@ -28,7 +28,8 @@ public class AdminMemberList extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberService dao = new MemberServiceImpl();
-		List<MemberVO> members = dao.memberSelectList();
+//		List<MemberVO> members = dao.memberSelectList();
+		List<MemberVO> members = dao.memberList();
 		String page = "admin/member/list";
 		
 		request.setAttribute("members", members);
