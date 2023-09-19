@@ -55,4 +55,9 @@ public class MemberServiceImpl implements MemberService {
 		return map.memberPage(memberId);
 	}
 
+	@Override
+	public List<MemberVO> memberList() {
+		return map.memberList();
+	}
+
 }

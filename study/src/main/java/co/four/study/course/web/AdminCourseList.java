@@ -1,4 +1,4 @@
-package co.four.study;
+package co.four.study.course.web;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,43 +10,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.four.study.common.ViewResolve;
-import co.four.study.memberCourse.service.MemberCourseService;
-import co.four.study.memberCourse.service.MemberCourseVO;
-import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
+import co.four.study.course.service.CourseService;
+import co.four.study.course.service.CourseVO;
+import co.four.study.course.serviceImpl.CourseServiceImpl;
 
 
-@WebServlet("/adminhome.do")
-public class AdminHomeController extends HttpServlet {
+@WebServlet("/admincourselist.do")
+public class AdminCourseList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public AdminHomeController() {
+    public AdminCourseList() {
         super();
-
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		MemberCourseService dao = new MemberCourseServiceImpl();
-//		MemberCourseVO vo = new MemberCourseVO();
-//		
-//		vo.setMemberId("uyeol");
-//		vo.setCourseId(2);
-//		vo = dao.countJindo(vo);
-//		
-//		System.out.println(vo);
-//		double num =  ((double)vo.getCount()/vo.getTcnt()) * 100;
-//		System.out.println(num + "%");
-//		
+		CourseService dao = new CourseServiceImpl();
+		List<CourseVO> list = dao.courseSelectList();
 		
+		String page = "admin/course/courselist";
 		
-		String page = "admin/home/home";
+		request.setAttribute("courses", list);
+		
 		ViewResolve.foward(request, response, page);
+		
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		doGet(request, response);
 	}
 

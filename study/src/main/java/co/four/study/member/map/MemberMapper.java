@@ -23,4 +23,7 @@ public interface MemberMapper {
 	
 	//회원페이지 조회
 	MemberVO memberPage(String memberId);
+	
+	//회원 (관리자 제외) 조회
+	List<MemberVO> memberList();
 }
