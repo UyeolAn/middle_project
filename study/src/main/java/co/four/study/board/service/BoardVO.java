@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class BoardVO {
 	
+	// 내부 필드
 	private int boardId;
 	
 	private String memberId;
@@ -21,7 +22,7 @@ public class BoardVO {
 	
 	private String boardImg;
 	
-	private String boardHit;
+	private int boardHit;
 	
 	private int boardLike;
 	

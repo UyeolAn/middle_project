@@ -40,4 +40,10 @@ public class ReplyServiceImpl implements ReplyService {
 		return map.replyDelete(vo);
 	}
 
+	
+	@Override
+	public int replyCnt(int id) {
+		return map.replyCnt(id);
+	}
+
 }

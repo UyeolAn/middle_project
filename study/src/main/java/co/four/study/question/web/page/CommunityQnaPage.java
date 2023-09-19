@@ -1,4 +1,4 @@
-package co.four.study.board.web;
+package co.four.study.question.web.page;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.four.study.common.ViewResolve;
 
-@WebServlet("/communityfreepage.do")
-public class CommunityFreePage extends HttpServlet {
+@WebServlet("/communityqnapage.do")
+public class CommunityQnaPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public CommunityFreePage() {
+    public CommunityQnaPage() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String page = "community/communityFreePage";
+		String page = "community/communityQnaPage";
 		request.setAttribute("menu", "community");
 		ViewResolve.foward(request, response, page);
 	}
