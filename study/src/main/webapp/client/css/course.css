@@ -23,6 +23,27 @@
     transition: all, 0.3s;
     cursor: pointer;
 }
+.shop__sidebar__tags span {
+	color: #404040;
+	font-size: 13px;
+	font-weight: 700;
+	background: #f1f5f8;
+	padding: 5px 18px;
+	display: inline-block;
+	text-transform: uppercase;
+	margin-right: 6px;
+	margin-bottom: 10px;
+	-webkit-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+}
+
+.shop__sidebar__tags span:hover,
+.shop__sidebar__tags span.active {
+    background: #111111;
+    color: #ffffff;
+}
+
 
 /*.breadcrumb__links span:after {
     position: absolute;
