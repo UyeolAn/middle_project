@@ -5,6 +5,9 @@
 	<select id="courseSelectList" resultType="co.four.study.course.service.CourseVO">
 		SELECT	*
 		FROM	COURSES
+		<if test="courseMainCategory != null">
+		WHERE	COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
+		</if>
 		<if test="courseSubCategory != null">
 		WHERE	COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
 		</if>
@@ -59,5 +62,24 @@
 		GROUP BY COURSE_MAIN_CATEGORY
 	</select>
 	
+	<select id="courseTotalCount" resultType="int">
+		SELECT COUNT(1) FROM COURSES
+	</select>
+	
+	<select id="coursePagingList" resultType="co.four.study.course.service.CourseVO">
+		SELECT  T.*
+		FROM   (SELECT ROWNUM RNM, A.*
+		        FROM ( SELECT * 
+		               FROM   COURSES 
+		               <if test="courseMainCategory != null">
+		               WHERE COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
+		               </if>
+		               <if test="courseSubCategory != null">
+					   WHERE COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
+					   </if>
+		             ) A
+		        ) T
+		WHERE RNM BETWEEN #{start} AND #{end}
+	</select>
 
 </mapper>

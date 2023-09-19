@@ -104,9 +104,8 @@
                      <li class="active"><a href="home.do">Home</a></li>
                      <li><a href="courseList.do">Course</a>
                          <ul class="dropdown">
-                             <li><a href="./about.html">IT</a></li>
-                             <li><a href="./shop-details.html">English</a></li>
-                             <li><a href="./shopping-cart.html">Computer</a></li>
+                             <li><a href="courseList.do?cid=it">IT</a></li>
+                             <li><a href="courseList.do?cid=english">English</a></li>
                          </ul>
                      </li>
 					<li><a href="">Package</a>

@@ -14,4 +14,7 @@ public class CourseVO {
 	private String courseGrade;
 	private String courseImg;
 	private int subCategoryCount; // 서브카테고리 수
+	
+	// 페이징 관련
+	int start, end;
 }
