@@ -45,4 +45,14 @@ public class MemberServiceImpl implements MemberService {
 		return map.memberDelete(vo);
 	}
 
+	@Override
+	public int memberBlock(MemberVO vo) {
+		return map.memberBlock(vo);
+	}
+
+	@Override
+	public MemberVO memberPage(String memberId) {
+		return map.memberPage(memberId);
+	}
+
 }

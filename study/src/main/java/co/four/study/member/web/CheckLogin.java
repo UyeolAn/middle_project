@@ -31,19 +31,21 @@ public class CheckLogin extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		vo.setMemberId(request.getParameter("memberId"));
-		vo.setMemberPassword(Sha256.encrypt(request.getParameter("memberPassword")));
-		//vo.setMemberName(request.getParameter("memberPassword"));
+//		vo.setMemberPassword(Sha256.encrypt(request.getParameter("memberPassword")));
+		vo.setMemberPassword(request.getParameter("memberPassword"));
+		vo.setAuthor(request.getParameter("author"));
+		session.setAttribute("author", vo.getAuthor());
 		vo = dao.memberSelect(vo);
 
 		if (vo != null) {
 			session.setAttribute("id", vo.getMemberId());
 			session.setAttribute("name", vo.getMemberName());
-			request.setAttribute("message", vo.getMemberName() + "님 환영합니다");
+
 		} else {
 			request.setAttribute("message", "비밀번호가 일치하지 않습니다.");
 		}
 		if (session.getAttribute("author") == "admin") {
-			String page = "home/home";// 관리자 페이지 링크
+			String page = "admin/home/home";// 관리자 페이지 링크
 			ViewResolve.foward(request, response, page);
 		} else {
 			String page = "home/home";

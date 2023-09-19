@@ -50,4 +50,5 @@
 		GROUP BY COURSE_SUB_CATEGORY
 	</select>
 	
+
 </mapper>
