@@ -4,12 +4,12 @@
 
 	<select id="memberSelectList"
 		resultType="co.four.study.member.service.MemberVO">
-		SELET * FROM MEMBERS
+		SELECT * FROM MEMBERS
 	</select>
 
 	<select id="memberSelect"
 		resultType="co.four.study.member.service.MemberVO">
-		SELET *
+		SELECT *
 		FROM MEMBERS
 		WHERE MEMBER_ID = #{memberId}
 		<if test="#{memberPassword} != null">
@@ -24,23 +24,34 @@
 		#{mamberPassword},#{memberName}, #{memberTel},
 		#{memberAddress},
 		#{memberEmail},
-		#{memberEnterDate}, #{memberStopDate}, #{memberAuthor})
+		sysdate, null, #{memberAuthor})
 	</insert>
 
 	<update id="memberUpdate"
 		parameterType="co.four.study.member.service.MemberVO">
 		UPDATE MEMBERS
-		<if test="membername != null">MEMBER_NAME = #{memberName},</if>
-		<if test="memberTel != null">MEMBER_TEL = #{memberTel},</if>
-		<if test="memberAddress != null">MEMBER_ADDRESS = #{memberAddress},</if>
-		<if test="memberEmail != null">MEMBER_EMAIL = #{memberEmail},</if>
-		<if test="memberTl != null">MEMBER_TEL = #{memberTel},</if>
+		<set>
+			<if test="memberName != null">MEMBER_NAME = #{memberName},</if>
+			<if test="memberTel != null">MEMBER_TEL = #{memberTel},</if>
+			<if test="memberAddress != null">MEMBER_ADDRESS = #{memberAddress},</if>
+			<if test="memberEmail != null">MEMBER_EMAIL = #{memberEmail},</if>
+			<if test="memberStopDate != null">MEMBER_STOP_DATE = #{memberStopDate}</if>
+		</set>
+		WHERE MEMBER_ID = #{memberId}
 	</update>
 
-	<delete id="memberDelete">
+	<delete id="memberDelete" parameterType="co.four.study.member.service.MemberVO">
 		DELETE FROM MEMBERS
 		WHERE MEMBER_ID = #{memberId}
 
 	</delete>
+	
+	<update id="memberBlock" parameterType="co.four.study.member.service.MemberVO">
+		UPDATE MEMBERS SET MEMBER_STOP_DATE = NULL WHERE MEMBER_ID = #{memberId}
+	</update>
+	
+	<select id="memberPage" resultType="co.four.study.member.service.MemberVO">
+		select * from members where member_id = #{memberId}
+	</select>
 
 </mapper>

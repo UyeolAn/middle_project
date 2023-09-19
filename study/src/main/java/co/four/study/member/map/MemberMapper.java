@@ -17,4 +17,10 @@ public interface MemberMapper {
 	int memberUpdate(MemberVO vo);
 
 	int memberDelete(MemberVO vo);
+	
+	//회원 차단
+	int memberBlock(MemberVO vo);
+	
+	//회원페이지 조회
+	MemberVO memberPage(String memberId);
 }

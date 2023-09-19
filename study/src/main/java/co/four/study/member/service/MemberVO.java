@@ -1,6 +1,7 @@
 package co.four.study.member.service;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -22,7 +23,7 @@ public class MemberVO {
 	
 	private LocalDate memberEnterDate;
 	
-	private LocalDate memberStopDate;
+	private Date memberStopDate;
 	
 	private String Author;
 
