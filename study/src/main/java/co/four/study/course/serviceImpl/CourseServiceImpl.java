@@ -39,4 +39,8 @@ public class CourseServiceImpl implements CourseService {
 		return map.courseDelete(vo);
 	}
 
+	@Override
+	public List<CourseVO> courseMenuList(CourseVO vo) {
+		return map.courseMenuList(vo);
+	}
 }

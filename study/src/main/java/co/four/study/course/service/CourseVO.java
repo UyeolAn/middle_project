@@ -13,4 +13,5 @@ public class CourseVO {
 	private String courseTeacher;
 	private String courseGrade;
 	private String courseImg;
+	private int subCategoryCount; // 서브카테고리 수
 }

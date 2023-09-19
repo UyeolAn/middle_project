@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="co.four.study.course.map.CourseMapper">
+<mapper namespace="co.four.study.course.map.CoursesMapper">
 
 	<select id="courseSelectList" resultType="co.four.study.course.service.CourseVO">
 		SELECT	*
@@ -43,4 +43,12 @@
 		WHERE COURSE_ID = #{courseId}
 	</delete>
 	
+	<select id="courseMenuList" resultType="co.four.study.course.service.CourseVO">
+		SELECT	COURSE_SUB_CATEGORY, COUNT(1) AS SUB_CATEGORY_COUNT
+		FROM	COURSES
+		WHERE	COURSE_MAIN_CATEGORY = UPPER(#{courseMainCategory})
+		GROUP BY COURSE_SUB_CATEGORY
+	</select>
+	
+
 </mapper>
