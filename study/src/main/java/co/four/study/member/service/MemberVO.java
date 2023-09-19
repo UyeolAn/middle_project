@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import lombok.Data;
 
+
 @Data
 public class MemberVO {
 	
@@ -23,6 +24,6 @@ public class MemberVO {
 	
 	private LocalDate memberStopDate;
 	
-	private String memberAuthor;
+	private String Author;
 
 }
