@@ -38,5 +38,23 @@
 		FROM MEMBERS_COURSES MC JOIN COURSES C ON  MC.COURSE_ID = C.COURSE_ID
 		WHERE MEMBER_ID = #{memberId}
 	</select>
+	
+	<select id="courseStudent" parameterType="co.four.study.course.service.CourseVO" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBERS_COURSES WHERE COURSE_ID = #{courseId}
+	</select>
+	
+	<select id="distinctStudentCategory" parameterType="co.four.study.memberCourse.service.MemberCourseVO" resultType="String">
+		SELECT distinct C.COURSE_MAIN_CATEGORY
+		FROM MEMBERS_COURSES MC JOIN COURSES C 
+		ON C.COURSE_ID = MC.COURSE_ID 
+		WHERE MC.MEMBER_ID = #{memberId}
+	</select>
+	
+	<select id="countStudentCategory" parameterType="co.four.study.memberCourse.service.MemberCourseVO" resultType="Integer">
+		SELECT count(*) 
+		FROM MEMBERS_COURSES MC JOIN COURSES C ON MC.COURSE_ID = C.COURSE_ID 
+		WHERE MEMBER_ID = #{memberId} and COURSE_MAIN_CATEGORY = #{courseMainCategory}
+	</select>
+	
 
 </mapper>

@@ -12,4 +12,12 @@ public class MemberCourseVO {
 	private int tcnt;
 	private double jindo;  //과정별 진도율
 	private String courseName;
+	
+	//강의 카테고리
+	private String courseMainCategory;
+	
+	//카테고리별 수강률
+	private double category;
+	
+	
 }

@@ -13,6 +13,8 @@ import co.four.study.common.ViewResolve;
 import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
 import co.four.study.course.serviceImpl.CourseServiceImpl;
+import co.four.study.memberCourse.service.MemberCourseService;
+import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
 import co.four.study.subcourse.service.SubCourseService;
 import co.four.study.subcourse.service.SubCourseVO;
 import co.four.study.subcourse.serviceImpl.SubCourseServiceImpl;
@@ -31,9 +33,9 @@ public class AdminCoursePage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CourseVO vo = new CourseVO();
-		CourseService dao = new CourseServiceImpl();
-		
+		CourseService dao = new CourseServiceImpl();	
 		SubCourseService sdao = new SubCourseServiceImpl();
+		MemberCourseService mcdao = new MemberCourseServiceImpl();
 
 		
 		
@@ -45,6 +47,8 @@ public class AdminCoursePage extends HttpServlet {
 		
 		List<SubCourseVO> slist = sdao.subcourseByCourse(vo);
 		
+		
+		int students = mcdao.courseStudent(vo);
 		for(int i=0; i<slist.size(); i++) {
 			slist.get(i).setSubcourseTime((slist.get(i).getSubcourseTime())/60);
 		}
@@ -55,6 +59,7 @@ public class AdminCoursePage extends HttpServlet {
 		
 		request.setAttribute("c", vo);
 		request.setAttribute("subcourse", slist);
+		request.setAttribute("students", students);
 		ViewResolve.foward(request, response, page);
 	}
 

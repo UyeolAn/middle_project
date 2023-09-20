@@ -1,6 +1,8 @@
 package co.four.study.course.web;
 
 import java.io.IOException;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import co.four.study.common.ViewResolve;
 import co.four.study.course.service.CourseService;
@@ -29,24 +32,23 @@ public class AdminCourseInsert extends HttpServlet {
 		CourseVO vo = new CourseVO();
 		CourseService dao = new CourseServiceImpl();
 		
-		String courseName = request.getParameter("courseName");
-		String courseScript = request.getParameter("courseScript");
-		int coursePrice = Integer.parseInt(request.getParameter("coursePrice"));
-		String courseTeacher = request.getParameter("courseTeacher");
-		String courseMainCategory = request.getParameter("courseMainCategory");
-		String courseSubCategory = request.getParameter("courseSubCategory");
-		String courseGrade = request.getParameter("courseGrade");
-		String courseImg = request.getParameter("courseImg");
+
+		//String saveDir = getServletContext().getRealPath("client/img/product");//servletContext: prjdb, realPath: webapp/attech/notice 실제경로, 파일이 바로바로 보임 현업에서는 안씀
+		//int maxSize = 1024*1024*100;
+		//MultipartRequest multi = new MultipartRequest(request, saveDir, maxSize, "utf-8", new DefaultFileRenamePolicy());//파일명이 동일할때 자동으로 1,2,3..
+		//String realImg = multi.getFilesystemName("courseImg"); //저장되는 파일명
+		vo.setCourseImg(request.getParameter("courseImg")); //이미지 파일 명을 저장한다.
 		
-		vo.setCourseName(courseName);
-		vo.setCourseScript(courseScript);
-		vo.setCoursePrice(coursePrice);
-		vo.setCourseTeacher(courseTeacher);
-		vo.setCourseMainCategory(courseMainCategory);
-		vo.setCourseSubCategory(courseSubCategory);
-		vo.setCourseGrade(courseGrade);
-		vo.setCourseImg(courseImg);
 		
+		vo.setCourseName(request.getParameter("courseName"));
+		vo.setCourseScript(request.getParameter("courseScript"));
+		vo.setCoursePrice(Integer.parseInt(request.getParameter("coursePrice")));
+		vo.setCourseTeacher(request.getParameter("courseTeacher"));
+		vo.setCourseMainCategory(request.getParameter("courseMainCategory"));
+		vo.setCourseSubCategory(request.getParameter("courseSubCategory"));
+		vo.setCourseGrade(request.getParameter("courseGrade"));
+		
+		System.out.println(vo);
 		int i = dao.courseInsert(vo);
 		if(i == 1) {
 			request.setAttribute("message", "강의가 등록되었습니다.");

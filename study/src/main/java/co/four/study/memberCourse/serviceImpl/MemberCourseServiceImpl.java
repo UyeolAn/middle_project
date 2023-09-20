@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import co.four.study.common.DataSource;
+import co.four.study.course.service.CourseVO;
 import co.four.study.member.service.MemberVO;
 import co.four.study.memberCourse.map.MemberCourseMapper;
 import co.four.study.memberCourse.service.MemberCourseService;
@@ -48,6 +49,22 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 	@Override
 	public int priceSum(MemberVO vo) {
 		return map.priceSum(vo);
+	}
+
+	@Override
+	public int courseStudent(CourseVO vo) {
+		return map.courseStudent(vo);
+	}
+
+
+	@Override
+	public List<String> distinctStudentCategory(MemberCourseVO vo) {
+		return map.distinctStudentCategory(vo);
+	}
+
+	@Override
+	public int countStudentCategory(MemberCourseVO vo) {
+		return map.countStudentCategory(vo);
 	}
 
 }
