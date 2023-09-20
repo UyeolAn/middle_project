@@ -34,7 +34,7 @@
 		WHERE reply_id = #{replyId}
 	</delete>
 	
-	<select id="replyCnt" resultType="int">
+	<select id="countBoardReply" resultType="int">
 		SELECT COUNT(*)
 		FROM replies
 		WHERE reply_id = #{id}

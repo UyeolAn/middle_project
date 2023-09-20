@@ -53,8 +53,8 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public int courseTotalCount() {
-		return map.courseTotalCount();
+	public int courseTotalCount(CourseVO vo) {
+		return map.courseTotalCount(vo);
 	}
 
 	@Override

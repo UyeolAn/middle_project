@@ -17,6 +17,10 @@
       .input__file__btn:hover {
         background: #A7A7A7;
       }
+
+      .small-btn {
+        padding: 9px 20px;
+      }
     </style>
   </head>
 
@@ -36,8 +40,8 @@
             </div>
             <div class="col-lg-12">
               <textarea id="boardContent" name="boardContent" placeholder="내용을 입력하세요..."></textarea>
-              <button type="reset" class="site-btn" style="font-size: medium; background: #B7B7B7;">취소</button>
-              <button type="submit" class="site-btn" style="font-size: medium;">등록</button>  
+              <button type="reset" class="site-btn small-btn" style="font-size: medium; background: #B7B7B7;">취소</button>
+              <button type="submit" class="site-btn small-btn" style="font-size: medium;">등록</button>  
             </div>
           </div>
         </form>

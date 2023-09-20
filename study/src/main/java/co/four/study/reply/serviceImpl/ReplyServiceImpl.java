@@ -41,10 +41,9 @@ public class ReplyServiceImpl implements ReplyService {
 		return map.replyDelete(vo);
 	}
 
-	
 	@Override
-	public int replyCnt(int id) {
-		return map.replyCnt(id);
+	public int countBoardReply(int id) {
+		return map.countBoardReply(id);
 	}
 
 	@Override

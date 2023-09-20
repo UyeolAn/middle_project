@@ -17,6 +17,6 @@ public interface CourseMapper {
 	List<Map<String, Object>> courseMainCategory(); // 메인카테고리 조회
 	
 	// 페이징 관련
-	int courseTotalCount();
+	int courseTotalCount(CourseVO vo);
 	List<CourseVO> coursePagingList(CourseVO vo);
 }

@@ -95,17 +95,19 @@
                             <a href="home.do">Home</a>
                             <c:if test="${menu eq 'course' && cid eq null}">
                             	<span>Course</span>
-                            	<span>전체보기</span>
+                            	<span class="subCate">전체보기</span>
                             </c:if>
                             <c:if test="${menu eq 'course' && cid eq 'it'}">
-                            	<span>IT</span>
+                            	<span>Course</span>
+                            	<span class="mainCate">IT</span>
                             </c:if>
                             <c:if test="${menu eq 'course' && cid eq 'english'}">
-                            	<span>English</span>
+                            	<span>Course</span>
+                            	<span class="mainCate">English</span>
                             </c:if>
                             <c:if test="${menu eq 'package'}">
                             	<span>Package</span>
-                            	<span>전체보기</span>
+                            	<span class="subCate">전체보기</span>
                             </c:if>
                         </div>
                     </div>
