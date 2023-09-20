@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import co.four.study.board.map.BoardMapper;
 import co.four.study.board.service.BoardService;
 import co.four.study.board.service.BoardVO;
+import co.four.study.board.service.etcvo.BoardSearchVO;
 import co.four.study.common.DataSource;
 
 public class BoardServiceImpl implements BoardService {
@@ -14,14 +15,16 @@ public class BoardServiceImpl implements BoardService {
 	private SqlSession sqlSession = DataSource.getInstance().openSession(true);
 	
 	private BoardMapper map = sqlSession.getMapper(BoardMapper.class);
+
 	
 	@Override
-	public List<BoardVO> boardSelectList() {
-		return map.boardSelectList();
+	public List<BoardVO> boardSelectList(String sortType) {
+		return map.boardSelectList(sortType);
 	}
 
 	@Override
 	public BoardVO boardSelect(BoardVO vo) {
+		map.updateBoardHit(vo.getBoardId());
 		return map.boardSelect(vo);
 	}
 
@@ -38,6 +41,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int boardDelete(BoardVO vo) {
 		return map.boardDelete(vo);
+	}
+
+	@Override
+	public List<BoardVO> searchBoards(BoardSearchVO vo) {
+		return map.searchBoards(vo);
 	}
 
 }

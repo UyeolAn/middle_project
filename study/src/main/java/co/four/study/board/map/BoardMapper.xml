@@ -4,7 +4,11 @@
 	<select id="boardSelectList" resultType="co.four.study.board.service.BoardVO">
 		SELECT *
 		FROM boards
-		ORDER BY board_id
+		<trim prefix="ORDER BY">
+            <if test="sortType == 'mostRecent'">board_id DESC</if>
+            <if test="sortType == 'mostHit'">board_hit DESC, board_id DESC</if>
+            <if test="sortType == 'mostLike'">board_like DESC, board_id DESC</if>
+        </trim>
 	</select>
 	
 	<select id="boardSelect" resultType="co.four.study.board.service.BoardVO">
@@ -37,4 +41,31 @@
 		DELETE FROM boards
 		WHERE board_id = #{boardId}
 	</delete>
+	
+	<select id="searchBoards" resultType="co.four.study.board.service.BoardVO">
+		SELECT *
+		FROM boards
+		<where>
+			<if test="searchType == 'boardTitle'">
+				AND board_title LIKE '%' || #{searchContent} || '%'
+			</if>
+			<if test="searchType == 'boardContent'">
+				AND board_content LIKE '%' || #{searchContent} || '%'
+			</if>
+			<if test="searchType == 'boardWriter'">
+				AND member_id LIKE '%' || #{searchContent} || '%'
+			</if>
+		</where>
+		<trim prefix="ORDER BY">
+            <if test="sortType == 'mostRecent'">board_id DESC</if>
+            <if test="sortType == 'mostHit'">board_hit DESC</if>
+            <if test="sortType == 'mostLike'">board_like DESC</if>
+        </trim>
+	</select>
+	
+	<update id="updateBoardHit" parameterType="int">
+		UPDATE boards
+		SET board_hit = board_hit + 1
+		WHERE board_id = #{id}
+	</update>
 </mapper>

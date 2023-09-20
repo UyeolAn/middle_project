@@ -27,10 +27,11 @@
   <body>
     <div class="col-lg-12 container">
       <div class="contact__form">
-        <form action="boardinsert.do" method="post">
+        <form action="boardupdate.do" method="post">
           <div class="row">
             <div class="col-lg-9">
-              <input type="text" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요..">
+              <input type="text" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요.."
+                value="${board.boardTitle}">
             </div>
             <div class="col-lg-12">
               <label class="input__file__btn" for="boardImg">
@@ -39,10 +40,13 @@
               <input type="file" id="boardImg" name="boardImg" style="display: none;">
             </div>
             <div class="col-lg-12">
-              <textarea id="boardContent" name="boardContent" placeholder="내용을 입력하세요..."></textarea>
-              <button type="reset" class="site-btn small-btn" style="font-size: medium; background: #B7B7B7;">취소</button>
-              <button type="submit" class="site-btn small-btn" style="font-size: medium;">등록</button>  
+              <textarea id="boardContent" name="boardContent"
+                placeholder="내용을 입력하세요...">${board.boardContent}</textarea>
+              <button type="reset" class="site-btn small-btn"
+                style="font-size: medium; background: #B7B7B7;">취소</button>
+              <button type="submit" class="site-btn small-btn" style="font-size: medium;">수정</button>
             </div>
+            <input type="hidden" id="boardId" name="boardId" value="${board.boardId}">
           </div>
         </form>
       </div>

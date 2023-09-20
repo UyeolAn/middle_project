@@ -14,16 +14,16 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import co.four.study.board.service.BoardService;
 import co.four.study.board.service.BoardVO;
+import co.four.study.board.service.etcvo.BoardSearchVO;
 import co.four.study.board.serviceImpl.BoardServiceImpl;
 import co.four.study.reply.service.ReplyService;
 import co.four.study.reply.serviceImpl.ReplyServiceImpl;
 
-@WebServlet("/boardall.do")
-public class BoardAll extends HttpServlet {
-	
+@WebServlet("/boardsearch.do")
+public class BoardSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public BoardAll() {
+    public BoardSearch() {
         super();
     }
 
@@ -31,7 +31,12 @@ public class BoardAll extends HttpServlet {
 		BoardService boardDao = new BoardServiceImpl();
 		ReplyService replyDao = new ReplyServiceImpl();
 		
-		List<BoardVO> boards = boardDao.boardSelectList(request.getParameter("sortType"));
+		BoardSearchVO searchVO = new BoardSearchVO();
+		searchVO.setSearchType(request.getParameter("searchType"));
+		searchVO.setSearchContent(request.getParameter("searchContent"));
+		searchVO.setSortType(request.getParameter("sortType"));
+		
+		List<BoardVO> boards = boardDao.searchBoards(searchVO);
 		for (BoardVO board : boards) {
 			int rCnt =  replyDao.countBoardReply(board.getBoardId());
 			board.setReplyCount(rCnt);

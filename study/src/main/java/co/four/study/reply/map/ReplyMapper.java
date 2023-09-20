@@ -18,7 +18,8 @@ public interface ReplyMapper {
 	int replyDelete(ReplyVO vo);
 	
 	
-	int replyCnt(int id);
+	//한 게시글의 댓글 수 조회
+	int countBoardReply(int id);
 	
 	//회원이 쓴 댓글 수 조회
     int countReply(MemberVO vo);
