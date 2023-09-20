@@ -1,5 +1,6 @@
 package co.four.study.course.serviceImpl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import co.four.study.common.DataSource;
 import co.four.study.course.map.CourseMapper;
 import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
+import co.four.study.course.service.PagingVO;
 
 public class CourseServiceImpl implements CourseService {
 	
@@ -49,4 +51,16 @@ public class CourseServiceImpl implements CourseService {
 	public List<Map<String, Object>> courseMainCategory() {
 		return map.courseMainCategory();
 	}
+
+	@Override
+	public int courseTotalCount() {
+		return map.courseTotalCount();
+	}
+
+	@Override
+	public List<CourseVO> coursePagingList(CourseVO vo) {
+		return map.coursePagingList(vo);
+	}
+
+
 }

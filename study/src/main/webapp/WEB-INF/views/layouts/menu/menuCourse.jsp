@@ -79,16 +79,10 @@
               </div>
               <div id="collapseFour" class="collapse" data-parent="#accordionExample">
                 <div class="card-body">
-                  <div class="shop__sidebar__categories">
-                    <label for="xs">초급
-                      <input type="radio" id="xs">
-                    </label>
-                    <label for="sm">중급
-                      <input type="radio" id="sm">
-                    </label>
-                    <label for="md">고급
-                      <input type="radio" id="md">
-                    </label>
+                  <div class="shop__sidebar__tags">
+                  	<span id="easy" class="active">초급</span>
+                  	<span id="normal">중급</span>
+                  	<span id="hard">고급</span>
                   </div>
                 </div>
               </div>

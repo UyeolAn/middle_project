@@ -120,9 +120,8 @@
             </div>
         </div>
     </div>
-
     <!-- Shop Section End -->
-
+    
     <!-- 제이쿼리 사용 -->
     <script type="text/javascript">
         function selectList(target) {
@@ -145,6 +144,7 @@
         function insertTag(result) {
         	$('.all-list').remove(); // 초기 태그 삭제
         	$('.result').remove(); // ajax 통신으로 추가한 태그 삭제
+        	$('.subCate').remove(); // 헤더쪽 메뉴경로 태그 삭제
         	
         	/* 메인카테고리, 서브카테고리 가져오기 start */
         	let mainCate = result[0].courseMainCategory;
@@ -152,8 +152,7 @@
         	mainCate = mainCate.toUpperCase();
         	subCate = subCate.toUpperCase();
         	
-            $('.breadcrumb__links').find('span').text(mainCate);
-            $('.breadcrumb__links').append('<span>'+ subCate + '</span>');
+            $('.breadcrumb__links').append('<span class="subCate">'+ subCate + '</span>');
          	/* 메인카테고리, 서브카테고리 가져오기 end-- */
             
          	
