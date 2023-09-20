@@ -64,6 +64,9 @@
 	
 	<select id="courseTotalCount" resultType="int">
 		SELECT COUNT(1) FROM COURSES
+		<if test="courseSubCategory != null">
+	    WHERE COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
+	    </if>
 	</select>
 	
 	<select id="coursePagingList" resultType="co.four.study.course.service.CourseVO">
