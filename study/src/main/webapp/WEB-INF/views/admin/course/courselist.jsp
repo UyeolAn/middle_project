@@ -97,7 +97,7 @@
 						.then(resolve=>resolve.json())
 						.then(result=>console.log(result));
 					alert("삭제되었습니다.");
-					//location.reload(true);
+					location.reload(true);
 				}
 		}
 
