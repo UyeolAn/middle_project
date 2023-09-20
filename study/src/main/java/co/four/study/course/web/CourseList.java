@@ -42,17 +42,17 @@ public class CourseList extends HttpServlet {
 		request.setAttribute("english", subCategory);
 		
 		// 강의 리스트 페이징처리 및 데이터 가져오기
-		int total = dao.courseTotalCount(); // 전체건수
+		int total = dao.courseTotalCount(null); // 전체건수
 		String nowPage = request.getParameter("nowPage"); // 현재페이지
 		String cntPerPage = request.getParameter("cntPerPage"); // 보여줄 건수
 		
 		if(nowPage == null && cntPerPage == null) {
-			nowPage = "2";
-			cntPerPage = "5";
+			nowPage = "1";
+			cntPerPage = "10";
 		} else if(nowPage == null) {
-			nowPage = "2";
+			nowPage = "1";
 		} else if(cntPerPage == null) {
-			cntPerPage = "5";
+			cntPerPage = "10";
 		}
 		
 		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
