@@ -4,17 +4,18 @@ import java.util.List;
 
 public interface MemberService {
 	
+	//멤버 전체 조회	
 	List<MemberVO> memberSelectList();
-	//멤버 전체 조회
+	//로그인
 	MemberVO memberSelect(MemberVO vo);
-	//ID값 입력>> 검색
+	//회원가입
 	int memberInsert(MemberVO vo);
-	
+	//수정
 	int memberUpdate(MemberVO vo);
-	
+	//회원탈퇴
 	int memberDelete(MemberVO vo);
 	
-	//회원 차단
+	//회원 차단(관리자만)
 	int memberBlock(MemberVO vo);
 	
 	//회원페이지 조회
