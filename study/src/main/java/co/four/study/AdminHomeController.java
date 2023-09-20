@@ -13,6 +13,8 @@ import co.four.study.common.ViewResolve;
 import co.four.study.memberCourse.service.MemberCourseService;
 import co.four.study.memberCourse.service.MemberCourseVO;
 import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
+import co.four.study.question.service.QuestionService;
+import co.four.study.question.serviceImpl.QuestionServiceImpl;
 
 
 @WebServlet("/adminhome.do")
@@ -27,18 +29,11 @@ public class AdminHomeController extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		MemberCourseService dao = new MemberCourseServiceImpl();
-//		MemberCourseVO vo = new MemberCourseVO();
-//		
-//		vo.setMemberId("uyeol");
-//		vo.setCourseId(2);
-//		vo = dao.countJindo(vo);
-//		
-//		System.out.println(vo);
-//		double num =  ((double)vo.getCount()/vo.getTcnt()) * 100;
-//		System.out.println(num + "%");
-//		
+		QuestionService qdao = new QuestionServiceImpl();
 		
+		int unanswerQ = qdao.unanswerQuestion();
+		
+		request.setAttribute("newQ", unanswerQ);
 		
 		String page = "admin/home/home";
 		ViewResolve.foward(request, response, page);

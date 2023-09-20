@@ -66,7 +66,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Course Management</h6>
 					<a class="collapse-item" href="admincourselist.do">강의목록</a> 
-					<a class="collapse-item" href="cards.html">강의등록</a>
+					<a class="collapse-item" href="adimincourseregister.do">강의등록</a>
 				</div>
 			</div></li>
 

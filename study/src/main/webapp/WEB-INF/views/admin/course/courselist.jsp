@@ -30,6 +30,8 @@
 						<tr>
 							<th>ID</th>
 							<th>NAME</th>
+							<th>MAIN CATEGORY</th>
+							<th>SUB CATEGORY</th>
 							<th>수정</th>
 							<th>삭제</th>
 						</tr>
@@ -38,6 +40,8 @@
 						<tr>
 							<th>ID</th>
 							<th>NAME</th>
+							<th>MAIN CATEGORY</th>
+							<th>SUB CATEGORY</th>
 							<th>수정</th>
 							<th>삭제</th>
 						</tr>
@@ -47,16 +51,8 @@
 							<tr>
 								<td>${c.courseId}</td>
 								<td>${c.courseName }</td>
-								<!-- 정지계정여부 표시 -->
-								<!-- <c:choose>
-									<c:when test="${m.memberStopDate != null}">
-										<td><input type="checkbox" class="block" name="block" checked/></td>
-									</c:when>
-									<c:otherwise>
-										<td><input type="checkbox" class="block" name="block"/></td>
-									</c:otherwise>
-								</c:choose> -->
-								<!-- 회원 상세페이지로 이동 버튼 -->
+								<td>${c.courseMainCategory}</td>	
+								<td>${c.courseSubCategory}</td>	
 								<td>
 									<a class="btn btn-secondary btn-icon-split">
 										<span class="icon text-white-50">

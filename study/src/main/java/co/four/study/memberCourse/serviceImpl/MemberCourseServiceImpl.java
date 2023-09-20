@@ -40,4 +40,14 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 		return map.countJindo(vo);
 	}
 
+	@Override
+	public List<String> category(MemberVO vo) {
+		return map.category(vo);
+	}
+
+	@Override
+	public int priceSum(MemberVO vo) {
+		return map.priceSum(vo);
+	}
+
 }

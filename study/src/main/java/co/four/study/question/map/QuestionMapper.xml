@@ -32,4 +32,16 @@
 		</set>
 		WHERE QUESTION_ID = #{questionId}
 	</update>
+	
+	
+	<select id="countQuestion" resultType="Integer" parameterType="co.four.study.member.service.MemberVO">
+		SELECT COUNT(*) 
+		FROM QUESTIONS WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<select id="unanswerQuestion" resultType="Integer">
+		SELECT COUNT(*) AS unanswered_questions
+		FROM QUESTIONS
+		WHERE QUESTION_ID NOT IN (SELECT DISTINCT QUESTION_ID FROM ANSWERS)
+	</select>
 </mapper>

@@ -8,6 +8,7 @@ import co.four.study.bucket.map.BucketMapper;
 import co.four.study.bucket.service.BucketService;
 import co.four.study.bucket.service.BucketVO;
 import co.four.study.common.DataSource;
+import co.four.study.member.service.MemberVO;
 
 public class BucketServiceImpl implements BucketService{
 
@@ -38,6 +39,11 @@ public class BucketServiceImpl implements BucketService{
 	@Override
 	public int bucketUpdate(BucketVO vo) {
 		return map.bucketUpdate(vo);
+	}
+
+	@Override
+	public int countBucket(MemberVO vo) {
+		return map.countBucket(vo);
 	}
 
 }

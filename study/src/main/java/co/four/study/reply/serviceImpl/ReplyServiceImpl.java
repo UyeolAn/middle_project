@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import co.four.study.common.DataSource;
+import co.four.study.member.service.MemberVO;
 import co.four.study.reply.map.ReplyMapper;
 import co.four.study.reply.service.ReplyService;
 import co.four.study.reply.service.ReplyVO;
@@ -44,6 +45,11 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public int replyCnt(int id) {
 		return map.replyCnt(id);
+	}
+
+	@Override
+	public int countReply(MemberVO vo) {
+		return map.countReply(vo);
 	}
 
 }
