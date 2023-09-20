@@ -25,6 +25,6 @@ public class MemberVO {
 	
 	private Date memberStopDate;
 	
-	private String Author;
+	private String memberAuthor;
 
 }

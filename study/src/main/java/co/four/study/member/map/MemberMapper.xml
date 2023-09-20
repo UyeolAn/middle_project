@@ -20,11 +20,10 @@
 	<insert id="memberInsert"
 		parameterType="co.four.study.member.service.MemberVO">
 		INSERT INTO MEMBERS
-		VALUES (#{memberId},
-		#{mamberPassword},#{memberName}, #{memberTel},
+		VALUES (#{memberId}, #{memberPassword}, #{memberName}, #{memberTel},
 		#{memberAddress},
 		#{memberEmail},
-		sysdate, null, #{memberAuthor})
+		SYSDATE , null, 'client')
 	</insert>
 
 	<update id="memberUpdate"
