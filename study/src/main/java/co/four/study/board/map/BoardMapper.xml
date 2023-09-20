@@ -4,6 +4,7 @@
 	<select id="boardSelectList" resultType="co.four.study.board.service.BoardVO">
 		SELECT *
 		FROM boards
+		ORDER BY board_id
 	</select>
 	
 	<select id="boardSelect" resultType="co.four.study.board.service.BoardVO">

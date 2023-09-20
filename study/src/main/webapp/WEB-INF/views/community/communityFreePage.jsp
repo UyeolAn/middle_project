@@ -154,7 +154,7 @@
                   .append($('<span class="etc__info__left"> /')
                     .text(`[\${board.memberId}] \${board.boardEnterDate}`))
                   .append($('<span class="etc__info__right"> /')
-                    .text(`조회수:\${board.boardHit} 좋아요:\${board.boardLike - board.boardDislike} 댓글:\${cntObj.replyCnt}`))
+                    .text(`조회수:\${board.boardHit}   좋아요:\${board.boardLike - board.boardDislike}   댓글:\${cntObj.replyCnt}`))
               )
               .on('click', function () {
                 let url = 'communityfreedetailpage.do?boardId=' + board.boardId;
