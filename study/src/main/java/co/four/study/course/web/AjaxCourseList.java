@@ -2,7 +2,9 @@ package co.four.study.course.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,7 +51,11 @@ public class AjaxCourseList extends HttpServlet {
 		}
 		
 		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		System.out.println(pvo); // 페이징 완료
+		
+		//int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate
+		String paging = dao.makeCourseList(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), subCate);
+		Map<String, String> pmap = new HashMap<String,String>();
+		pmap.put("paging", paging);
 		
 		// 넘어온 서브카테고리로 데이터 조회
 		vo.setStart(pvo.getStart());
@@ -57,12 +63,9 @@ public class AjaxCourseList extends HttpServlet {
 		List<CourseVO> courses = dao.coursePagingList(vo);
 		
 		List<Object> volist = new ArrayList<>();
-		volist.add(pvo);
-		request.setAttribute("paging", pvo);
+		volist.add(pmap);
 		volist.add(courses);
-		request.setAttribute("courses", courses);
 		String list = objectMapper.writeValueAsString(volist); // list형태의 데이터 => json형태로
-		System.out.println(list);
 		
 		response.setContentType("text/json; charset=UTF-8"); // 한글깨짐 방지
 		response.getWriter().append(list); //ajax를 return

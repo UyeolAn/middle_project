@@ -13,4 +13,7 @@ public interface ReviewService {
 	
 	//회원이 쓴 리뷰수
 	int countReview(MemberVO vo);
+	
+	//강의별 평점
+	List<ReviewVO> reviewStars();
 }
