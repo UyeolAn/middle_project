@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
+  <!-- 위에 헤더 -->
     <section style="background-color: #eee;">
         <div class="container py-5">
           <div class="row">
@@ -25,6 +26,7 @@
             </div>
           </div>
       
+          <!-- 회원 정보 카드 시작 -->
           <div class="row">
             <div class="col-lg-4">
               <div class="card mb-4">
@@ -32,8 +34,9 @@
                   <img src="admin/img/profile.svg" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
                   <h5 class="my-3">${m.memberName}</h5>
-                  <!-- <p class="text-muted mb-1">Full Stack Developer</p> -->
-                  <!-- <div class="d-flex justify-content-center mb-2 d-flex-column-revers"> -->
+                      <!-- 차단 여부 표시 -->
+                      <!-- 차단 당한 회원이면 계정정지해제버튼 -->
+                      <!-- 차단 아닌 회원이면 계정정지버튼 -->
                     <c:choose>
                         <c:when test="${m.memberStopDate ne null}">
                             <p>차단당한 회원</p>
@@ -43,29 +46,33 @@
                             <button type="button" class="btn btn-outline-primary ms-1" id="block">계정 정지</button>
                         </c:otherwise>
                     </c:choose>
-                <!-- </div> -->
-                  <!-- <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> -->
                 </div>
               </div>
+              <!-- 회원이 쓴 커뮤니티 및 정보 불러옴 -->
               <div class="card mb-4 mb-lg-0">
                 <div class="card-body p-0">
                   <ul class="list-group list-group-flush rounded-3">
+                    <!-- 회원이 수강하는 강의의 가격 합 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <span><i class="bi bi-coin fa-lg text-warning"></i> 수강 강의 가격 합</span>
                       <p class="mb-0">${price}원</p>
                     </li>
+                    <!-- 회원이 쓴 리뷰 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <span><i class="bi bi-check-all fa-lg" style="color: blue;"></i> 회원이 쓴 후기</span>
                       <p class="mb-0">${review}개</p>
                     </li>
+                    <!-- 회원이 쓴 댓글 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <span><i class="bi bi-indent fa-lg" style="color: #55acee;"></i> 회원이 쓴 댓글</span>
                       <p class="mb-0">${reply}개</p>
                     </li>
+                    <!-- 회원이 쓴 질문 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <span><i class="bi bi-question-circle fa-lg" style="color: #ac2bac;"></i> 회원이 쓴 질문</span>
                       <p class="mb-0">${question}개</p>
                     </li>
+                    <!-- 회원이 담은 장바구니 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <span><i class="bi bi-bucket-fill fa-lg" style="color: #3b5998;"></i> 회원이 담은 장바구니</span>
                       <p class="mb-0">${bucket}개</p>
@@ -74,6 +81,7 @@
                 </div>
               </div>
             </div>
+            <!-- 회원 상세 정보 -->
             <div class="col-lg-8">
               <div class="card mb-4">
                 <div class="card-body">
@@ -132,19 +140,27 @@
                   </div>
                 </div>
               </div>
+
+              <!-- 강의 별 진도율 -->
+              <!-- 서블릿에서 함께 넘겨줌 -->
               <div class="row">
                 <div class="col-md-6">
                   <div class="card mb-4">
                     <div class="card-body">
                       <p class="mb-4"><span class="text-primary font-italic me-1">강의 별 진도율</span></p>
+                      <!-- 서블릿에서 mclist로 담아서 보내줌 -->
                       <c:forEach items="${mclist }" var="c">
-                        <p class="mt-4 mb-1" style="font-size: .77rem;"><span class="cid" name=${c.courseId}>${c.courseName} 
-                          <c:if test="${c.jindo eq null}">(0%)</c:if>
-                          <c:if test="${c.jindo ne NaN}">(${c.jindo}%)</c:if>
-                          </span></p>
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">
+                          <span class="cid" name=${c.courseId}>${c.courseName} 
+                            <!-- 강의 이름 옆에 괄호로 진도율 표시 -->
+                            (${c.jindo}%)
+                          </span>
+                        </p>
+                        <!-- 차트 진도율만큼 그려줌 -->
                         <div class="progress rounded" style="height: 5px;">
                           <div class="progress-bar" role="progressbar" style="width: ${c.jindo}%" aria-valuenow="80"
-                            aria-valuemin="0" aria-valuemax="100" id=${c.courseId}></div>
+                            aria-valuemin="0" aria-valuemax="100" id=${c.courseId}>
+                          </div>
                         </div>
                       </c:forEach>
                     </div>
@@ -157,32 +173,45 @@
       </section>
       <script>
 
+//      해당 회원의 아이디 저장
         let id = "${m.memberId}";
         
+        //차단 및 차단해제 기능
+
+        //차단이 아닌 회원을 차단할 때
         $('#block').click(function(e) {
-			const response = confirm(id+"님을 정말 차단하시겠습니까?");
-            if(response) {
+			    const response = confirm(id+"님을 정말 차단하시겠습니까?");
+          if(response) {
 					fetch('ajaxmemberblock.do?mid='+id+'&block=true')
 						.then(resolve=>resolve.json())
 						.then(result=>console.log(result));
 					alert(id+"님이 차단되었습니다.");
-                    console.log($('#blockdiv').children[0]);
-                    location.reload(true);
-			}
+          console.log($('#blockdiv').children[0]);
+
+          // 차단이 완료되면 페이지 재로딩
+          location.reload(true);
+			    }
+          else {
+            console.log("차단 실패");
+          }
         })
 
+        //차단이 회원을 차단 해제할 때
         $('#non-block').click(function (e) {
-            let id = "${m.memberId}";
             const response = confirm(id+"님을 정말 차단 해제하시겠습니까?");
-            fetch('ajaxmemberblock.do?mid='+id+'&block=false')
-                .then(resolve=>resolve.json())
-                .then(result=>console.log(result));
-            alert(id+"님이 차단 해제되었습니다.");
-            location.reload(true);
+            if(response) {
+              fetch('ajaxmemberblock.do?mid='+id+'&block=false')
+                  .then(resolve=>resolve.json())
+                  .then(result=>console.log(result));
+              alert(id+"님이 차단 해제되었습니다.");
+  
+              // 차단 해제 후 페이지 재로딩
+              location.reload(true);
+            }
+            else {
+              console.log("차단 해제 실패");
+            }
         })
-
-        let mcList = "${mclist}";
-        console.log(mcList);
 
 
       </script>

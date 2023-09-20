@@ -38,5 +38,10 @@
 		DELETE FROM SUBCOURSES
 		WHERE SUBCOURSE_ID = #{subcourseId}
 	</delete>
+	
+	<select id="subcourseByCourse" parameterType="co.four.study.course.service.CourseVO" resultType="co.four.study.subcourse.service.SubCourseVO">
+		SELECT * FROM SUBCOURSES WHERE COURSE_ID = #{courseId}
+	
+	</select>
 
 </mapper>

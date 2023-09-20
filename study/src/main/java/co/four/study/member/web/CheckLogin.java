@@ -33,8 +33,8 @@ public class CheckLogin extends HttpServlet {
 		vo.setMemberId(request.getParameter("memberId"));
 //		vo.setMemberPassword(Sha256.encrypt(request.getParameter("memberPassword")));
 		vo.setMemberPassword(request.getParameter("memberPassword"));
-		vo.setAuthor(request.getParameter("author"));
-		session.setAttribute("author", vo.getAuthor());
+		vo.setMemberAuthor(request.getParameter("author"));
+		session.setAttribute("author", vo.getMemberAuthor());
 		vo = dao.memberSelect(vo);
 
 		if (vo != null) {

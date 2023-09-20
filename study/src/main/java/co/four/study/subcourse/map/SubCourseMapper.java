@@ -2,6 +2,7 @@ package co.four.study.subcourse.map;
 
 import java.util.List;
 
+import co.four.study.course.service.CourseVO;
 import co.four.study.subcourse.service.SubCourseVO;
 
 public interface SubCourseMapper {
@@ -10,4 +11,7 @@ public interface SubCourseMapper {
 	int subcourseInsert(SubCourseVO vo); // 서브강의 추가
 	int subcourseUpdate(SubCourseVO vo); // 서브강의 수정
 	int subcourseDelete(SubCourseVO vo); // 서브강의 삭제
+	
+	//메인강의로 서브강의들 찾는 함수
+	List<SubCourseVO> subcourseByCourse(CourseVO vo);
 }
