@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import co.four.study.common.DataSource;
+import co.four.study.course.service.CourseVO;
 import co.four.study.subcourse.map.SubCourseMapper;
 import co.four.study.subcourse.service.SubCourseService;
 import co.four.study.subcourse.service.SubCourseVO;
@@ -37,6 +38,11 @@ public class SubCourseServiceImpl implements SubCourseService{
 	@Override
 	public int subcourseDelete(SubCourseVO vo) {
 		return map.subcourseDelete(vo);
+	}
+
+	@Override
+	public List<SubCourseVO> subcourseByCourse(CourseVO vo) {
+		return map.subcourseByCourse(vo);
 	}
 
 }

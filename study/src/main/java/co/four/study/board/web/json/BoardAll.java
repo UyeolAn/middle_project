@@ -15,6 +15,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import co.four.study.board.service.BoardService;
 import co.four.study.board.service.BoardVO;
 import co.four.study.board.serviceImpl.BoardServiceImpl;
+import co.four.study.reply.service.ReplyService;
+import co.four.study.reply.serviceImpl.ReplyServiceImpl;
 
 @WebServlet("/boardall.do")
 public class BoardAll extends HttpServlet {
@@ -26,8 +28,14 @@ public class BoardAll extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BoardService dao = new BoardServiceImpl();
-		List<BoardVO> boards = dao.boardSelectList();
+		BoardService boardDao = new BoardServiceImpl();
+		ReplyService replyDao = new ReplyServiceImpl();
+		
+		List<BoardVO> boards = boardDao.boardSelectList(request.getParameter("sortType"));
+		for (BoardVO board : boards) {
+			int rCnt =  replyDao.countBoardReply(board.getBoardId());
+			board.setReplyCount(rCnt);
+		}
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		String boardsJson = objectMapper.registerModule(new JavaTimeModule()).writeValueAsString(boards);

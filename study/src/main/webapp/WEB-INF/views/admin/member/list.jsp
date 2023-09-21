@@ -16,13 +16,16 @@
 <body>
 
 	<!-- 회원목록조회페이지 -->
+
 	<!-- Page Heading -->
 	<h1 class="h3 mb-2 text-gray-800">회원 목록</h1>
 	<p class="mb-4">
 		회원관리 페이지
 	</p>
 
-	<!-- DataTales Example -->
+
+
+	<!-- 테이블 시작 -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">Member List</h6>
@@ -56,6 +59,7 @@
 						</tr>
 					</tfoot>
 					<tbody>
+						<!-- 회원정보 동적으로 불러옴 -->
 						<c:forEach items="${members }" var="m">
 							<tr>
 								<td>${m.memberId }</td>
@@ -64,7 +68,7 @@
 								<td>${m.memberAddress }</td>
 								<td>${m.memberEmail }</td>
 								<td>${m.memberEnterDate }</td>
-								<!-- 정지계정여부 표시 -->
+								<!-- 정지계정여부 체크 표시 -->
 								<c:choose>
 									<c:when test="${m.memberStopDate != null}">
 										<td><input type="checkbox" class="block" name="block" checked/></td>

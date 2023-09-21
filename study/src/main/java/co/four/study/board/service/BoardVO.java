@@ -28,4 +28,7 @@ public class BoardVO {
 	
 	private int boardDislike;
 	
+	// 외부 필드
+	private int replyCount;
+	
 }

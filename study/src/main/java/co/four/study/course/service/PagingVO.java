@@ -31,7 +31,7 @@ public class PagingVO {
 	// 시작, 끝 페이지 계산
 	private void calcStartEndPage(int nowPage, int cntPage) {
 		setEndPage(((int)Math.ceil((double)nowPage / (double)cntPage)) * cntPage);
-		if(getEndPage() < getLastPage()) {
+		if(getLastPage() < getEndPage()) {
 			setEndPage(getLastPage());
 		}
 		setStartPage(getEndPage() - cntPage + 1);

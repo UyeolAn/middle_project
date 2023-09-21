@@ -1,7 +1,9 @@
 package co.four.study.member.web;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -71,7 +73,7 @@ public class AdminMemberPage extends HttpServlet {
 			mcvo = mcdao.countJindo(mcvo);
 			vo.setCount(mcvo.getCount());
 			vo.setTcnt(mcvo.getTcnt());
-			double jindo =  ((double)vo.getCount()/vo.getTcnt()) * 100;
+			double jindo = Math.round(((double)vo.getCount()/vo.getTcnt()) * 100);
 			if(Double.isNaN(jindo)) jindo = 0;
 			vo.setJindo(jindo);
 			cvo.setCourseId(vo.getCourseId());
@@ -81,7 +83,27 @@ public class AdminMemberPage extends HttpServlet {
 		
 		List<String> category = mcdao.category(memvo);
 		
+
+		//회원이 수강하는 카테고리 종류
+		List<String> disCategory = mcdao.distinctStudentCategory(mcvo);
 		
+		//회원이 듣는 강의수
+		int countCourse = mcvolist.size();
+		
+		//카테고리 별로 수강률 넣음
+		Map<String, Double> catePercent = new HashMap<>();
+		
+		for(String c : disCategory) {
+			MemberCourseVO mcvo2 = new MemberCourseVO();
+			mcvo2.setMemberId(mid);
+			mcvo2.setCourseMainCategory(c);
+			
+			//카테고리별로 몇개인지
+			int count = mcdao.countStudentCategory(mcvo);
+			double per = Math.round(((double)count/countCourse)*100);
+			catePercent.put(c, per);
+			
+		}
 		//회원정보 조회 함수
 		memvo = dao.memberPage(mid);
 	
@@ -99,6 +121,7 @@ public class AdminMemberPage extends HttpServlet {
 		request.setAttribute("reply", reply);
 		request.setAttribute("question", q);
 		request.setAttribute("bucket", bucket);
+		request.setAttribute("per", catePercent);
 		
 		String page = "admin/member/memberPage";
 		ViewResolve.foward(request, response, page);

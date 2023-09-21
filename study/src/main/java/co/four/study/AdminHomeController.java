@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import co.four.study.common.ViewResolve;
 import co.four.study.memberCourse.service.MemberCourseService;
 import co.four.study.memberCourse.service.MemberCourseVO;
-import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
+
 import co.four.study.question.service.QuestionService;
 import co.four.study.question.serviceImpl.QuestionServiceImpl;
 

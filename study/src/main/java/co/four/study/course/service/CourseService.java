@@ -1,6 +1,5 @@
 package co.four.study.course.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +13,7 @@ public interface CourseService {
 	List<Map<String, Object>> courseMainCategory(); // 메인카테고리 조회
 	
 	// 페이징 관련
-	int courseTotalCount();
+	int courseTotalCount(CourseVO vo);
 	List<CourseVO> coursePagingList(CourseVO vo);
+	public String makeCourseList(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate);
 }
