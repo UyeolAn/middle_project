@@ -56,7 +56,9 @@
             <div class="col-lg-4 col-md-6 col-sm-6 course-col">
                 <div class="product__item course-item" onclick="courseDetail(${c.courseId})">
                     <div class="product__item__pic set-bg course-item-pic"
-                        data-setbg="client/img/product/${c.courseImg }">
+                        <c:if test="${null eq c.courseImg}">data-setbg="client/img/product/basic.png" </c:if>
+                        <c:if test="${null ne c.courseImg }">data-setbg="client/img/product/${c.courseImg}" </c:if>
+                     >
                         <ul class="product__hover">
                             <li><a href="#"><img src="client/img/icon/cart.png" alt=""></a></li>
                             <li><a href="#"><img src="client/img/icon/heart.png" alt=""></a></li>
@@ -65,21 +67,21 @@
                     <div class="product__item__text">
                         <h6>${c.courseName }</h6>
                         <div class="rating">
-								<c:if test="${c.courseStars > 0 }">
-									<c:forEach var="i" begin="1" end="${c.courseStars}">
-		                            	<i class="fa fa-star"></i>
-									</c:forEach>
-									<c:forEach var="i" begin="1" end="${5 - c.courseStars}">
-		                            	<i class="fa fa-star-o"></i>
-									</c:forEach>
-								</c:if>
-								<c:if test="${c.courseStars == 0 }">
-		                        	<i class="fa fa-star-o"></i>
-		                            <i class="fa fa-star-o"></i>
-		                            <i class="fa fa-star-o"></i>
-		                            <i class="fa fa-star-o"></i>
-		                            <i class="fa fa-star-o"></i>
-								</c:if>
+							<c:if test="${c.courseStars > 0 }">
+								<c:forEach var="i" begin="1" end="${c.courseStars}">
+	                            	<i class="fa fa-star"></i>
+								</c:forEach>
+								<c:forEach var="i" begin="1" end="${5 - c.courseStars}">
+	                            	<i class="fa fa-star-o"></i>
+								</c:forEach>
+							</c:if>
+							<c:if test="${c.courseStars == 0 }">
+	                        	<i class="fa fa-star-o"></i>
+	                            <i class="fa fa-star-o"></i>
+	                            <i class="fa fa-star-o"></i>
+	                            <i class="fa fa-star-o"></i>
+	                            <i class="fa fa-star-o"></i>
+							</c:if>
                         </div>
                         <c:choose>
                             <c:when test="${c.coursePrice <= 0}">

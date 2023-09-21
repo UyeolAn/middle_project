@@ -55,9 +55,13 @@ function appendCourseList(result) {
         $('.course-count').text('조회건수 : ' + data.length);
         clone.addClass('result');
         clone.css('display', 'block');
+        clone.find('.course-item-pic').css('overflow', 'hidden');
         clone.find('.course-item').attr('onclick', 'courseDetail(' + data[i].courseId + ')');
-        clone.find('.course-item-pic').attr('data-setbg','client/img/product/' + data[i].courseImg);
-        clone.find('.course-thum').attr('src', 'client/img/product/' + data[i].courseImg);
+        if(data[i].courseImg == null) {
+        	clone.find('.course-thum').attr('src', 'client/img/product/basic.png');
+		} else {
+        	clone.find('.course-thum').attr('src', 'client/img/product/' + data[i].courseImg);
+		}
         clone.find('.course-name').text(data[i].courseName);
         if(data[i].courseStars > 0){
         	let endNum = data[i].courseStars;

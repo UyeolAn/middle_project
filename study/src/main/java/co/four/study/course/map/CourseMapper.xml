@@ -3,20 +3,29 @@
 <mapper namespace="co.four.study.course.map.CourseMapper">
 
 	<select id="courseSelectList" resultType="co.four.study.course.service.CourseVO">
-		SELECT	*
-		FROM	COURSES
+		SELECT *
+		FROM COURSES
+		WHERE 1=1
 		<if test="courseMainCategory != null">
-		WHERE	COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
+		AND COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
 		</if>
 		<if test="courseSubCategory != null">
-		WHERE	COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
+		AND COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
 		</if>
+		<if test="courseGrade != null">
+	    AND COURSE_GRADE = LOWER(#{courseGrade})
+	    </if>
 	</select>
 	
 	<select id="courseSelect" resultType="co.four.study.course.service.CourseVO">
-		SELECT	*
-		FROM	COURSES
-		WHERE	COURSE_ID = #{courseId}
+		SELECT	A.*, B.*
+		FROM	COURSES A,
+		        (SELECT COURSE_ID, ROUND(SUM(REVIEW_STARS)/COUNT(REVIEW_STARS)) COURSE_STARS
+		        FROM REVIEWS
+		        WHERE COURSE_ID = #{courseId}
+		        GROUP BY COURSE_ID) B
+		WHERE A.COURSE_ID = B.COURSE_ID(+)
+		AND A.COURSE_ID = #{courseId}
 	</select>
 	
 	<insert id="courseInsert" parameterType="co.four.study.course.service.CourseVO">

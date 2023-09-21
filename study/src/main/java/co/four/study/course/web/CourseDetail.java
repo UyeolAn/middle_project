@@ -24,6 +24,7 @@ public class CourseDetail extends HttpServlet {
 		CourseService dao = new CourseServiceImpl();
 		CourseVO vo = new CourseVO();
 		String courseId = request.getParameter("courseId");
+		System.out.println("받아온 courseId:::: " + courseId);
 		
 		// 강의 페이지 사이드 메뉴 만들기
 		dao.makeSideMenu(request);

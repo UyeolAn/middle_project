@@ -34,19 +34,27 @@ public class CourseList extends HttpServlet {
 		dao.makeSideMenu(request);
 		
 		// subCate를 누른건지 grade를 누른건지 구분
+		String subCate;
+		String grade;
 		try {
-			String subCate = request.getParameter("subCate");
-			String grade = request.getParameter("grade");
-			
+			subCate = request.getParameter("subCate");
 			if(!subCate.trim().equals("") && subCate != null) {
 				vo.setCourseSubCategory(subCate);
 			}
+			System.out.println("subCate = " + subCate);
+		} catch (NullPointerException e) {
+			System.out.println("courseList.do::grade 호출했음!");
+		}
+		try {
+			grade = request.getParameter("grade");
 			if(!grade.trim().equals("") && grade != null) {
 				vo.setCourseGrade(grade);
 			}
+			System.out.println("grade = " + grade);
 		} catch (NullPointerException e) {
-			System.out.println("헤더메뉴에서 호출했음!");
+			System.out.println("courseList.do::subCate 호출했음!");
 		}
+		System.out.println(vo);
 		
 		
 		// 강의 리스트 페이징처리
@@ -70,7 +78,6 @@ public class CourseList extends HttpServlet {
 		String cid = request.getParameter("cid"); // 넘어온 메인카테고리
 		List<CourseVO> courses;
 
-		vo = new CourseVO();
 		if(cid != null) {
 			vo.setCourseMainCategory(cid);
 			vo.setStart(pvo.getStart());
