@@ -29,20 +29,28 @@ public class CourseList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CourseService dao = new CourseServiceImpl();
 		CourseVO vo = new CourseVO();
-		List<CourseVO> subCategory;
 		
 		// 강의 페이지 사이드 메뉴 만들기
-		// it 관련
-		vo.setCourseMainCategory("it"); 
-		subCategory = dao.courseSubCategory(vo);
-		request.setAttribute("it", subCategory);
-		// english 관련
-		vo.setCourseMainCategory("english"); 
-		subCategory = dao.courseSubCategory(vo);
-		request.setAttribute("english", subCategory);
+		dao.makeSideMenu(request);
+		
+		// subCate를 누른건지 grade를 누른건지 구분
+		try {
+			String subCate = request.getParameter("subCate");
+			String grade = request.getParameter("grade");
+			
+			if(!subCate.trim().equals("") && subCate != null) {
+				vo.setCourseSubCategory(subCate);
+			}
+			if(!grade.trim().equals("") && grade != null) {
+				vo.setCourseGrade(grade);
+			}
+		} catch (NullPointerException e) {
+			System.out.println("헤더메뉴에서 호출했음!");
+		}
+		
 		
 		// 강의 리스트 페이징처리
-		int total = dao.courseTotalCount(null); // 전체건수
+		int total = dao.courseTotalCount(vo); // 전체건수
 		String nowPage = request.getParameter("nowPage"); // 현재페이지
 		String cntPerPage = request.getParameter("cntPerPage"); // 보여줄 건수
 		
@@ -73,7 +81,6 @@ public class CourseList extends HttpServlet {
 			vo.setEnd(pvo.getEnd());
 			courses = dao.coursePagingList(vo);
 		}
-		System.out.println("강의정보 ::: " + courses);
 		
 		if(courses != null) {
 			request.setAttribute("courses", courses); // 강의 리스트 조회 완료

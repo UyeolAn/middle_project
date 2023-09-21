@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+.row {
+	justify-content: center;
+}
+.product__details__pic {
+	padding: 0px;
+}
+.course_bg {
+	display: flex;
+	align-items: center;
+	height: 320px !important;
+	background-color: #fff;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+.course_container {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 100%;
+}
+/* 강의사진 */
+.course_pic {
+	width: 50%;
+	height: 100%;
+	border-radius: 15px;
+	z-index: 1;
+	border: 1px solid #f3f2ee;
+}
+
+/* 강의 정보 영역 */
+.course_info_wrap {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	height: 100%;
+	text-align: left;
+	padding-left: 30px;
+}
+.course_info_wrap p {
+	margin: 0;
+}
+.course_links {
+	margin-top: 5px !important;
+	margin-left: 3px !important;
+}
+.course_links span {
+	color: #545353;
+}
+.course_grade_name {
+	height: 50%;
+}
+.course_info_etc {
+	height: 40%;
+}
+.course_grade_name p {
+	display: inline-block;
+	color: #282828;
+	font-weight: 700;
+	font-size: 26px;
+	height: 120px;
+	padding-top: 10px;
+}
+.course_grade {
+	display: inline-block;
+	padding: 0px 5px;
+	background-color: #234378;
+	font-size: 12px;
+	border-radius: 5px;
+	color: #fff;
+	margin-bottom: 2px;
+	margin-left: 2px;
+}
+.course_name {
+	display: block;
+	line-height: 31px;
+	margin-top: 8px;
+}
+.course_info_etc p {
+	font-size: 16px;
+}
