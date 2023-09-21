@@ -28,7 +28,7 @@
 	<!-- 테이블 시작 -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Member List</h6>
+			<h6 class="m-0 font-weight-bold text-dark">Member List</h6>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
@@ -79,11 +79,11 @@
 								</c:choose>
 								<!-- 회원 상세페이지로 이동 버튼 -->
 								<td>
-									<a class="btn btn-primary btn-icon-split">
+									<a class="btn btn-secondary btn-icon-split">
 										<span class="icon text-white-50">
-											<i class="fas fa-info-circle"></i>
+											<i class="fas fa-arrow-right"></i>
 										</span>
-										<span class="text" id="${m.memberId}">Page</span>
+										<span class="text" id="${m.memberId}">조회</span>
 									</a>
 								</td>
 							</tr>

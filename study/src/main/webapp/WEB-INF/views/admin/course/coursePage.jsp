@@ -56,27 +56,27 @@
                   <ul class="list-group list-group-flush rounded-3">
                     <!-- 강의를 수강하는 회원 수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <span class="font-weight-bold"><i class="bi bi-coin fa-lg text-warning"></i> 수강하는 학생 수</span>
+                      <span class="font-weight-bold"><i class="bi bi-coin fa-lg text-warning"></i> 수강자 수</span>
                       <p class="mb-0">${students}명</p>
                     </li>
                     <!-- 회원이 쓴 리뷰 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <span class="font-weight-bold"><i class="bi bi-check-all fa-lg" style="color: blue;"></i> 회원이 쓴 후기</span>
-                      <p class="mb-0">개</p>
+                      <span class="font-weight-bold"><i class="bi bi-check-all fa-lg" style="color: blue;"></i> 강의 후기</span>
+                      <p class="mb-0">${reviews}개</p>
                     </li>
                     <!-- 회원이 쓴 댓글 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <span class="font-weight-bold"><i class="bi bi-indent fa-lg" style="color: #55acee;"></i> 회원이 쓴 댓글</span>
-                      <p class="mb-0">개</p>
+                      <span class="font-weight-bold"><i class="bi bi-indent fa-lg" style="color: #55acee;"></i> 강의 질문</span>
+                      <p class="mb-0">${questions}개</p>
                     </li>
                     <!-- 회원이 쓴 질문 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <span class="font-weight-bold"><i class="bi bi-question-circle fa-lg" style="color: #ac2bac;"></i> 회원이 쓴 질문</span>
+                      <span class="font-weight-bold"><i class="bi bi-question-circle fa-lg" style="color: #ac2bac;"></i> 채울까말까</span>
                       <p class="mb-0">개</p>
                     </li>
                     <!-- 회원이 담은 장바구니 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <span class="font-weight-bold"><i class="bi bi-bucket-fill fa-lg" style="color: #3b5998;"></i> 회원이 담은 장바구니</span>
+                      <span class="font-weight-bold"><i class="bi bi-bucket-fill fa-lg" style="color: #3b5998;"></i> 강의 별점</span>
                       <p class="mb-0">개</p>
                     </li>
                   </ul>

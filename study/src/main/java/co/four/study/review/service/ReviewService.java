@@ -5,7 +5,7 @@ import java.util.List;
 import co.four.study.member.service.MemberVO;
 
 public interface ReviewService {
-	List<ReviewVO> reviewSelectList();
+	List<ReviewVO> reviewSelectList(ReviewVO vo);
 	ReviewVO reviewSelect (ReviewVO vo);
 	int reviewInsert(ReviewVO vo);
 	int reviewDelete(ReviewVO vo);

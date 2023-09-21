@@ -7,7 +7,7 @@ import co.four.study.member.service.MemberVO;
 import co.four.study.review.service.ReviewVO;
 
 public interface ReviewMapper {
-	List<ReviewVO> reviewSelectList();
+	List<ReviewVO> reviewSelectList(ReviewVO vo);
 	ReviewVO reviewSelect (ReviewVO vo);
 	int reviewInsert(ReviewVO vo);
 	int reviewDelete(ReviewVO vo);

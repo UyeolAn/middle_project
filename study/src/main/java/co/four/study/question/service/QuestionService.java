@@ -5,7 +5,7 @@ import java.util.List;
 import co.four.study.member.service.MemberVO;
 
 public interface QuestionService {
-	List<QuestionVO> questionSelectList();
+	List<QuestionVO> questionSelectList(QuestionVO vo);
 	QuestionVO questionSelect(QuestionVO vo);
 	int questionInsert(QuestionVO vo);
 	int questionDelete(QuestionVO vo);
