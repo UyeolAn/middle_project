@@ -35,7 +35,7 @@
 		<hr class="sidebar-divider">
 
 		<!-- Heading -->
-		<div class="sidebar-heading">Interface</div>
+		<div class="sidebar-heading">관리</div>
 
 		<!-- Nav Item - Pages Collapse Menu -->
 		<li class="nav-item">
@@ -57,10 +57,10 @@
 
 		<li class="nav-item"><a class="nav-link collapsed" href="#"
 			data-toggle="collapse" data-target="#course"
-			aria-expanded="true" aria-controls="collapseTwo"> 
+			aria-expanded="true" aria-controls="course"> 
 			<i class="fas fa-fw fa-cog"></i> <span>강의관리</span>
 		</a>
-			<div id="course" class="collapse" aria-labelledby="headingTwo"
+			<div id="course" class="collapse" aria-labelledby="headingCourse"
 				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Course Management</h6>
@@ -68,60 +68,35 @@
 					<a class="collapse-item" href="adimincourseregister.do">강의등록</a>
 				</div>
 			</div></li>
-
-		<!-- Nav Item - Utilities Collapse Menu -->
+			
 		<li class="nav-item"><a class="nav-link collapsed" href="#"
-			data-toggle="collapse" data-target="#collapseUtilities"
-			aria-expanded="true" aria-controls="collapseUtilities"> <i
-				class="fas fa-fw fa-wrench"></i> <span>Utilities</span>
+			data-toggle="collapse" data-target="#package"
+			aria-expanded="true" aria-controls="package"> 
+			<i class="fas fa-fw fa-cog"></i> <span>패키지관리</span>
 		</a>
-			<div id="collapseUtilities" class="collapse"
-				aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+			<div id="package" class="collapse" aria-labelledby="headingPackage"
+				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">Custom Utilities:</h6>
-					<a class="collapse-item" href="utilities-color.html">Colors</a> <a
-						class="collapse-item" href="utilities-border.html">Borders</a> <a
-						class="collapse-item" href="utilities-animation.html">Animations</a>
-					<a class="collapse-item" href="utilities-other.html">Other</a>
+					<h6 class="collapse-header">Course Management</h6>
+					<a class="collapse-item" href="admincourselist.do">패키지목록</a> 
+					<a class="collapse-item" href="adimincourseregister.do">패키지등록</a>
+				</div>
+			</div></li>
+			
+		<li class="nav-item"><a class="nav-link collapsed" href="#"
+			data-toggle="collapse" data-target="#worker"
+			aria-expanded="true" aria-controls="worker"> 
+			<i class="fas fa-fw fa-cog"></i> <span>직원관리</span>
+		</a>
+			<div id="worker" class="collapse" aria-labelledby="headingWorker"
+				data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<h6 class="collapse-header">Worker Management</h6>
+					<a class="collapse-item" href="admincourselist.do">직원목록</a> 
+					<a class="collapse-item" href="adimincourseregister.do">직원등록</a>
 				</div>
 			</div></li>
 
-		<!-- Divider -->
-		<hr class="sidebar-divider">
-
-		<!-- Heading -->
-		<div class="sidebar-heading">Addons</div>
-
-		<!-- Nav Item - Pages Collapse Menu -->
-		<li class="nav-item"><a class="nav-link collapsed" href="#"
-			data-toggle="collapse" data-target="#collapsePages"
-			aria-expanded="true" aria-controls="collapsePages"> <i
-				class="fas fa-fw fa-folder"></i> <span>Pages</span>
-		</a>
-			<div id="collapsePages" class="collapse"
-				aria-labelledby="headingPages" data-parent="#accordionSidebar">
-				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">Login Screens:</h6>
-					<a class="collapse-item" href="login.html">Login</a> <a
-						class="collapse-item" href="register.html">Register</a> <a
-						class="collapse-item" href="forgot-password.html">Forgot
-						Password</a>
-					<div class="collapse-divider"></div>
-					<h6 class="collapse-header">Other Pages:</h6>
-					<a class="collapse-item" href="404.html">404 Page</a> <a
-						class="collapse-item" href="blank.html">Blank Page</a>
-				</div>
-			</div></li>
-
-		<!-- Nav Item - Charts -->
-		<li class="nav-item"><a class="nav-link" href="charts.html">
-				<i class="fas fa-fw fa-chart-area"></i> <span>Charts</span>
-		</a></li>
-
-		<!-- Nav Item - Tables -->
-		<li class="nav-item"><a class="nav-link" href="tables.html">
-				<i class="fas fa-fw fa-table"></i> <span>Tables</span>
-		</a></li>
 
 		<!-- Divider -->
 		<hr class="sidebar-divider d-none d-md-block">
@@ -132,6 +107,7 @@
 		</div>
 
 		<!-- Sidebar Message -->
+		<!--  
 		<div class="sidebar-card d-none d-lg-flex">
 			<img class="sidebar-card-illustration mb-2"
 				src="admin/img/undraw_rocket.svg" alt="...">
@@ -143,6 +119,7 @@
 				href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to
 				Pro!</a>
 		</div>
+		-->
 
 	</ul>
 </body>

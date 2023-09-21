@@ -6,32 +6,29 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
-
-<!-- Start GA -->
 </head>
 <body>
 	<div class="section-body container py-5">
 	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">강의 등록</h1>
+	<h1 class="h3 mb-2 text-gray-800">강의 수정</h1>
 	<p class="mb-4">
-		등록할 강의의 정보를 입력해주세요.
+		수정할 강의의 정보를 입력해주세요.
 	</p>
 		<div class="row">
 		  <div class="col-12 col-md-6 col-lg-12">
 			<div class="card">
 			  <div class="card-header">
-				<h6 class="m-0 font-weight-bold text-primary">New Course</h6>
+				<h6 class="m-0 font-weight-bold text-primary">${c.courseName}</h6>
 			  </div>
 			  <div class="card-body">
-				<form id="frm" action="admincourseinsert.do" method="post">
+				<form id="frm" action="admincourseupdate.do" method="post">
 				<div class="form-group">
 				  <label>강의 이름</label>
-				  <input type="text" class="form-control" name="courseName">
+				  <input type="text" class="form-control" name="courseName" placeholder="${c.courseName}">
 				</div>
 				<div class="form-group">
 					<label>강의 설명</label>
-					<input type="text" class="form-control" name="courseScript">
+					<input type="text" class="form-control" name="courseScript" placeholder="${c.courseScript}">
 				  </div>
 				  <div class="col-lg-12 row">
 				<div class="form-group col-lg-6">
@@ -42,7 +39,7 @@
 						<i class="fa fa-credit-card"></i>
 					  </div>
 					</div>
-					<input type="text" class="form-control" name="coursePrice">
+					<input type="text" class="form-control" name="coursePrice" placeholder="${c.coursePrice}">
 				  </div>
 				</div>
 				<div class="form-group col-lg-6">
@@ -53,7 +50,7 @@
 						  <i class="fa fa-user"></i>
 						</div>
 					  </div>
-					  <input type="text" class="form-control" name="courseTeacher">
+					  <input type="text" class="form-control" name="courseTeacher" placeholder="${c.courseTeacher}">
 					</div>
 				  </div>
 				</div>
@@ -95,7 +92,7 @@
 				  </div>
 				  <div class="form-group">
 					<label>강의 이미지</label>
-					<input type="file" style="display: block;" id="courseImg" name="courseImg">
+					<input type="file" style="display: block;" id="courseImg" name="courseImg" placeholder="${c.courseImg}">
 				  </div>
 				  <div class="row">
 					<div class="col-lg-4"></div>
@@ -109,7 +106,7 @@
 					  </button>
 					</div>
 					</div>
-					<div class="col-lg-4"></div>
+					<span hidden name="courseId" value = "${c.courseId}"></span>
 
 				  </div>
 				</form>
@@ -143,7 +140,7 @@
 	}
 
 	function alarm() {
-		alert("강의가 등록되었습니다.");
+		alert("강의가 수정되었습니다.");
 	}
 
 	// function formCheck() {

@@ -15,4 +15,5 @@ public interface CourseService {
 	// 페이징 관련
 	int courseTotalCount(CourseVO vo);
 	List<CourseVO> coursePagingList(CourseVO vo);
+	public String makeCourseList(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate);
 }

@@ -46,7 +46,7 @@
                   <div class="shop__sidebar__categories">
                     <ul class="nice-scroll">
                       <c:forEach items="${it}" var="it" >
-                    	<li onclick="selectList(this)" data-c="${it.courseSubCategory }">
+                    	<li onclick="courseList('${it.courseSubCategory }', 1)" data-c="${it.courseSubCategory }">
                     	  <span>${it.courseSubCategory } (${it.subCategoryCount })</span>
                     	</li>
                       </c:forEach>
@@ -64,7 +64,7 @@
                   <div class="shop__sidebar__categories">
                     <ul class="nice-scroll">
                       <c:forEach items="${english}" var="eng" >
-                    	<li onclick="selectList(this)" data-c="${eng.courseSubCategory }">
+                    	<li onclick="courseList('${eng.courseSubCategory }', 1)" data-c="${eng.courseSubCategory }">
                     	  <span>${eng.courseSubCategory } (${eng.subCategoryCount })</span>
                     	</li>
                       </c:forEach>

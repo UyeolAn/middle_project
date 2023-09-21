@@ -8,6 +8,21 @@
     <title>Insert title here</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <link rel="stylesheet" href="client/css/course.css">
+    <script type="text/javascript">
+	    /* 페이징 갯수 옵션 변경시 작동 */
+	    function selChange() {
+			let sel = $('#cntPerPage').val();
+			location.href="courseList.do?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	    }
+		
+		/* 강의 상세조회 Ajax */
+		function courseDetail(id) {
+			console.log("here!! detail!")
+			let form = document.getElementById("courseform");
+			form.courseId.value = id;
+			form.submit();
+		}
+    </script>
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
@@ -51,11 +66,23 @@
                     <div class="product__item__text">
                         <h6>${c.courseName }</h6>
                         <div class="rating">
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
+                        	<c:choose>
+								<c:when test="${c.courseId == 1 }">
+									<%-- <c:forEach var="i" begin="1" end="${star.reviewStars}">
+		                            	<i class="fa fa-star"></i>
+									</c:forEach>
+									<c:forEach var="i" begin="1" end="${5 - star.reviewStars}">
+		                            	<i class="fa fa-star-o"></i>
+									</c:forEach> --%>
+								</c:when>
+								<c:otherwise>
+		                        	<i class="fa fa-star-o"></i>
+		                            <i class="fa fa-star-o"></i>
+		                            <i class="fa fa-star-o"></i>
+		                            <i class="fa fa-star-o"></i>
+		                            <i class="fa fa-star-o"></i>
+								</c:otherwise>
+							</c:choose>
                         </div>
                         <c:choose>
                             <c:when test="${c.coursePrice <= 0}">
@@ -133,29 +160,12 @@
     <!-- Ajax용 강의 리스트 end -->
     
     <!-- Ajax용 페이징 영역 start -->
-    <div class="row paging-row ajax-paging">
-        <div class="col-lg-12 col-paging" style="display:none;">
-	        <div class="product__pagination">
-	           	<!-- 시작페이지가 1이아닐때 (<) 표시 nowPage=(startPage-1),cntPerPage(보여줄개수) / -->
-	            <a class="active beforeBtn" data-c="">&lt;</a>
-	           	
-	           	<!-- 반복문 숫자가 현재페이지(nowPage)랑 같으면 -->
-	           	<a class="active eq-now-page">11</a>
-	           	<!-- 반복문 숫자가 현재페이지(nowPage)랑 다르면 -->
-	           	<a class="ne-now-page" data-c="">12</a>
-	           	
-	           	<!-- 현재 보이는 끝페이지(endPage)랑 마지막페이지(lastPage)가 같지 않으면 -->
-	           	<!-- nowPage=${paging.endPage + 1 }&cntPerPage=${paging.cntPerPage} -->
-	           	<a class="active afterBtn" data-c="">&gt;</a>
-	        </div>
-        </div>
-    </div>
-    <input type="hidden" value=${paging.nowPage } id="nowPage"/>
+    <div class="row paging-row ajax-paging"></div>
     <!-- Ajax용 페이징 영역 end -->
     
     
     <!-- 강의 상세조회 폼 start -->
-    <form id="courseform" action="courseDetail.do" method="post">
+    <form id="courseform" action="coursedetail.do" method="post">
 		<input type="hidden" id="courseId" name="courseId">
 	</form>
     <!-- 강의 상세조회 폼 end -->
@@ -167,26 +177,18 @@
     <script type="text/javascript">
     
     	/* 사이드메뉴 강의 조회 Ajax */
-        function selectList(target) {
-            let subCate = $(target).attr('data-c');
-            let sel = $('#cntPerPage').val();
-            let nowPage = $('#nowPage').val();
-            
-            $.ajax({
-                url: 'ajaxCourseList.do',
+    	function courseList(subCate, nowPage) {
+    		let sel = $('#cntPerPage').val();
+    		$.ajax({
+    			url: 'ajaxCourseList.do',
                 method: 'post',
                 data: { subCate: subCate, nowPage: nowPage, cntPerPage: sel },
                 success: function (result) {
-                	console.log(result[0]);
                     appendCourseList(result); // [func] 강의 리스트 태그 생성
                     appendPaging(result); // [func] 페이징 태그 생성
-                },
-                error: function (result) {
-                    console.log("오류났어요");
-                    console.log(result);
                 }
-            })
-        }
+    		})
+    	}
 
         function appendCourseList(result) {
         	$('.all-list').remove(); // 초기 태그 삭제
@@ -226,57 +228,12 @@
         }
         
         function appendPaging(result) {
-        	let data = result[0];
-            let cdata = result[1][0].courseSubCategory;
-            console.log("appendPaging에 들어옴!");
-            console.log(data);
-            console.log(cdata);
+        	let data = result[0].paging;
             
         	$('.all-list-paging').remove(); // 초기 태그 삭제
         	$('.p-result').remove(); // ajax 통신으로 추가된 태그 삭제
-        	
-            let clone = $('.col-paging:eq(0)').clone(); // 태그 create
             
-            clone.addClass('p-result');
-            clone.css('display', 'block');
-            
-            // 시작페이지가 1이아닐때 : (<) 표시
-            if(data.startPage != 1) {
-            	clone.find('.beforeBtn').attr('onclick', 'selectList(target)');
-        		clone.find('.beforeBtn').attr('data-c', cdata);
-            } else {
-            	clone.find('.beforeBtn').remove();
-            }
-            
-            // 페이지 출력
-            for(let i = data.startPage; i <= data.endPage; i++){
-            	console.log("data.lastPage:::::" + data.lastPage);
-            	if(data.nowPage == i){ // 반복문 숫자가 현재페이지(nowPage)랑 같으면
-            		clone.find('.eq-now-page').text(i);
-            	} else if(data.nowPate != i) { //반복문 숫자가 현재페이지(nowPage)랑 다르면
-            		clone.find('.ne-now-page').attr('onclick', 'selectList(target)');
-            		clone.find('.ne-now-page').attr('data-c', cdata);
-            		$('#nowPage').val(i);
-            		clone.find('.ne-now-page').text(i);
-            	}
-            }
-            
-            // 현재 보이는 끝페이지(endPage)랑 마지막페이지(lastPage)가 같지 않으면
-            if(data.endPage != data.lastPage) {
-            	clone.find('.afterBtn').attr('onclick', 'selectList(target)');
-        		clone.find('.afterBtn').attr('data-c', cdata);
-        		$('#nowPage').val(i);
-            } else {
-            	clone.find('.afterBtn').remove();
-            }
-            
-         	// 마지막페이지가 1이면
-            if(data.lastPage == 1) { 
-        		console.log('페이지가 하나밖에 없어요!!!!');
-        		clone.find('.ne-now-page').remove();
-        	} 
-            
-    		$('.paging-row').append(clone); // 태그 append
+    		$('.paging-row').append(data); // 태그 append
         }
         
         function categoryUpdate(data) {
@@ -296,18 +253,6 @@
         	$('.breadcrumb__links').append('<span class="mainCate">'+ mainCate + '</span>');
             $('.breadcrumb__links').append('<span class="subCate">'+ subCate + '</span>');
         }
-        
-        
-        /* 페이징 갯수 옵션 변경시 작동 */
-        function selChange() {
-		let sel = $('#cntPerPage').val();
-		location.href="courseList.do?nowPage=${paging.nowPage}&cntPerPage="+sel;
-		
-		/* 강의 상세조회 Ajax */
-		function courseDetail() {
-			
-		}
-	}
 
     </script>
 </body>
