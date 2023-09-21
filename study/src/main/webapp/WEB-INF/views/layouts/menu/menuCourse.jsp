@@ -46,8 +46,8 @@
                   <div class="shop__sidebar__categories">
                     <ul class="nice-scroll">
                       <c:forEach items="${it}" var="it" >
-                    	<li onclick="courseList('${it.courseSubCategory }', 1)" data-c="${it.courseSubCategory }">
-                    	  <span>${it.courseSubCategory } (${it.subCategoryCount })</span>
+                    	<li onclick="courseList('subCate', '${it.courseSubCategory }', 1, this)" data-c="${it.courseSubCategory }">
+                    	  <span class="sub_menu">${it.courseSubCategory } (${it.subCategoryCount })</span>
                     	</li>
                       </c:forEach>
                     </ul>
@@ -64,8 +64,8 @@
                   <div class="shop__sidebar__categories">
                     <ul class="nice-scroll">
                       <c:forEach items="${english}" var="eng" >
-                    	<li onclick="courseList('${eng.courseSubCategory }', 1)" data-c="${eng.courseSubCategory }">
-                    	  <span>${eng.courseSubCategory } (${eng.subCategoryCount })</span>
+                    	<li onclick="courseList('subCate','${eng.courseSubCategory }', 1, this)" data-c="${eng.courseSubCategory }">
+                    	  <span class="sub_menu">${eng.courseSubCategory } (${eng.subCategoryCount })</span>
                     	</li>
                       </c:forEach>
                     </ul>
@@ -80,9 +80,9 @@
               <div id="collapseFour" class="collapse" data-parent="#accordionExample">
                 <div class="card-body">
                   <div class="shop__sidebar__tags">
-                  	<span id="easy" class="active">초급</span>
-                  	<span id="normal">중급</span>
-                  	<span id="hard">고급</span>
+                  	<span id="easy" class="sub_menu_g" onclick="courseList('grade', 'easy', 1)">초급</span>
+                  	<span id="normal" class="sub_menu_g" onclick="courseList('grade', 'normal', 1)">중급</span>
+                  	<span id="hard" class="sub_menu_g" onclick="courseList('grade', 'hard', 1)">고급</span>
                   </div>
                 </div>
               </div>

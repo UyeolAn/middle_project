@@ -41,7 +41,8 @@
 .shop__sidebar__tags span:hover,
 .shop__sidebar__tags span.active {
     background: #111111;
-    color: #ffffff;
+    color: #ffffff !important;
+    cursor: pointer;
 }
 .product__pagination button {
     display: inline-block;
@@ -65,6 +66,9 @@
     border-color: #111111;
 }
 
+.product__item__text .rating i {
+	color: #ffbc00;
+}
 
 /*.breadcrumb__links span:after {
     position: absolute;
