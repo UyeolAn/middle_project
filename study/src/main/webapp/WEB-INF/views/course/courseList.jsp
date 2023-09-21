@@ -66,23 +66,21 @@
                     <div class="product__item__text">
                         <h6>${c.courseName }</h6>
                         <div class="rating">
-                        	<c:choose>
-								<c:when test="${c.courseId == 1 }">
-									<%-- <c:forEach var="i" begin="1" end="${star.reviewStars}">
+								<c:if test="${c.courseStars > 0 }">
+									<c:forEach var="i" begin="1" end="${c.courseStars}">
 		                            	<i class="fa fa-star"></i>
 									</c:forEach>
-									<c:forEach var="i" begin="1" end="${5 - star.reviewStars}">
+									<c:forEach var="i" begin="1" end="${5 - c.courseStars}">
 		                            	<i class="fa fa-star-o"></i>
-									</c:forEach> --%>
-								</c:when>
-								<c:otherwise>
+									</c:forEach>
+								</c:if>
+								<c:if test="${c.courseStars == 0 }">
 		                        	<i class="fa fa-star-o"></i>
 		                            <i class="fa fa-star-o"></i>
 		                            <i class="fa fa-star-o"></i>
 		                            <i class="fa fa-star-o"></i>
 		                            <i class="fa fa-star-o"></i>
-								</c:otherwise>
-							</c:choose>
+								</c:if>
                         </div>
                         <c:choose>
                             <c:when test="${c.coursePrice <= 0}">
@@ -137,11 +135,7 @@
                 <div class="product__item__text">
                     <h6 class="course-name">${c.courseName }</h6>
                     <div class="rating">
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
+                    	<!-- 별점태그 -->
                     </div>
                     <c:choose>
                         <c:when test="${c.coursePrice <= 0}">
@@ -177,12 +171,26 @@
     <script type="text/javascript">
     
     	/* 사이드메뉴 강의 조회 Ajax */
-    	function courseList(subCate, nowPage) {
+    	function courseList(type, value, nowPage, target) {
+    		$('.sub_menu').css('color','#b7b7b7');
+    		$('.sub_menu_g').removeClass('active');
+    		
     		let sel = $('#cntPerPage').val();
+    		let subCateVal = '';
+    		let gradeVal = '';
+    		
+    		if(type == 'subCate'){
+    			subCateVal = value;
+    			$(target).children().css('color','#e53637');
+    		} else if(type == 'grade') {
+    			gradeVal = value;
+    			$(target).addClass('active');
+    		}
+    		
     		$.ajax({
     			url: 'ajaxCourseList.do',
                 method: 'post',
-                data: { subCate: subCate, nowPage: nowPage, cntPerPage: sel },
+                data: { subCate: subCateVal, grade: gradeVal, nowPage: nowPage, cntPerPage: sel },
                 success: function (result) {
                     appendCourseList(result); // [func] 강의 리스트 태그 생성
                     appendPaging(result); // [func] 페이징 태그 생성
@@ -214,9 +222,25 @@
                 $('.course-count').text('조회건수 : ' + data.length);
                 clone.addClass('result');
                 clone.css('display', 'block');
+                clone.find('.course-item').attr('onclick', 'courseDetail(' + data[i].courseId + ')');
                 clone.find('.course-item-pic').attr('data-setbg','client/img/product/' + data[i].courseImg);
                 clone.find('.course-thum').attr('src', 'client/img/product/' + data[i].courseImg);
                 clone.find('.course-name').text(data[i].courseName);
+                if(data[i].courseStars > 0){
+                	let endNum = data[i].courseStars;
+                	console.log(data[i].courseStars);
+	                for(let i=1; i<=endNum; i++){
+		                clone.find('.rating').append('<i class="fa fa-star" style="margin-right: -1px;"></i>');
+	                }
+	                for(let i=1; i<=(5-endNum); i++) {
+	                	clone.find('.rating').append('<i class="fa fa-star-o" style="margin-right: -1px;"></i>');
+	                }
+                } else {
+                	for(let i=1; i<=5; i++){
+                		clone.find('.rating').append('<i class="fa fa-star-o" style="margin-right: -1px;"></i>');
+                	}
+                }
+                
                 clone.find('.course-price').text(priceText);
                 if(priceText == '무료') {
                 	clone.find('.course-price').css('color', 'red');

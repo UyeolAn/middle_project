@@ -1,6 +1,5 @@
 package co.four.study.course.serviceImpl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +9,6 @@ import co.four.study.common.DataSource;
 import co.four.study.course.map.CourseMapper;
 import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
-import co.four.study.course.service.PagingVO;
 
 public class CourseServiceImpl implements CourseService {
 	
@@ -61,31 +59,51 @@ public class CourseServiceImpl implements CourseService {
 	public List<CourseVO> coursePagingList(CourseVO vo) {
 		return map.coursePagingList(vo);
 	}
-	
+
 	@Override
-	public String makeCourseList(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate) {
+	public String makeSubCateCourseList(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate) {
 		String tags = "";
-		
 		tags += "<div class='col-lg-12 col-paging'>";
 		tags += "<div class='product__pagination p-result'>";
-		
 		if(startPage != 1) {
-			tags += "<button class='active beforeBtn' onclick=\"courseList('" + subCate + "'," + (startPage-1) + ")\">&lt;</button>";
+			tags += "<button class='active beforeBtn' onclick=\"courseList('subCate', '" + subCate + "'," + (startPage-1) + ")\">&lt;</button>";
 		}
-		
 		for(int i=startPage; i<=endPage; i++) {
 			if(nowPage == i) {
 				tags += "<button class='active'>" + i + "</button>";    
 			}
 			if(nowPage != i) {
-				tags += "<button onclick=\"courseList('" + subCate + "'," + i + ")\">" + i + "</button>";
+				tags += "<button onclick=\"courseList('subCate', '" + subCate + "'," + i + ")\">" + i + "</button>";
 			}
 		}
-		
 		if(endPage != lastPage) {
-			tags += "<button class='active afterBtn' onclick=\"courseList('" + subCate + "'," + (endPage + 1) + ")\">&gt;</button>";
+			tags += "<button class='active afterBtn' onclick=\"courseList('subCate', '" + subCate + "'," + (endPage + 1) + ")\">&gt;</button>";
 		}
-		
+		tags += "</div>";    
+		tags += "</div>";    
+
+		return tags;
+	}
+
+	@Override
+	public String makeGradeCourseList(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String grade) {
+		String tags = "";
+		tags += "<div class='col-lg-12 col-paging'>";
+		tags += "<div class='product__pagination p-result'>";
+		if(startPage != 1) {
+			tags += "<button class='active beforeBtn' onclick=\"courseList('grade', '" + grade + "'," + (startPage-1) + ")\">&lt;</button>";
+		}
+		for(int i=startPage; i<=endPage; i++) {
+			if(nowPage == i) {
+				tags += "<button class='active'>" + i + "</button>";    
+			}
+			if(nowPage != i) {
+				tags += "<button onclick=\"courseList('grade', '" + grade + "'," + i + ")\">" + i + "</button>";
+			}
+		}
+		if(endPage != lastPage) {
+			tags += "<button class='active afterBtn' onclick=\"courseList('grade', '" + grade + "'," + (endPage + 1) + ")\">&gt;</button>";
+		}
 		tags += "</div>";    
 		tags += "</div>";    
 

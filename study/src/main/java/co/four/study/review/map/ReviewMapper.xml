@@ -36,10 +36,4 @@
 		SELECT COUNT(*) 
 		FROM REVIEWS WHERE MEMBER_ID = #{memberId}
 	</select>
-	
-	<select id="reviewStars" resultType="co.four.study.review.service.ReviewVO">
-		SELECT COURSE_ID, ROUND(SUM(REVIEW_STARS)/COUNT(REVIEW_STARS)) REVIEW_STARS
-		FROM REVIEWS
-		GROUP BY COURSE_ID
-	</select>
 </mapper>
