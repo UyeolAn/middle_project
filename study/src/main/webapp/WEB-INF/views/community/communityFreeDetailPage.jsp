@@ -18,6 +18,10 @@
           color: #B7B7B7;
         }
 
+        .row {
+
+        }
+
         .small-btn {
           margin-right: 3%;
           padding: 9px 20px;
@@ -32,8 +36,20 @@
           border-radius: 20px;
         }
 
+        .active-like-btn {
+          margin-right: 3%;
+          padding: 9px 20px;
+          font-size: medium;
+          background: #E53637;
+          border-radius: 20px;
+        }
+
         .like-btn:hover {
           background: #E53637;
+        }
+
+        .active-like-btn:hover {
+          background: #ffa9a9;
         }
 
         .dislike-btn {
@@ -44,8 +60,20 @@
           border-radius: 20px;
         }
 
+        .active-dislike-btn {
+          margin-right: 3%;
+          padding: 9px 20px;
+          font-size: medium;
+          background: #777;
+          border-radius: 20px;
+        }
+
         .dislike-btn:hover {
           background: #777;
+        }
+
+        .active-dislike-btn:hover {
+          background: #ccc;
         }
       </style>
       <script src="client/js/jquery-3.3.1.min.js"></script>
@@ -68,24 +96,23 @@
         <hr>
 
         <!--Board Main Body Start-->
-        <div class="row">
+        <div class="col-lg-12 row">
           <div class="col-lg-10">
-            <p id="boardContent" style="white-space:pre;">
-              <c:out value="${board.boardContent}" />
-            </p>
+            <p class="col-lg-12" id="boardContent" style="white-space:pre;">${board.boardContent}</p>
           </div>
           <div class="col-lg-7 comm__free__board__detail__buttons">
-            <button type="button" class="site-btn small-btn"
+            <button type="button" id="updateBtn" class="site-btn small-btn"
               onclick="location.href='communityfreeupdatepage.do?boardId=${board.boardId}'">수정</button>
-            <button type="button" class="site-btn small-btn" style="background: #E53637;"
+            <button type="button" id="deleteBtn" class="site-btn small-btn" style="background: #E53637;"
               onclick="deleteBoard()">삭제</button>
             <form id="deleteForm" action="boarddelete.do">
               <input type="hidden" id="boardId" name="boardId" value="${board.boardId}">
             </form>
           </div>
           <div class="col-lg-5 comm__free__board__detail__like">
-            <button type="button" class="site-btn like-btn" onclick="addLike()">LIKE : ${board.boardLike}</button>
-            <button type="button" class="site-btn dislike-btn" onclick="addDislike()">DISLIKE :
+            <button type="button" id="likeBtn" class="site-btn like-btn">LIKE :
+              ${board.boardLike}</button>
+            <button type="button" id="dislikeBtn" class="site-btn dislike-btn">DISLIKE :
               ${board.boardDislike}</button>
           </div>
         </div>
@@ -98,16 +125,33 @@
         let boardId = '${board.boardId}';
 
         // 처음 로딩
-        loadPage();
+        setLikeBtn();
+        setDisLikeBtn();
+        setUpdDelBtn();
+        loadMemberRecommend();
 
-        // 처음 로딩 시 실행되는 함수
-        function loadPage() {
+        // 이 게시글에서 회원이 좋아요/싫어요를 눌렀는지에 대한 정보를 반환하는 함수
+        function loadMemberRecommend() {
           if (loginMemberId != 'null') {
             $.ajax({
               url: 'recommendselect.do?boardId=' + boardId + '&recommendValue=like',
               method: 'get',
               success: function (recommendJson) {
-                console.log(recommendJson);
+                if (recommendJson != null) {
+                  $('button.site-btn.like-btn').attr('class', 'site-btn active-like-btn');
+                }
+              },
+              error: function (err) {
+                console.log(err);
+              }
+            });
+            $.ajax({
+              url: 'recommendselect.do?boardId=' + boardId + '&recommendValue=dislike',
+              method: 'get',
+              success: function (recommendJson) {
+                if (recommendJson != null) {
+                  $('button.site-btn.dislike-btn').attr('class', 'site-btn active-dislike-btn');
+                }
               },
               error: function (err) {
                 console.log(err);
@@ -115,7 +159,6 @@
             });
           }
         }
-
 
         // 게시글 삭제 함수
         function deleteBoard() {
@@ -126,8 +169,101 @@
           }
         }
 
-        function addLike() {
+        // 좋아요 버튼 활성화
+        function setLikeBtn() {
+          $('#likeBtn').on('click', function () {
+            if (loginMemberId != 'null') {
+              if ($(this).attr('class') == 'site-btn like-btn') {
+                $.ajax({
+                  url: 'recommendinsert.do',
+                  method: 'post',
+                  data: {
+                    memberId: loginMemberId,
+                    boardId: boardId,
+                    recommendValue: 'like'
+                  },
+                  success: function (messageJson) {
+                    alert(messageJson.message);
+                    location.replace('communityfreedetailpage.do?boardId=' + boardId);
+                  },
+                  error: function (err) {
+                    console.log(err);
+                  }
+                });
+              } else if ($(this).attr('class') == 'site-btn active-like-btn') {
+                $.ajax({
+                  url: 'recommenddelete.do',
+                  method: 'post',
+                  data: {
+                    memberId: loginMemberId,
+                    boardId: boardId,
+                    recommendValue: 'like'
+                  },
+                  success: function (messageJson) {
+                    alert(messageJson.message);
+                    location.replace('communityfreedetailpage.do?boardId=' + boardId)
+                  },
+                  error: function (err) {
+                    console.log(err);
+                  }
+                });
+              }
+            } else {
+              alert('로그인 하셔야 합니다!');
+            }
+          });
+        }
 
+        // 싫어요 버튼 활성화
+        function setDisLikeBtn() {
+          $('#dislikeBtn').on('click', function () {
+            if (loginMemberId != 'null') {
+              if ($(this).attr('class') == 'site-btn dislike-btn') {
+                $.ajax({
+                  url: 'recommendinsert.do',
+                  method: 'post',
+                  data: {
+                    memberId: loginMemberId,
+                    boardId: boardId,
+                    recommendValue: 'dislike'
+                  },
+                  success: function (messageJson) {
+                    alert(messageJson.message);
+                    location.replace('communityfreedetailpage.do?boardId=' + boardId);
+                  },
+                  error: function (err) {
+                    console.log(err);
+                  }
+                });
+              } else if ($(this).attr('class') == 'site-btn active-dislike-btn') {
+                $.ajax({
+                  url: 'recommenddelete.do',
+                  method: 'post',
+                  data: {
+                    memberId: loginMemberId,
+                    boardId: boardId,
+                    recommendValue: 'dislike'
+                  },
+                  success: function (messageJson) {
+                    alert(messageJson.message);
+                    location.replace('communityfreedetailpage.do?boardId=' + boardId)
+                  },
+                  error: function (err) {
+                    console.log(err);
+                  }
+                });
+              }
+            } else {
+              alert('로그인 하셔야 합니다!');
+            }
+          });
+        }
+
+        function setUpdDelBtn() {
+          if (loginMemberId == 'null' || loginMemberId != '${board.memberId}') {
+            $('#updateBtn').hide();
+            $('#deleteBtn').hide();
+          }
         }
       </script>
     </body>

@@ -11,20 +11,23 @@
 	SELECT *
 	FROM recommends
 	WHERE board_id = #{boardId} AND
-		  member_id = #{memberId}
+		  member_id = #{memberId} AND
+		  recommend_value = #{recommendValue}
 </select>
 
 <insert id="recommendInsert" parameterType="co.four.study.recommend.service.RecommendVO">
 	<selectKey keyProperty="recommendId" resultType="int" order="BEFORE">
         SELECT NVL(MAX(recommend_id), 0) + 1 AS recommend_id FROM recommends
     </selectKey>
-	INSERT INTO recommends (member_id, board_id, recommendValue)
-	VALUES (#{memberId}, #{boardId}, #{recommendValue})
+	INSERT INTO recommends (recommend_id, member_id, board_id, recommend_value)
+	VALUES (#{recommendId}, #{memberId}, #{boardId}, #{recommendValue})
 </insert>
 
 <delete id="recommendDelete" parameterType="co.four.study.recommend.service.RecommendVO">
 	DELETE FROM recommends
-	WHERE recommend_id = #{recommendId}
+	WHERE board_id = #{boardId} AND
+		  member_id = #{memberId} AND
+		  recommend_value = #{recommendValue}
 </delete>
 
 <select id="countRecommend" parameterType="int"

@@ -30,12 +30,12 @@ public class RecommendSelect extends HttpServlet {
 		RecommendVO dto = new RecommendVO();
 		dto.setMemberId((String)session.getAttribute("loginId"));
 		dto.setBoardId(Integer.parseInt(request.getParameter("boardId")));
+		dto.setRecommendValue(request.getParameter("recommendValue"));
 		
 		RecommendVO selectedVO = dao.recommendSelect(dto);
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		String recommendJson = objectMapper.writeValueAsString(selectedVO);
-		System.out.println(recommendJson);
 		
 		response.setContentType("text/json;charset=utf-8");
 		response.getWriter().print(recommendJson);

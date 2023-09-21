@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import co.four.study.board.service.BoardService;
 import co.four.study.board.service.BoardVO;
@@ -22,10 +23,12 @@ public class BoardInsert extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BoardService dao = new BoardServiceImpl();
+		HttpSession session = request.getSession();
 		
+		BoardService dao = new BoardServiceImpl();
+
 		BoardVO insertVO = new BoardVO();
-		insertVO.setMemberId("uyeol"); // 나중에 로그인 세션의 id 값으로 바꿔줘야함
+		insertVO.setMemberId((String)session.getAttribute("loginId"));
 		insertVO.setBoardTitle(request.getParameter("boardTitle"));
 		insertVO.setBoardContent(request.getParameter("boardContent"));
 //		insertVO.setBoardImg(null); // 나중에 이미지 추가 기능도 넣어줘야함
