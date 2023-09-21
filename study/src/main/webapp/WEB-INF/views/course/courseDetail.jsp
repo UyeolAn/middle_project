@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="client/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="client/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="client/css/elegant-icons.css" type="text/css">
-<link rel="stylesheet" href="client/css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="client/css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="client/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="client/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="client/css/style.css" type="text/css">
+<link rel="stylesheet" href="client/css/coursedetail.css" type="text/css">
+<link rel="stylesheet" href="client/css/course.css" type="text/css">
 </head>
 <body> 
     <!-- Offcanvas Menu Begin -->
@@ -20,72 +17,26 @@
 
     <!-- 강의 상세 정보 Begin -->
     <section class="shop-details">
-        <div class="product__details__pic">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="product__details__breadcrumb">
-                            <a href="home.do">Home</a>
-                            <a href="CourseList.do">Course</a>
-                            <span>강의 상세 정보</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-3">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="img/shop-details/thumb-1.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="img/shop-details/thumb-2.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="img/shop-details/thumb-3.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="img/shop-details/thumb-4.png">
-                                        <i class="fa fa-play"></i>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6 col-md-9">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="img/shop-details/product-big-2.png" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="img/shop-details/product-big-3.png" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="img/shop-details/product-big.png" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-4" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="img/shop-details/product-big-4.png" alt="">
-                                    <a href="https://www.youtube.com/watch?v=8PJ3_p7VqHw&list=RD8PJ3_p7VqHw&start_radio=1" class="video-popup"><i class="fa fa-play"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    	<!-- data-setbg="client/img/product/${course.courseImg }" -->
+        <div class="product__details__pic set-bg course_bg" >
+            <div class="container course_container">
+                <div class="row set-bg course_pic" data-setbg="client/img/product/${course.courseImg }"></div>
+                <!-- <div class="image_overlay"></div> -->
+                <div class="course_info_wrap">
+                	<p class="breadcrumb__links course_links"><span>${fn:toUpperCase(course.courseMainCategory)}</span> <span>${fn:toUpperCase(course.courseSubCategory)}</span></p>
+	                <div class="course_grade_name">
+	                	<p>
+	                		<c:if test="${course.courseGrade eq 'easy' }"><span class="course_grade">중급이상</span></c:if>
+		                	<c:if test="${course.courseGrade eq 'normal' }"><span class="course_grade">초급</span></c:if>
+		                	<c:if test="${course.courseGrade eq 'hard' }"><span class="course_grade">중급이상</span></c:if>
+	                		<c:if test="${course.courseGrade ne 'hard' }"><span class="c_space"></span></c:if>
+	                		<c:if test="${course.courseGrade eq 'hard' }"><span class="c_space"></span></c:if>
+	                		<span class="course_name">${course.courseName }</span>
+	                	</p>
+	                </div>
+	                <div class="course_info_etc">
+	                	<p>${course.courseScript }</p>
+	                </div>
                 </div>
             </div>
         </div>
@@ -442,5 +393,17 @@
         </div>
     </section>
     <!-- 다른 강의 추천 End -->
+    
+    <form id="cform" action="courseList.do" method="post">
+    	<input type="hidden" name="subCate" id="subCate" value="" />
+    	<input type="hidden" name="grade" id="grade" value="" />
+    	<input type="hidden" name="nowPage" id="nowPage" value="" />
+    	<input type="hidden" name="cntPerPage" id="cntPerPage" value="" />
+    </form>
+    
+    
+    <!-- 강의 관련 자바스크립트 연결 -->
+    <script type="text/javascript" src="client/js/coursedetail.js"></script>
+    
 </body>
 </html>

@@ -3,6 +3,9 @@ package co.four.study.course.serviceImpl;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.session.SqlSession;
 
 import co.four.study.common.DataSource;
@@ -66,18 +69,18 @@ public class CourseServiceImpl implements CourseService {
 		tags += "<div class='col-lg-12 col-paging'>";
 		tags += "<div class='product__pagination p-result'>";
 		if(startPage != 1) {
-			tags += "<button class='active beforeBtn' onclick=\"courseList('subCate', '" + subCate + "'," + (startPage-1) + ")\">&lt;</button>";
+			tags += "<button class='active beforeBtn' onclick=\"courseList('subCate', '" + subCate + "'," + (startPage-1) + ", this)\">&lt;</button>";
 		}
 		for(int i=startPage; i<=endPage; i++) {
 			if(nowPage == i) {
 				tags += "<button class='active'>" + i + "</button>";    
 			}
 			if(nowPage != i) {
-				tags += "<button onclick=\"courseList('subCate', '" + subCate + "'," + i + ")\">" + i + "</button>";
+				tags += "<button onclick=\"courseList('subCate', '" + subCate + "'," + i + ", this)\">" + i + "</button>";
 			}
 		}
 		if(endPage != lastPage) {
-			tags += "<button class='active afterBtn' onclick=\"courseList('subCate', '" + subCate + "'," + (endPage + 1) + ")\">&gt;</button>";
+			tags += "<button class='active afterBtn' onclick=\"courseList('subCate', '" + subCate + "'," + (endPage + 1) + ", this)\">&gt;</button>";
 		}
 		tags += "</div>";    
 		tags += "</div>";    
@@ -91,23 +94,39 @@ public class CourseServiceImpl implements CourseService {
 		tags += "<div class='col-lg-12 col-paging'>";
 		tags += "<div class='product__pagination p-result'>";
 		if(startPage != 1) {
-			tags += "<button class='active beforeBtn' onclick=\"courseList('grade', '" + grade + "'," + (startPage-1) + ")\">&lt;</button>";
+			tags += "<button class='active beforeBtn' onclick=\"courseList('grade', '" + grade + "'," + (startPage-1) + ", this)\">&lt;</button>";
 		}
 		for(int i=startPage; i<=endPage; i++) {
 			if(nowPage == i) {
 				tags += "<button class='active'>" + i + "</button>";    
 			}
 			if(nowPage != i) {
-				tags += "<button onclick=\"courseList('grade', '" + grade + "'," + i + ")\">" + i + "</button>";
+				tags += "<button onclick=\"courseList('grade', '" + grade + "'," + i + ", this)\">" + i + "</button>";
 			}
 		}
 		if(endPage != lastPage) {
-			tags += "<button class='active afterBtn' onclick=\"courseList('grade', '" + grade + "'," + (endPage + 1) + ")\">&gt;</button>";
+			tags += "<button class='active afterBtn' onclick=\"courseList('grade', '" + grade + "'," + (endPage + 1) + ", this)\">&gt;</button>";
 		}
 		tags += "</div>";    
 		tags += "</div>";    
 
 		return tags;
+	}
+
+	@Override
+	public void makeSideMenu(HttpServletRequest request) {
+		CourseService dao = new CourseServiceImpl();
+		CourseVO vo = new CourseVO();
+		List<CourseVO> subCategory;
+		
+		// it 관련
+		vo.setCourseMainCategory("it"); 
+		subCategory = dao.courseSubCategory(vo);
+		request.setAttribute("it", subCategory);
+		// english 관련
+		vo.setCourseMainCategory("english"); 
+		subCategory = dao.courseSubCategory(vo);
+		request.setAttribute("english", subCategory);
 	}
 
 

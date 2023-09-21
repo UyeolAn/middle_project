@@ -80,9 +80,9 @@
               <div id="collapseFour" class="collapse" data-parent="#accordionExample">
                 <div class="card-body">
                   <div class="shop__sidebar__tags">
-                  	<span id="easy" class="sub_menu_g" onclick="courseList('grade', 'easy', 1)">초급</span>
-                  	<span id="normal" class="sub_menu_g" onclick="courseList('grade', 'normal', 1)">중급</span>
-                  	<span id="hard" class="sub_menu_g" onclick="courseList('grade', 'hard', 1)">고급</span>
+                  	<span id="easy" class="sub_menu_g" onclick="courseList('grade', 'easy', 1, this)">입문</span>
+                  	<span id="normal" class="sub_menu_g" onclick="courseList('grade', 'normal', 1, this)">초급</span>
+                  	<span id="hard" class="sub_menu_g" onclick="courseList('grade', 'hard', 1, this)">중급이상</span>
                   </div>
                 </div>
               </div>
