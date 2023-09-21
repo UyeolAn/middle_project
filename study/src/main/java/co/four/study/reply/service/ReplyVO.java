@@ -18,9 +18,5 @@ public class ReplyVO {
 	private LocalDate replyEnterDate;
 	
 	private LocalDate replyUpdateDate;
-	
-	private int replyLike;
-	
-	private int replyDislike;
 
 }
