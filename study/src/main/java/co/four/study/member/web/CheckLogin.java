@@ -26,6 +26,8 @@ public class CheckLogin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		//로그인 실행
 		MemberService dao = new MemberServiceImpl();
 		MemberVO vo = new MemberVO();
 		HttpSession session = request.getSession();
@@ -45,7 +47,7 @@ public class CheckLogin extends HttpServlet {
 			
 			
 			if (session.getAttribute("loginAuthor").equals("admin")) {
-				String page = "admin/member/memberPage";// 관리자 페이지 링크
+				String page = "admin/home/home";// 관리자 페이지 링크
 				ViewResolve.foward(request, response, page);
 			} else {
 				String page = "home/home.jsp";

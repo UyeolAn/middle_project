@@ -20,8 +20,7 @@
 
         <!-- Custom styles for this template-->
         <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
-
-    </head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <body class="bg-gradient-primary">
 
@@ -37,24 +36,25 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                                 </div>
-                                <form class="user" method="post" action="memberRegist.do">
+
+                                <form class="user" method="post" action="memberRegist.do" onsubmit="return formCheck()"
+                                    id="frm">
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="exampleFirstName" name="memberId" placeholder="ID">
-                                            <button type="button" class="btn" id="double check" onclick=idCheck()
-                                                value="0">중복확인</button>
+                                            <input type="text" class="form-control form-control-user" id="memberId"
+                                                name="memberId" placeholder="ID">
+                                            <button type="button" class="btn" id="doubleCheck" value="No" onclick="memberIdCheck()">중복확인</button>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="exampleLastName" name="memberName" placeholder="Name">
+                                            <input type="text" class="form-control form-control-user" id="memberName"
+                                                name="memberName" placeholder="Name">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <input type="password" class="form-control form-control-user"
-                                                name="memberPassword" id="exampleInputPassword" placeholder="Password">
+                                                name="memberPassword" id="memberPassword" placeholder="Password">
                                         </div>
                                         <div class="col-sm-6">
                                             <input type="password" class="form-control form-control-user" id="checkPass"
@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="form-group">
 
-                                        <input type="email" class="form-control form-control-user"
+                                        <input type="Address" class="form-control form-control-user"
                                             id="exampleInputEmail" name="memberAddress" placeholder="Address">
                                     </div>
 
@@ -100,26 +100,77 @@
         </div>
 
         <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="admin/vendor/jquery/jquery.min.js"></script>
+        <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+        <script src="admin/js/sb-admin-2.min.js"></script>
 
 
+        <script type="text/javascript">
+           
 
-        <script>
-            // id 체크
-            function idCheck() {
-
+            function memberIdCheck() {
+                console.log('123');
+                $.ajax({
+                    url: '/ajaxmembercheck.do',
+                    method: 'get',
+                    success: function (result) {
+                        console.log(result);
+                        if (str == "YES") {
+                            alert("사용가능한 아이디입니다");
+                            document.getElementById("doubleCheck").value = "Yes";
+                            document.getElementById("doubleCheck").disabled = true;
+                        } else if (str == "NO") {
+                            alert("이미 사용하는 아이디입니다");
+                            document.getElementById("memberId").value = "";
+                            document.getElementById("memberId").focus();
+                        }
+                    },
+                    error: function (result) {
+                        console.log("오류났어요");
+                    }
+                })
             }
 
-            //중복 id체크 
-            function MemberIdCheck() {
 
+
+
+            // function memberIdCheck() {
+            //     let url = "ajaxmembercheck.do"
+            //     let payload = document.getElementById("memberId").value;
+            //     url = url + "?memberId=" + payload;
+
+            //     fetch(url)
+            //         .then(response => response.text())
+            //         .then(text => membercheck(text));
+            // }
+
+
+            // function membercheck(str) {
+
+            // }
+
+            function formCheck() {
+                let form = document.getElementById("frm");
+
+                if (form.idCheck.value == 'No') {
+                    alert("아이디 중복체크를 하세요.");
+                    return false;
+                }
+
+                if (form.memberPassword.value != form.checkPass.value) {
+                    alert("입력한 패스워드가 일치하지 않습니다.");
+                    form.memberPassword.value = "";
+                    form.checkPass.value = "";
+                    form.memberPassword.focus();
+                    return false;
+                }
+
+                return true;
             }
         </script>
 

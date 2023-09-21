@@ -26,6 +26,8 @@ public class Logout extends HttpServlet {
 		session.invalidate();
 					String page = "home/home.jsp";
 			ViewResolve.foward(request, response, page);
+			
+			
 		}
 	
 
