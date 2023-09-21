@@ -21,6 +21,7 @@
         <!-- Custom styles for this template-->
         <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        
 
     <body class="bg-gradient-primary">
 
@@ -43,7 +44,7 @@
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <input type="text" class="form-control form-control-user" id="memberId"
                                                 name="memberId" placeholder="ID">
-                                            <button type="button" class="btn" id="doubleCheck" value="No" onclick="memberIdCheck()">중복확인</button>
+                                            <button type="button" class="btn" id="doubleCheck" value="No">중복확인</button>
                                         </div>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control form-control-user" id="memberName"
@@ -86,7 +87,7 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    <a class="small" href="searchpassword.do">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
                                     <a class="small" href="login.html">Already have an account? Login!</a>
@@ -111,23 +112,32 @@
 
 
         <script type="text/javascript">
-           
 
-            function memberIdCheck() {
-                console.log('123');
+
+            $('#doubleCheck').click(function () {
+
                 $.ajax({
-                    url: '/ajaxmembercheck.do',
-                    method: 'get',
-                    success: function (result) {
-                        console.log(result);
+                    url: 'ajaxmembercheck.do',
+                    method: 'post',
+                    data: { memberId: document.getElementById("memberId").value },
+                    success: function (data) {
+                        var aa = JSON.parse(data);
+                        var str = aa.str;
+                      console.log(str)
+                    //   let str 
+                        
+
                         if (str == "YES") {
+
                             alert("사용가능한 아이디입니다");
                             document.getElementById("doubleCheck").value = "Yes";
                             document.getElementById("doubleCheck").disabled = true;
+                            console.log(str);
                         } else if (str == "NO") {
                             alert("이미 사용하는 아이디입니다");
                             document.getElementById("memberId").value = "";
                             document.getElementById("memberId").focus();
+                            console.log(str);
                         }
                     },
                     error: function (result) {
@@ -135,6 +145,9 @@
                     }
                 })
             }
+            )
+
+
 
 
 

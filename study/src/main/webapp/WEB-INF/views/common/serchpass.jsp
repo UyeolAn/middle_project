@@ -12,7 +12,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>SB Admin 2 - Login</title>
+		<title>forgot pass</title>
 
 		<!-- Custom fonts for this template-->
 		<link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -25,9 +25,15 @@
 		<link rel="stylesheet" href="admin/css/sb-admin-2.min.css">
 	</head>
 
-	<body class="bg-gradient-primary">
+	<body class="bg-gradient-primary" style="display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100dvh;">
 
-		<div class="container">
+		<div class="container" style=" padding: 3rem;
+		font-size: 2rem;
+		border-radius: 1rem;
+		">
 
 			<!-- Outer Row -->
 			<div class="row justify-content-center">
@@ -42,7 +48,7 @@
 								<div class="col-lg-6">
 									<div class="p-5">
 										<div class="text-center">
-											<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+											<h1 class="h4 text-gray-900 mb-4">Find Password!</h1>
 										</div>
 										<form class="user" action="checkLogin.do" method="get">
 											<div class="form-group">
@@ -53,26 +59,12 @@
 												<input type="password" class="form-control form-control-user"
 													name="memberPassword" id="memberPassword" placeholder="Password">
 											</div>
-											<div class="form-group">
-												<div class="custom-control custom-checkbox small">
-													<input type="checkbox" class="custom-control-input"
-														id="customCheck"> <label class="custom-control-label"
-														for="customCheck">
-														Remember Me </label>
-												</div>
-											</div>
 											<button type="submit"
 												class="btn btn-primary btn-user btn-block">Login</button>
-											<hr>
+
 										</form>
+
 										<hr>
-										<div class="text-center">
-											<a class="small" href="searchpassword.do">Forgot
-												Password?</a>
-										</div>
-										<div class="text-center">
-											<a class="small" href="register.do">Create an Account!</a>
-										</div>
 									</div>
 								</div>
 							</div>

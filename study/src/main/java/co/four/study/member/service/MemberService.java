@@ -24,4 +24,8 @@ public interface MemberService {
 	//회원 (관리자 제외) 조회
 	List<MemberVO> memberList();
 	
+	//비밀번호 조회용
+	int memberSearchPass(MemberVO vo);
+	
+	
 }
