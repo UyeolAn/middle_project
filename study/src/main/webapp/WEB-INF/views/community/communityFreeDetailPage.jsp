@@ -48,6 +48,7 @@
           background: #777;
         }
       </style>
+      <script src="client/js/jquery-3.3.1.min.js"></script>
     </head>
 
     <body>
@@ -69,7 +70,9 @@
         <!--Board Main Body Start-->
         <div class="row">
           <div class="col-lg-10">
-            <p id="boardContent" style="white-space:pre;"><c:out value="${board.boardContent}"/></p>
+            <p id="boardContent" style="white-space:pre;">
+              <c:out value="${board.boardContent}" />
+            </p>
           </div>
           <div class="col-lg-7 comm__free__board__detail__buttons">
             <button type="button" class="site-btn small-btn"
@@ -81,14 +84,39 @@
             </form>
           </div>
           <div class="col-lg-5 comm__free__board__detail__like">
-            <button type="button" class="site-btn like-btn" onclick="">LIKE : ${board.boardLike}</button>
-            <button type="button" class="site-btn dislike-btn">DISLIKE : ${board.boardDislike}</button>
+            <button type="button" class="site-btn like-btn" onclick="addLike()">LIKE : ${board.boardLike}</button>
+            <button type="button" class="site-btn dislike-btn" onclick="addDislike()">DISLIKE :
+              ${board.boardDislike}</button>
           </div>
         </div>
         <!--Board Main Body End-->
         <hr>
       </div>
       <script>
+        // 변수 선언
+        let loginMemberId = '<%=(String)session.getAttribute("loginId")%>';
+        let boardId = '${board.boardId}';
+
+        // 처음 로딩
+        loadPage();
+
+        // 처음 로딩 시 실행되는 함수
+        function loadPage() {
+          if (loginMemberId != 'null') {
+            $.ajax({
+              url: 'recommendselect.do?boardId=' + boardId + '&recommendValue=like',
+              method: 'get',
+              success: function (recommendJson) {
+                console.log(recommendJson);
+              },
+              error: function (err) {
+                console.log(err);
+              }
+            });
+          }
+        }
+
+
         // 게시글 삭제 함수
         function deleteBoard() {
           if (confirm("정말 삭제하시겠습니까??") == true) {
@@ -96,6 +124,10 @@
           } else {
             return false;
           }
+        }
+
+        function addLike() {
+
         }
       </script>
     </body>

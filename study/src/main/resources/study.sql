@@ -212,8 +212,6 @@ CREATE TABLE boards
 , board_update_date DATE
 , board_img VARCHAR2(100)
 , board_hit NUMBER DEFAULT 0 NOT NULL
-, board_like NUMBER DEFAULT 0 NOT NULL
-, board_dislike NUMBER DEFAULT 0 NOT NULL
 , CONSTRAINT boards_board_id_pk PRIMARY KEY 
   (
     board_id
@@ -238,8 +236,45 @@ COMMENT ON COLUMN boards.board_enter_date IS '게시글 작성일';
 COMMENT ON COLUMN boards.board_update_date IS '게시글 수정일';
 COMMENT ON COLUMN boards.board_img IS '게시글 이미지첨부';
 COMMENT ON COLUMN boards.board_hit IS '게시글 조회수';
-COMMENT ON COLUMN boards.board_like IS '게시글 좋아요';
-COMMENT ON COLUMN boards.board_dislike IS '게시글 싫어요';
+
+
+
+
+
+-- recommends
+CREATE TABLE recommends 
+(
+  recommend_id NUMBER NOT NULL
+, member_id VARCHAR2(100) NOT NULL
+, board_id NUMBER NOT NULL
+, recommend_value VARCHAR2(10) NOT NULL
+, CONSTRAINT recommends_recommend_id_pk PRIMARY KEY 
+  (
+    recommend_id
+  )
+, CONSTRAINT recommends_member_id_fk FOREIGN KEY
+  (
+    member_id 
+  )
+  REFERENCES members
+  (
+    member_id 
+  )
+, CONSTRAINT recommends_board_id_fk FOREIGN KEY
+  (
+    board_id 
+  )
+  REFERENCES boards
+  (
+    board_id 
+  )
+);
+
+COMMENT ON COLUMN recommends.recommend_id IS '추천 ID';
+COMMENT ON COLUMN recommends.member_id IS '회원 ID';
+COMMENT ON COLUMN recommends.board_id IS '게시글 ID';
+COMMENT ON COLUMN recommends.recommend_value IS '추천 값(좋/싫)';
+
 
 
 
@@ -254,8 +289,6 @@ CREATE TABLE replies
 , reply_content VARCHAR2(512) NOT NULL
 , reply_enter_date DATE DEFAULT SYSDATE NOT NULL
 , reply_update_date DATE
-, reply_like NUMBER DEFAULT 0 NOT NULL
-, reply_dislike NUMBER DEFAULT 0 NOT NULL
 , CONSTRAINT replies_reply_id_pk PRIMARY KEY 
   (
     reply_id
@@ -287,8 +320,6 @@ COMMENT ON COLUMN replies.member_id IS '회원 ID';
 COMMENT ON COLUMN replies.reply_content IS '댓글 내용';
 COMMENT ON COLUMN replies.reply_enter_date IS '댓글 작성일';
 COMMENT ON COLUMN replies.reply_update_date IS '댓글 수정일';
-COMMENT ON COLUMN replies.reply_like IS '댓글 좋아요';
-COMMENT ON COLUMN replies.reply_dislike IS '댓글 싫어요';
 
 
 
@@ -352,8 +383,7 @@ CREATE TABLE answers
 , answer_enter_date DATE DEFAULT SYSDATE NOT NULL
 , answer_update_date DATE
 , answer_img VARCHAR2(100)
-, answer_like NUMBER DEFAULT 0 NOT NULL
-, answer_dislike NUMBER DEFAULT 0 NOT NULL
+, answer_solve VARCHAR2(15) DEFAULT 'not_solved' NOT NULL
 , CONSTRAINT answers_answer_id_pk PRIMARY KEY 
   (
     answer_id
@@ -386,8 +416,8 @@ COMMENT ON COLUMN answers.answer_content IS '답변 내용';
 COMMENT ON COLUMN answers.answer_enter_date IS '답변 작성일';
 COMMENT ON COLUMN answers.answer_update_date IS '답변 수정일';
 COMMENT ON COLUMN answers.answer_img IS '답변 이미지첨부';
-COMMENT ON COLUMN answers.answer_img IS '답변 좋아요';
-COMMENT ON COLUMN answers.answer_img IS '답변 싫어요';
+COMMENT ON COLUMN answers.answer_solve IS '답변 해결여부';
+
 
 
 

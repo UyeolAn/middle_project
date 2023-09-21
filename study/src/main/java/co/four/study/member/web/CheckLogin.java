@@ -38,13 +38,13 @@ public class CheckLogin extends HttpServlet {
 		;
 		
 		if (vo != null) {
-			session.setAttribute("memberId", vo.getMemberId());
-			session.setAttribute("memberName", vo.getMemberName());
-			session.setAttribute("memberAuthor", vo.getMemberAuthor());
-			session.setAttribute("memberPassword", vo.getMemberPassword());
+			session.setAttribute("loginId", vo.getMemberId());
+			session.setAttribute("loginName", vo.getMemberName());
+			session.setAttribute("loginAuthor", vo.getMemberAuthor());
+			session.setAttribute("loginPassword", vo.getMemberPassword());
 			
 			
-			if (session.getAttribute("memberAuthor").equals("admin")) {
+			if (session.getAttribute("loginAuthor").equals("admin")) {
 				String page = "admin/member/memberPage";// 관리자 페이지 링크
 				ViewResolve.foward(request, response, page);
 			} else {
