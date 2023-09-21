@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.four.study.review.map.ReviewMapper">
-	<select id="reviewSelectList" resultType="co.four.study.review.service.ReviewVO">
+	<select id="reviewSelectList" resultType="co.four.study.review.service.ReviewVO" parameterType="co.four.study.review.service.ReviewVO">
 		SELECT *
 		FROM REVIEWS
+		<if test="courseId != null">
+		WHERE COURSE_ID = #{courseId}
+		</if>
 	</select>
 	
 	<select id="reviewSelect" resultType="co.four.study.review.service.ReviewVO">

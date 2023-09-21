@@ -27,11 +27,11 @@
 				<form id="frm" action="admincourseinsert.do" method="post">
 				<div class="form-group">
 				  <label>강의 이름</label>
-				  <input type="text" class="form-control" name="courseName">
+				  <input type="text" class="form-control" name="courseName" required>
 				</div>
 				<div class="form-group">
 					<label>강의 설명</label>
-					<input type="text" class="form-control" name="courseScript">
+					<textarea class="form-control" name="courseScript" required></textarea>
 				  </div>
 				  <div class="col-lg-12 row">
 				<div class="form-group col-lg-6">
@@ -42,7 +42,7 @@
 						<i class="fa fa-credit-card"></i>
 					  </div>
 					</div>
-					<input type="text" class="form-control" name="coursePrice">
+					<input type="text" class="form-control" name="coursePrice" required>
 				  </div>
 				</div>
 				<div class="form-group col-lg-6">
@@ -53,7 +53,7 @@
 						  <i class="fa fa-user"></i>
 						</div>
 					  </div>
-					  <input type="text" class="form-control" name="courseTeacher">
+					  <input type="text" class="form-control" name="courseTeacher" required>
 					</div>
 				  </div>
 				</div>
@@ -101,7 +101,7 @@
 					<div class="col-lg-4"></div>
 					<div class="col-lg-4" >
 						<div style="text-align: center;">
-					  <button type="submit"  class="btn btn-primary btn-circle btn-lg" style="margin-right: 20px;" onclick="alarm()">
+					  <button type="submit"  class="btn btn-primary btn-circle btn-lg" style="margin-right: 20px;">
 						<i class="fas fa-check"></i>
 						</button>
 					  <button type="reset" class="btn btn-danger btn-circle btn-lg" style="margin-left: 20px;">
@@ -142,9 +142,10 @@
 		
 	}
 
-	function alarm() {
+	$('form').submit() {
 		alert("강의가 등록되었습니다.");
 	}
+
 
 	// function formCheck() {
 	// 	let form = document.getElementById('frm');

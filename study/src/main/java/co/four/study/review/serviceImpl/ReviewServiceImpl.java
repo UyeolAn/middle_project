@@ -18,8 +18,8 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewMapper map = sqlSession.getMapper(ReviewMapper.class);
 	
 	@Override
-	public List<ReviewVO> reviewSelectList() {
-		return map.reviewSelectList();
+	public List<ReviewVO> reviewSelectList(ReviewVO vo) {
+		return map.reviewSelectList(vo);
 	}
 	@Override
 	public ReviewVO reviewSelect(ReviewVO vo) {

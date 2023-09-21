@@ -6,7 +6,7 @@ import co.four.study.member.service.MemberVO;
 import co.four.study.question.service.QuestionVO;
 
 public interface QuestionMapper {
-	List<QuestionVO> questionSelectList();
+	List<QuestionVO> questionSelectList(QuestionVO vo);
 	QuestionVO questionSelect(QuestionVO vo);
 	int questionInsert(QuestionVO vo);
 	int questionDelete(QuestionVO vo);

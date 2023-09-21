@@ -15,8 +15,8 @@ public class QuestionServiceImpl implements QuestionService{
 	
 	private QuestionMapper map = sqlSession.getMapper(QuestionMapper.class);
 	@Override
-	public List<QuestionVO> questionSelectList() {
-		return map.questionSelectList();
+	public List<QuestionVO> questionSelectList(QuestionVO vo) {
+		return map.questionSelectList(vo);
 	}
 
 	@Override
