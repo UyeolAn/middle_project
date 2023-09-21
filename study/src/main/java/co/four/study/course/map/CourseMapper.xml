@@ -38,7 +38,7 @@
 			<if test="courseTeacher != null">COURSE_TEACHER = #{courseTeacher},</if>
 			<if test="courseGrade != null">COURSE_GRADE = #{courseGrade},</if>
 			<if test="courseGrade != null">COURSE_SCRIPT = #{courseScript},</if>
-			<if test="courseImg != null">COURSE_IMG = #{courseImg},</if>
+			<if test="courseImg != null and courseImg != 'delete'">COURSE_IMG = #{courseImg},</if>
 			<if test="courseImg == 'delete'">COURSE_IMG = NULL</if>
 		</set>
 		WHERE COURSE_ID = #{courseId}

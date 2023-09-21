@@ -21,65 +21,65 @@
 				<h6 class="m-0 font-weight-bold text-primary">${c.courseName}</h6>
 			  </div>
 			  <div class="card-body">
-				<form id="frm" action="admincourseupdate.do" method="post">
+				<form id="frm" action="admincourseupdate.do" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-				<label>강의 아이디</label>
+				<label class="font-weight-bold">강의 아이디</label>
 				  <input type="text" class="form-control" name="courseId" value="${c.courseId }" placeholder="${c.courseId}" readonly>
 				</div>
 				<div class="form-group">
-				  <label>강의 이름</label>
-				  <input type="text" class="form-control" name="courseName" placeholder="${c.courseName}">
+				  <label class="font-weight-bold">강의 이름</label>
+				  <input type="text" class="form-control" name="courseName" value="${c.courseName}">
 				</div>
 				<div class="form-group">
-					<label>강의 설명</label>
-					<textarea class="form-control" name="courseScript" placeholder="${c.courseScript}"></textarea>
+					<label class="font-weight-bold">강의 설명</label>
+					<textarea class="form-control" name="courseScript" value="${c.courseScript}">${c.courseScript}</textarea>
 				  </div>
 				  <div class="col-lg-12 row">
 				<div class="form-group col-lg-6">
-				  <label>강의 가격 (원)</label>
+				  <label class="font-weight-bold">강의 가격 (원)</label>
 				  <div class="input-group">
 					<div class="input-group-prepend">
 					  <div class="input-group-text">
 						<i class="fa fa-credit-card"></i>
 					  </div>
 					</div>
-					<input type="text" class="form-control" name="coursePrice" placeholder="${c.coursePrice}">
+					<input type="text" class="form-control" name="coursePrice" value="${c.coursePrice}">
 				  </div>
 				</div>
 				<div class="form-group col-lg-6">
-					<label>강의 강사(채널)</label>
+					<label class="font-weight-bold">강의 강사(채널)</label>
 					<div class="input-group">
 					  <div class="input-group-prepend">
 						<div class="input-group-text">
 						  <i class="fa fa-user"></i>
 						</div>
 					  </div>
-					  <input type="text" class="form-control" name="courseTeacher" placeholder="${c.courseTeacher}">
+					  <input type="text" class="form-control" name="courseTeacher" value="${c.courseTeacher}">
 					</div>
 				  </div>
 				</div>
 				<div class="row">
 					<div class="form-group col-lg-6">
-						<label>메인 카테고리</label>
+						<label class="font-weight-bold">메인 카테고리</label>
 						<select class="form-control select2 main" id="courseMainCategory" name="courseMainCategory" onchange="changeSub()">
-							<option value="it">IT</option>
-							<option value="english">ENGLISH</option>
+							<option value="it" id="it">IT</option>
+							<option value="english" id="english">ENGLISH</option>
 						</select>
 					</div>
 					<div class="form-group col-lg-6">
-						<label>서브 카테고리</label>
+						<label class="font-weight-bold">서브 카테고리</label>
 						<select class="form-control select2" id="courseSubCategory" name="courseSubCategory">
-							<option value="java">JAVA</option>
-							<option value="python">PYTHON</option>
-							<option value="c">C</option>
-							<option value="c++">C++</option>
-							<option value="c#">C#</option>
+							<option value="java" id="java">JAVA</option>
+							<option value="python" id="python">PYTHON</option>
+							<option value="c" id="c">C</option>
+							<option value="c++" id="c++">C++</option>
+							<option value="c#" id="c#">C#</option>
 						</select>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="form-label">난이도</label>
-					<div class="selectgroup w-100">
+				<div class="form-group col-lg-6">
+					<label class="form-label font-weight-bold">난이도</label>
+					<div class="selectgroup w-100" id="grade">
 					  <label class="selectgroup-item">
 						<input type="radio" name="courseGrade" value="easy" class="selectgroup-input" checked="">
 						<span class="selectgroup-button">초급</span>
@@ -94,9 +94,20 @@
 					  </label>
 					</div>
 				  </div>
-				  <div class="form-group">
-					<label>강의 이미지</label>
-					<input type="file" style="display: block;" id="courseImg" name="courseImg" placeholder="${c.courseImg}">
+				  <div class="form-group col-lg-6">
+					<label class="font-weight-bold">이미지를 수정하시겠습니까?</label>
+					<input type="checkbox" style="display: block;" id="ckImg" name="ckImg" onchange="ck()">				 
+				  </div>
+				  <div id="hid" style="display: none;">
+					<div class="form-group col-lg-6" id="imgForm">
+					  <label class="font-weight-bold">강의 이미지</label>
+					  <input type="file" style="display: block;" id="courseImg" name="courseImg">
+					</div>
+					<div class="form-group col-lg-6" id="delForm">
+					  <label class="font-weight-bold">기존 이미지를 삭제하실거면 체크하시오.</label>
+					  <input type="checkbox" style="display: block;" id="ckDel" name="ckDel" onchange="ckdel()" >				 
+					  <input type="hidden" value="false" id="ckRealDel" name="ckRealDel" >				 
+					</div>
 				  </div>
 				  <div class="row">
 					<div class="col-lg-4"></div>
@@ -120,19 +131,31 @@
 
 
 <script>
+	// console.log($('input[type=file]'));
+
 	let it =['java', 'python', 'c', 'c++', 'c#'];
 	let english = ['비즈니스/마케팅', 'toeic', 'toefl'];
 
-	// let mainCategory = $('.main');
-	let mainCategory = $('#courseMainCategory option[value='+"${c.courseMainCategory}"+']');
+	let mainCategory = $('.main');
+	let mainCategoryOpt = $('#courseMainCategory option[value='+'"${c.courseMainCategory}"'+']');
 
-	console.log("메인카테고리 "+"${c.courseMainCategory}");
-
-	console.log(mainCategory);
-	mainCategory.attr("selected", "selected");
-
-
+	mainCategoryOpt.attr("selected", "selected");
+	
 	let subCategory = $('#courseSubCategory');
+	changeSub();
+	// subCategory = document.getElementById('${c.courseSubCategory}');
+	console.log(subCategory);
+
+	let subCategoryOpt = $('#courseSubCategory option[value='+'"${c.courseSubCategory}"'+']');
+	console.log(subCategoryOpt);
+	subCategoryOpt.attr("selected", "selected");
+
+	let gradeRadio = $('#grade input[value='+'"${c.courseGrade}"'+']');
+	console.log($('#grade input'));
+	console.log(gradeRadio);
+	gradeRadio.attr("checked","checked");
+
+
 
 	function changeSub() {
 		// let childrens = document.querySelectorAll(subCategory.children);
@@ -151,6 +174,26 @@
 
 	function alarm() {
 		alert("강의가 수정되었습니다.");
+	}
+
+	function ck() {
+		if($('#ckImg').is(':checked')) {
+			console.log("체크됨");
+			$('#hid').css("display","block");
+		}
+		else {
+			console.log("체크해제됨");
+			$('#hid').css("display","none");
+		}
+	}
+
+	function ckdel() {
+		if($('#ckDel').is(":checked")) {
+			$('#ckRealDel').attr("value", "true");
+		}
+		else {
+			$('#ckRealDel').attr("value", "false");
+		}
 	}
 
 	// function formCheck() {

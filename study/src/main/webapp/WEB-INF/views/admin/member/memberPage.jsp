@@ -33,7 +33,7 @@
                 <div class="card-body text-center">
                   <img src="admin/img/profile.svg" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">${m.memberName}</h5>
+                  <h5 class="my-3 font-weight-bold">${m.memberName}</h5>
                       <!-- 차단 여부 표시 -->
                       <!-- 차단 당한 회원이면 계정정지해제버튼 -->
                       <!-- 차단 아닌 회원이면 계정정지버튼 -->
@@ -147,7 +147,7 @@
                 <div class="col-md-6">
                   <div class="card mb-4">
                     <div class="card-body">
-                      <p class="mb-4"><span class="text-primary font-italic me-1">강의 별 진도율</span></p>
+                      <p class="mb-4"><span class="text-primary font-weight-bold me-1">강의 별 진도율</span></p>
                       <!-- 서블릿에서 mclist로 담아서 보내줌 -->
                       <c:if test="${empty mclist}">
                         <div style="width: 100%;">
@@ -176,7 +176,7 @@
                 <div class="col-md-6">
                   <div class="card mb-4 h-100">
                     <div class="card-body" style="height: 100px;">
-                      <h5 class="card-title">${m.memberName}님의 수강 카테고리</h5>
+                      <span class="card-title font-weight-bold">${m.memberName}님의 수강 카테고리</span>
                       <div class="chart-pie pt-4" style="height: 100px;">
                         <canvas id="myPieChart" style="height: 100px;"></canvas>
                     </div>
@@ -191,7 +191,6 @@
           </div>
         </div>
       </section>
-    <script src="admin/js/demo/chart-pie-demo.js"></script>
       <script>
 
 //      해당 회원의 아이디 저장

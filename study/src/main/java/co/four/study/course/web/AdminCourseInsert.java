@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import co.four.study.common.ViewResolve;
 import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
@@ -29,20 +32,20 @@ public class AdminCourseInsert extends HttpServlet {
 		CourseService dao = new CourseServiceImpl();
 		
 
-		//String saveDir = getServletContext().getRealPath("client/img/product");//servletContext: prjdb, realPath: webapp/attech/notice 실제경로, 파일이 바로바로 보임 현업에서는 안씀
-		//int maxSize = 1024*1024*100;
-		//MultipartRequest multi = new MultipartRequest(request, saveDir, maxSize, "utf-8", new DefaultFileRenamePolicy());//파일명이 동일할때 자동으로 1,2,3..
-		//String realImg = multi.getFilesystemName("courseImg"); //저장되는 파일명
-		vo.setCourseImg(request.getParameter("courseImg")); //이미지 파일 명을 저장한다.
+		String saveDir = getServletContext().getRealPath("client/img/product");//servletContext: prjdb, realPath: webapp/attech/notice 실제경로, 파일이 바로바로 보임 현업에서는 안씀
+		int maxSize = 1024*1024*100;
+		MultipartRequest multi = new MultipartRequest(request, saveDir, maxSize, "utf-8", new DefaultFileRenamePolicy());//파일명이 동일할때 자동으로 1,2,3..
+		String realImg = multi.getFilesystemName("courseImg"); //저장되는 파일명
+		vo.setCourseImg(realImg); //이미지 파일 명을 저장한다.
 		
 		
-		vo.setCourseName(request.getParameter("courseName"));
-		vo.setCourseScript(request.getParameter("courseScript"));
-		vo.setCoursePrice(Integer.parseInt(request.getParameter("coursePrice")));
-		vo.setCourseTeacher(request.getParameter("courseTeacher"));
-		vo.setCourseMainCategory(request.getParameter("courseMainCategory"));
-		vo.setCourseSubCategory(request.getParameter("courseSubCategory"));
-		vo.setCourseGrade(request.getParameter("courseGrade"));
+		vo.setCourseName(multi.getParameter("courseName"));
+		vo.setCourseScript(multi.getParameter("courseScript"));
+		vo.setCoursePrice(Integer.parseInt(multi.getParameter("coursePrice")));
+		vo.setCourseTeacher(multi.getParameter("courseTeacher"));
+		vo.setCourseMainCategory(multi.getParameter("courseMainCategory"));
+		vo.setCourseSubCategory(multi.getParameter("courseSubCategory"));
+		vo.setCourseGrade(multi.getParameter("courseGrade"));
 		
 		System.out.println(vo);
 		int i = dao.courseInsert(vo);

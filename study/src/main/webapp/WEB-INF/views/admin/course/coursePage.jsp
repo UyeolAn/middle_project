@@ -35,7 +35,7 @@
                             <img src="client/img/product/${c.courseImg}" style="width: 200px;">
                         </c:otherwise>
                     </c:choose>
-                  <h5 class="my-3">${c.courseName}</h5>
+                  <h6 class="my-3 font-weight-bold">${c.courseName}</h6>
                     <a class="btn btn-secondary btn-icon-split modify">
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>
@@ -134,7 +134,28 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0 font-weight-bold">강의 카테고리</p>
+                      <p class="mb-0 font-weight-bold">강의 난이도</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">
+                        <c:choose>
+                          <c:when test="${c.courseGrade eq 'easy'}">
+                            하
+                          </c:when>
+                          <c:when test="${c.courseGrade eq 'normal'}">
+                            중
+                          </c:when>
+                          <c:otherwise>
+                            상
+                          </c:otherwise>
+                      </c:choose>
+                      </p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0 font-weight-bold">강의 메인 카테고리</p>
                     </div>
                     <div class="col-sm-9">
                       <p class="text-muted mb-0">${c.courseMainCategory}</p>
@@ -154,7 +175,7 @@
 
               <div class="card mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">SubCourse List</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">하위 강의 목록</h6>
                 </div>
                 <div class="card-body " data-spy="scroll">
             			<div class="table-responsive">
