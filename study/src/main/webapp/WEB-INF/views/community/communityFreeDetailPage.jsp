@@ -28,11 +28,23 @@
           margin-right: 3%;
           padding: 9px 20px;
           font-size: medium;
-          background: #CCC;
+          background: #ffa9a9;
           border-radius: 20px;
         }
 
         .like-btn:hover {
+          background: #E53637;
+        }
+
+        .dislike-btn {
+          margin-right: 3%;
+          padding: 9px 20px;
+          font-size: medium;
+          background: #ccc;
+          border-radius: 20px;
+        }
+
+        .dislike-btn:hover {
           background: #777;
         }
       </style>
@@ -69,8 +81,8 @@
             </form>
           </div>
           <div class="col-lg-5 comm__free__board__detail__like">
-            <button type="button" class="site-btn like-btn">LIKE : ${board.boardLike}</button>
-            <button type="button" class="site-btn like-btn">DISLIKE : ${board.boardDislike}</button>
+            <button type="button" class="site-btn like-btn" onclick="">LIKE : ${board.boardLike}</button>
+            <button type="button" class="site-btn dislike-btn">DISLIKE : ${board.boardDislike}</button>
           </div>
         </div>
         <!--Board Main Body End-->
