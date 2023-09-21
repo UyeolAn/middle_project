@@ -39,6 +39,7 @@ public class AdminCourseInsert extends HttpServlet {
 		vo.setCourseImg(realImg); //이미지 파일 명을 저장한다.
 		
 		
+		
 		vo.setCourseName(multi.getParameter("courseName"));
 		vo.setCourseScript(multi.getParameter("courseScript"));
 		vo.setCoursePrice(Integer.parseInt(multi.getParameter("coursePrice")));
@@ -49,26 +50,23 @@ public class AdminCourseInsert extends HttpServlet {
 		
 		System.out.println(vo);
 		int i = dao.courseInsert(vo);
+		vo = dao.courseSelect(vo);
+		System.out.println(vo);
+		int id = vo.getCourseId();
 		if(i == 1) {
-			request.setAttribute("message", "강의가 등록되었습니다.");
+//			request.setAttribute("message", "강의가 등록되었습니다.");
+			response.sendRedirect("admincoursepage.do?cid="+id);
 		}
 		else {
 			request.setAttribute("retCode", "Fail");
 		}
+
+		
+//		String page = "admin/course/coursePage";
 //		
-//		List<CourseVO> list = dao.courseSelectList(null);
 //		
-//		String page = "admin/course/courselist";
-//		
-//		request.setAttribute("courses", list);
-//		
+//		request.setAttribute("c", vo);
 //		ViewResolve.foward(request, response, page);
-		
-		String page = "admin/course/coursePage";
-		
-		
-		request.setAttribute("c", vo);
-		ViewResolve.foward(request, response, page);
 		
 	}
 
