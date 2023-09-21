@@ -24,18 +24,18 @@
 				<h6 class="m-0 font-weight-bold text-primary">New Course</h6>
 			  </div>
 			  <div class="card-body">
-				<form id="frm" action="admincourseinsert.do" method="post">
+				<form id="frm" action="admincourseinsert.do" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-				  <label>강의 이름</label>
+				  <label class="font-weight-bold">강의 이름</label>
 				  <input type="text" class="form-control" name="courseName" required>
 				</div>
 				<div class="form-group">
-					<label>강의 설명</label>
+					<label class="font-weight-bold">강의 설명</label>
 					<textarea class="form-control" name="courseScript" required></textarea>
 				  </div>
 				  <div class="col-lg-12 row">
 				<div class="form-group col-lg-6">
-				  <label>강의 가격 (원)</label>
+				  <label class="font-weight-bold">강의 가격 (원)</label>
 				  <div class="input-group">
 					<div class="input-group-prepend">
 					  <div class="input-group-text">
@@ -46,7 +46,7 @@
 				  </div>
 				</div>
 				<div class="form-group col-lg-6">
-					<label>강의 강사(채널)</label>
+					<label class="font-weight-bold">강의 강사(채널)</label>
 					<div class="input-group">
 					  <div class="input-group-prepend">
 						<div class="input-group-text">
@@ -59,14 +59,14 @@
 				</div>
 				<div class="row">
 					<div class="form-group col-lg-6">
-						<label>메인 카테고리</label>
-						<select class="form-control select2 main" name="courseMainCategory" onchange="changeSub()">
+						<label class="font-weight-bold">메인 카테고리</label>
+						<select class="form-control select2 main" id="courseMainCategory" name="courseMainCategory" onchange="changeSub()">
 							<option value="it">IT</option>
 							<option value="english">ENGLISH</option>
 						</select>
 					</div>
 					<div class="form-group col-lg-6">
-						<label>서브 카테고리</label>
+						<label class="font-weight-bold">서브 카테고리</label>
 						<select class="form-control select2" id="courseSubCategory" name="courseSubCategory">
 							<option value="java">JAVA</option>
 							<option value="python">PYTHON</option>
@@ -77,7 +77,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="form-label">난이도</label>
+					<label class="form-label font-weight-bold">난이도</label>
 					<div class="selectgroup w-100">
 					  <label class="selectgroup-item">
 						<input type="radio" name="courseGrade" value="easy" class="selectgroup-input" checked="">
@@ -94,7 +94,7 @@
 					</div>
 				  </div>
 				  <div class="form-group">
-					<label>강의 이미지</label>
+					<label class="font-weight-bold">강의 이미지</label>
 					<input type="file" style="display: block;" id="courseImg" name="courseImg">
 				  </div>
 				  <div class="row">
@@ -124,7 +124,7 @@
 	let it =['java', 'python', 'c', 'c++', 'c#'];
 	let english = ['비즈니스/마케팅', 'toeic', 'toefl'];
 
-	let mainCategory = $('.main');
+	let mainCategory = $('#courseMainCategory');
 	let subCategory = $('#courseSubCategory');
 
 	function changeSub() {
@@ -142,9 +142,10 @@
 		
 	}
 
-	$('form').submit() {
-		alert("강의가 등록되었습니다.");
-	}
+	// $('form').submit() {
+
+	// 	alert("강의가 등록되었습니다.");
+	// }
 
 
 	// function formCheck() {
