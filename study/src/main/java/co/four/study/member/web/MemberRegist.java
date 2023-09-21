@@ -25,6 +25,8 @@ public class MemberRegist extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		//회원가입
 		MemberService dao = new MemberServiceImpl();
 		MemberVO vo = new MemberVO();
 
@@ -34,7 +36,7 @@ public class MemberRegist extends HttpServlet {
 		vo.setMemberTel(request.getParameter("memberTel"));
 		vo.setMemberAddress(request.getParameter("memberAddress"));
 		vo.setMemberEmail(request.getParameter("memberEmail"));
-System.out.println(vo);
+		System.out.println(vo);
 		dao.memberInsert(vo);
 
 		String page = "home/home.jsp";

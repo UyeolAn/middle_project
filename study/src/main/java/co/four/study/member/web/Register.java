@@ -22,6 +22,9 @@ public class Register extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//회원가입 페이지 이동
+		
 		String page = "common/register.jsp";
 		ViewResolve.foward(request, response, page);
 	}
