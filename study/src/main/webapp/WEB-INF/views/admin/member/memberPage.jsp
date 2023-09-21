@@ -40,10 +40,10 @@
                     <c:choose>
                         <c:when test="${m.memberStopDate ne null}">
                             <p class="font-weight-bold text-danger">차단당한 회원</p>
-                            <button type="button" class="btn btn-primary" id="non-block">계정 정지 해제</button>                  
+                            <button type="button" class="btn btn-danger" id="non-block">계정 정지 해제</button>                  
                         </c:when>
                         <c:otherwise>
-                            <button type="button" class="btn btn-outline-primary ms-1" id="block">계정 정지</button>
+                            <button type="button" class="btn btn-outline-danger ms-1" id="block">계정 정지</button>
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -87,7 +87,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0 font-weight-bold">Name</p>
+                      <p class="mb-0 font-weight-bold">이름</p>
                     </div>
                     <div class="col-sm-9">
                       <p class="text-muted mb-0">${m.memberName}</p>
@@ -96,16 +96,16 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0 font-weight-bold">ID</p>
+                      <p class="mb-0 font-weight-bold">아이디</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">${m.memberId}</p>
+                      <p class="text-muted mb-0" id="mid" value="${m.memberId}">${m.memberId}</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0 font-weight-bold">Email</p>
+                      <p class="mb-0 font-weight-bold">이메일</p>
                     </div>
                     <div class="col-sm-9">
                       <p class="text-muted mb-0">${m.memberEmail}</p>
@@ -114,7 +114,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0 font-weight-bold">Tel</p>
+                      <p class="mb-0 font-weight-bold">연락처</p>
                     </div>
                     <div class="col-sm-9">
                       <p class="text-muted mb-0">${m.memberTel}</p>
@@ -123,7 +123,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0 font-weight-bold">Address</p>
+                      <p class="mb-0 font-weight-bold">주소</p>
                     </div>
                     <div class="col-sm-9">
                       <p class="text-muted mb-0">${m.memberAddress}</p>
@@ -132,7 +132,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0 font-weight-bold">Enter Date</p>
+                      <p class="mb-0 font-weight-bold">가입일</p>
                     </div>
                     <div class="col-sm-9">
                       <p class="text-muted mb-0">${m.memberEnterDate}</p>
@@ -176,7 +176,7 @@
                 <div class="col-md-6">
                   <div class="card mb-4 h-100">
                     <div class="card-body" style="height: 100px;">
-                      <h5 class="card-title">Pie Chart</h5>
+                      <h5 class="card-title">${m.memberName}님의 수강 카테고리</h5>
                       <div class="chart-pie pt-4" style="height: 100px;">
                         <canvas id="myPieChart" style="height: 100px;"></canvas>
                     </div>
@@ -233,6 +233,9 @@
               console.log("차단 해제 실패");
             }
         })
+
+        
+        console.log($('#myPieChart'));
 
 
       </script>

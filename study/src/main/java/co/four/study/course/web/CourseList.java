@@ -1,9 +1,7 @@
 package co.four.study.course.web;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +14,6 @@ import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
 import co.four.study.course.service.PagingVO;
 import co.four.study.course.serviceImpl.CourseServiceImpl;
-import co.four.study.review.service.ReviewService;
-import co.four.study.review.service.ReviewVO;
-import co.four.study.review.serviceImpl.ReviewServiceImpl;
 
 
 @WebServlet("/courseList.do")
@@ -33,10 +28,8 @@ public class CourseList extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CourseService dao = new CourseServiceImpl();
-		ReviewService rdao = new ReviewServiceImpl();
 		CourseVO vo = new CourseVO();
 		List<CourseVO> subCategory;
-		List<ReviewVO> coursesStar;
 		
 		// 강의 페이지 사이드 메뉴 만들기
 		// it 관련
@@ -80,6 +73,7 @@ public class CourseList extends HttpServlet {
 			vo.setEnd(pvo.getEnd());
 			courses = dao.coursePagingList(vo);
 		}
+		System.out.println("강의정보 ::: " + courses);
 		
 		if(courses != null) {
 			request.setAttribute("courses", courses); // 강의 리스트 조회 완료
@@ -88,13 +82,6 @@ public class CourseList extends HttpServlet {
 		} else {
 			System.out.println("강의 조회에서 오류 발생");
 		}
-		
-		// 강의 별점 조회
-		coursesStar = rdao.reviewStars();
-		request.setAttribute("star", coursesStar);
-		System.out.println("=======");
-		System.out.println(coursesStar);
-		System.out.println(courses);
 		
 		// 페이지 포워딩
 		String page = "course/courseList";

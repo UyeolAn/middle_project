@@ -23,18 +23,22 @@ public class AdminCourseUpdate extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		CourseVO vo = new CourseVO(); 
+		vo.setCourseId(Integer.parseInt(request.getParameter("courseId")));
+		CourseService dao = new CourseServiceImpl();
+		
+		System.out.println(request.getParameter("courseName"));
+		System.out.println(request.getParameter("courseScript"));
+		System.out.println(request.getParameter("courseMainCategory"));
+		System.out.println(request.getParameter("courseSubCategory"));
+		
+		vo = dao.courseSelect(vo);
+		
+		System.out.println("강의 아이디 : "+vo);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CourseVO vo = new CourseVO(); 
-		vo.setCourseId(Integer.parseInt(request.getParameter("courseID")));
-		CourseService dao = new CourseServiceImpl();
-		
-		vo = dao.courseSelect(vo);
-		
-		System.out.println(vo);
 		
 		doGet(request, response);
 	}

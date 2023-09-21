@@ -64,12 +64,16 @@
 	
 	<select id="courseTotalCount" resultType="int">
 		SELECT COUNT(1) FROM COURSES
+		WHERE 1=1
 		<if test="courseSubCategory != null">
-	    WHERE COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
+	    AND COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
+	    </if>
+		<if test="courseGrade != null">
+	    AND COURSE_GRADE = LOWER(#{courseGrade})
 	    </if>
 	</select>
 	
-	<select id="coursePagingList" resultType="co.four.study.course.service.CourseVO">
+	<!-- <select id="coursePagingList" resultType="co.four.study.course.service.CourseVO">
 		SELECT  T.*
 		FROM   (SELECT ROWNUM RNM, A.*
 		        FROM ( SELECT * 
@@ -82,6 +86,30 @@
 					   </if>
 		             ) A
 		        ) T
+		WHERE RNM BETWEEN #{start} AND #{end}
+	</select> -->
+	
+	<select id="coursePagingList" resultType="co.four.study.course.service.CourseVO">
+		SELECT T.*, B.*
+		FROM (SELECT ROWNUM RNM, A.*
+		      FROM  (SELECT * FROM COURSES
+		      		 WHERE 1=1
+		      		 <if test="courseMainCategory != null">
+		             	AND COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
+		             </if>
+		             <if test="courseSubCategory != null">
+					 	AND COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
+					 </if> 
+		             <if test="courseGrade != null">
+					 	AND COURSE_GRADE = LOWER(#{courseGrade})
+					 </if> 
+		      		 ORDER BY COURSE_ID) A
+		      ) T
+		LEFT JOIN
+		(SELECT COURSE_ID, ROUND(SUM(REVIEW_STARS)/COUNT(REVIEW_STARS)) COURSE_STARS
+		FROM REVIEWS
+		GROUP BY COURSE_ID) B
+		ON T.COURSE_ID = B.COURSE_ID
 		WHERE RNM BETWEEN #{start} AND #{end}
 	</select>
 

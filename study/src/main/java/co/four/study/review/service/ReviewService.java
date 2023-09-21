@@ -5,7 +5,7 @@ import java.util.List;
 import co.four.study.member.service.MemberVO;
 
 public interface ReviewService {
-	List<ReviewVO> reviewSelectList();
+	List<ReviewVO> reviewSelectList(ReviewVO vo);
 	ReviewVO reviewSelect (ReviewVO vo);
 	int reviewInsert(ReviewVO vo);
 	int reviewDelete(ReviewVO vo);
@@ -13,7 +13,4 @@ public interface ReviewService {
 	
 	//회원이 쓴 리뷰수
 	int countReview(MemberVO vo);
-	
-	//강의별 평점
-	List<ReviewVO> reviewStars();
 }

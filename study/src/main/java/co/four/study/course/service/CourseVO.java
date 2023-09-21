@@ -17,4 +17,7 @@ public class CourseVO {
 	
 	// 페이징 관련
 	int start, end;
+	
+	// 강의 평점
+	double courseStars;
 }

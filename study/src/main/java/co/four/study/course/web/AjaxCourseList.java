@@ -33,10 +33,19 @@ public class AjaxCourseList extends HttpServlet {
 		CourseVO vo = new CourseVO();
 		ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 		
-		// 강의 리스트 페이징처리 및 데이터 가져오기
+		// subCate를 누른건지 grade를 누른건지 구분
+		String paging = null;
 		String subCate = request.getParameter("subCate");
-		vo.setCourseSubCategory(subCate);
+		String grade = request.getParameter("grade");
 		
+		if(!subCate.trim().equals("") && subCate != null) {
+			vo.setCourseSubCategory(subCate);
+		}
+		if(!grade.trim().equals("") && grade != null) {
+			vo.setCourseGrade(grade);
+		}
+		
+		// 강의 리스트 페이징처리 및 데이터 가져오기
 		int total = dao.courseTotalCount(vo); // 전체건수
 		String nowPage = request.getParameter("nowPage"); // 현재페이지
 		String cntPerPage = request.getParameter("cntPerPage"); // 보여줄 건수
@@ -49,13 +58,19 @@ public class AjaxCourseList extends HttpServlet {
 		} else if(cntPerPage == null) {
 			cntPerPage = "10";
 		}
-		
 		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
-		//int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate
-		String paging = dao.makeCourseList(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), subCate);
+		if(!subCate.trim().equals("") && subCate != null) {
+			paging = dao.makeSubCateCourseList(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), subCate);
+		}
+		if(!grade.trim().equals("") && grade != null) {
+			paging = dao.makeGradeCourseList(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), grade);
+		}
+		
 		Map<String, String> pmap = new HashMap<String,String>();
 		pmap.put("paging", paging);
+		System.out.println(pvo);
+		System.out.println(paging);
 		
 		// 넘어온 서브카테고리로 데이터 조회
 		vo.setStart(pvo.getStart());

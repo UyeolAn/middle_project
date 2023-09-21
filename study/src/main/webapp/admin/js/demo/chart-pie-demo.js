@@ -3,19 +3,45 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 
 // Pie Chart Example
-var ctx = document.getElementById("myPieChart");
+
+
+  var ctx = document.getElementById("myPieChart");
+  var midForCate = document.getElementById("mid").innerText;
+  
+
+  var bg = ['rgb(255, 99, 132)','rgb(255, 205, 86)','rgb(54, 162, 235)'];
+  var hv = ['#2e59d9', '#17a673', '#2c9faf'];
+  var idx = 0;
+  fetch('ajaxmembercategorychart.do?mid='+midForCate)
+  .then(resolve => resolve.json())
+  .then(json=> {
+    console.log(json);
+    for(let prop in json) {
+      console.log(prop);
+      console.log(json[prop]);
+
+      myPieChart.data.labels[idx] = prop.toUpperCase();
+      myPieChart.data.datasets[0].data[idx] = json[prop];
+      myPieChart.data.datasets[0].backgroundColor[idx] = bg[idx];
+      myPieChart.data.datasets[0].hoverBackgroundColor[idx] = hv[idx];
+      myPieChart.update();
+      idx++;
+    }
+  });
+
+
 
 
 
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: [],
     datasets: [{
-      data: [55, 30, 15],
-      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-      hoverBorderColor: "rgba(234, 236, 244, 1)",
+      data: [],
+      backgroundColor: [],
+      hoverBackgroundColor: [],
+      hoverOffset: 4
     }],
   },
   options: {

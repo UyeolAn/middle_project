@@ -12,6 +12,10 @@ import co.four.study.board.service.BoardService;
 import co.four.study.board.service.BoardVO;
 import co.four.study.board.serviceImpl.BoardServiceImpl;
 import co.four.study.common.ViewResolve;
+import co.four.study.recommend.service.RecommendService;
+import co.four.study.recommend.service.RecommendVO;
+import co.four.study.recommend.service.etcvo.RecommendCountVO;
+import co.four.study.recommend.serviceImpl.RecommendServiceImpl;
 
 @WebServlet("/communityfreedetailpage.do")
 public class CommunityFreeDetailPage extends HttpServlet {
@@ -23,13 +27,19 @@ public class CommunityFreeDetailPage extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BoardService dao = new BoardServiceImpl();
+		BoardService boardDao = new BoardServiceImpl();
+		RecommendService recommendDao = new RecommendServiceImpl();
+		
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
 		
 		BoardVO dto = new BoardVO();
-		dto.setBoardId(Integer.parseInt(request.getParameter("boardId")));
+		dto.setBoardId(boardId);
 		
-		BoardVO selectedVO = dao.boardSelect(dto);
+		BoardVO selectedVO = boardDao.boardSelect(dto);
 		if (selectedVO != null) {
+			RecommendCountVO countVO = recommendDao.countRecommend(boardId);
+			selectedVO.setBoardLike(countVO.getBoardLike());
+			selectedVO.setBoardDislike(countVO.getBoardDislike());
 			String page = "community/communityFreeDetailPage";
 			request.setAttribute("menu", "community");
 			request.setAttribute("board", selectedVO);

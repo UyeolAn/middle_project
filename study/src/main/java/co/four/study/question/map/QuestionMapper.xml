@@ -3,6 +3,9 @@
 <mapper namespace="co.four.study.question.map.QuestionMapper">
 	<select id="questionSelectList" resultType="co.four.study.question.service.QuestionVO">
 		SELECT * FROM QUESTIONS
+		<if test="courseId != null">
+		WHERE COURSE_ID = #{courseId}
+		</if>
 	</select>
 	
 	<select id="questionSelect" resultType="co.four.study.question.service.QuestionVO">
