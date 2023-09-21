@@ -6,6 +6,10 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <style type="text/css">
+      input[type=text] {
+        color: #333;
+      }
+
       .input__file__btn {
         margin-top: 1%;
         padding: 6px 25px;
@@ -41,7 +45,7 @@
             </div>
             <div class="col-lg-12">
               <textarea id="boardContent" name="boardContent"
-                placeholder="내용을 입력하세요...">${board.boardContent}</textarea>
+                placeholder="내용을 입력하세요..." style="color: #333;">${board.boardContent}</textarea>
               <button type="reset" class="site-btn small-btn"
                 style="font-size: medium; background: #B7B7B7;">취소</button>
               <button type="submit" class="site-btn small-btn" style="font-size: medium;">수정</button>

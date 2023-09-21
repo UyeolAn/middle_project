@@ -15,6 +15,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import co.four.study.board.service.BoardService;
 import co.four.study.board.service.BoardVO;
 import co.four.study.board.serviceImpl.BoardServiceImpl;
+import co.four.study.recommend.service.RecommendService;
+import co.four.study.recommend.service.etcvo.RecommendCountVO;
+import co.four.study.recommend.serviceImpl.RecommendServiceImpl;
 import co.four.study.reply.service.ReplyService;
 import co.four.study.reply.serviceImpl.ReplyServiceImpl;
 
@@ -30,11 +33,16 @@ public class BoardAll extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardService boardDao = new BoardServiceImpl();
 		ReplyService replyDao = new ReplyServiceImpl();
+		RecommendService recommendDao = new RecommendServiceImpl();
 		
 		List<BoardVO> boards = boardDao.boardSelectList(request.getParameter("sortType"));
 		for (BoardVO board : boards) {
 			int rCnt =  replyDao.countBoardReply(board.getBoardId());
 			board.setReplyCount(rCnt);
+			
+			RecommendCountVO countVO = recommendDao.countRecommend(board.getBoardId());
+			board.setBoardLike(countVO.getBoardLike());
+			board.setBoardDislike(countVO.getBoardDislike());
 		}
 		
 		ObjectMapper objectMapper = new ObjectMapper();

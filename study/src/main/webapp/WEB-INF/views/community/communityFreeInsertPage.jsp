@@ -6,6 +6,10 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <style type="text/css">
+      input[type=text] {
+        color: #333;
+      }
+
       .input__file__btn {
         margin-top: 1%;
         padding: 6px 25px;
@@ -39,9 +43,10 @@
               <input type="file" id="boardImg" name="boardImg" style="display: none;">
             </div>
             <div class="col-lg-12">
-              <textarea id="boardContent" name="boardContent" placeholder="내용을 입력하세요..."></textarea>
-              <button type="reset" class="site-btn small-btn" style="font-size: medium; background: #B7B7B7;">취소</button>
-              <button type="submit" class="site-btn small-btn" style="font-size: medium;">등록</button>  
+              <textarea id="boardContent" name="boardContent" placeholder="내용을 입력하세요..." style="color: #333;"></textarea>
+              <button type="reset" class="site-btn small-btn"
+                style="font-size: medium; background: #B7B7B7;">취소</button>
+              <button type="submit" class="site-btn small-btn" style="font-size: medium;">등록</button>
             </div>
           </div>
         </form>

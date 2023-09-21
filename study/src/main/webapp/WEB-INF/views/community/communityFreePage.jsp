@@ -6,6 +6,10 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <style type="text/css">
+      input[type=text] {
+        color: #333;
+      }
+
       /* 해당 페이지 전용 클래스 */
       .comm__free__board__sort>li {
         margin-left: 5%;
@@ -64,7 +68,7 @@
             <div class="col-lg-3">
               <div class="checkout__input">
                 <select id="searchType" name="searchType">
-                  <option value="boardAll">==== 선택하세요 ====</option>
+                  <option value="boardAll">==== 전체 보기 ====</option>
                   <option value="boardTitle">게시글 제목</option>
                   <option value="boardContent">게시글 내용</option>
                   <option value="boardWriter">글 작성자</option>
@@ -73,7 +77,7 @@
             </div>
             <div class="col-lg-7">
               <div class="checkout__input">
-                <input type="text" id="searchContent" name="searchContent" placeholder="정렬 기준을 먼저 선택한 후 검색 내용을 입력하세요..">
+                <input type="text" id="searchContent" name="searchContent" placeholder="검색 내용을 입력하세요..">
               </div>
             </div>
             <div class="col-lg-2">
@@ -96,7 +100,7 @@
           </div>
           <div class="col-lg-2">
             <div class="checkout__input">
-              <button type="button" class="site-btn" onclick="location.href='communityfreeinsertpage.do'">
+              <button type="button" id="writeBtn" class="site-btn" onclick="location.href='communityfreeinsertpage.do'">
                 글쓰기
               </button>
             </div>
@@ -123,103 +127,125 @@
         </div>
         <!--Board List End-->
       </div>
-      <script>
-        // 변수
-        let sortType = 'mostRecent';
+    </div>
+    <script>
+      // 변수
+      let loginMemberId = '<%=(String)session.getAttribute("loginId")%>';
 
-        // 처음 로딩
-        setOrderBtn();
-        loadBoards();
+      let searchContent = $('#searchContent').val();
+      let sortType = 'mostRecent';
 
-        // 처음 로딩 시 게시글 리스트를 불러오는 함수
-        function loadBoards() {
-          $.ajax({
-            url: 'boardall.do?sortType=' + sortType,
-            method: 'get',
-            success: function (boardsJson) {
-              showBoards(boardsJson);
-            },
-            error: function (err) {
-              console.log(err);
-            }
-          });
-        }
+      let currentPage = 1;
+      let totalPage;
 
-        // 게시글 목록을 보여주는 함수
-        function showBoards(boardsJson) {
-          $('div.comm__free__board').empty();
-          boardsJson.forEach(board => {
-            $('div.comm__free__board')
-              .append(
-                $('<div class="product__details__tab__content__item"> /')
-                  .append($('<h5 class="col-lg-12"> /').text(`\${board.boardTitle}`))
-                  .append($('<p class="col-lg-9 comm__free__board__content"> /').text(`\${board.boardContent}`))
-                  .append($('<br>'))
-                  .append(
-                    $('<div class="col-lg-12 comm__free__board__etc__info"> /')
-                      .append($('<span class="etc__info__left"> /')
-                        .text(`[\${board.memberId}] \${board.boardEnterDate}`))
-                      .append($('<span class="etc__info__right"> /')
-                        .text(`조회수:\${board.boardHit}   좋아요:\${board.boardLike}   댓글:\${board.replyCount}`))
-                  )
-                  .on('click', function () {
-                    let url = 'communityfreedetailpage.do?boardId=' + board.boardId;
-                    location.replace(url);
-                  })
-              )
-              .append($('<hr>'));
-          });
-        }
+      // 처음 로딩
+      setOrderBtn();
+      setInsertBtn();
+      loadBoards();
 
-        // 정렬 버튼 활성화 함수
-        function setOrderBtn() {
-          $('ul.comm__free__board__sort>li').on('click', function () {
-            sortType = $(this).attr('id');
-
-            let lis = $(this).parent().children();
-            lis.each(function (idx, li) {
-              if ($(li).attr('id') == sortType) {
-                $(li).attr('class', 'sort__active');
-              } else {
-                $(li).attr('class', 'sort__nonactive');
-              }
-            });
-
-            loadBoards();
-          });
-        }
-
-        // 게시글 검색 함수
-        function searchBoards() {
-          let searchData = convertToObject($("#searchForm").serializeArray());
-          searchData.sortType = sortType;
-          $.ajax({
-            url: 'boardsearch.do',
-            method: 'post',
-            data: {
-              searchType: searchData.searchType,
-              searchContent: searchData.searchContent,
-              sortType: searchData.sortType
-            },
-            success: function (boardsJson) {
-              showBoards(boardsJson);
-            },
-            error: function (err) {
-              console.log(err);
-            }
-          });
-        }
-
-        // Form 데이터 -> Javascript Object 변환 함수
-        function convertToObject(arrayData) {
-          let object = {};
-          for (let i = 0; i < arrayData.length; i++) {
-            object[arrayData[i]['name']] = arrayData[i]['value'];
+      // 처음 로딩 시 게시글 리스트를 불러오는 함수
+      function loadBoards() {
+        let searchData = convertToObject($("#searchForm").serializeArray());
+        searchData.sortType = sortType;
+        $.ajax({
+          url: 'boardsearch.do',
+          method: 'post',
+          data: {
+            searchType: searchData.searchType,
+            searchContent: searchData.searchContent,
+            sortType: searchData.sortType
+          },
+          success: function (boardsJson) {
+            showBoards(boardsJson);
+          },
+          error: function (err) {
+            console.log(err);
           }
+        });
+      }
 
-          return object;
+      // 게시글 목록을 보여주는 함수
+      function showBoards(boardsJson) {
+        $('div.comm__free__board').empty();
+        boardsJson.forEach(board => {
+          $('div.comm__free__board')
+            .append(
+              $('<div class="product__details__tab__content__item"> /')
+                .append($('<h5 class="col-lg-12"> /').text(`\${board.boardTitle}`))
+                .append($('<p class="col-lg-9 comm__free__board__content"> /').text(`\${board.boardContent}`))
+                .append($('<br>'))
+                .append(
+                  $('<div class="col-lg-12 comm__free__board__etc__info"> /')
+                    .append($('<span class="etc__info__left"> /')
+                      .text(`[\${board.memberId}] \${board.boardEnterDate}`))
+                    .append($('<span class="etc__info__right"> /')
+                      .text(`조회수:\${board.boardHit}   좋아요:\${board.boardLike}   댓글:\${board.replyCount}`))
+                )
+                .on('click', function () {
+                  let url = 'communityfreedetailpage.do?boardId=' + board.boardId;
+                  location.replace(url);
+                })
+            )
+            .append($('<hr>'));
+        });
+      }
+
+      // 정렬 버튼 활성화 함수
+      function setOrderBtn() {
+        $('ul.comm__free__board__sort>li').on('click', function () {
+          sortType = $(this).attr('id');
+
+          let lis = $(this).parent().children();
+          lis.each(function (idx, li) {
+            if ($(li).attr('id') == sortType) {
+              $(li).attr('class', 'sort__active');
+            } else {
+              $(li).attr('class', 'sort__nonactive');
+            }
+          });
+
+          loadBoards();
+        });
+      }
+
+      function setInsertBtn() {
+        if (loginMemberId == 'null') {
+          $('#writeBtn').hide();
         }
-      </script>
+        // onclick 은 태그에 정의해놓았음
+      }
+
+      // 게시글 검색 함수
+      function searchBoards() {
+        let searchData = convertToObject($("#searchForm").serializeArray());
+        searchData.sortType = sortType;
+        $.ajax({
+          url: 'boardsearch.do',
+          method: 'post',
+          data: {
+            searchType: searchData.searchType,
+            searchContent: searchData.searchContent,
+            sortType: searchData.sortType
+          },
+          success: function (boardsJson) {
+            showBoards(boardsJson);
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        });
+      }
+
+      // Form 데이터 -> Javascript Object 변환 함수
+      function convertToObject(arrayData) {
+        let object = {};
+        for (let i = 0; i < arrayData.length; i++) {
+          object[arrayData[i]['name']] = arrayData[i]['value'];
+        }
+
+        return object;
+      }
+    </script>
   </body>
 
   </html>

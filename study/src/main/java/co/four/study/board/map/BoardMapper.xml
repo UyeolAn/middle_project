@@ -3,11 +3,16 @@
 <mapper namespace="co.four.study.board.map.BoardMapper">
 	<select id="boardSelectList" resultType="co.four.study.board.service.BoardVO">
 		SELECT *
-		FROM boards
+		FROM boards b
 		<trim prefix="ORDER BY">
             <if test="sortType == 'mostRecent'">board_id DESC</if>
             <if test="sortType == 'mostHit'">board_hit DESC, board_id DESC</if>
-            <if test="sortType == 'mostLike'">board_like DESC, board_id DESC</if>
+            <if test="sortType == 'mostLike'">
+	            (SELECT COUNT(*)
+				 FROM recommends r
+				 WHERE r.board_id = b.board_id AND
+				 	   r.recommend_value = 'like') DESC, board_id DESC
+            </if>
         </trim>
 	</select>
 	
@@ -44,7 +49,7 @@
 	
 	<select id="searchBoards" resultType="co.four.study.board.service.BoardVO">
 		SELECT *
-		FROM boards
+		FROM boards b
 		<where>
 			<if test="searchType == 'boardTitle'">
 				AND board_title LIKE '%' || #{searchContent} || '%'
@@ -59,7 +64,12 @@
 		<trim prefix="ORDER BY">
             <if test="sortType == 'mostRecent'">board_id DESC</if>
             <if test="sortType == 'mostHit'">board_hit DESC</if>
-            <if test="sortType == 'mostLike'">board_like DESC</if>
+            <if test="sortType == 'mostLike'">
+	            (SELECT COUNT(*)
+				 FROM recommends r
+				 WHERE r.board_id = b.board_id AND
+				 	   r.recommend_value = 'like') DESC, board_id DESC
+            </if>
         </trim>
 	</select>
 	

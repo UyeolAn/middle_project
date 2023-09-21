@@ -13,7 +13,6 @@ import co.four.study.board.service.BoardVO;
 import co.four.study.board.serviceImpl.BoardServiceImpl;
 import co.four.study.common.ViewResolve;
 import co.four.study.recommend.service.RecommendService;
-import co.four.study.recommend.service.RecommendVO;
 import co.four.study.recommend.service.etcvo.RecommendCountVO;
 import co.four.study.recommend.serviceImpl.RecommendServiceImpl;
 
@@ -40,9 +39,11 @@ public class CommunityFreeDetailPage extends HttpServlet {
 			RecommendCountVO countVO = recommendDao.countRecommend(boardId);
 			selectedVO.setBoardLike(countVO.getBoardLike());
 			selectedVO.setBoardDislike(countVO.getBoardDislike());
-			String page = "community/communityFreeDetailPage";
+			
 			request.setAttribute("menu", "community");
 			request.setAttribute("board", selectedVO);
+			
+			String page = "community/communityFreeDetailPage";
 			ViewResolve.foward(request, response, page);
 		} else {
 			System.out.println("게시글 불러오기에 실패하였습니다.");

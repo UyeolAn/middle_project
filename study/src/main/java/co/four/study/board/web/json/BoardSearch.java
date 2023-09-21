@@ -16,6 +16,9 @@ import co.four.study.board.service.BoardService;
 import co.four.study.board.service.BoardVO;
 import co.four.study.board.service.etcvo.BoardSearchVO;
 import co.four.study.board.serviceImpl.BoardServiceImpl;
+import co.four.study.recommend.service.RecommendService;
+import co.four.study.recommend.service.etcvo.RecommendCountVO;
+import co.four.study.recommend.serviceImpl.RecommendServiceImpl;
 import co.four.study.reply.service.ReplyService;
 import co.four.study.reply.serviceImpl.ReplyServiceImpl;
 
@@ -30,6 +33,7 @@ public class BoardSearch extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardService boardDao = new BoardServiceImpl();
 		ReplyService replyDao = new ReplyServiceImpl();
+		RecommendService recommendDao = new RecommendServiceImpl();
 		
 		BoardSearchVO searchVO = new BoardSearchVO();
 		searchVO.setSearchType(request.getParameter("searchType"));
@@ -40,6 +44,10 @@ public class BoardSearch extends HttpServlet {
 		for (BoardVO board : boards) {
 			int rCnt =  replyDao.countBoardReply(board.getBoardId());
 			board.setReplyCount(rCnt);
+			
+			RecommendCountVO countVO = recommendDao.countRecommend(board.getBoardId());
+			board.setBoardLike(countVO.getBoardLike());
+			board.setBoardDislike(countVO.getBoardDislike());
 		}
 		
 		ObjectMapper objectMapper = new ObjectMapper();
