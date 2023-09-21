@@ -32,22 +32,26 @@ public class AjaxMemberCheck extends HttpServlet {
 		MemberService dao = new MemberServiceImpl();
 		MemberVO vo = new MemberVO();
 		ObjectMapper objectMapper = new ObjectMapper();
-		
+
 		vo.setMemberId(request.getParameter("memberId"));
 		vo = dao.memberSelect(vo);
-		System.out.println(vo);
 
 		String str = "YES"; // 사용 가능한 아이디
 		if (vo != null) {
 			str = "NO"; // 이미 존재하는 아이디 입니다.
+
 		}
-		
+
 		Map<String, String> result = new HashMap<>();
-		
-		result.put("str", str);
+
+		result.put("str",str);
+//		System.out.println(result);
+
 		String json = objectMapper.writeValueAsString(result);
 		response.setContentType("text/html; charset=UTF-8");
-		response.getWriter().append(json);
+		response.getWriter().print(json);
+//		System.out.println(json);
+		
 
 	}
 
