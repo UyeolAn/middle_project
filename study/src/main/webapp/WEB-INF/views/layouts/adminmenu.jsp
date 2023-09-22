@@ -19,7 +19,7 @@
 				<i class="fas fa-laugh-wink"></i>
 			</div>
 			<div class="sidebar-brand-text mx-3">
-				Admin Page
+				관리자 페이지
 			</div>
 		</a>
 
@@ -92,7 +92,7 @@
 				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Worker Management</h6>
-					<a class="collapse-item" href="admincourselist.do">직원목록</a> 
+					<a class="collapse-item" href="adminemployeelist.do">직원목록</a> 
 					<a class="collapse-item" href="adimincourseregister.do">직원등록</a>
 				</div>
 			</div></li>

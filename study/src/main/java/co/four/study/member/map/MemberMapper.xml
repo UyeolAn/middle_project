@@ -64,7 +64,7 @@
 	<select id="memberList"
 		resultType="co.four.study.member.service.MemberVO">
 		SELECT * FROM MEMBERS WHERE MEMBER_AUTHOR = 'client' ORDER
-		BY MEMBER_NAME
+		BY MEMBER_ENTER_DATE
 	</select>
 
 
