@@ -34,7 +34,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 
 
 var myPieChart = new Chart(ctx, {
-  type: 'doughnut',
+  type: 'pie',
   data: {
     labels: [],
     datasets: [{
