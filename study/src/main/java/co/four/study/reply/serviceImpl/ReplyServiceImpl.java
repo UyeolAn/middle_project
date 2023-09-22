@@ -9,6 +9,7 @@ import co.four.study.member.service.MemberVO;
 import co.four.study.reply.map.ReplyMapper;
 import co.four.study.reply.service.ReplyService;
 import co.four.study.reply.service.ReplyVO;
+import co.four.study.reply.service.etcvo.ReplySortVO;
 
 public class ReplyServiceImpl implements ReplyService {
 
@@ -41,6 +42,11 @@ public class ReplyServiceImpl implements ReplyService {
 		return map.replyDelete(vo);
 	}
 
+	@Override
+	public List<ReplyVO> sortRepliesWithPaging(ReplySortVO vo) {
+		return map.sortRepliesWithPaging(vo);
+	}
+	
 	@Override
 	public int countBoardReply(int id) {
 		return map.countBoardReply(id);
