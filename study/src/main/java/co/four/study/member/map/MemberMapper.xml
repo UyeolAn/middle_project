@@ -16,21 +16,14 @@
 			AND MEMBER_PASSWORD = #{memberPassword}
 		</if>
 	</select>
-	
-	<select id="memberSearchPass"
-		resultType="co.four.study.member.service.MemberVO">
-		SELECT *
-		FROM MEMBERS
-		WHERE MEMBER_ID = #{memberId}
-		<if test="memberEmail != null">
-			AND MEMBER_EMAIL = #{memberEmail}
-		</if>
-	</select>
+
+
 
 	<insert id="memberInsert"
 		parameterType="co.four.study.member.service.MemberVO">
 		INSERT INTO MEMBERS
-		VALUES (#{memberId}, #{memberPassword}, #{memberName}, #{memberTel},
+		VALUES (#{memberId},
+		#{memberPassword}, #{memberName}, #{memberTel},
 		#{memberAddress},
 		#{memberEmail},
 		SYSDATE , null, 'client')
@@ -47,24 +40,52 @@
 			<if test="memberStopDate != null">MEMBER_STOP_DATE = #{memberStopDate}</if>
 		</set>
 		WHERE MEMBER_ID = #{memberId}
+
 	</update>
 
-	<delete id="memberDelete" parameterType="co.four.study.member.service.MemberVO">
+	<delete id="memberDelete"
+		parameterType="co.four.study.member.service.MemberVO">
 		DELETE FROM MEMBERS
 		WHERE MEMBER_ID = #{memberId}
 
 	</delete>
-	
-	<update id="memberBlock" parameterType="co.four.study.member.service.MemberVO">
-		UPDATE MEMBERS SET MEMBER_STOP_DATE = NULL WHERE MEMBER_ID = #{memberId}
+
+	<update id="memberBlock"
+		parameterType="co.four.study.member.service.MemberVO">
+		UPDATE MEMBERS SET MEMBER_STOP_DATE = NULL WHERE
+		MEMBER_ID = #{memberId}
 	</update>
-	
-	<select id="memberPage" resultType="co.four.study.member.service.MemberVO">
+
+	<select id="memberPage"
+		resultType="co.four.study.member.service.MemberVO">
 		select * from members where member_id = #{memberId}
 	</select>
-	
-	<select id="memberList" resultType="co.four.study.member.service.MemberVO">
-		SELECT * FROM MEMBERS WHERE MEMBER_AUTHOR = 'client' ORDER BY MEMBER_NAME
+
+	<select id="memberList"
+		resultType="co.four.study.member.service.MemberVO">
+		SELECT * FROM MEMBERS WHERE MEMBER_AUTHOR = 'client' ORDER
+		BY MEMBER_NAME
 	</select>
+
+
+	<select id="memberSearchPass"
+		resultType="co.four.study.member.service.MemberVO">
+		SELECT *
+		FROM MEMBERS
+		WHERE MEMBER_ID = #{memberId}
+		AND MEMBER_EMAIL = #{memberEmail}
+	</select>
+
+
+	<update id="memberPassReset"
+		parameterType="co.four.study.member.service.MemberVO">
+		UPDATE MEMBERS
+		<set>
+			MEMBER_PASSWORD = #{memberPassword}
+		</set>
+		WHERE MEMBER_ID = #{memberId}
+		AND MEMBER_EMAIL = #{memberEmail}
+	</update>
+
 
 </mapper>

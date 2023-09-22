@@ -2,7 +2,7 @@
 
 
 	<!DOCTYPE html>
-	<html lang>
+	<html>
 
 	<head>
 
@@ -67,7 +67,7 @@
 										</form>
 										<hr>
 										<div class="text-center">
-											<a class="small" href="searchpassword.do">Forgot
+											<a class="small" href="passwordsearch.do">Forgot
 												Password?</a>
 										</div>
 										<div class="text-center">

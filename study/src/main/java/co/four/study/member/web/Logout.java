@@ -24,8 +24,7 @@ public class Logout extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-					String page = "home/home.jsp";
-			ViewResolve.foward(request, response, page);
+					response.sendRedirect("home.do");
 			
 			
 		}

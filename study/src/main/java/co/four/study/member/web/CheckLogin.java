@@ -1,6 +1,7 @@
 package co.four.study.member.web;
 
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +27,7 @@ public class CheckLogin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		//로그인 실행
 		MemberService dao = new MemberServiceImpl();
 		MemberVO vo = new MemberVO();
@@ -47,11 +48,11 @@ public class CheckLogin extends HttpServlet {
 			
 			
 			if (session.getAttribute("loginAuthor").equals("admin")) {
-				String page = "admin/home/home";// 관리자 페이지 링크
-				ViewResolve.foward(request, response, page);
+				
+				response.sendRedirect("adminhome.do");// 관리자 페이지 링크
+			
 			} else {
-				String page = "home/home.jsp";
-				ViewResolve.foward(request, response, page);
+				response.sendRedirect("home.do");// 관리자 페이지 링크
 			}
 			
 			
@@ -61,7 +62,6 @@ public class CheckLogin extends HttpServlet {
 		}
 
 		
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

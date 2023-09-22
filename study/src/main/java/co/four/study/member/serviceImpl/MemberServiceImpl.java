@@ -61,9 +61,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int memberSearchPass(MemberVO vo) {
-		
+	public MemberVO memberSearchPass(MemberVO vo) {
+
 		return map.memberSearchPass(vo);
+	}
+
+	@Override
+	public MemberVO memberPassReset(MemberVO vo) {
+		
+		return map.memberPassReset(vo);
 	}
 
 }

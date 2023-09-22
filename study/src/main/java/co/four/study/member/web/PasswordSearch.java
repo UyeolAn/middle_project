@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import co.four.study.common.ViewResolve;
 
 
-@WebServlet("/searchpassword.do")
-public class SearchPassword extends HttpServlet {
+@WebServlet("/passwordsearch.do")
+public class PasswordSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-    public SearchPassword() {
+    public PasswordSearch() {
         super();
        
     }
