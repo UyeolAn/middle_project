@@ -463,6 +463,7 @@
             url: 'replyinsert.do',
             method: 'post',
             data: {
+              boardId: boardId,
               replyContent: replyContent
             },
             success: function (boardsJson) {
