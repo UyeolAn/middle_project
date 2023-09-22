@@ -25,7 +25,8 @@ public interface MemberService {
 	List<MemberVO> memberList();
 	
 	//비밀번호 조회용
-	int memberSearchPass(MemberVO vo);
+	MemberVO memberSearchPass(MemberVO vo);
 	
-	
+	//비밀번호 리셋
+	MemberVO memberPassReset(MemberVO vo);
 }

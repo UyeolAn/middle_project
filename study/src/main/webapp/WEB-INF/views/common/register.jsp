@@ -147,25 +147,7 @@
             }
             )
 
-
-
-
-
-
-            // function memberIdCheck() {
-            //     let url = "ajaxmembercheck.do"
-            //     let payload = document.getElementById("memberId").value;
-            //     url = url + "?memberId=" + payload;
-
-            //     fetch(url)
-            //         .then(response => response.text())
-            //         .then(text => membercheck(text));
-            // }
-
-
-            // function membercheck(str) {
-
-            // }
+           
 
             function formCheck() {
                 let form = document.getElementById("frm");
