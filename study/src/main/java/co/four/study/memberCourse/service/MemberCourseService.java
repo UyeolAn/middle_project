@@ -28,4 +28,7 @@ public interface MemberCourseService {
 	
 	//회원/카테고리 별 갯수
 	int countStudentCategory(MemberCourseVO vo);
+	
+	//현재 총 매출
+	int totalPrice();
 }

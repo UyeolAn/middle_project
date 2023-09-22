@@ -56,5 +56,10 @@
 		WHERE MEMBER_ID = #{memberId} and COURSE_MAIN_CATEGORY = #{courseMainCategory}
 	</select>
 	
+	<select id="totalPrice" resultType="Integer">
+		SELECT SUM(C.COURSE_PRICE)
+		FROM MEMBERS_COURSES MC JOIN COURSES C ON MC.COURSE_ID = C.COURSE_ID
+	</select>
+	
 
 </mapper>

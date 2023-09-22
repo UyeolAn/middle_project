@@ -12,6 +12,39 @@
     text-align: center;
     line-height: 100%;
   }
+  #modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -29,7 +62,7 @@
             </div>
           </div>
       
-          <!-- 회원 정보 카드 시작 -->
+          <!-- 강의 정보 카드 시작 -->
           <div class="row">
             <div class="col-lg-4">
               <div class="card mb-4">
@@ -58,7 +91,7 @@
                 </div>
               </div>
               <!-- 강의 여러 정보 불러옴 -->
-              <div class="card mb-4 mb-lg-0">
+              <div class="card mb-4">
                 <div class="card-body p-0">
                   <ul class="list-group list-group-flush rounded-3">
                     <!-- 강의를 수강하는 회원 수 -->
@@ -66,22 +99,17 @@
                       <span class="font-weight-bold"><i class="bi bi-coin fa-lg text-warning"></i> 수강자 수</span>
                       <p class="mb-0">${students}명</p>
                     </li>
-                    <!-- 회원이 쓴 리뷰 갯수 -->
+                    <!-- 강의 후기 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <span class="font-weight-bold"><i class="bi bi-check-all fa-lg" style="color: blue;"></i> 강의 후기</span>
                       <p class="mb-0">${reviews}개</p>
                     </li>
-                    <!-- 회원이 쓴 댓글 갯수 -->
+                    <!-- 강의에 달린 질문 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <span class="font-weight-bold"><i class="bi bi-indent fa-lg" style="color: #55acee;"></i> 강의 질문</span>
                       <p class="mb-0">${questions}개</p>
                     </li>
-                    <!-- 회원이 쓴 질문 갯수 -->
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <span class="font-weight-bold"><i class="bi bi-question-circle fa-lg" style="color: #ac2bac;"></i> 채울까말까</span>
-                      <p class="mb-0">개</p>
-                    </li>
-                    <!-- 회원이 담은 장바구니 갯수 -->
+                    <!-- 강의 별점 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <span class="font-weight-bold"><i class="bi bi-bucket-fill fa-lg" style="color: #3b5998;"></i> 강의 별점</span>
                       <div class="d-flex justify-content-center small text-warning mb-2" class="stars" name="${c.courseId}">
@@ -94,7 +122,7 @@
                 </div>
               </div>
             </div>
-            <!-- 회원 상세 정보 -->
+            <!-- 강의 상세 정보 -->
             <div class="col-lg-8">
               <div class="card mb-4">
                 <div class="card-body">
@@ -184,85 +212,110 @@
                 </div>
               </div>
 
-              <div class="card mb-4">
-                <div class="card-header py-3" style="display: flex; justify-content: space-between;">
-                  <h6 class="m-0 font-weight-bold text-primary" style="line-height: 38px;">하위 강의 목록</h6>
-                  <a class="btn btn-primary btn-icon-split" id="add" onclick="addSub()">
+          </div>
+        </div>
+        <!-- 강의 하위 강의 목록들 -->
+        <div class="row">
+          <div class="col-lg-12">
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-header py-3" style="display: flex; justify-content: space-between;">
+              <h6 class="m-0 font-weight-bold text-primary" style="line-height: 38px;">하위 강의 목록</h6>
+              <a class="btn btn-primary btn-icon-split" id="add" onclick="addSub()">
+                <span class="icon text-white-50">
+                    <i class="fas fa-arrow-right"></i>
+                </span>
+                <span class="add text" id="addBtn">추가</span>
+              </a>
+            </div>
+            <div class="card-body " data-spy="scroll">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th style="width: 30%;">이름</th>
+                      <th style="width: 30%;">링크</th>
+                      <th style="width: 20%;">시간</th>
+                      <th style="width: 10%;">수정</th>
+                      <th style="width: 10%;">삭제</th>
+                    </tr>
+                  </thead>
+                  <tbody id="scList">
+                    <c:if test="${empty subcourse}">
+                      <tr id="empty"><td class="font-weight-bold" colspan="5" style="text-align: center;">서브강의가 없습니다.</td></tr>
+                    </c:if>
+                    <c:if test="${not empty subcourse}">
+                      <c:forEach items="${subcourse }" var="s">
+                        <tr value="${s.subcourseId}">
+                          <td>${s.subcourseName}</td>
+                          <td><a href="${s.subcourseLink}" target="_blank"> ${s.subcourseLink}</a></td>
+                          <td>${s.subcourseTime}분</td>
+                          <td>
+                            <a class="btn btn-secondary btn-icon-split" id="modiS" onclick="modiSub(${s.subcourseId})">
+                              <span class="icon text-white-50">
+                                  <i class="fas fa-arrow-right"></i>
+                              </span>
+                            </a>
+                          </td>
+                          <td>
+                            <a class="btn btn-danger btn-icon-split deleteSub" onclick="delSub(${s.subcourseId})">
+                              <span class="icon text-white-50">
+                                  <i class="fas fa-trash"></i>
+                              </span>
+                            </a>
+                          </td>
+                        </tr>
+                      </c:forEach>
+                    </c:if>
+                    <tr style="display: none;" class="addInput" id="lasttable">
+                      <td><input type="text" style="width: 100%;" placeholder="이름" name="scName" id="inputName"></td>
+                      <td colspan="2"><input type="text" style="width: 100%;" placeholder="링크" name="scLink" id="inputLink"></td>
+                      <td colspan="2"><input type="text" style="width: 100%;" name="scTime" placeholder="시간(분)" id="inputTime"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div style="display: none;" class="addInput">
+                  <a class="btn btn-primary btn-icon-split" id="ok" onclick="saveSub(${c.courseId})">
                     <span class="icon text-white-50">
                         <i class="fas fa-arrow-right"></i>
                     </span>
-                    <span class="add text" id="addBtn">추가</span>
+                    <span class="text" >완료</span>
                   </a>
-                </div>
-                <div class="card-body " data-spy="scroll">
-            			<div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
-                      <thead>
-                        <tr>
-                          <th style="width: 60%;">이름</th>
-                          <th style="width: 10%;">링크</th>
-                          <th style="width: 15%;">시간</th>
-                          <th style="width: 5%;">수정</th>
-                          <th style="width: 5%;">삭제</th>
-                        </tr>
-                      </thead>
-                      <tbody id="scList">
-                        <c:if test="${empty subcourse}">
-                          <tr><td class="font-weight-bold" colspan="3" style="text-align: center;">서브강의가 없습니다.</td></tr>
-                        </c:if>
-                        <c:if test="${not empty subcourse}">
-                          <c:forEach items="${subcourse }" var="s">
-                            <tr>
-                              <td>${s.subcourseName}</td>
-                              <td><a href="${s.subcourseLink}" target="_blank"> ${s.subcourseLink}</a></td>
-                              <td>${s.subcourseTime}분</td>
-                              <td>
-                                <a class="btn btn-secondary btn-icon-split">
-                                  <span class="icon text-white-50">
-                                      <i class="fas fa-arrow-right"></i>
-                                  </span>
-                                </a>
-                              </td>
-                              <td>
-                                <a class="btn btn-danger btn-icon-split" id="deleteSub" onclick="delSub()">
-                                  <span class="icon text-white-50">
-                                      <i class="fas fa-trash"></i>
-                                  </span>
-                                </a>
-                              </td>
-                            </tr>
-                          </c:forEach>
-                        </c:if>
-                        <tr style="display: none;" class="addInput" id="lasttable">
-                          <td><input type="text" style="width: 100%;" placeholder="이름" name="scName" id="inputName"></td>
-                          <td><input type="text" style="width: 100%;" placeholder="링크" name="scLink" id="inputLink"></td>
-                          <td colspan="3"><input type="text" style="width: 100%;" name="scTime" placeholder="시간(분)" id="inputTime"></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div style="display: none;" class="addInput">
-                      <a class="btn btn-primary btn-icon-split" id="ok" onclick="saveSub(${c.courseId})">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-arrow-right"></i>
-                        </span>
-                      </a>
-                  </div>
-                </div>
               </div>
-
-
             </div>
-
+            </div>
           </div>
+
+
+        </div>
         </div>
       </section>
+
+      <div class="card shadow mb-4" id="modal">
+        <div class="card-header py-3 modal-content">
+            <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+            <button id="close-modal">닫기</button>
+        </div>
+        <div class="card-body">
+            <input type="text" placeholder="생각중">
+        </div>
+    </div>
+
+
+      <!-- 강의 수정 -->
       <form id="sform" action="admincoursemodify.do" method="post">
         <input type="hidden" id="cid" name="cid">
-      </form> 
+      </form>
+      <!-- 서브강의 삭제 -->
+      <form id="s2form" action="admincoursedelete.do" method="post">
+        <input type="hidden" id="cid" name="cid">
+      </form>  
       <script src='admin/js/SubCourse.js'></script>
 <script>
   const sc = new SubCourse();
   const fields = ['subcourseName', 'subcourseLink', 'subcourseTime'];
+  const modal = document.getElementById("modal");
+  const openModalBtn = document.getElementById("modiS");
+  const closeModalBtn = document.getElementById("close-modal");
 
   sc.showInfo();
 
@@ -281,7 +334,9 @@
 
     sc.subcourseAdd(s, function(data) {
       if(data.retCode == "Success") {
+        $('#empty').remove();
         let tr = MakeTr(data.data);
+        // console.log(data.data);
         $('#lasttable').before(tr);
 
         $('#inputName').val("");
@@ -299,19 +354,41 @@
     })
   }
 
-  $('#deleteSub').addEventListener("click", delSub);
-  function delSub(e) {
-    // console.log(e.target);
-    console.log(e);
-    // sc.subcourseDel(sid, function(result) {
-    // })
+
+  function delSub(sid) {
+    console.log("삭제누르면실행"+sid);
+    const response = confirm("삭제하시겠습니까?");
+    if(response) {
+      sc.subcourseRemove(sid, function(result) {
+        if (result.retCode == "Success") {
+          alert("서브강의가 삭제되었습니다.");
+          location.reload(true);
+        }
+        else if(result.retCode == "Fail") {
+          alert("처리중 에러");
+        }
+        else {
+          alert("잘못된 코드 반환");
+        }
+      })
+    }
   }
+
+  function modiSub(sid) {
+    alert("ㅇㅇ");
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden"; // 스크롤바 제거
+  }
+  
+
 
   
 
   function MakeTr (sub) {
 
 			let tr = document.createElement('tr');
+      console.log("방금 추가된 sc아이디 : "+sub.subcourseId);
+      tr.setAttribute("value",sub.subcourseId);
 			// tr.setAttribute('subcourseId', reply.replyId);
 			// tr.addEventListener('dblclick', showEditForm);
 			for (let prop of fields) {
@@ -335,6 +412,7 @@
 			let td = document.createElement('td');
 			let a = document.createElement('a');
       a.setAttribute("class", "btn btn-secondary btn-icon-split");
+      a.setAttribute("onclick",`modiSub(\${sub.subcourseId})`);
       let span = document.createElement('span');
       span.setAttribute("class","icon text-white-50");
       let i = document.createElement('i');
@@ -349,8 +427,8 @@
 			a = document.createElement('a');
       a.setAttribute("class", "btn btn-danger btn-icon-split");
       a.setAttribute("id","deleteSub");
-      a.addEventListener('click',delsub);
-      // a.setAttribute("onclick","delSub()");
+      // a.addEventListener('click',delsub);
+      a.setAttribute("onclick",`delSub(\${sub.subcourseId})`);
       span = document.createElement('span');
       span.setAttribute("class","icon text-white-50");
       i = document.createElement('i');
@@ -393,11 +471,9 @@
   console.log(id);
   console.log(name);
   if(response) {
-      fetch('admincoursedelete.do?cid='+id)
-        .then(resolve=>resolve.json())
-        .then(result=>console.log(result));
-      alert("삭제되었습니다.");
-      location.reload(true);
+        let form = document.getElementById("s2form");
+        form.cid.value = id;
+        form.submit();
     }
 }
 
@@ -408,6 +484,16 @@ $('.modify').click(function(e) {
   form.submit();
 })
 
+// 모달창 열기
+// openModalBtn.addEventListener("click", () => {
+//   modal.style.display = "block";
+//   document.body.style.overflow = "hidden"; // 스크롤바 제거
+// });
+// 모달창 닫기
+closeModalBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+  document.body.style.overflow = "auto"; // 스크롤바 보이기
+});
 
 </script>
 </body>

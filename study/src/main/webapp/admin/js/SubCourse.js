@@ -21,7 +21,7 @@ console.log("admin/js/SubCourse.js");
 		.then(result=>callback(result));
 	 }
 
-	 delSub(sid , callback) {
+	 subcourseRemove(sid , callback) {
 		fetch('ajaxsubcoursedel.do?sid='+sid)
 		.then(resolve=>resolve.json())
 		.then(result=>callback(result));

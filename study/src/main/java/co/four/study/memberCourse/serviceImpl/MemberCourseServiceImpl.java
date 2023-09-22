@@ -67,4 +67,9 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 		return map.countStudentCategory(vo);
 	}
 
+	@Override
+	public int totalPrice() {
+		return map.totalPrice();
+	}
+
 }
