@@ -17,32 +17,59 @@
 
     <!-- 강의 상세 정보 Begin -->
     <section class="shop-details">
-    	<!-- data-setbg="client/img/product/${course.courseImg }" -->
+    	<!-- 강의 카테고리, 등급, 강의 이름, 설명 start -->
         <div class="product__details__pic set-bg course_bg" >
             <div class="container course_container">
                 <div class="row set-bg course_pic" data-setbg="client/img/product/${course.courseImg }"></div>
-                <!-- <div class="image_overlay"></div> -->
                 <div class="course_info_wrap">
-                	<p class="breadcrumb__links course_links"><span>${fn:toUpperCase(course.courseMainCategory)}</span> <span>${fn:toUpperCase(course.courseSubCategory)}</span></p>
-	                <div class="course_grade_name">
-	                	<p>
-	                		<c:if test="${course.courseGrade eq 'easy' }"><span class="course_grade">중급이상</span></c:if>
-		                	<c:if test="${course.courseGrade eq 'normal' }"><span class="course_grade">초급</span></c:if>
-		                	<c:if test="${course.courseGrade eq 'hard' }"><span class="course_grade">중급이상</span></c:if>
-	                		<c:if test="${course.courseGrade ne 'hard' }"><span class="c_space"></span></c:if>
-	                		<c:if test="${course.courseGrade eq 'hard' }"><span class="c_space"></span></c:if>
-	                		<span class="course_name">${course.courseName }</span>
-	                	</p>
+	                <div>
+	                	<p class="breadcrumb__links course_links"><span>${fn:toUpperCase(course.courseMainCategory)}</span> <span>${fn:toUpperCase(course.courseSubCategory)}</span></p>
+		                <div class="course_grade_name">
+		                	<p>
+		                		<c:if test="${course.courseGrade eq 'easy' }"><span class="course_grade">중급이상</span></c:if>
+			                	<c:if test="${course.courseGrade eq 'normal' }"><span class="course_grade">초급</span></c:if>
+			                	<c:if test="${course.courseGrade eq 'hard' }"><span class="course_grade">중급이상</span></c:if>
+		                		<c:if test="${course.courseGrade ne 'hard' }"><span class="c_space"></span></c:if>
+		                		<c:if test="${course.courseGrade eq 'hard' }"><span class="c_space"></span></c:if>
+		                		<span class="course_name">${course.courseName }</span>
+		                	</p>
+		                </div>
 	                </div>
 	                <div class="course_info_etc">
-	                	<p>${course.courseScript }</p>
+	                	<!-- 별점 가져오기 -->
+	                	<div class="rating">
+                            <c:if test="${course.courseStars > 0 }">
+								<c:forEach var="i" begin="1" end="${course.courseStars}">
+	                            	<i class="fa fa-star"></i>
+								</c:forEach>
+								<c:forEach var="i" begin="1" end="${5 - course.courseStars}">
+	                            	<i class="fa fa-star-o"></i>
+								</c:forEach>
+							</c:if>
+							<c:if test="${course.courseStars == 0 }">
+	                        	<i class="fa fa-star-o"></i>
+	                            <i class="fa fa-star-o"></i>
+	                            <i class="fa fa-star-o"></i>
+	                            <i class="fa fa-star-o"></i>
+	                            <i class="fa fa-star-o"></i>
+							</c:if>
+                            <span> - 5 Reviews</span>
+                        </div>
+                        
+                        <!-- 강사 이름 -->
+                        <div class="course_teacher">
+                        	<span class="infd-icon"><svg width="19" xmlns="http://www.w3.org/2000/svg" height="19" viewBox="0 0 16 16"><path fill="#343a40" fill-rule="evenodd" d="M8 1.667c-2.025 0-3.667 1.641-3.667 3.666 0 1.26.636 2.371 1.603 3.031-2.243.822-3.859 2.945-3.933 5.454-.009.277.209.507.485.515.276.008.506-.209.514-.485C3.082 11.158 5.29 9 8 9c2.71 0 4.918 2.157 4.998 4.848.008.276.238.493.514.485.276-.008.493-.239.485-.514-.074-2.51-1.69-4.633-3.933-5.455.967-.66 1.603-1.771 1.603-3.03 0-2.026-1.642-3.667-3.667-3.667zM5.333 5.333c0-1.472 1.194-2.666 2.667-2.666 1.473 0 2.667 1.194 2.667 2.666C10.667 6.806 9.473 8 8 8 6.527 8 5.333 6.806 5.333 5.333z" clip-rule="evenodd"></path></svg></span>
+                        	<p>${course.courseTeacher }</p>
+                        </div>
 	                </div>
                 </div>
             </div>
         </div>
+        <!-- 강의 카테고리, 등급, 강의 이름, 설명 end -->
+        
         <div class="product__details__content">
             <div class="container">
-                <div class="row d-flex justify-content-center">
+                <!-- <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="product__details__text">
                             <h4>Hooded thermal anorak</h4>
@@ -116,126 +143,70 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+                </div> -->
+                <!-- 여기까지 필요없을듯 -->
+                <div class="row course_tab_row">
                     <div class="col-lg-12">
                         <div class="product__details__tab">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-toggle="tab" href="#tabs-5"
-                                    role="tab">Description</a>
+                                    role="tab">강의소개</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">Customer
-                                    Previews(5)</a>
+                                    <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">커리큘럼</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#tabs-7" role="tab">Additional
-                                    information</a>
+                                    <a class="nav-link" data-toggle="tab" href="#tabs-7" role="tab">수강생리뷰</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
+                            	<!-- 강의소개 탭 start  -->
                                 <div class="tab-pane active" id="tabs-5" role="tabpanel">
                                     <div class="product__details__tab__content">
-                                        <p class="note">Nam tempus turpis at metus scelerisque placerat nulla deumantos
-                                            solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis
-                                            ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo
-                                        pharetras loremos.</p>
+                                        <p class="note">${course.courseScript }</p>
                                         <div class="product__details__tab__content__item">
-                                            <h5>Products Infomation</h5>
-                                            <p>A Pocket PC is a handheld computer, which features many of the same
-                                                capabilities as a modern PC. These handy little devices allow
-                                                individuals to retrieve and store e-mail messages, create a contact
-                                                file, coordinate appointments, surf the internet, exchange text messages
-                                                and more. Every product that is labeled as a Pocket PC must be
-                                                accompanied with specific software to operate the unit and must feature
-                                            a touchscreen and touchpad.</p>
-                                            <p>As is the case with any new technology product, the cost of a Pocket PC
-                                                was substantial during it’s early release. For approximately $700.00,
-                                                consumers could purchase one of top-of-the-line Pocket PCs in 2003.
-                                                These days, customers are finding that prices have become much more
-                                                reasonable now that the newness is wearing off. For approximately
-                                            $350.00, a new Pocket PC can now be purchased.</p>
-                                        </div>
-                                        <div class="product__details__tab__content__item">
-                                            <h5>Material used</h5>
-                                            <p>Polyester is deemed lower quality due to its none natural quality’s. Made
-                                                from synthetic materials, not natural like wool. Polyester suits become
-                                                creased easily and are known for not being breathable. Polyester suits
-                                                tend to have a shine to them compared to wool and cotton suits, this can
-                                                make the suit look cheap. The texture of velvet is luxurious and
-                                                breathable. Velvet is a great choice for dinner party jacket and can be
-                                            worn all year round.</p>
+                                            <!-- <h5>강의정보...?</h5>
+                                            <p>더이상 불러올 정보가 없습니다..</p> -->
                                         </div>
                                     </div>
                                 </div>
+                                <!-- 커리큘럼 탭 start -->
                                 <div class="tab-pane" id="tabs-6" role="tabpanel">
                                     <div class="product__details__tab__content">
                                         <div class="product__details__tab__content__item">
-                                            <h5>Products Infomation</h5>
-                                            <p>A Pocket PC is a handheld computer, which features many of the same
-                                                capabilities as a modern PC. These handy little devices allow
-                                                individuals to retrieve and store e-mail messages, create a contact
-                                                file, coordinate appointments, surf the internet, exchange text messages
-                                                and more. Every product that is labeled as a Pocket PC must be
-                                                accompanied with specific software to operate the unit and must feature
-                                            a touchscreen and touchpad.</p>
-                                            <p>As is the case with any new technology product, the cost of a Pocket PC
-                                                was substantial during it’s early release. For approximately $700.00,
-                                                consumers could purchase one of top-of-the-line Pocket PCs in 2003.
-                                                These days, customers are finding that prices have become much more
-                                                reasonable now that the newness is wearing off. For approximately
-                                            $350.00, a new Pocket PC can now be purchased.</p>
-                                        </div>
-                                        <div class="product__details__tab__content__item">
-                                            <h5>Material used</h5>
-                                            <p>Polyester is deemed lower quality due to its none natural quality’s. Made
-                                                from synthetic materials, not natural like wool. Polyester suits become
-                                                creased easily and are known for not being breathable. Polyester suits
-                                                tend to have a shine to them compared to wool and cotton suits, this can
-                                                make the suit look cheap. The texture of velvet is luxurious and
-                                                breathable. Velvet is a great choice for dinner party jacket and can be
-                                            worn all year round.</p>
+                                            <h5>커리큘럼을 불러오기..</h5>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- 수강생리뷰 탭 start -->
                                 <div class="tab-pane" id="tabs-7" role="tabpanel">
                                     <div class="product__details__tab__content">
-                                        <p class="note">Nam tempus turpis at metus scelerisque placerat nulla deumantos
-                                            solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis
-                                            ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo
-                                        pharetras loremos.</p>
                                         <div class="product__details__tab__content__item">
-                                            <h5>Products Infomation</h5>
-                                            <p>A Pocket PC is a handheld computer, which features many of the same
-                                                capabilities as a modern PC. These handy little devices allow
-                                                individuals to retrieve and store e-mail messages, create a contact
-                                                file, coordinate appointments, surf the internet, exchange text messages
-                                                and more. Every product that is labeled as a Pocket PC must be
-                                                accompanied with specific software to operate the unit and must feature
-                                            a touchscreen and touchpad.</p>
-                                            <p>As is the case with any new technology product, the cost of a Pocket PC
-                                                was substantial during it’s early release. For approximately $700.00,
-                                                consumers could purchase one of top-of-the-line Pocket PCs in 2003.
-                                                These days, customers are finding that prices have become much more
-                                                reasonable now that the newness is wearing off. For approximately
-                                            $350.00, a new Pocket PC can now be purchased.</p>
-                                        </div>
-                                        <div class="product__details__tab__content__item">
-                                            <h5>Material used</h5>
-                                            <p>Polyester is deemed lower quality due to its none natural quality’s. Made
-                                                from synthetic materials, not natural like wool. Polyester suits become
-                                                creased easily and are known for not being breathable. Polyester suits
-                                                tend to have a shine to them compared to wool and cotton suits, this can
-                                                make the suit look cheap. The texture of velvet is luxurious and
-                                                breathable. Velvet is a great choice for dinner party jacket and can be
-                                            worn all year round.</p>
+                                            <h5>리뷰불러오기..</h5>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- 금액, 장바구니.. -->
+                	<div class="course_price_wrap">
+                		<c:choose>
+                            <c:when test="${course.coursePrice <= 0}">
+                                <h5 style="color:red;" class="course_price">무료</h5>
+                            </c:when>
+                            <c:otherwise>
+                                <h5 class="course_price">
+                                    <fmt:formatNumber value="${course.coursePrice }" pattern="#,###" />원
+                                </h5>
+                            </c:otherwise>
+                        </c:choose>
+                		<div class="button_wrap">
+                			<button>수강신청 하기</button>
+                			<button>장바구니 담기</button>
+                		</div>
+                	</div>
                 </div>
             </div>
         </div>
@@ -243,7 +214,7 @@
     <!-- 강의 상세 정보 End -->
 
     <!-- 다른 강의 추천 Begin -->
-    <section class="related spad">
+    <!-- <section class="related spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -286,112 +257,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                            <ul class="product__hover">
-                                <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6>Piqué Biker Jacket</h6>
-                            <a href="#" class="add-cart">+ Add To Cart</a>
-                            <div class="rating">
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <h5>$67.24</h5>
-                            <div class="product__color__select">
-                                <label for="pc-4">
-                                    <input type="radio" id="pc-4">
-                                </label>
-                                <label class="active black" for="pc-5">
-                                    <input type="radio" id="pc-5">
-                                </label>
-                                <label class="grey" for="pc-6">
-                                    <input type="radio" id="pc-6">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                    <div class="product__item sale">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
-                            <span class="label">Sale</span>
-                            <ul class="product__hover">
-                                <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6>Multi-pocket Chest Bag</h6>
-                            <a href="#" class="add-cart">+ Add To Cart</a>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <h5>$43.48</h5>
-                            <div class="product__color__select">
-                                <label for="pc-7">
-                                    <input type="radio" id="pc-7">
-                                </label>
-                                <label class="active black" for="pc-8">
-                                    <input type="radio" id="pc-8">
-                                </label>
-                                <label class="grey" for="pc-9">
-                                    <input type="radio" id="pc-9">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-4.jpg">
-                            <ul class="product__hover">
-                                <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6>Diagonal Textured Cap</h6>
-                            <a href="#" class="add-cart">+ Add To Cart</a>
-                            <div class="rating">
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <h5>$60.9</h5>
-                            <div class="product__color__select">
-                                <label for="pc-10">
-                                    <input type="radio" id="pc-10">
-                                </label>
-                                <label class="active black" for="pc-11">
-                                    <input type="radio" id="pc-11">
-                                </label>
-                                <label class="grey" for="pc-12">
-                                    <input type="radio" id="pc-12">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- 다른 강의 추천 End -->
     
     <form id="cform" action="courseList.do" method="post">
