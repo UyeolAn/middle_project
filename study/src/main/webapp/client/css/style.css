@@ -136,10 +136,10 @@ ol {
 	background-size: cover;
 	background-position: top center;
 }
-
+/* 전유진 수정 */
 .spad {
-	padding-top: 100px;
-	padding-bottom: 100px;
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
 
 .text-white h1,
@@ -938,6 +938,10 @@ ol {
 .product__item {
 	overflow: hidden;
 	margin-bottom: 40px;
+}
+/* 전유진 추가 */
+.course-item {
+	cursor: pointer;
 }
 
 .product__item.sale .product__item__pic .label {

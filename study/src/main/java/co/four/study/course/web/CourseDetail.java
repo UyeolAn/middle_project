@@ -35,12 +35,6 @@ public class CourseDetail extends HttpServlet {
 		vo.setCourseId(courseId);
 		vo = dao.courseReviewSelect(vo);
 		request.setAttribute("course", vo);
-		// 미리보기 강의 1건 조회
-		SubCourseVO svo = new SubCourseVO();
-		svo.setCourseId(courseId);
-		svo.setSubcourseId(1);
-		svo = sdao.subcourseSelect(svo);
-		request.setAttribute("free", svo);
 		
 		// 서브강의 리스트 조회
 		vo = new CourseVO();
@@ -52,7 +46,6 @@ public class CourseDetail extends HttpServlet {
 			subCourses.get(i).setSubcourseTime((subCourses.get(i).getSubcourseTime())/60);
 		}
 		request.setAttribute("subCourses", subCourses);
-		System.out.println(subCourses);
 		
 		// 강의 페이지 사이드 메뉴 만들기
 		dao.makeSideMenu(request);

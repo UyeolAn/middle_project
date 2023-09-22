@@ -67,84 +67,9 @@
         </div>
         <!-- 강의 카테고리, 등급, 강의 이름, 설명 end -->
         
+        <!-- 강의소개, 커리큘럽, 수강생리뷰 탭 start -->
         <div class="product__details__content">
             <div class="container">
-                <!-- <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="product__details__text">
-                            <h4>Hooded thermal anorak</h4>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <span> - 5 Reviews</span>
-                            </div>
-                            <h3>$270.00 <span>70.00</span></h3>
-                            <p>Coat with quilted lining and an adjustable hood. Featuring long sleeves with adjustable
-                                cuff tabs, adjustable asymmetric hem with elastic side tabs and a front zip fastening
-                            with placket.</p>
-                            <div class="product__details__option">
-                                <div class="product__details__option__size">
-                                    <span>Size:</span>
-                                    <label for="xxl">xxl
-                                        <input type="radio" id="xxl">
-                                    </label>
-                                    <label class="active" for="xl">xl
-                                        <input type="radio" id="xl">
-                                    </label>
-                                    <label for="l">l
-                                        <input type="radio" id="l">
-                                    </label>
-                                    <label for="sm">s
-                                        <input type="radio" id="sm">
-                                    </label>
-                                </div>
-                                <div class="product__details__option__color">
-                                    <span>Color:</span>
-                                    <label class="c-1" for="sp-1">
-                                        <input type="radio" id="sp-1">
-                                    </label>
-                                    <label class="c-2" for="sp-2">
-                                        <input type="radio" id="sp-2">
-                                    </label>
-                                    <label class="c-3" for="sp-3">
-                                        <input type="radio" id="sp-3">
-                                    </label>
-                                    <label class="c-4" for="sp-4">
-                                        <input type="radio" id="sp-4">
-                                    </label>
-                                    <label class="c-9" for="sp-9">
-                                        <input type="radio" id="sp-9">
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="product__details__cart__option">
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1">
-                                    </div>
-                                </div>
-                                <a href="#" class="primary-btn">add to cart</a>
-                            </div>
-                            <div class="product__details__btns__option">
-                                <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
-                                <a href="#"><i class="fa fa-exchange"></i> Add To Compare</a>
-                            </div>
-                            <div class="product__details__last__option">
-                                <h5><span>Guaranteed Safe Checkout</span></h5>
-                                <img src="img/shop-details/details-payment.png" alt="">
-                                <ul>
-                                    <li><span>SKU:</span> 3812912</li>
-                                    <li><span>Categories:</span> Clothes</li>
-                                    <li><span>Tag:</span> Clothes, Skin, Body</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- 여기까지 필요없을듯 -->
                 <div class="row course_tab_row">
                     <div class="col-lg-12">
                         <div class="product__details__tab">
@@ -170,10 +95,11 @@
                                     	</div>
                                         <div class="product__details__tab__content__item">
 	                                    	<h5><span>🧐</span> 미리보기를 통해 콘텐츠를 확인해보세요.</h5>
-                                            <div id="free_iframe_area_1" data_link="${free.subcourseLink }"></div>
+                                            <div id="free_iframe_area_1" data_link="${subCourses[1].subcourseLink }"></div>
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <!-- 커리큘럼 탭 start -->
                                 <div class="tab-pane" id="tabs-6" role="tabpanel">
                                     <div class="product__details__tab__content">
@@ -217,11 +143,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <!-- 수강생리뷰 탭 start -->
                                 <div class="tab-pane" id="tabs-7" role="tabpanel">
                                     <div class="product__details__tab__content">
                                         <div class="product__details__tab__content__item">
-                                            <h5>리뷰불러오기..</h5>
+                                        	<div class="reviw_tab_title">
+	                                            <h5>수강평 <span>총 10개</span></h5>
+	                                            <p>수강생분들이 직접 작성하신 리뷰입니다.</p>
+                                        	</div>
+                                        	<div class="review_tab_content">
+                                        		
+                                        	</div>
                                         </div>
                                     </div>
                                 </div>
@@ -248,6 +181,7 @@
                 </div>
             </div>
         </div>
+    	<!-- 강의소개, 커리큘럽, 수강생리뷰 탭 end -->
     </section>
     <!-- 강의 상세 정보 End -->
 
