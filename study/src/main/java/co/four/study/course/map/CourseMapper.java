@@ -19,5 +19,4 @@ public interface CourseMapper {
 	int courseTotalCount(CourseVO vo);
 	List<CourseVO> coursePagingList(CourseVO vo);
 	
-	CourseVO courseReviewSelect(CourseVO vo);
 }
