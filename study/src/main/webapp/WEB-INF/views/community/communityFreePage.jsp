@@ -14,7 +14,7 @@
       .comm__free__board__sort>li {
         margin-left: 5%;
         margin-top: 4%;
-        font-size: smaller;
+        font-size: medium;
         color: #B7B7B7;
         float: left;
       }
@@ -118,7 +118,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="product__pagination">
-            <a class="active" href="#">1</a>
+            <!-- <a class="active" href="#">1</a> -->
           </div>
         </div>
         <!--Board List End-->
@@ -131,8 +131,12 @@
       let searchContent = $('#searchContent').val();
       let sortType = 'mostRecent';
 
+      let totalCount;
+      let pageCount;
+
       let currentPage = 1;
       let totalPage;
+
 
       // 처음 로딩
       setOrderBtn();
@@ -144,15 +148,17 @@
         let searchData = convertToObject($("#searchForm").serializeArray());
         searchData.sortType = sortType;
         $.ajax({
-          url: 'boardsearch.do',
+          url: 'boardsearchwithpaging.do',
           method: 'post',
           data: {
             searchType: searchData.searchType,
             searchContent: searchData.searchContent,
-            sortType: searchData.sortType
+            sortType: searchData.sortType,
+            page: currentPage
           },
           success: function (boardsJson) {
             showBoards(boardsJson);
+            showPageList();
           },
           error: function (err) {
             console.log(err);
@@ -186,6 +192,68 @@
         });
       }
 
+      // 페이지 바 생성 함수
+      function showPageList() {
+        let searchData = convertToObject($("#searchForm").serializeArray());
+        searchData.sortType = sortType;
+        $.ajax({
+          url: 'boardcount.do',
+          method: 'post',
+          data: {
+            searchType: searchData.searchType,
+            searchContent: searchData.searchContent,
+            sortType: searchData.sortType,
+          },
+          success: function (countJson) {
+            totalCount = countJson.totalCount;
+            let totalPage = Math.ceil(totalCount / 5);
+
+            let endPage = totalPage < Math.ceil(currentPage / 10) * 10 ? totalPage : Math.ceil(currentPage / 10) * 10;
+            let startPage = Math.floor(currentPage / 10) * 10 + 1;         
+
+            let prev = startPage > 1;
+            let next = endPage < totalPage;
+
+            console.log(totalCount);
+            console.log(endPage);
+            console.log(startPage);
+            console.log(currentPage);
+            console.log(prev);
+            console.log(next);
+
+            $('.product__pagination').empty();
+            if (prev) {
+              makePageAtag("&laquo", startPage - 1);
+            }
+            for (let i = startPage; i <= endPage; i++) {
+              makePageAtag(i, i);
+            }
+            if (next) {
+              makePageAtag("&raquo", endPage + 1);
+            }
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        });
+      }
+
+      // 페이지 a태그 생성 함수
+      function makePageAtag(inner, page) {
+        let atag = $('<a />');
+        atag.removeAttr('href');
+        if (page == currentPage) {
+          atag.attr('class', 'active')
+        }
+        atag.attr('style', 'cursor: pointer;');
+        atag.html(inner);
+        atag.on('click', function () {
+          currentPage = page;
+          loadBoards();
+        });
+        $('.product__pagination').append(atag);
+      }
+
       // 정렬 버튼 활성화 함수
       function setOrderBtn() {
         $('ul.comm__free__board__sort>li').on('click', function () {
@@ -199,11 +267,11 @@
               $(li).attr('class', 'sort__nonactive');
             }
           });
-
           loadBoards();
         });
       }
 
+      // 글쓰기 버튼 관련 함수
       function setInsertBtn() {
         if (loginMemberId == 'null') {
           $('#writeBtn').hide();
@@ -225,6 +293,7 @@
           },
           success: function (boardsJson) {
             showBoards(boardsJson);
+            showPageList();
           },
           error: function (err) {
             console.log(err);
@@ -238,7 +307,6 @@
         for (let i = 0; i < arrayData.length; i++) {
           object[arrayData[i]['name']] = arrayData[i]['value'];
         }
-
         return object;
       }
     </script>
