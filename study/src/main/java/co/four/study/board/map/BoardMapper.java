@@ -21,7 +21,13 @@ public interface BoardMapper {
 	// 게시글 검색
 	List<BoardVO> searchBoards(BoardSearchVO vo);
 	
-	//조회수 증가
+	// 게시글 페이징 검색
+	List<BoardVO> searchBoardsWithPaging(BoardSearchVO vo);
+	
+	// 게시글 카운트
+	int countBoards(BoardSearchVO vo);
+	
+	// 조회수 증가
 	int updateBoardHit(int id);
 	
 }

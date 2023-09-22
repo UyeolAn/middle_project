@@ -134,6 +134,11 @@ public class CourseServiceImpl implements CourseService {
 		request.setAttribute("english", subCategory);
 	}
 
+	@Override
+	public CourseVO courseReviewSelect(CourseVO vo) {
+		return map.courseReviewSelect(vo);
+	}
+
 
 
 }

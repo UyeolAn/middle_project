@@ -40,7 +40,7 @@
               <label class="input__file__btn" for="boardImg">
                 IMG
               </label>
-              <input type="file" id="boardImg" name="boardImg" style="display: none;">
+              <input type="file" id="boardImg" name="boardImg" style="display: none;" disabled="disabled">
             </div>
             <div class="col-lg-12">
               <textarea id="boardContent" name="boardContent" placeholder="내용을 입력하세요..." style="color: #333;"></textarea>

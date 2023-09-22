@@ -48,4 +48,14 @@ public class BoardServiceImpl implements BoardService {
 		return map.searchBoards(vo);
 	}
 
+	@Override
+	public List<BoardVO> searchBoardsWithPaging(BoardSearchVO vo) {
+		return map.searchBoardsWithPaging(vo);
+	}
+
+	@Override
+	public int countBoards(BoardSearchVO vo) {
+		return map.countBoards(vo);
+	}
+
 }

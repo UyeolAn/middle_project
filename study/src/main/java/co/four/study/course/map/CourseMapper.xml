@@ -23,20 +23,21 @@
 		<if test="courseId != null">		
 		WHERE	COURSE_ID = #{courseId}
 		</if>
-		<if test="courseName != null and courseId == null">
-		WHERE COURSE_NAME = #{courseName}
+		<if test="courseName != null and courseScript != null and courseId == null">
+		WHERE COURSE_NAME = #{courseName} AND COURSE_SCRIPT = #{courseScript}
 		</if>
 	</select>
 	
-  	<select id="courseReviewSelect" resultType="co.four.study.course.service.CourseVO">
-  		SELECT	A.*, B.*
-		FROM	COURSES A,
-		        (SELECT COURSE_ID, ROUND(SUM(REVIEW_STARS)/COUNT(REVIEW_STARS)) COURSE_STARS
-		        FROM REVIEWS
-		        WHERE COURSE_ID = #{courseId}
-		        GROUP BY COURSE_ID) B
-		WHERE A.COURSE_ID = B.COURSE_ID(+)
-		AND A.COURSE_ID = #{courseId}
+
+<select id="courseReviewSelect" resultType="co.four.study.course.service.CourseVO">
+        SELECT   A.*, B.*
+      FROM   COURSES A,
+              (SELECT COURSE_ID, ROUND(SUM(REVIEW_STARS)/COUNT(REVIEW_STARS)) COURSE_STARS
+              FROM REVIEWS
+              WHERE COURSE_ID = #{courseId}
+              GROUP BY COURSE_ID) B
+      WHERE A.COURSE_ID = B.COURSE_ID(+)
+      AND A.COURSE_ID = #{courseId}
     </select>
   
 	<insert id="courseInsert" parameterType="co.four.study.course.service.CourseVO">

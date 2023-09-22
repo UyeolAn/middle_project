@@ -53,7 +53,7 @@ public class AdminCoursePage extends HttpServlet {
 		vo.setCourseId(cid);
 
 		//아이디를 이용하여 강의 정보 불러옴
-		vo = dao.courseSelect(vo);
+		vo = dao.courseReviewSelect(vo);
 
 		//카테고리와 서브카테고리를 대문자로 바꾸어줌
 		vo.setCourseMainCategory(vo.getCourseMainCategory().toUpperCase());
@@ -83,7 +83,7 @@ public class AdminCoursePage extends HttpServlet {
 		
 		String page = "admin/course/coursePage";
 		
-		System.out.println(cid);
+//		System.out.println(cid);
 		
 		request.setAttribute("c", vo);
 		request.setAttribute("subcourse", slist);
