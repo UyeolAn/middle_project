@@ -36,7 +36,8 @@ public class AjaxPasswordReset extends HttpServlet {
 		vo.setMemberPassword(Sha256.encrypt(request.getParameter("memberPassword")));
 		vo.setMemberEmail(request.getParameter("memberEmail"));
 		System.out.println(vo);
-		dao.memberPassReset(vo);
+		vo = dao.memberPassReset(vo);
+		
 
 		//세션삭제
 		session.invalidate();
