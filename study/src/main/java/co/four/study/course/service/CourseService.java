@@ -24,5 +24,4 @@ public interface CourseService {
 	// 강의 페이지 사이드 메뉴 만들기
 	public void makeSideMenu(HttpServletRequest request);
 	
-	CourseVO courseReviewSelect(CourseVO vo);
 }
