@@ -27,23 +27,21 @@
                                         <c:if test="${empty loginId}">
                                             <a href="login.do">Sign in</a>
                                         </c:if>
-                                        <c:if test = "${not empty loginId}">
-                                            <a href="logout.do">LOGOUT</a>
-                                        </c:if>
                                         <a href="#">FAQs</a>
                                     </div>
-                                    <div class="header__top__hover">
-                                        <span>Usd <i class="arrow_carrot-down"></i></span>
-                                        <ul>
-                                            <li>USD</li>
-                                            <li>EUR</li>
-                                            <li>USD</li>
-                                        </ul>
-                                    </div>
+                                    <c:if test="${not empty loginId}">
+                                        <div class="header__top__hover">
+                                            <span>${loginName} 님 접속중<i class="arrow_carrot-down"></i></span>
+                                            <ul>
+                                                <li><a href="logout.do">LOGOUT</a></li>
+                                                <li><a href="#">MY PAGE</a></li>
+                                            </ul>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
                 <div class="container">
                     <div class="row">

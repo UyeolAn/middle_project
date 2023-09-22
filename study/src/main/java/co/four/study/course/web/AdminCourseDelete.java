@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import co.four.study.common.ViewResolve;
 import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
 import co.four.study.course.serviceImpl.CourseServiceImpl;
@@ -39,17 +40,18 @@ public class AdminCourseDelete extends HttpServlet {
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		
-		if(i==1) {
-			resultMap.put("retCode", "Success");
-			resultMap.put("data", vo);
-		}
-		else {
-			resultMap.put("retCode", "Fail");
-		}
 		
 		String json = objectMapper.writeValueAsString(resultMap);
 		response.setContentType("text/json; charset=UTF-8");
 		response.getWriter().print(json);
+		
+		if(i != 0) {
+			response.sendRedirect("admincourselist.do");
+		}//위임, 리스트를 다시 보여주라는 것
+//		}else {
+//			request.setAttribute("message", "게시글 등록이 실패했습니다.");
+//			ViewResolve.forward(request, response, page);}
+		
 	}
 
 
