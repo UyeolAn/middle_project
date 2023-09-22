@@ -105,10 +105,10 @@
 							<nav class="header__menu mobile-menu">
 								<ul>
 									<li class="active"><a href="home.do">Home</a></li>
-									<li><a href="courseList.do">Course</a>
+									<li><a href="courselist.do">Course</a>
 										<ul class="dropdown">
-											<li><a href="courseList.do?cid=it">IT</a></li>
-											<li><a href="courseList.do?cid=english">English</a></li>
+											<li><a href="courselist.do?mainCate=it">IT</a></li>
+											<li><a href="courselist.do?mainCate=english">English</a></li>
 										</ul>
 									</li>
 									<li><a href="">Package</a>

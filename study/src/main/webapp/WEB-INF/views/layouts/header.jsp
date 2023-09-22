@@ -55,10 +55,10 @@
                                 <ul>
                                     <li><a href="home.do">Home</a></li>
                                     <li class="<c:if test=" ${menu eq 'course' }">active</c:if>"><a
-                                            href="courseList.do">Course</a>
+                                            href="courselist.do">Course</a>
                                         <ul class="dropdown">
-                                            <li><a href="courseList.do?cid=it">IT</a></li>
-                                            <li><a href="courseList.do?cid=english">English</a></li>
+                                            <li><a href="courselist.do?mainCate=it">IT</a></li>
+                                            <li><a href="courselist.do?mainCate=english">English</a></li>
                                         </ul>
                                     </li>
                                     <li class="<c:if test=" ${menu eq 'package' }">active</c:if>"><a href="">Package</a>

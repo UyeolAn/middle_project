@@ -16,7 +16,7 @@ import co.four.study.course.service.PagingVO;
 import co.four.study.course.serviceImpl.CourseServiceImpl;
 
 
-@WebServlet("/courseList.do")
+@WebServlet("/courselist.do")
 public class CourseList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,7 +33,7 @@ public class CourseList extends HttpServlet {
 		// 강의 페이지 사이드 메뉴 만들기
 		dao.makeSideMenu(request);
 		
-		// subCate를 누른건지 grade를 누른건지 구분
+		// subCategory를 누른건지 grade를 누른건지 구분(상품 디테일 페이지에서 사용함)
 		String subCate;
 		String grade;
 		try {
@@ -43,7 +43,7 @@ public class CourseList extends HttpServlet {
 			}
 			System.out.println("subCate = " + subCate);
 		} catch (NullPointerException e) {
-			System.out.println("courseList.do::grade 호출했음!");
+			System.out.println("courseList.do::subCate try catch");
 		}
 		try {
 			grade = request.getParameter("grade");
@@ -52,9 +52,8 @@ public class CourseList extends HttpServlet {
 			}
 			System.out.println("grade = " + grade);
 		} catch (NullPointerException e) {
-			System.out.println("courseList.do::subCate 호출했음!");
+			System.out.println("courseList.do::grade try catch");
 		}
-		System.out.println(vo);
 		
 		
 		// 강의 리스트 페이징처리
@@ -64,22 +63,23 @@ public class CourseList extends HttpServlet {
 		
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
-			cntPerPage = "10";
+			cntPerPage = "9";
 		} else if(nowPage == null) {
 			nowPage = "1";
 		} else if(cntPerPage == null) {
-			cntPerPage = "10";
+			cntPerPage = "9";
 		}
 		
 		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		request.setAttribute("paging", pvo); // 페이징 완료
+		System.out.println(pvo);
 		
 		// 강의 리스트 가져오기
-		String cid = request.getParameter("cid"); // 넘어온 메인카테고리
+		String mainCate = request.getParameter("mainCate"); // 넘어온 메인카테고리
 		List<CourseVO> courses;
 
-		if(cid != null) {
-			vo.setCourseMainCategory(cid);
+		if(mainCate != null) {
+			vo.setCourseMainCategory(mainCate);
 			vo.setStart(pvo.getStart());
 			vo.setEnd(pvo.getEnd());
 			courses = dao.coursePagingList(vo);
@@ -92,9 +92,9 @@ public class CourseList extends HttpServlet {
 		if(courses != null) {
 			request.setAttribute("courses", courses); // 강의 리스트 조회 완료
 			request.setAttribute("tcnt", courses.size()); // 조회된 건수
-			request.setAttribute("cid", cid); // 메인카테고리
+			request.setAttribute("cid", mainCate); // 메인카테고리
 		} else {
-			System.out.println("강의 조회에서 오류 발생");
+			System.out.println("courselist.do 강의 조회에서 오류 발생");
 		}
 		
 		// 페이지 포워딩

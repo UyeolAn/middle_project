@@ -2,8 +2,8 @@
 
 .course-item {
 	border: 1px solid #e6e6e6;
-    border-radius: 10px;
-    padding: 15px;
+	border-radius: 10px;
+	padding: 15px;
 }
 
 .course-item-pic {
@@ -16,13 +16,14 @@
 
 .shop__sidebar__categories ul li span {
 	color: #b7b7b7;
-    font-size: 15px;
-    line-height: 32px;
-    -webkit-transition: all, 0.3s;
-    -o-transition: all, 0.3s;
-    transition: all, 0.3s;
-    cursor: pointer;
+	font-size: 15px;
+	line-height: 32px;
+	-webkit-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+	cursor: pointer;
 }
+
 .shop__sidebar__tags span {
 	color: #404040;
 	font-size: 13px;
@@ -40,32 +41,51 @@
 
 .shop__sidebar__tags span:hover,
 .shop__sidebar__tags span.active {
-    background: #111111;
-    color: #ffffff !important;
-    cursor: pointer;
+	background: #111111;
+	color: #ffffff !important;
+	cursor: pointer;
 }
+
 .product__pagination button {
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 700;
-    color: #111111;
-    height: 30px;
-    width: 30px;
-    border: 1px solid transparent;
-    border-radius: 50%;
-    line-height: 30px;
-    text-align: center;
-    background-color: #fff;
-    padding: 0;
-    margin: 0 3px;
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 700;
+	color: #111111;
+	height: 30px;
+	width: 30px;
+	border: 1px solid transparent;
+	border-radius: 50%;
+	line-height: 30px;
+	text-align: center;
+	background-color: #fff;
+	padding: 0;
+	margin: 0 3px;
 }
+
 .product__pagination button.active {
-    border-color: #111111;
+	border-color: #111111;
 }
+
 .product__pagination button:hover {
-    border-color: #111111;
+	border-color: #111111;
 }
 
 .product__item__text .rating i {
 	color: #ffbc00;
+}
+
+@media only screen and (max-width: 991px) {
+	.shop__sidebar {
+	    padding-right: 0 ;
+	    margin-bottom: 40px;
+	}
+	.shop__sidebar__accordion {
+		padding: 0 10px
+	}
+}
+
+@media only screen and (max-width: 576px) {
+	.course-item-pic {
+		height: 58vw;
+	}
 }

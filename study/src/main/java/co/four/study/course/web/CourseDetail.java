@@ -13,6 +13,9 @@ import co.four.study.common.ViewResolve;
 import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
 import co.four.study.course.serviceImpl.CourseServiceImpl;
+import co.four.study.review.service.ReviewService;
+import co.four.study.review.service.ReviewVO;
+import co.four.study.review.serviceImpl.ReviewServiceImpl;
 import co.four.study.subcourse.service.SubCourseService;
 import co.four.study.subcourse.service.SubCourseVO;
 import co.four.study.subcourse.serviceImpl.SubCourseServiceImpl;
@@ -28,6 +31,7 @@ public class CourseDetail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CourseService dao = new CourseServiceImpl();
 		SubCourseService sdao = new SubCourseServiceImpl();
+		ReviewService rdao = new ReviewServiceImpl();
 		CourseVO vo = new CourseVO();
 		int courseId = Integer.valueOf(request.getParameter("courseId"));
 		
@@ -37,8 +41,6 @@ public class CourseDetail extends HttpServlet {
 		request.setAttribute("course", vo);
 		
 		// 서브강의 리스트 조회
-		vo = new CourseVO();
-		vo.setCourseId(courseId);
 		List<SubCourseVO> subCourses = sdao.subcourseSortedList(vo);
 		
 		// 강의 시간 계산
@@ -46,6 +48,14 @@ public class CourseDetail extends HttpServlet {
 			subCourses.get(i).setSubcourseTime((subCourses.get(i).getSubcourseTime())/60);
 		}
 		request.setAttribute("subCourses", subCourses);
+		
+		// 강의별 리뷰 조회
+		int rcount = rdao.courseReviewCount(vo);
+		List<ReviewVO> reviews = rdao.courseReviewSortedList(vo);
+		request.setAttribute("rcount", rcount);
+		request.setAttribute("reviews", reviews);
+		System.out.println("rcount::::: " + rcount);
+		System.out.println("reviews::::: " + reviews);
 		
 		// 강의 페이지 사이드 메뉴 만들기
 		dao.makeSideMenu(request);

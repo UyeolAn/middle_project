@@ -105,7 +105,7 @@
 	margin-bottom: 10px;
 }
 
-.course_info_etc .rating i {
+.rating i {
 	color: #ffbc00;
 	margin-right: -5px;
 }
@@ -156,15 +156,18 @@
 	margin-bottom: 50px;
 	gap: 10px;
 }
+
 .intro_text {
 	width: 30%;
 	text-align: center;
 	font-weight: 900;
 }
+
 .intro_text span {
 	display: block;
 	text-align: center;
 }
+
 .note {
 	width: 65%;
 	font-size: 16px;
@@ -187,36 +190,94 @@
 
 .course_price_wrap {
 	width: 28%;
-	height: 300px;
+	height: fit-content;
 	border: 1px solid #e6e6e6;
 	border-radius: 5px;
 	margin-top: 30px;
-	padding: 20px;
 }
 
 .course_price {
 	font-weight: 600;
+	text-align: left;
+	padding: 20px 17px;
+	font-size: 23px;
+}
+
+.course_price_free,
+.course_price_pay {
+	font-size: 15px;
+	font-weight: 600;
 	text-align: center;
-	padding-bottom: 20px;
+	color: #fff;
+	padding: 10px;
+	border-radius: 5px 5px 0 0;
+}
+.course_price_free {
+	background: #e5503c;
+}
+.course_price_pay {
+	background: #232e67;
+}
+
+.course_price_bottom {
+	margin: 0;
+	padding: 15px;
+}
+
+.course_price_bottom li {
+	list-style: none;
+	font-size: 14px;
+	color: #343a40;
+	padding-left: 7px;
+}
+
+.course_price_bottom li::before {
+	content: '';
+	display: inline-block;
+	width: 4px;
+	height: 4px;
+	margin: -5px 10px 0 0;
+	vertical-align: middle;
+	background: #343a40;
+	border-radius: 50%
 }
 
 .button_wrap {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	align-items: center;
 	justify-content: center;
+	gap: 10px;
 	align-items: center;
 }
 
-.button_wrap button {
-	padding: 15px 45px;
-	border: 1px solid #e6e6e6;
-	background-color: #384441;
+.button_wrap .btn-green {
+	padding: 12px 30px 10px 30px;
+	background-color: #fff;
 	border-radius: 5px;
 	font-weight: 700;
-	color: #fff;
+	color: #3188db;
+	border: 1px solid #3188db;
+	margin: 10px 0;
+	transition: all 0.4s;
 }
 
+.button_wrap .btn-green:hover {
+	background-color: #3188db;
+	color: #fff;
+}
+.button_wrap .btn-green-p,
+.button_wrap .btn-green-p-cart {
+	padding: 12px 50px 10px 50px;
+	margin: 0;
+}
+.button_wrap .btn-green-p-cart {
+	background-color: #3188db;
+	color: #fff;
+}
+.button_wrap .btn-green-p-cart:hover {
+	background-color: #185896;
+}
 
 /* 강의 모달창 */
 .btnWrap {
@@ -317,19 +378,25 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
 .subcourse_data .col_7 .col_left p:nth-child(3) {
 	min-width: 53px;
 	color: #9e9e9e;
 }
-#tabs-5 h5, #tabs-6 h5 {
+
+#tabs-5 h5,
+#tabs-6 h5 {
 	position: relative;
 	padding-left: 35px;
 }
-#tabs-5 h5 span, #tabs-6 h5 span {
+
+#tabs-5 h5 span,
+#tabs-6 h5 span {
 	position: absolute;
 	top: -4px;
 	left: 3px;
 }
+
 .play_btn {
 	display: flex;
 	background-color: transparent;
@@ -337,4 +404,24 @@
 	padding: 0;
 	margin: 0;
 	padding-right: 15px;
+}
+
+/* 리뷰영역 */
+.reviw_tab_title {
+	padding-bottom: 50px;
+}
+.reviw_col_top {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.review_tab_content .col_7 {
+	padding: 15px 10px;
+	border-bottom: 1px solid #e6e6e6;
+}
+.review_tab_content .col_7:first-child {
+	border-top: 1px solid #e6e6e6;
+}
+.reviw_content {
+	padding-top: 15px;
 }

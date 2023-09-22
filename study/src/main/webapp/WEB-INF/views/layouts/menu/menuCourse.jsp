@@ -34,7 +34,7 @@
           <div class="accordion" id="accordionExample">
           	<div class="card">
           	  <div class="course-all">
-	            <a href="courseList.do">전체보기</a>
+	            <a href="courselist.do">전체보기</a>
 	          </div>
           	</div>
             <div class="card">

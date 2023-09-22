@@ -26,11 +26,11 @@
 	                	<p class="breadcrumb__links course_links"><span>${fn:toUpperCase(course.courseMainCategory)}</span> <span>${fn:toUpperCase(course.courseSubCategory)}</span></p>
 		                <div class="course_grade_name">
 		                	<p>
-		                		<c:if test="${course.courseGrade eq 'easy' }"><span class="course_grade">중급이상</span></c:if>
+		                		<c:if test="${course.courseGrade eq 'easy' }"><span class="course_grade">입문</span></c:if>
 			                	<c:if test="${course.courseGrade eq 'normal' }"><span class="course_grade">초급</span></c:if>
 			                	<c:if test="${course.courseGrade eq 'hard' }"><span class="course_grade">중급이상</span></c:if>
-		                		<c:if test="${course.courseGrade ne 'hard' }"><span class="c_space"></span></c:if>
-		                		<c:if test="${course.courseGrade eq 'hard' }"><span class="c_space"></span></c:if>
+		                		<%-- <c:if test="${course.courseGrade ne 'hard' }"><span class="c_space"></span></c:if>
+		                		<c:if test="${course.courseGrade eq 'hard' }"><span class="c_space"></span></c:if> --%>
 		                		<span class="course_name">${course.courseName }</span>
 		                	</p>
 		                </div>
@@ -46,7 +46,7 @@
 	                            	<i class="fa fa-star-o"></i>
 								</c:forEach>
 							</c:if>
-							<c:if test="${course.courseStars == 0 }">
+							<c:if test="${course.courseStars <= 0 }">
 	                        	<i class="fa fa-star-o"></i>
 	                            <i class="fa fa-star-o"></i>
 	                            <i class="fa fa-star-o"></i>
@@ -149,11 +149,45 @@
                                     <div class="product__details__tab__content">
                                         <div class="product__details__tab__content__item">
                                         	<div class="reviw_tab_title">
-	                                            <h5>수강평 <span>총 10개</span></h5>
+	                                            <h5>수강평 <span>총 ${rcount }개</span></h5>
 	                                            <p>수강생분들이 직접 작성하신 리뷰입니다.</p>
                                         	</div>
                                         	<div class="review_tab_content">
-                                        		
+                                        		<c:forEach items="${reviews}" var="r">
+	                                        		<div class="col_7">
+	                                           			<div class="reviw_col_top">
+	                                           				<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#b9c2c9" class="bi bi-person-circle" viewBox="0 0 16 16">
+															  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+															  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+															</svg>
+	                                           				<div>
+	                                            				<div class="rating">
+	                                            					<c:if test="${r.reviewStars > 0 }">
+																		<c:forEach var="i" begin="1" end="${r.reviewStars}">
+											                            	<i class="fa fa-star"></i>
+																		</c:forEach>
+																		<c:forEach var="i" begin="1" end="${5 - r.reviewStars}">
+											                            	<i class="fa fa-star-o"></i>
+																		</c:forEach>
+																	</c:if>
+																	<c:if test="${r.reviewStars <= 0 }">
+											                        	<i class="fa fa-star-o"></i>
+											                            <i class="fa fa-star-o"></i>
+											                            <i class="fa fa-star-o"></i>
+											                            <i class="fa fa-star-o"></i>
+											                            <i class="fa fa-star-o"></i>
+																	</c:if>
+	                                            				</div>
+	                                            				<p>
+	                                            					<span>${r.memberId }</span>
+	                                            					<c:if test="${r.reviewUpdateDate ne null }">${r.reviewUpdateDate}</c:if>
+	                                            					<c:if test="${r.reviewUpdateDate eq null }">${r.reviewEnterDate}</c:if>
+	                                            				</p>
+	                                           				</div>
+	                                           			</div>
+	                                           			<p class="reviw_content">${r.reviewContent }</p>
+	                                           		</div>
+                                           		</c:forEach>
                                         	</div>
                                         </div>
                                     </div>
@@ -161,80 +195,50 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 금액, 장바구니.. -->
+                    <!-- 금액, 장바구니.. start -->
                 	<div class="course_price_wrap">
-                		<c:choose>
-                            <c:when test="${course.coursePrice <= 0}">
-                                <h5 style="color:red;" class="course_price">무료</h5>
-                            </c:when>
-                            <c:otherwise>
-                                <h5 class="course_price">
-                                    <fmt:formatNumber value="${course.coursePrice }" pattern="#,###" />원
-                                </h5>
-                            </c:otherwise>
-                        </c:choose>
-                		<div class="button_wrap">
-                			<button>수강신청 하기</button>
-                			<button>장바구니 담기</button>
+                		<div class="course_price_top">
+	                		<c:choose>
+	                            <c:when test="${course.coursePrice <= 0}">
+	                                <h5 class="course_price_free">무료, 지금 바로 수강하세요!</h5>
+	                                <h5 class="course_price">0원</h5>
+	                                <div class="button_wrap">
+			                			<button type="button" class="btn btn-green">바로 수강신청 하기</button>
+			                		</div>
+	                            </c:when>
+	                            <c:otherwise>
+	                            	<c:if test="${course.coursePrice >= 100000 }">
+		                            	<h5 class="course_price_pay">3개월 무이자 할부 가능!</h5>
+	                            	</c:if>
+	                                <h5 class="course_price">
+	                                    <fmt:formatNumber value="${course.coursePrice }" pattern="#,###" />원
+	                                </h5>
+			                		<div class="button_wrap">
+			                			<button type="button" class="btn btn-green btn-green-p-cart">수강신청 하기</button>
+			                			<button type="button" class="btn btn-green btn-green-p" >장바구니 담기</button>
+			                		</div>
+	                            </c:otherwise>
+	                        </c:choose>
                 		</div>
+                		<ul class="course_price_bottom">
+                			<li>수강기한: 무제한</li>
+                			<li>지식제공자: ${course.courseTeacher }</li>
+               				<c:if test="${course.courseGrade eq 'easy'}"><li>난이도: 입문</li></c:if>
+               				<c:if test="${course.courseGrade eq 'normal'}"><li>난이도: 초급</li></c:if>
+               				<c:if test="${course.courseGrade eq 'hard'}"><li>난이도: 중급이상</li></c:if>
+                			<li>질문 답변 제공</li>
+                		</ul>
                 	</div>
+                	<!-- 금액, 장바구니.. end -->
                 </div>
             </div>
         </div>
     	<!-- 강의소개, 커리큘럽, 수강생리뷰 탭 end -->
     </section>
     <!-- 강의 상세 정보 End -->
-
-    <!-- 다른 강의 추천 Begin -->
-    <!-- <section class="related spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3 class="related-title">Related Product</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
-                            <span class="label">New</span>
-                            <ul class="product__hover">
-                                <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6>Piqué Biker Jacket</h6>
-                            <a href="#" class="add-cart">+ Add To Cart</a>
-                            <div class="rating">
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <h5>$67.24</h5>
-                            <div class="product__color__select">
-                                <label for="pc-1">
-                                    <input type="radio" id="pc-1">
-                                </label>
-                                <label class="active black" for="pc-2">
-                                    <input type="radio" id="pc-2">
-                                </label>
-                                <label class="grey" for="pc-3">
-                                    <input type="radio" id="pc-3">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- 다른 강의 추천 End -->
     
-    <form id="cform" action="courseList.do" method="post">
+    
+    <form id="cform" action="courselist.do" method="post">
     	<input type="hidden" name="subCate" id="subCate" value="" />
     	<input type="hidden" name="grade" id="grade" value="" />
     	<input type="hidden" name="nowPage" id="nowPage" value="" />
