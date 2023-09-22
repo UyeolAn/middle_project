@@ -115,14 +115,17 @@
       <div class="comm__free__board">
         <!-- loadBoards() -> showBoards(boardsJson) -->
       </div>
+      <!--Board List End-->
+
+      <!--Page Bar Start-->
       <div class="row">
         <div class="col-lg-12">
           <div class="product__pagination">
             <!-- <a class="active" href="#">1</a> -->
           </div>
         </div>
-        <!--Board List End-->
       </div>
+      <!--Page Bar End-->
     </div>
     <script>
       // 변수
@@ -131,15 +134,14 @@
       let searchContent = $('#searchContent').val();
       let sortType = 'mostRecent';
 
-      let totalCount;
-      let pageCount;
+      let totalCount; // 총 개시글 수
 
-      let currentPage = 1;
-      let totalPage;
+      let currentPage = 1; // 현재 페이지
+      let totalPage; // 전체 페이지 수
 
 
       // 처음 로딩
-      setOrderBtn();
+      setSortBtn();
       setInsertBtn();
       loadBoards();
 
@@ -209,7 +211,7 @@
             let totalPage = Math.ceil(totalCount / 5);
 
             let endPage = totalPage < Math.ceil(currentPage / 10) * 10 ? totalPage : Math.ceil(currentPage / 10) * 10;
-            let startPage = Math.floor(currentPage / 10) * 10 + 1;         
+            let startPage = Math.floor(currentPage / 10) * 10 + 1;
 
             let prev = startPage > 1;
             let next = endPage < totalPage;
@@ -255,7 +257,7 @@
       }
 
       // 정렬 버튼 활성화 함수
-      function setOrderBtn() {
+      function setSortBtn() {
         $('ul.comm__free__board__sort>li').on('click', function () {
           sortType = $(this).attr('id');
 
@@ -284,12 +286,13 @@
         let searchData = convertToObject($("#searchForm").serializeArray());
         searchData.sortType = sortType;
         $.ajax({
-          url: 'boardsearch.do',
+          url: 'boardsearchwithpaging.do',
           method: 'post',
           data: {
             searchType: searchData.searchType,
             searchContent: searchData.searchContent,
-            sortType: searchData.sortType
+            sortType: searchData.sortType,
+            page: 1
           },
           success: function (boardsJson) {
             showBoards(boardsJson);

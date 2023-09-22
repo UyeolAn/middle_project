@@ -34,10 +34,23 @@
 		WHERE reply_id = #{replyId}
 	</delete>
 	
+	<select id="sortRepliesWithPaging" resultType="co.four.study.reply.service.ReplyVO">
+		SELECT *
+		FROM (SELECT ROWNUM AS rm, a.*
+			  FROM (SELECT *
+				    FROM replies r
+				    WHERE board_id = #{boardId}
+				    <trim prefix="ORDER BY">
+		                <if test="sortType == 'mostRecent'">reply_id DESC</if>
+		                <if test="sortType == 'registDate'">reply_id</if>
+		            </trim>) a )
+	     WHERE rm BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
 	<select id="countBoardReply" resultType="int">
 		SELECT COUNT(*)
 		FROM replies
-		WHERE reply_id = #{id}
+		WHERE board_id = #{id}
 	</select>
 	
 	<select id="countReply" resultType="Integer" parameterType="co.four.study.member.service.MemberVO">

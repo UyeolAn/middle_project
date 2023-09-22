@@ -147,20 +147,20 @@
           <span class="col-lg-12 reply__info__count" id="replyCount">REPLY : 10</span>
           <br>
           <div class="col-lg-12">
-            <textarea id="boardContent" name="boardContent" placeholder="댓글을 입력하세요..."
+            <textarea id="replyContent" name="replyContent" placeholder="댓글을 입력하세요..."
               style="height: 70px; margin-top: 10px; color: #333; "></textarea>
           </div>
           <div class="col-lg-12 row">
             <div class="col-lg-9">
               <ul class="comm__free__reply__sort">
                 <li class="sort__active" id="mostRecent">최신순</li>
-                <li id="mostHit">등록순</li>
+                <li id="registDate">등록순</li>
               </ul>
             </div>
             <div class="col-lg-3">
               <div class="checkout__input">
                 <button type="button" id="writeBtn" class="site-btn" style="float: right; padding: 9px 20px;"
-                  onclick="location.href='communityfreeinsertpage.do'">등록</button>
+                  onclick="insertReply()">등록</button>
               </div>
             </div>
           </div>
@@ -168,36 +168,45 @@
         <!--Reply Top Bar End-->
         <hr>
 
-        <!--Reply Main Body Start-->
-        <div class="col-lg-12 comm__free__board__detail__etc__info" style="margin-top: 3%;">
-          <span class="etc__info__name" id="memberId">uyeol</span>
-          <span class="etc__info__datehit">2023-09-22
-            <!-- <c:if test="${empty board.boardUpdateDate}">ㆍ2023-09-22</c:if>
-            <c:if test="${not empty board.boardUpdateDate}">ㆍ2023-09-22</c:if> -->
-          </span>
-          <br>
-          <div style="margin-top: 1%; margin-bottom: 3%;">
-            <p id="boardContent" style="white-space:pre;">댓글 내용입니다...</p>
+        <!--Reply List Start-->
+        <div class="comm__free__reply">
+          <!--loadReplies() -> showReplies()-->
+        </div>
+        <!--Reply List End-->
+
+        <!--Page Bar Start-->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="product__pagination">
+              <!-- <a class="active" href="#">1</a> -->
+            </div>
           </div>
         </div>
-        <!--Reply Main Body End-->
-        <hr>
-        
+        <!--Page Bar End-->
 
 
       </div>
 
-      <!--게시글 상세보기 관련 JS Start-->
       <script>
         // 변수 선언
         let loginMemberId = '<%=(String)session.getAttribute("loginId")%>';
         let boardId = '${board.boardId}';
+
+        let sortType = 'mostRecent'; // 댓글 정렬 기준
+
+        let totalCount; // 총 댓글 수
+
+        let currentPage = 1; // 댓글 현재 페이지
+        let totalPage; // 댓글 전체 페이지 수
 
         // 처음 로딩
         setLikeBtn();
         setDisLikeBtn();
         setUpdDelBtn();
         loadMemberRecommend();
+        setTimeout(() => { }, 500);
+        loadReplies();
+        setSortBtn();
 
         // 이 게시글에서 회원이 좋아요/싫어요를 눌렀는지에 대한 정보를 반환하는 함수
         function loadMemberRecommend() {
@@ -328,20 +337,144 @@
           });
         }
 
+        // 수정/삭제 버튼 로그인한 사용자만 보이게 하는 함수
         function setUpdDelBtn() {
           if (loginMemberId == 'null' || loginMemberId != '${board.memberId}') {
             $('#updateBtn').hide();
             $('#deleteBtn').hide();
           }
         }
-      </script>
-      <!--게시글 상세보기 관련 JS End-->
 
-      <!--댓글 관련 JS Start-->
-      <script>
-        
+        // 댓글 불러오는 함수
+        function loadReplies() {
+          $.ajax({
+            url: 'replysortwithpaging.do',
+            method: 'post',
+            data: {
+              boardId: boardId,
+              sortType: sortType,
+              page: currentPage
+            },
+            success: function (repliesJson) {
+              showReplies(repliesJson);
+              showPageList();
+            },
+            error: function (err) {
+              console.log(err);
+            }
+          });
+        }
+
+        // 댓글 목록을 보여주는 함수
+        function showReplies(repliesJson) {
+          $('div.comm__free__reply').empty();
+          repliesJson.forEach(reply => {
+            $('div.comm__free__reply')
+              .append(
+                $('<div class="col-lg-12 comm__free__board__detail__etc__info" style="margin-top: 3%;"> /')
+                  .append($('<span class="etc__info__name" id="memberId"> /').text(`\${reply.memberId}`))
+                  .append($('<span class="etc__info__datehit"> /').text(`ㆍ\${reply.replyEnterDate}`))
+                  .append($('<br>'))
+                  .append(
+                    $('<div style="margin-top: 1%; margin-bottom: 3%;"> /')
+                      .append($('<p id="boardContent" style="white-space:pre;"> /')
+                        .text(`\${reply.replyContent}`))
+                  )
+              )
+              .append($('<hr>'));
+          });
+        }
+
+        // 댓글 페이지 바 생성 함수
+        function showPageList() {
+          $.ajax({
+            url: 'replycount.do?boardId=' + boardId,
+            method: 'get',
+            success: function (countJson) {
+              totalCount = countJson.totalCount;
+              let totalPage = Math.ceil(totalCount / 5);
+
+              let endPage = totalPage < Math.ceil(currentPage / 10) * 10 ? totalPage : Math.ceil(currentPage / 10) * 10;
+              let startPage = Math.floor(currentPage / 10) * 10 + 1;
+
+              let prev = startPage > 1;
+              let next = endPage < totalPage;
+
+              console.log(totalCount);
+              console.log(endPage);
+              console.log(startPage);
+              console.log(currentPage);
+              console.log(prev);
+              console.log(next);
+
+              $('.product__pagination').empty();
+              if (prev) {
+                makePageAtag("&laquo", startPage - 1);
+              }
+              for (let i = startPage; i <= endPage; i++) {
+                makePageAtag(i, i);
+              }
+              if (next) {
+                makePageAtag("&raquo", endPage + 1);
+              }
+            },
+            error: function (err) {
+              console.log(err);
+            }
+          });
+        }
+
+        // 페이지 a태그 생성 함수
+        function makePageAtag(inner, page) {
+          let atag = $('<a />');
+          atag.removeAttr('href');
+          if (page == currentPage) {
+            atag.attr('class', 'active')
+          }
+          atag.attr('style', 'cursor: pointer;');
+          atag.html(inner);
+          atag.on('click', function () {
+            currentPage = page;
+            loadBoards();
+          });
+          $('.product__pagination').append(atag);
+        }
+
+        // 정렬 버튼 활성화 함수
+        function setSortBtn() {
+          $('ul.comm__free__reply__sort>li').on('click', function () {
+            sortType = $(this).attr('id');
+            let lis = $(this).parent().children();
+            lis.each(function (idx, li) {
+              if ($(li).attr('id') == sortType) {
+                $(li).attr('class', 'sort__active');
+              } else {
+                $(li).attr('class', 'sort__nonactive');
+              }
+            });
+            loadReplies();
+          });
+        }
+
+        // 댓글 등록 함수
+        function insertReply() {
+          let replyContent = $('#replyContent').text();
+          $.ajax({
+            url: 'replyinsert.do',
+            method: 'post',
+            data: {
+              replyContent: replyContent
+            },
+            success: function (boardsJson) {
+              
+            },
+            error: function (err) {
+              console.log(err);
+            }
+          });
+        }
       </script>
-      <!--댓글 관련 JS End-->
+
     </body>
 
     </html>
