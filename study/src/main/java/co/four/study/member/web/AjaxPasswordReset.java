@@ -1,8 +1,6 @@
 package co.four.study.member.web;
 
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +14,12 @@ import co.four.study.member.service.MemberService;
 import co.four.study.member.service.MemberVO;
 import co.four.study.member.serviceImpl.MemberServiceImpl;
 
-@WebServlet("/checkLogin.do")
-public class CheckLogin extends HttpServlet {
+@WebServlet("/ajaxpasswordreset.do")
+public class AjaxPasswordReset extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public CheckLogin() {
+	// 패스워드 변경하고 세션 초기화
+	public AjaxPasswordReset() {
 		super();
 
 	}
@@ -28,40 +27,21 @@ public class CheckLogin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//로그인 실행
 		MemberService dao = new MemberServiceImpl();
 		MemberVO vo = new MemberVO();
 		HttpSession session = request.getSession();
-
+		
+		//비밀번호 변경
 		vo.setMemberId(request.getParameter("memberId"));
 		vo.setMemberPassword(Sha256.encrypt(request.getParameter("memberPassword")));
-		// vo.setMemberPassword(request.getParameter("memberPassword"));
+		vo.setMemberEmail(request.getParameter("memberEmail"));
+		System.out.println(vo);
+		dao.memberPassReset(vo);
 
-		vo = dao.memberSelect(vo);
-		
-		
-		if (vo != null) {
-			session.setAttribute("loginId", vo.getMemberId());
-			session.setAttribute("loginName", vo.getMemberName());
-			session.setAttribute("loginAuthor", vo.getMemberAuthor());
-			session.setAttribute("loginPassword", vo.getMemberPassword());
-			
-			
-			if (session.getAttribute("loginAuthor").equals("admin")) {
-				
-				response.sendRedirect("adminhome.do");// 관리자 페이지 링크
-			
-			} else {
-				response.sendRedirect("home.do");// 관리자 페이지 링크
-			}
-			
-			
-		} else {
-			String page = "common/login.jsp";
-			ViewResolve.foward(request, response, page);
-		}
-
-		
+		//세션삭제
+		session.invalidate();
+		String page = "common/login.jsp";
+		ViewResolve.foward(request, response, page);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

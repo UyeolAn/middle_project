@@ -51,7 +51,7 @@
 											<div class="text-center">
 												<h1 class="h4 text-gray-900 mb-4">RESET Password!</h1>
 											</div>
-											<c:if test="${empty memberId}">
+											<c:if test="${empty searchId}">
 												<form class="user">
 													<div class="form-group">
 														<input type="text" class="form-control form-control-user"
@@ -64,27 +64,26 @@
 															placeholder="Email Address">
 													</div>
 													<button type="button" class="btn btn-primary btn-user btn-block"
-														id="passwordReset">password reset</button>
+														id="IdEmailCheck">password reset</button>
 												</form>
 											</c:if>
-											
-											<c:if test="${not empty memberId}">
+
+											<c:if test="${not empty searchId}">
 												<hr>
-												<form action="">
-													<form class="user">
-														<div class="form-group">
-															<input type="text" class="form-control form-control-user"
-																id="memberId" name="memberId" aria-describedby="INPUT ID"
-																placeholder="Enter ID" value="${memberId}" readonly>
-														</div>
-														<div class="form-group">
-															<input type="email" class="form-control form-control-user"
-																id="memberEmail" name="memberEmail"
-																placeholder="Email Address" value="${memberEmail}" readonly>
-														</div>
-														<button type="button" class="btn btn-primary btn-user btn-block"
-															id="passwordReset">password reset</button>
-													
+
+												<form class="user">
+													<div class="form-group">
+														<input type="text" class="form-control form-control-user"
+															id="memberIdcheck" name="memberId"
+															aria-describedby="INPUT ID" placeholder="Enter ID" readonly
+															value="${searchId}">
+													</div>
+													<div class="form-group">
+														<input type="email" class="form-control form-control-user"
+															id="memberEmailcheck" name="memberEmail"
+															placeholder="Email Address" readonly value="${searchEmail}">
+													</div>
+													<hr>
 													<div class="form-group row">
 														<div class="col-sm-6 mb-3 mb-sm-0">
 															<input type="password"
@@ -98,11 +97,14 @@
 																placeholder="Repeat Password">
 														</div>
 													</div>
-													<button type="submit"
-														class="btn btn-primary btn-user btn-block">SUBMIT</button>
+													<a class="btn btn-primary btn-user btn-block"
+														id="passwordReset">SUBMIT</a>
 
 												</form>
 											</c:if>
+
+											<hr>
+											<a class="btn btn-primary btn-user btn-block" href="logout.do">HOME</a>
 
 											<hr>
 										</div>
@@ -116,26 +118,64 @@
 				</div>
 
 			</div>
+
+
 			<script>
-				$("#passwordReset").click(function () {
-					
+				//변경할 Id탐색
+				$("#IdEmailCheck").click(function () {
+
 					$.ajax({
 						url: 'ajaxpasswordresettarget.do',
 						type: 'post',
-						data: { memberId: document.getElementById("memberId").value, memberEmail: document.getElementById("memberEmail").value },
+						data: {
+							memberId: document.getElementById("memberId").value,
+							memberEmail: document.getElementById("memberEmail").value,
+						},
 						success: function (data) {
-							
-							var resetpass = JSON.parse(data);
-							var Id = resetpass.memberId;
-							var email = resetpass.memberEmail;
-							console.log(email);
+
+
+							alert("next")
 							location.replace("passwordsearch.do")
-							
+
+
+
 						}
 					})
 				})
 
+				//submit 클릭>>비밀번호 체크
+				$("#passwordReset").click(function () {
+					let password = document.getElementById("memberPassword").value;
+					let repeatPassword = document.getElementById("checkPass").value;
+					if (password == repeatPassword) {
+						console.log("ak")
+						SubmitPass()
+						alert("next")
+
+					} else {
+						alert("비밀번호가 일치하지 않습니다.")
+					}
+
+				})
+
+
+				//비밀번호 변경 
+				function SubmitPass() {
+					$.ajax({
+						url: 'ajaxpasswordreset.do',
+						type: 'post',
+						data: {
+							memberId: document.getElementById("memberIdcheck").value,
+							memberEmail: document.getElementById("memberEmailcheck").value,
+							memberPassword: document.getElementById("memberPassword").value
+						}
+					})
+				}
+
 			</script>
+
+
+
 			<!-- Bootstrap core JavaScript-->
 			<script src="admin/vendor/jquery/jquery.min.js"></script>
 			<script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -147,7 +187,7 @@
 			<script src="admin/js/sb-admin-2.min.js"></script>
 
 		</body>
-		
+
 		<script>
 
 		</script>
