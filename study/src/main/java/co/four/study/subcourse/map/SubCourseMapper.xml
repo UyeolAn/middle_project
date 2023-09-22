@@ -43,5 +43,14 @@
 		SELECT * FROM SUBCOURSES WHERE COURSE_ID = #{courseId}
 	
 	</select>
+	
+	<select id="subcourseSortedList" resultType="co.four.study.subcourse.service.SubCourseVO">
+		SELECT ROWNUM RWM, A.*
+		FROM (SELECT * 
+		      FROM SUBCOURSES A 
+		      WHERE COURSE_ID = #{courseId}
+		      ORDER BY COURSE_ID, SUBCOURSE_ID) A
+		ORDER BY RWM
+	</select>
 
 </mapper>

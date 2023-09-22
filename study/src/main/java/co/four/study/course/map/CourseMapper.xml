@@ -28,8 +28,8 @@
 		</if>
 	</select>
 	
-  <select id="temp">
-  SELECT	A.*, B.*
+  	<select id="courseReviewSelect" resultType="co.four.study.course.service.CourseVO">
+  		SELECT	A.*, B.*
 		FROM	COURSES A,
 		        (SELECT COURSE_ID, ROUND(SUM(REVIEW_STARS)/COUNT(REVIEW_STARS)) COURSE_STARS
 		        FROM REVIEWS

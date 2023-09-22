@@ -27,6 +27,11 @@ public class CourseServiceImpl implements CourseService {
 	public CourseVO courseSelect(CourseVO vo) {
 		return map.courseSelect(vo);
 	}
+	
+	@Override
+	public CourseVO courseReviewSelect(CourseVO vo) {
+		return map.courseReviewSelect(vo);
+	}
 
 	@Override
 	public int courseInsert(CourseVO vo) {
@@ -128,6 +133,7 @@ public class CourseServiceImpl implements CourseService {
 		subCategory = dao.courseSubCategory(vo);
 		request.setAttribute("english", subCategory);
 	}
+
 
 
 }

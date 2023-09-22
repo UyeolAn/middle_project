@@ -8,6 +8,7 @@ import co.four.study.course.service.CourseVO;
 public interface CourseMapper {
 	List<CourseVO> courseSelectList(CourseVO vo); // 강의 전체조회, 메인카테고리별 조회
 	CourseVO courseSelect(CourseVO vo); // 강의 단건조회
+	CourseVO courseReviewSelect(CourseVO vo); // 강의 단건조회(리뷰까지)
 	int courseInsert(CourseVO vo); // 강의 추가
 	int courseUpdate(CourseVO vo); // 강의 수정
 	int courseDelete(CourseVO vo); // 강의 삭제

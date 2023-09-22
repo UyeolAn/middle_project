@@ -3,9 +3,11 @@
 .row {
 	justify-content: center;
 }
+
 .product__details__pic {
 	padding: 0px;
 }
+
 .course_bg {
 	display: flex;
 	align-items: center;
@@ -17,6 +19,7 @@
 	margin-bottom: 0;
 	padding-bottom: 50px;
 }
+
 .course_container {
 	display: flex;
 	justify-content: space-around;
@@ -24,6 +27,7 @@
 	height: 100%;
 	padding-bottom: 30px;
 }
+
 /* 강의사진 */
 .course_pic {
 	width: 50%;
@@ -43,22 +47,28 @@
 	text-align: left;
 	padding-left: 30px;
 }
+
 .course_info_wrap p {
 	margin: 0;
 }
+
 .course_links {
 	margin-top: 15px !important;
 	margin-left: 3px !important;
 }
+
 .course_links span {
 	color: #545353;
 }
+
 .course_grade_name {
 	height: 50%;
 }
+
 .course_info_etc {
 	height: auto;
 }
+
 .course_grade_name p {
 	display: inline-block;
 	color: #282828;
@@ -67,6 +77,7 @@
 	height: 120px;
 	padding-top: 10px;
 }
+
 .course_grade {
 	display: inline-block;
 	padding: 0px 5px;
@@ -77,11 +88,13 @@
 	margin-bottom: 2px;
 	margin-left: 2px;
 }
+
 .course_name {
 	display: block;
 	line-height: 31px;
 	margin-top: 8px;
 }
+
 .course_info_etc p {
 	font-size: 16px;
 	font-weight: 700;
@@ -91,19 +104,23 @@
 .course_info_etc .rating {
 	margin-bottom: 10px;
 }
+
 .course_info_etc .rating i {
-    color: #ffbc00;
-    margin-right: -5px;
+	color: #ffbc00;
+	margin-right: -5px;
 }
+
 .course_info_etc .rating span {
 	margin-left: 10px;
 }
+
 .course_teacher {
 	display: flex;
 	height: 20px;
 	gap: 5px;
 	margin-bottom: 15px;
 }
+
 .course_teacher .infd-icon svg {
 	margin-bottom: 5px;
 }
@@ -112,46 +129,55 @@
 .product__details__tab {
 	padding-top: 30px;
 }
+
 .product__details__tab .nav-tabs {
 	gap: 30px;
 	padding-top: 19px;
 	border-top: 1px solid #e5e5e5;
 	border-bottom: 1px solid #e5e5e5;
 }
+
 .product__details__tab .nav-tabs li {
 	margin: 0;
 }
+
 .product__details__tab .nav-tabs .nav-item .nav-link {
 	font-size: 15px;
 	font-weight: 600;
 	color: #888;
 }
+
 .note {
 	font-size: 15px;
 }
+
 .course_tab_row {
 	justify-content: space-between;
 }
+
 .course_tab_row .col-lg-12 {
-	max-width: 60%;
+	max-width: 70%;
 	padding: 0;
 }
+
 .course_tab_row .product__details__tab__content {
 	padding-left: 10px;
 }
 
 .course_price_wrap {
-	width: 35%;
+	width: 28%;
 	border: 1px solid #e6e6e6;
-    border-radius: 5px;
-    margin-top: 30px;
-    padding: 20px;
+	border-radius: 5px;
+	margin-top: 30px;
+	padding: 20px;
 }
+
 .course_price {
 	font-weight: 600;
 	text-align: center;
 	padding-bottom: 20px;
 }
+
 .button_wrap {
 	display: flex;
 	flex-direction: column;
@@ -159,6 +185,7 @@
 	justify-content: center;
 	align-items: center;
 }
+
 .button_wrap button {
 	padding: 15px 45px;
 	border: 1px solid #e6e6e6;
@@ -166,4 +193,109 @@
 	border-radius: 5px;
 	font-weight: 700;
 	color: #fff;
+}
+
+
+/* 강의 모달창 */
+#btnWrap {
+	width: 500px;
+	margin: 100px auto;
+}
+
+#popupBtn {
+	width: 150px;
+	height: 50px;
+	padding: 10px 5px;
+}
+
+#modalWrap {
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
+	padding-top: 100px;
+	/* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%;
+	/* Full width */
+	height: 100%;
+	/* Full height */
+	overflow: auto;
+	/* Enable scroll if needed */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* Black w/ opacity */
+	display: none;
+}
+
+#modalBody {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 15px;
+	width: 60vw;
+	height: 60vh;
+	max-width: 949px;
+	min-height: 620px;
+	padding: 30px 30px;
+	margin: 0 auto;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#closeBtn {
+	/*float:right;*/
+	font-weight: bold;
+	color: #777;
+	font-size: 25px;
+	cursor: pointer;
+}
+
+.bold_text {
+	font-size: 20px;
+	font-weight: 700;
+	padding: 12px 0;
+}
+
+.modalBody_top {
+	display: flex;
+	justify-content: space-between;
+}
+
+.subcourse_list_wrap {
+	list-style: none;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+}
+
+.subcourse_data .col_7 {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.subcourse_data .col_7 .col_left {
+	display: flex;
+}
+
+.subcourse_data .col_7 .col_left p {
+	padding: 0 5px;
+}
+
+.subcourse_data .col_7 .col_left p:nth-child(2) {
+	width:400px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#tabs-6 h5 {
+	position: relative;
+	padding-left: 35px;
+}
+#tabs-6 h5 span {
+	position: absolute;
+	top: -4px;
+	left: 3px;
 }

@@ -14,13 +14,6 @@
 			let sel = $('#cntPerPage').val();
 			location.href="courseList.do?nowPage=${paging.nowPage}&cntPerPage="+sel;
 	    }
-		
-		/* 강의 상세조회 */
-		function courseDetail(id) {
-			let form = document.getElementById("courseform");
-			form.courseId.value = id;
-			form.submit();
-		}
     </script>
 </head>
 <body>

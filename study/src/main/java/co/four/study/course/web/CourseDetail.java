@@ -1,6 +1,8 @@
 package co.four.study.course.web;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,9 @@ import co.four.study.common.ViewResolve;
 import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
 import co.four.study.course.serviceImpl.CourseServiceImpl;
+import co.four.study.subcourse.service.SubCourseService;
+import co.four.study.subcourse.service.SubCourseVO;
+import co.four.study.subcourse.serviceImpl.SubCourseServiceImpl;
 
 @WebServlet("/coursedetail.do")
 public class CourseDetail extends HttpServlet {
@@ -22,21 +27,24 @@ public class CourseDetail extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CourseService dao = new CourseServiceImpl();
+		SubCourseService sdao = new SubCourseServiceImpl();
 		CourseVO vo = new CourseVO();
-		String courseId = request.getParameter("courseId");
-		System.out.println("받아온 courseId:::: " + courseId);
+		int courseId = Integer.valueOf(request.getParameter("courseId"));
+		
+		// 강의 상세정보 조회
+		vo.setCourseId(courseId);
+		vo = dao.courseReviewSelect(vo);
+		request.setAttribute("course", vo);
+		
+		// 서브강의 리스트 조회
+		vo = new CourseVO();
+		vo.setCourseId(courseId);
+		List<SubCourseVO> subCourses = sdao.subcourseSortedList(vo);
+		request.setAttribute("subCourses", subCourses);
+		System.out.println(subCourses);
 		
 		// 강의 페이지 사이드 메뉴 만들기
 		dao.makeSideMenu(request);
-		
-		// 강의 상세정보 조회
-		vo.setCourseId(Integer.parseInt(courseId));
-		vo = dao.courseSelect(vo);
-		request.setAttribute("course", vo);
-		
-		System.out.println("상품디테일 서블릿 ::::: 객체정보 === ");
-		System.out.println(vo);
-		
 		// 페이지 포워딩
 		String page = "course/courseDetail";
 		request.setAttribute("menu", "course");

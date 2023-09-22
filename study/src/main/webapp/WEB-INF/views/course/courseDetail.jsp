@@ -175,7 +175,35 @@
                                 <div class="tab-pane" id="tabs-6" role="tabpanel">
                                     <div class="product__details__tab__content">
                                         <div class="product__details__tab__content__item">
-                                            <h5>커리큘럼을 불러오기..</h5>
+                                            <h5><span>✍️</span> 이런 걸 배워요!</h5>
+                                            <ul class="subcourse_list_wrap">
+                                            	<c:forEach items="${subCourses}" var="s">
+	                                            	<li class="subcourse_data">
+	                                            		<div class="col_7">
+	                                            			<div class="col_left">
+		                                            			<p>${s.rwm }.</p>
+		                                            			<p>${s.subcourseName }</p>
+		                                            			<p>${s.subcourseTime }</p>
+	                                            			</div>
+	                                            			<button onclick="playBtn(${s.subcourseId }, '${s.subcourseLink }')" value="${s.subcourseLink }">강의 재생</button>
+	                                            		</div>
+	                                            		<div id="modalWrap">
+	                                            			<div id="modalContent">
+																<div id="modalBody">
+																	<div class="modalBody_top">
+																    	<p class="bold_text"><span class="bold_text">[${s.rwm }강] </span>${s.subcourseName }</p>
+																    	<span id="closeBtn">&times;</span>
+																	</div>
+															    	<div id="iframe_area_${s.subcourseId }">
+															    		<!-- 동영상 태그 넣기.. -->
+															    	</div>
+															    	<!-- <iframe width="100%" height="315" src="#" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+															    </div>
+														 	</div>
+	                                            		</div>
+	                                            	</li>
+	                                            </c:forEach>	
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -272,6 +300,7 @@
     
     <!-- 강의 관련 자바스크립트 연결 -->
     <script type="text/javascript" src="client/js/coursedetail.js"></script>
+    
     
 </body>
 </html>
