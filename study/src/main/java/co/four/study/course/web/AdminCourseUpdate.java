@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import co.four.study.common.ViewResolve;
 import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
 import co.four.study.course.serviceImpl.CourseServiceImpl;
@@ -31,7 +32,8 @@ public class AdminCourseUpdate extends HttpServlet {
 		int maxSize = 1024*1024*100;
 		MultipartRequest multi = new MultipartRequest(request, saveDir, maxSize, "utf-8", new DefaultFileRenamePolicy());//파일명이 동일할때 자동으로 1,2,3..
 		
-		vo.setCourseId(Integer.parseInt(multi.getParameter("courseId")));
+		int id = Integer.parseInt(multi.getParameter("courseId"));
+		vo.setCourseId(id);
 		CourseService dao = new CourseServiceImpl();
 //		
 //		System.out.println(request.getParameter("courseName"));
@@ -73,13 +75,21 @@ public class AdminCourseUpdate extends HttpServlet {
 
 		
 		int i = dao.courseUpdate(vo);
-		System.out.println("수정한 강의 정보 : "+vo);
+//		System.out.println("수정한 강의 정보 : "+vo);
 		if(i == 1) {
-			request.setAttribute("message", "강의가 등록되었습니다.");
+//			request.setAttribute("message", "강의가 등록되었습니다.");
+			response.sendRedirect("admincoursepage.do?cid="+id);
 		}
 		else {
 			request.setAttribute("retCode", "Fail");
 		}
+		
+//		
+//		String page = "admin/course/coursePage";
+//		
+//		
+//		request.setAttribute("c", vo);
+//		ViewResolve.foward(request, response, page);
 	}
 
 

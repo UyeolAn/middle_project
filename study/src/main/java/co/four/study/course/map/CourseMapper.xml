@@ -16,7 +16,12 @@
 	<select id="courseSelect" resultType="co.four.study.course.service.CourseVO">
 		SELECT	*
 		FROM	COURSES
+		<if test="courseId != null">		
 		WHERE	COURSE_ID = #{courseId}
+		</if>
+		<if test="courseName != null and courseId == null">
+		WHERE COURSE_NAME = #{courseName}
+		</if>
 	</select>
 	
 	<insert id="courseInsert" parameterType="co.four.study.course.service.CourseVO">
