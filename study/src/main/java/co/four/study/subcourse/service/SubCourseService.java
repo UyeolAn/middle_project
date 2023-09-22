@@ -13,4 +13,6 @@ public interface SubCourseService {
 	
 	//메인강의로 서브강의들 찾는 함수
 	List<SubCourseVO> subcourseByCourse(CourseVO vo);
+	//정렬된 서브강의 목록
+	List<SubCourseVO> subcourseSortedList(CourseVO vo);
 }

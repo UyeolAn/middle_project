@@ -45,4 +45,9 @@ public class SubCourseServiceImpl implements SubCourseService{
 		return map.subcourseByCourse(vo);
 	}
 
+	@Override
+	public List<SubCourseVO> subcourseSortedList(CourseVO vo) {
+		return map.subcourseSortedList(vo);
+	}
+
 }

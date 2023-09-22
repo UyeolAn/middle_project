@@ -114,3 +114,10 @@ function categoryUpdate(data) {
 	$('.breadcrumb__links').append('<span class="mainCate">'+ mainCate + '</span>');
     $('.breadcrumb__links').append('<span class="subCate">'+ subCate + '</span>');
 }
+
+/* 강의 상세조회 */
+function courseDetail(id) {
+	let form = document.getElementById("courseform");
+	form.courseId.value = id;
+	form.submit();
+}

@@ -9,4 +9,7 @@ public class SubCourseVO {
 	private String subcourseName;
 	private String subcourseLink;
 	private int subcourseTime;
+	
+	// 서브강의 정렬번호
+	int rwm;
 }

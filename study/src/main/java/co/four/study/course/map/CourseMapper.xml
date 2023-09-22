@@ -28,6 +28,7 @@
 		</if>
 	</select>
 	
+
 <select id="courseReviewSelect" resultType="co.four.study.course.service.CourseVO">
         SELECT   A.*, B.*
       FROM   COURSES A,
