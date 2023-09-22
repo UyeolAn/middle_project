@@ -164,10 +164,13 @@
                             	<!-- 강의소개 탭 start  -->
                                 <div class="tab-pane active" id="tabs-5" role="tabpanel">
                                     <div class="product__details__tab__content">
-                                        <p class="note">${course.courseScript }</p>
+                                    	<div class="course_script_wrap">
+                                    		<div class="intro_text"><span>🎓</span>이런분들께<br> 추천드려요!</div>
+	                                        <p class="note">${course.courseScript }</p>
+                                    	</div>
                                         <div class="product__details__tab__content__item">
-                                            <!-- <h5>강의정보...?</h5>
-                                            <p>더이상 불러올 정보가 없습니다..</p> -->
+	                                    	<h5><span>🧐</span> 미리보기를 통해 콘텐츠를 확인해보세요.</h5>
+                                            <div id="free_iframe_area_1" data_link="${free.subcourseLink }"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -179,28 +182,35 @@
                                             <ul class="subcourse_list_wrap">
                                             	<c:forEach items="${subCourses}" var="s">
 	                                            	<li class="subcourse_data">
+	                                            		<!-- 서브강의 리스트 생성 start -->
 	                                            		<div class="col_7">
 	                                            			<div class="col_left">
 		                                            			<p>${s.rwm }.</p>
 		                                            			<p>${s.subcourseName }</p>
-		                                            			<p>${s.subcourseTime }</p>
+		                                            			<p>(${s.subcourseTime }분)</p>
 	                                            			</div>
-	                                            			<button onclick="playBtn(${s.subcourseId }, '${s.subcourseLink }')" value="${s.subcourseLink }">강의 재생</button>
+	                                            			<button onclick="playBtn(${s.subcourseId }, '${s.subcourseLink }')" class="play_btn">
+	                                            				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+																  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+																</svg>
+	                                            			</button>
 	                                            		</div>
-	                                            		<div id="modalWrap">
-	                                            			<div id="modalContent">
-																<div id="modalBody">
+	                                            		<!-- 서브강의 리스트 생성 end -->
+	                                            		<!-- 강의 모달창 start -->
+	                                            		<div id="modalWrap_${s.subcourseId }" class="modalWrap" data-s="${s.subcourseId }">
+	                                            			<div id="modalContent_${s.subcourseId }" class="modalContent">
+																<div id="modalBody_${s.subcourseId }" class="modalBody">
 																	<div class="modalBody_top">
 																    	<p class="bold_text"><span class="bold_text">[${s.rwm }강] </span>${s.subcourseName }</p>
-																    	<span id="closeBtn">&times;</span>
+																    	<span class="closeBtn">&times;</span>
 																	</div>
 															    	<div id="iframe_area_${s.subcourseId }">
 															    		<!-- 동영상 태그 넣기.. -->
 															    	</div>
-															    	<!-- <iframe width="100%" height="315" src="#" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
 															    </div>
 														 	</div>
 	                                            		</div>
+	                                            		<!-- 강의 모달창 end -->
 	                                            	</li>
 	                                            </c:forEach>	
                                             </ul>
