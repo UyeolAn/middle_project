@@ -86,6 +86,10 @@
 		WHERE MEMBER_ID = #{memberId}
 		AND MEMBER_EMAIL = #{memberEmail}
 	</update>
+	
+	<select id="employeeList" resultType="co.four.study.member.service.MemberVO">
+		SELECT * FROM MEMBERS WHERE MEMBER_AUTHOR = 'admin' ORDER BY MEMBER_ENTER_DATE
+	</select>
 
 
 </mapper>

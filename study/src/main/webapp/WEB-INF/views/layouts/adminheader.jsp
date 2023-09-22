@@ -105,10 +105,12 @@
 				</div></li>
 
 			<!-- Nav Item - Messages -->
-			<li class="nav-item dropdown no-arrow mx-1"><a
-				class="nav-link dropdown-toggle" href="#" id="messagesDropdown"
+			<li class="nav-item dropdown no-arrow mx-1">
+			<a class="nav-link dropdown-toggle" href="https://tawk.to/chat/63bd6d55c2f1ac1e202cb159/1gmdv669s" 
+				id="messagesDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"> <i class="fas fa-envelope fa-fw"></i> <!-- Counter - Messages -->
+				aria-expanded="false"> <i class="fas fa-envelope fa-fw"></i> 
+				<!-- Counter - Messages -->
 					<span class="badge badge-danger badge-counter">7</span>
 			</a> <!-- Dropdown - Messages -->
 				<div

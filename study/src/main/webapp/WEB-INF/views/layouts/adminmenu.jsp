@@ -93,7 +93,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Worker Management</h6>
 					<a class="collapse-item" href="adminemployeelist.do">직원목록</a> 
-					<a class="collapse-item" href="adimincourseregister.do">직원등록</a>
+					<a class="collapse-item" href="adminemployeeregister.do">직원등록</a>
 				</div>
 			</div></li>
 

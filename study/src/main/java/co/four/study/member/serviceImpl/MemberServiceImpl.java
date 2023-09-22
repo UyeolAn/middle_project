@@ -72,4 +72,9 @@ public class MemberServiceImpl implements MemberService {
 		return map.memberPassReset(vo);
 	}
 
+	@Override
+	public List<MemberVO> employeeList() {
+		return map.employeeList();
+	}
+
 }

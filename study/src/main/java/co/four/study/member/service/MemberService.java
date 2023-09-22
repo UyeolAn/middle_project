@@ -29,4 +29,7 @@ public interface MemberService {
 	
 	//비밀번호 리셋
 	MemberVO memberPassReset(MemberVO vo);
+	
+	//직원 리스트
+	List<MemberVO> employeeList();
 }

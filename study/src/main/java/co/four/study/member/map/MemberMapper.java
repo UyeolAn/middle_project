@@ -32,7 +32,8 @@ public interface MemberMapper {
 	//비밀번호 수정
 	MemberVO memberPassReset(MemberVO vo);
 	
-
+	//직원 리스트
+	List<MemberVO> employeeList();
 }
 			
 		
