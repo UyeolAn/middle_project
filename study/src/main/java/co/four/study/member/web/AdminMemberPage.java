@@ -63,13 +63,13 @@ public class AdminMemberPage extends HttpServlet {
 		mcvo.setMemberId(mid);
 		
 		List<MemberCourseVO> mcvolist = mcdao.selectMemberCourseList(memvo);
-		System.out.println(mcvolist);
+//		System.out.println(mcvolist);
 		
 		for(MemberCourseVO vo : mcvolist) {
-			System.out.println(vo);
+//			System.out.println(vo);
 			mcvo.setMemberId(mid);
 			mcvo.setCourseId(vo.getCourseId());
-			System.out.println(mcvo);
+//			System.out.println(mcvo);
 			mcvo = mcdao.countJindo(mcvo);
 			vo.setCount(mcvo.getCount());
 			vo.setTcnt(mcvo.getTcnt());

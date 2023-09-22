@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<style>
+  td, th {
+    text-align: center;
+    line-height: 100%;
+  }
+</style>
 </head>
 <body>
     <section style="background-color: #eee;">
@@ -77,7 +84,11 @@
                     <!-- 회원이 담은 장바구니 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <span class="font-weight-bold"><i class="bi bi-bucket-fill fa-lg" style="color: #3b5998;"></i> 강의 별점</span>
-                      <p class="mb-0">개</p>
+                      <div class="d-flex justify-content-center small text-warning mb-2" class="stars" name="${c.courseId}">
+                        <c:forEach var = "i" begin = "1" end = "${c.courseStars}">
+                          <div class="bi-star-fill"></div>
+                        </c:forEach>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -174,20 +185,28 @@
               </div>
 
               <div class="card mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">하위 강의 목록</h6>
+                <div class="card-header py-3" style="display: flex; justify-content: space-between;">
+                  <h6 class="m-0 font-weight-bold text-primary" style="line-height: 38px;">하위 강의 목록</h6>
+                  <a class="btn btn-primary btn-icon-split" id="add" onclick="addSub()">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                    <span class="add text" id="addBtn">추가</span>
+                  </a>
                 </div>
                 <div class="card-body " data-spy="scroll">
             			<div class="table-responsive">
                     <table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>이름</th>
-                          <th>링크</th>
-                          <th>시간</th>
+                          <th style="width: 60%;">이름</th>
+                          <th style="width: 10%;">링크</th>
+                          <th style="width: 15%;">시간</th>
+                          <th style="width: 5%;">수정</th>
+                          <th style="width: 5%;">삭제</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="scList">
                         <c:if test="${empty subcourse}">
                           <tr><td class="font-weight-bold" colspan="3" style="text-align: center;">서브강의가 없습니다.</td></tr>
                         </c:if>
@@ -195,13 +214,39 @@
                           <c:forEach items="${subcourse }" var="s">
                             <tr>
                               <td>${s.subcourseName}</td>
-                              <td>${s.subcourseLink}</td>
+                              <td><a href="${s.subcourseLink}" target="_blank"> ${s.subcourseLink}</a></td>
                               <td>${s.subcourseTime}분</td>
+                              <td>
+                                <a class="btn btn-secondary btn-icon-split">
+                                  <span class="icon text-white-50">
+                                      <i class="fas fa-arrow-right"></i>
+                                  </span>
+                                </a>
+                              </td>
+                              <td>
+                                <a class="btn btn-danger btn-icon-split" id="deleteSub" onclick="delSub()">
+                                  <span class="icon text-white-50">
+                                      <i class="fas fa-trash"></i>
+                                  </span>
+                                </a>
+                              </td>
                             </tr>
                           </c:forEach>
                         </c:if>
+                        <tr style="display: none;" class="addInput" id="lasttable">
+                          <td><input type="text" style="width: 100%;" placeholder="이름" name="scName" id="inputName"></td>
+                          <td><input type="text" style="width: 100%;" placeholder="링크" name="scLink" id="inputLink"></td>
+                          <td colspan="3"><input type="text" style="width: 100%;" name="scTime" placeholder="시간(분)" id="inputTime"></td>
+                        </tr>
                       </tbody>
                     </table>
+                    <div style="display: none;" class="addInput">
+                      <a class="btn btn-primary btn-icon-split" id="ok" onclick="saveSub(${c.courseId})">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                      </a>
+                  </div>
                 </div>
               </div>
 
@@ -214,8 +259,134 @@
       <form id="sform" action="admincoursemodify.do" method="post">
         <input type="hidden" id="cid" name="cid">
       </form> 
+      <script src='admin/js/SubCourse.js'></script>
 <script>
-  console.log(${empty subcourse});
+  const sc = new SubCourse();
+  const fields = ['subcourseName', 'subcourseLink', 'subcourseTime'];
+
+  sc.showInfo();
+
+  // console.log(${empty subcourse});
+  function saveSub(id) {
+    console.log($('#inputName').val());
+    console.log($('#inputLink').val());
+    console.log($('#inputTime').val());
+
+    let name = $('#inputName').val();
+    let link = $('#inputLink').val();
+    let time = $('#inputTime').val();
+    let cid = id;
+
+    const s = {cId:cid, scName:name, scLink:link, scTime:time};
+
+    sc.subcourseAdd(s, function(data) {
+      if(data.retCode == "Success") {
+        let tr = MakeTr(data.data);
+        $('#lasttable').before(tr);
+
+        $('#inputName').val("");
+        $('#inputLink').val("");
+        $('#inputTime').val("");
+        // location.reload(true);
+
+      }
+      else if (data.retCode == "Fail" ) {
+					alert("처리 중 에러");
+      }
+      else {
+        alert("알 수 없는 반환코드");
+      }
+    })
+  }
+
+  $('#deleteSub').addEventListener("click", delSub);
+  function delSub(e) {
+    // console.log(e.target);
+    console.log(e);
+    // sc.subcourseDel(sid, function(result) {
+    // })
+  }
+
+  
+
+  function MakeTr (sub) {
+
+			let tr = document.createElement('tr');
+			// tr.setAttribute('subcourseId', reply.replyId);
+			// tr.addEventListener('dblclick', showEditForm);
+			for (let prop of fields) {
+				let td = document.createElement('td');
+				if(prop == 'subcourseLink') {
+          let a = document.createElement('a');
+          a.setAttribute("href", sub[prop]);
+          a.setAttribute("target","_blank");
+					a.innerText = sub[prop];
+          td.appendChild(a);
+				}
+        else if(prop == 'subcourseTime') {
+          let time = sub[prop] / 60;
+          td.innerText = time+"분";
+        }
+				else {
+					td.innerText = sub[prop];
+				}
+				tr.appendChild(td);
+			}
+			let td = document.createElement('td');
+			let a = document.createElement('a');
+      a.setAttribute("class", "btn btn-secondary btn-icon-split");
+      let span = document.createElement('span');
+      span.setAttribute("class","icon text-white-50");
+      let i = document.createElement('i');
+      i.setAttribute("class", "fas fa-arrow-right");
+      span.appendChild(i);
+      a.appendChild(span);
+      td.appendChild(a);
+			tr.appendChild(td);
+
+
+      td = document.createElement('td');
+			a = document.createElement('a');
+      a.setAttribute("class", "btn btn-danger btn-icon-split");
+      a.setAttribute("id","deleteSub");
+      a.addEventListener('click',delsub);
+      // a.setAttribute("onclick","delSub()");
+      span = document.createElement('span');
+      span.setAttribute("class","icon text-white-50");
+      i = document.createElement('i');
+      i.setAttribute("class", "fas fa-trash");
+      span.appendChild(i);
+      a.appendChild(span);
+      td.appendChild(a);
+
+			// btn.addEventListener('click', deleteReplyFnc );
+			// td.appendChild(btn);
+			// document.getElementById('replyList').appendChild(tr);
+      
+
+			tr.appendChild(td);
+			return tr;
+		}
+
+  function addSub() {
+    $('.addInput').css("display","");
+    console.log($('#addBtn').attr("class"));
+    if($('#addBtn').attr("class") == 'add text') {
+      console.log("추가버튼 누름");
+      $('#addBtn').text("취소");
+      $('.addInput').css("display","");
+      $('#addBtn').attr("class", "cancel text");
+    }
+    else if ($('#addBtn').attr("class") == 'cancel text') {
+      console.log("취소버튼 누름");
+      $('#addBtn').text("추가");
+      $('.addInput').css("display","none");
+      $('#addBtn').attr("class", "add text");
+
+    }
+    // $('.addBtn').attr("class", "cancelBtn");
+  }
+
 
   function remove(id) {
   const response = confirm("삭제하시겠습니까?");

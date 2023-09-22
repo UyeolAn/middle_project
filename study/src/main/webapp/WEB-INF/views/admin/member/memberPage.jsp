@@ -175,7 +175,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="card mb-4 h-100">
-                    <div class="card-body" style="height: 100px;">
+                    <div class="card-body">
                       <span class="card-title font-weight-bold">${m.memberName}님의 수강 카테고리</span>
                       <div class="chart-pie pt-4" style="height: 100px;">
                         <canvas id="myPieChart" style="height: 100px;"></canvas>
