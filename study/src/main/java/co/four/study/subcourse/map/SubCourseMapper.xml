@@ -5,6 +5,7 @@
 	<select id="subcourseSelectList" resultType="co.four.study.subcourse.service.SubCourseVO">
 		SELECT	*
 		FROM	SUBCOURSES
+		ORDER BY COURSE_ID
 	</select>
 	
 	<select id="subcourseSelect" resultType="co.four.study.subcourse.service.SubCourseVO">
