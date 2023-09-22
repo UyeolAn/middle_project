@@ -21,7 +21,7 @@ public class PasswordSearch extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String page = "common/serchpass.jsp";
+		String page = "common/searchpass.jsp";
 		ViewResolve.foward(request, response, page);
 	}
 
