@@ -13,7 +13,8 @@ public class BoardSearchVO {
 	private String sortType;
 	
 	// 페이징 정보
-	private String startRow;
+	private int startRow;
 	
-	private String endRow;
+	private int endRow;
+	
 }
