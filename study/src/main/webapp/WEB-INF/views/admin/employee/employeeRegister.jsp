@@ -52,33 +52,29 @@
                         <input type="email" class="form-control" name="email" required>
                     </div>
 					<div class="form-group">
-                        <label class="font-weight-bold">주소</label>
-                        <input type="text" class="form-control" name="address" required>
-                    </div>
-
-					<div class="form-group">
-						<label class="font-weight-bold">주소(카카오)</label><br>
-								<input type="text" id="sample6_postcode" class="form-control" style="display: inline; width: 50%;" placeholder="우편번호">
-									<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" id="sample6_address" class="form-control" placeholder="주소"><br>
-							<input type="text" id="sample6_detailAddress" class="form-control" style="width: 50%; display: inline;" placeholder="상세주소">
-							<input type="text" id="sample6_extraAddress" class="form-control" style="width: 50%; display: inline;" placeholder="참고항목">
+						<label class="font-weight-bold">주소</label><br>
+						<input type="text" id="sample6_postcode" class="form-control mb-2" style="display: inline; width: 50%;" placeholder="우편번호">
+						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="text" id="sample6_address" class="form-control mb-2" style="width: 100%; display: inline;" name="address1" placeholder="주소">
+						<div class="row mb-2" style="width: 100%; margin-left: 0;">
+							<input type="text" id="sample6_detailAddress" class="form-control col-lg-6" style="width: 50%; display: inline;" name="address2" placeholder="상세주소"><!--
+							--><input type="text" id="sample6_extraAddress" class="form-control col-lg-6" style="width: 50%; display: inline;" name="address3" placeholder="참고항목">
+						</div>
 					</div>
 
-				  <div class="row">
-					<div class="col-lg-4"></div>
+				    <div class="row">
+						<div class="col-lg-4"></div>
 					<div class="col-lg-4" >
 						<div style="text-align: center;">
-					  <button type="submit"  class="btn btn-primary btn-circle btn-lg" style="margin-right: 20px;">
-						<i class="fas fa-check"></i>
-						</button>
-					  <button type="reset" class="btn btn-danger btn-circle btn-lg" style="margin-left: 20px;">
-						<i class="fas fa-trash"></i>
-					  </button>
-					</div>
+					  		<button type="submit"  class="btn btn-primary btn-circle btn-lg" style="margin-right: 20px;">
+							<i class="fas fa-check"></i>
+							</button>
+							<button type="reset" class="btn btn-danger btn-circle btn-lg" style="margin-left: 20px;">
+								<i class="fas fa-trash"></i>
+							</button>
+						</div>
 					</div>
 					<div class="col-lg-4"></div>
-
 				  </div>
 				</form>
 			  </div>

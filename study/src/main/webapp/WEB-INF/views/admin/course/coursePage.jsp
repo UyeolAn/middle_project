@@ -116,6 +116,9 @@
                         <c:forEach var = "i" begin = "1" end = "${c.courseStars}">
                           <div class="bi-star-fill"></div>
                         </c:forEach>
+                        <c:forEach var = "i" begin = "1" end = "${5 - c.courseStars}">
+                          <div class="bi-star"></div>
+                        </c:forEach>
                       </div>
                     </li>
                   </ul>
