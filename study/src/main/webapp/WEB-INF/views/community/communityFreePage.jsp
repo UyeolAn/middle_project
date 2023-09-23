@@ -82,7 +82,8 @@
             </div>
             <div class="col-lg-2">
               <div class="checkout__input">
-                <button type="button" class="site-btn" onclick="searchBoards()">검색</button>
+                <button type="button" class="site-btn" onclick="searchBoards()"
+                  style="border-radius: 10px; font-size: medium;">검색</button>
               </div>
             </div>
           </div>
@@ -100,9 +101,8 @@
           </div>
           <div class="col-lg-2">
             <div class="checkout__input">
-              <button type="button" id="writeBtn" class="site-btn" onclick="location.href='communityfreeinsertpage.do'">
-                글쓰기
-              </button>
+              <button type="button" id="writeBtn" class="site-btn" onclick="location.href='communityfreeinsertpage.do'"
+                style="border-radius: 10px; font-size: medium;">글쓰기</button>
             </div>
           </div>
         </div>
@@ -127,6 +127,7 @@
       </div>
       <!--Page Bar End-->
     </div>
+    
     <script>
       // 변수
       let loginMemberId = '<%=(String)session.getAttribute("loginId")%>';

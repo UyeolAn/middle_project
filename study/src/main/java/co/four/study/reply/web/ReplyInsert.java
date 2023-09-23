@@ -1,6 +1,8 @@
 package co.four.study.reply.web;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import co.four.study.common.ViewResolve;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import co.four.study.reply.service.ReplyService;
 import co.four.study.reply.service.ReplyVO;
 import co.four.study.reply.serviceImpl.ReplyServiceImpl;
@@ -27,19 +30,27 @@ public class ReplyInsert extends HttpServlet {
 		
 		ReplyService dao = new ReplyServiceImpl();
 		
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		
 		ReplyVO insertVO = new ReplyVO();
 		insertVO.setMemberId((String)session.getAttribute("loginId"));
-		insertVO.setBoardId(Integer.parseInt(request.getParameter("boardId")));
+		insertVO.setBoardId(boardId);
 		insertVO.setReplyContent(request.getParameter("replyContent"));
 		
 		int numIns = dao.replyInsert(insertVO);
+		Map<String, String> messageMap = new HashMap<>();
+		
 		if (numIns != 0) {
-			request.setAttribute("menu", "community");
-			String page = "community/communityFreePage";
-			ViewResolve.foward(request, response, page);
+			messageMap.put("message", "댓글이 추가되었습니다!!");
 		} else {
-			System.out.println("추가 실패!!");
+			messageMap.put("message", "댓글 추가에 실패하였습니다.");
 		}
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		String messageJson = objectMapper.writeValueAsString(messageMap);
+		
+		response.setContentType("text/json;charset=utf-8");
+		response.getWriter().print(messageJson);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

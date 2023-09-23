@@ -22,6 +22,7 @@
           margin-right: 3%;
           padding: 9px 20px;
           font-size: medium;
+          border-radius: 10px;
         }
 
         .like-btn {
@@ -94,6 +95,25 @@
         .comm__free__reply__sort>.sort__active {
           color: #333;
         }
+
+        .reply-btn {
+          margin-right: 1%;
+          padding: 3px 7px;
+          font-size: x-small;
+          background: #aaa;
+          border-radius: 5px;
+          float: right;
+        }
+
+        .reply__textarea {
+          width: 100%;
+          border: 1px solid #e1e1e1;
+          padding-left: 20px;
+          padding-top: 12px;
+          font-size: 15px;
+          margin-bottom: 24px;
+          resize: none;
+        }
       </style>
       <script src="client/js/jquery-3.3.1.min.js"></script>
     </head>
@@ -147,7 +167,7 @@
           <span class="col-lg-12 reply__info__count" id="replyCount">REPLY : 10</span>
           <br>
           <div class="col-lg-12">
-            <textarea id="replyContent" name="replyContent" placeholder="댓글을 입력하세요..."
+            <textarea id="replyInput" name="replyInput" placeholder="댓글을 입력하세요..."
               style="height: 70px; margin-top: 10px; color: #333; "></textarea>
           </div>
           <div class="col-lg-12 row">
@@ -159,8 +179,8 @@
             </div>
             <div class="col-lg-3">
               <div class="checkout__input">
-                <button type="button" id="writeBtn" class="site-btn" style="float: right; padding: 9px 20px;"
-                  onclick="insertReply()">등록</button>
+                <button type="button" id="writeBtn" class="site-btn small-btn"
+                  style="float: right; padding: 9px 20px; font-size: medium;" onclick="insertReply()">등록</button>
               </div>
             </div>
           </div>
@@ -358,6 +378,7 @@
             success: function (repliesJson) {
               showReplies(repliesJson);
               showPageList();
+              setReplyUpdDelBtn();
             },
             error: function (err) {
               console.log(err);
@@ -372,14 +393,21 @@
             $('div.comm__free__reply')
               .append(
                 $('<div class="col-lg-12 comm__free__board__detail__etc__info" style="margin-top: 3%;"> /')
-                  .append($('<span class="etc__info__name" id="memberId"> /').text(`\${reply.memberId}`))
+                  .append($('<span class="etc__info__name"> /').text(`\${reply.memberId}`))
                   .append($('<span class="etc__info__datehit"> /').text(`ㆍ\${reply.replyEnterDate}`))
+                  .append($('<button type="button" class="site-btn reply-btn reply-delete-btn">')
+                    .text('삭제').val(`\${reply.memberId}`))
+                  .append($('<button type="button" class="site-btn reply-btn reply-update-btn">')
+                    .text('수정').val(`\${reply.memberId}`))
+                  .append($('<button type="button" class="site-btn reply-btn reply-update-check-btn" style="background: #E53637">')
+                    .text('수정').val(`\${reply.memberId}`).hide())
                   .append($('<br>'))
                   .append(
-                    $('<div style="margin-top: 1%; margin-bottom: 3%;"> /')
-                      .append($('<p id="boardContent" style="white-space:pre;"> /')
+                    $('<div class="reply-content-box" style="margin-top: 1%; margin-bottom: 3%;"> /')
+                      .append($('<p class="reply-content" style="white-space:pre;"> /')
                         .text(`\${reply.replyContent}`))
                   )
+                  .append($('<input type="hidden" class="reply-id-hidden">').val(`\${reply.replyId}`))
               )
               .append($('<hr>'));
           });
@@ -458,20 +486,91 @@
 
         // 댓글 등록 함수
         function insertReply() {
-          let replyContent = $('#replyContent').text();
-          $.ajax({
-            url: 'replyinsert.do',
-            method: 'post',
-            data: {
-              boardId: boardId,
-              replyContent: replyContent
-            },
-            success: function (boardsJson) {
-              
-            },
-            error: function (err) {
-              console.log(err);
+          if (loginMemberId != 'null') {
+            let replyContent = $('#replyInput').val();
+            if (replyContent != '') {
+              $.ajax({
+                url: 'replyinsert.do',
+                method: 'post',
+                data: {
+                  boardId: boardId,
+                  replyContent: replyContent
+                },
+                success: function (messageJson) {
+                  alert(messageJson.message);
+                  location.replace('communityfreedetailpage.do?boardId=' + boardId);
+                },
+                error: function (err) {
+                  console.log(err);
+                }
+              });
+            } else {
+              alert('댓글 내용을 입력해주세요.');
             }
+          } else {
+            alert('로그인 하셔야 합니다!!');
+          }
+        }
+
+        // 댓글 수정/삭제 버튼 관련 함수
+        function setReplyUpdDelBtn() {
+          $('.reply-update-btn').each(function () {
+            if ($(this).val() != loginMemberId) {
+              $(this).hide();
+            }
+            $(this).on('click', function () {
+              let replyId = $('.reply-id-hidden').val();
+              let replyBox = $(this).parent().find('.reply-content-box');
+              let replyContent = replyBox.find('.reply-content').text();
+
+              replyBox.empty();
+              replyBox.append($('<textarea class="col-lg-12 reply__textarea" style="height: 70px; color: #333;" />').text(replyContent));
+              $(this).hide();
+              $(this).parent().find('.reply-delete-btn').attr('disabled', true);
+
+              let updateBtn = $(this).parent().find('.reply-update-check-btn');
+              updateBtn.show();
+              updateBtn.on('click', function () {
+                let updateContent = $('.reply__textarea').val();
+                $.ajax({
+                  url: 'replyupdate.do',
+                  method: 'post',
+                  data: {
+                    replyId: replyId,
+                    updateContent: updateContent
+                  },
+                  success: function (messageJson) {
+                    alert(messageJson.message);
+                    location.replace('communityfreedetailpage.do?boardId=' + boardId);
+                  },
+                  error: function (err) {
+                    console.log(err);
+                  }
+                });
+              });
+            });
+          });
+          $('.reply-delete-btn').each(function () {
+            if ($(this).val() != loginMemberId) {
+              $(this).hide();
+            }
+            $(this).on('click', function () {
+              let replyId = $('.reply-id-hidden').val();
+              $.ajax({
+                url: 'replydelete.do',
+                method: 'post',
+                data: {
+                  replyId: replyId
+                },
+                success: function (messageJson) {
+                  alert(messageJson.message);
+                  location.replace('communityfreedetailpage.do?boardId=' + boardId);
+                },
+                error: function (err) {
+                  console.log(err);
+                }
+              });
+            });
           });
         }
       </script>

@@ -20,15 +20,15 @@
         color: #333;
       }
 
-      .comm__qna__board__order>li {
+      .comm__qna__board__sort>li {
         margin-left: 5%;
         margin-top: 4%;
-        font-size: smaller;
+        font-size: medium;
         color: #B7B7B7;
         float: left;
       }
 
-      .comm__qna__board__order>li:hover {
+      .comm__qna__board__sort>li:hover {
         color: #333;
       }
 
@@ -107,7 +107,7 @@
           </div>
           <div class="col-lg-2">
             <div class="checkout__input">
-              <button type="button" class="site-btn">검색</button>
+              <button type="button" class="site-btn" style="border-radius: 10px; font-size: medium;">검색</button>
             </div>
           </div>
         </div>
@@ -123,14 +123,14 @@
         <!--Order/Write Bar Start-->
         <div class="row">
           <div class="col-lg-10">
-            <ul class="comm__qna__board__order">
+            <ul class="comm__qna__board__sort">
               <li>최신순</li>
               <li>답변많은순</li>
             </ul>
           </div>
           <div class="col-lg-2">
             <div class="checkout__input">
-              <button type="button" class="site-btn">글쓰기</button>
+              <button type="button" class="site-btn" style="border-radius: 10px; font-size: medium;">글쓰기</button>
             </div>
           </div>
         </div>
@@ -172,6 +172,19 @@
       <hr>
       <!--Community Board List End-->
     </div>
+
+    <script>
+      // 변수
+      let loginMemberId = '<%=(String)session.getAttribute("loginId")%>';
+
+      let searchContent = $('#searchContent').val();
+      let sortType = 'mostRecent';
+
+      let totalCount; // 총 개시글 수
+
+      let currentPage = 1; // 현재 페이지
+      let totalPage; // 전체 페이지 수
+    </script>
   </body>
 
   </html>
