@@ -37,4 +37,10 @@
 		WHERE ANSWER_ID = #{answerId}
 	</delete>
 	
+	<select id="countQuestionAnswer" resultType="int">
+		SELECT COUNT(*)
+		FROM answers
+		WHERE question_id = #{id}
+	</select>
+	
 </mapper>

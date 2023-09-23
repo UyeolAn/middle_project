@@ -39,4 +39,9 @@ public class AnswerServiceImpl implements AnswerService{
 		return map.answerDelete(vo);
 	}
 
+	@Override
+	public int countQuestionAnswer(int id) {
+		return map.countQuestionAnswer(id);
+	}
+
 }

@@ -330,7 +330,7 @@ CREATE TABLE questions
 (
   question_id NUMBER NOT NULL
 , member_id VARCHAR2(100) NOT NULL
-, course_id NUMBER NOT NULL
+, course_id NUMBER
 , question_title VARCHAR2(100) NOT NULL
 , question_content VARCHAR2(512) NOT NULL
 , question_enter_date DATE DEFAULT SYSDATE NOT NULL

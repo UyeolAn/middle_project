@@ -9,11 +9,14 @@ import co.four.study.member.service.MemberVO;
 import co.four.study.question.map.QuestionMapper;
 import co.four.study.question.service.QuestionService;
 import co.four.study.question.service.QuestionVO;
+import co.four.study.question.service.etcvo.QuestionSearchVO;
 
 public class QuestionServiceImpl implements QuestionService{
+	
 	private SqlSession sqlSession = DataSource.getInstance().openSession(true);
 	
 	private QuestionMapper map = sqlSession.getMapper(QuestionMapper.class);
+	
 	@Override
 	public List<QuestionVO> questionSelectList(QuestionVO vo) {
 		return map.questionSelectList(vo);
@@ -21,6 +24,7 @@ public class QuestionServiceImpl implements QuestionService{
 
 	@Override
 	public QuestionVO questionSelect(QuestionVO vo) {
+		map.updateQuestionHit(vo.getQuestionId());
 		return map.questionSelect(vo);
 	}
 
@@ -38,6 +42,16 @@ public class QuestionServiceImpl implements QuestionService{
 	public int questionUpdate(QuestionVO vo) {
 		return map.questionUpdate(vo);
 	}
+	
+	@Override
+	public List<QuestionVO> searchQuestionsWithPaging(QuestionSearchVO vo) {
+		return map.searchQuestionsWithPaging(vo);
+	}
+	
+	@Override
+	public int countQuestions(QuestionSearchVO vo) {
+		return map.countQuestions(vo);
+	}
 
 	@Override
 	public int countQuestion(MemberVO vo) {
@@ -47,6 +61,11 @@ public class QuestionServiceImpl implements QuestionService{
 	@Override
 	public int unanswerQuestion() {
 		return map.unanswerQuestion();
+	}
+
+	@Override
+	public String getQuestionCourseName(int id) {
+		return map.getQuestionCourseName(id);
 	}
 
 }

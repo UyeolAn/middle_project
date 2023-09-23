@@ -14,4 +14,8 @@ public interface AnswerService {
 	
 	int answerDelete(AnswerVO vo);
 	
+	
+	// 질문에 달린 답변 카운트
+	int countQuestionAnswer(int id);
+	
 }

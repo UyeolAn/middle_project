@@ -36,6 +36,55 @@
 		WHERE QUESTION_ID = #{questionId}
 	</update>
 	
+	<select id="searchQuestionsWithPaging" resultType="co.four.study.question.service.QuestionVO">
+		SELECT *
+		FROM (SELECT ROWNUM AS rm, a.*
+			  FROM (SELECT *
+				    FROM questions
+				    <where>
+						<if test="searchType == 'questionTitle'">
+							AND question_title LIKE '%' || #{searchContent} || '%'
+						</if>
+						<if test="searchType == 'questionContent'">
+							AND question_content LIKE '%' || #{searchContent} || '%'
+						</if>
+						<if test="searchType == 'questionWriter'">
+							AND member_id LIKE '%' || #{searchContent} || '%'
+						</if>
+						<if test="searchCourse != ''">
+							AND course_id IN (SELECT course_id
+											  FROM courses
+											  WHERE course_name LIKE '%' || #{searchCourse} || '%')
+						</if>
+					</where> 
+				    <trim prefix="ORDER BY">
+		                <if test="sortType == 'mostRecent'">question_id DESC</if>
+		                <if test="sortType == 'mostHit'">question_hit DESC</if>
+		            </trim>) a )
+	     WHERE rm BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	
+	<select id="countQuestions" resultType="int">
+		SELECT COUNT(*) 
+		FROM questions 
+		<where>
+			<if test="searchType == 'questionTitle'">
+				AND question_title LIKE '%' || #{searchContent} || '%'
+			</if>
+			<if test="searchType == 'questionContent'">
+				AND question_content LIKE '%' || #{searchContent} || '%'
+			</if>
+			<if test="searchType == 'questionWriter'">
+				AND member_id LIKE '%' || #{searchContent} || '%'
+			</if>
+			<if test="searchCourse != ''">
+				AND course_id IN (SELECT course_id
+								  FROM courses
+								  WHERE course_name LIKE '%' || #{searchCourse} || '%')
+			</if>
+		</where> 
+	</select>
 	
 	<select id="countQuestion" resultType="Integer" parameterType="co.four.study.member.service.MemberVO">
 		SELECT COUNT(*) 
@@ -47,4 +96,18 @@
 		FROM QUESTIONS
 		WHERE QUESTION_ID NOT IN (SELECT DISTINCT QUESTION_ID FROM ANSWERS)
 	</select>
+	
+	<select id="getQuestionCourseName" resultType="String">
+		SELECT c.course_name
+		FROM questions q
+			JOIN courses c
+			ON q.course_id = c.course_id
+		WHERE q.question_id = #{id}
+	</select>
+	
+	<update id="updateQuestionHit" parameterType="int">
+		UPDATE questions
+		SET question_hit = question_hit + 1
+		WHERE question_id = #{id}
+	</update>
 </mapper>
