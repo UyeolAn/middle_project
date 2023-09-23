@@ -77,4 +77,9 @@ public class MemberServiceImpl implements MemberService {
 		return map.employeeList();
 	}
 
+	@Override
+	public int employeeInsert(MemberVO vo) {
+		return map.employeeInsert(vo);
+	}
+
 }

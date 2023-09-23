@@ -34,6 +34,9 @@ public interface MemberMapper {
 	
 	//직원 리스트
 	List<MemberVO> employeeList();
+	
+	//직원 등록
+	int employeeInsert(MemberVO vo);
 }
 			
 		

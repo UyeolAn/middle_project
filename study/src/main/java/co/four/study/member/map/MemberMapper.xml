@@ -28,6 +28,15 @@
 		#{memberEmail},
 		SYSDATE , null, 'client')
 	</insert>
+	
+	<insert id="employeeInsert" parameterType="co.four.study.member.service.MemberVO">
+		INSERT INTO MEMBERS
+		VALUES (#{memberId},
+		#{memberPassword}, #{memberName}, #{memberTel},
+		#{memberAddress},
+		#{memberEmail},
+		SYSDATE , null, 'admin')
+	</insert>
 
 	<update id="memberUpdate"
 		parameterType="co.four.study.member.service.MemberVO">
