@@ -7,6 +7,7 @@
 	
 	<select id="bucketSelect" resultType="co.four.study.bucket.service.BucketVO">
 		SELECT * FROM BUCKET WHERE MEMBER_ID = #{memberId}
+		<if test="courseId != 0">AND COURSE_ID = #{courseId}</if>
 	</select>
 	
 	<insert id="bucketInsert" parameterType="co.four.study.bucket.service.BucketVO">
@@ -22,4 +23,17 @@
 		FROM BUCKET WHERE MEMBER_ID = #{memberId}
 	</select>
 	
+	<select id="memberBucketList" resultType="co.four.study.course.service.CourseVO" parameterType="co.four.study.bucket.service.BucketVO">
+		SELECT A.COURSE_ID, A.COURSE_NAME, A.COURSE_PRICE, A.COURSE_IMG, B.MEMBER_ID
+		FROM COURSES A, BUCKET B
+		WHERE A.COURSE_ID = B.COURSE_ID
+		AND   B.MEMBER_ID = #{memberId}
+	</select>
+	
+	<select id="sumCoursesPrice" resultType="Integer" parameterType="co.four.study.bucket.service.BucketVO">
+		SELECT SUM(A.COURSE_PRICE) COURSES_PRICE
+		FROM COURSES A, BUCKET B
+		WHERE A.COURSE_ID = B.COURSE_ID
+		AND   B.MEMBER_ID = #{memberId}
+	</select>
 </mapper>
