@@ -106,7 +106,7 @@
 
         <script type="text/javascript">
 
-
+//중복체크 버튼 클릭시 서블릿에 id체크
             $('#doubleCheck').click(function () {
 
                 $.ajax({
@@ -134,14 +134,15 @@
                         }
                     },
                     error: function (result) {
-                        console.log("오류났어요");
+                        console.log("err");
                     }
                 })
             }
             )
 
 
-
+//submit 버튼 작동시 중복체크 실행 여부 
+//패스워드 불일치 여부 확인
             function formCheck() {
                 let form = document.getElementById("frm");
 
