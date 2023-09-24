@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.four.study.member.map.MemberMapper">
 
+	<resultMap type="HashMap" id="clientMap">
+		<id column = "count" property="count"/>
+		<id column = "monthly" property="monthly"/>
+	</resultMap>
+
 	<select id="memberSelectList"
 		resultType="co.four.study.member.service.MemberVO">
 		SELECT * FROM MEMBERS
@@ -100,5 +105,13 @@
 		SELECT * FROM MEMBERS WHERE MEMBER_AUTHOR = 'admin' ORDER BY MEMBER_ENTER_DATE
 	</select>
 
+	<select id="monthlyClient" resultMap="clientMap">
+		select count(*) as count, to_char(to_date(member_enter_date), 'YYYY-MM') as monthly
+		from members
+		where member_author = 'client'
+		and ROWNUM <![CDATA[<=]]> 5
+		group by  to_char(to_date(member_enter_date), 'YYYY-MM')
+		order by monthly
+	</select>
 
 </mapper>

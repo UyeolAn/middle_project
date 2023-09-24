@@ -27,12 +27,32 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
+
 // Area Chart Example
-var ctx = document.getElementById("myAreaChart");
+var ctx = document.getElementById('myAreaChart');
+
+console.log("차트불러옴");
+var idx = 0;
+fetch('ajaxmonthlyclient.do')
+.then(resolve => resolve.json())
+.then(json=> {
+  console.log(json[0].count);
+  for(let prop of json) {
+    console.log(prop);
+    console.log(prop.count);
+    console.log(prop.monthly);
+
+    myLineChart.data.labels[idx] = prop.monthly;
+    myLineChart.data.datasets[0].data[idx] = prop.count;
+    myLineChart.update();
+    idx++;
+  }
+});
+
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: [],
     datasets: [{
       label: "Earnings",
       lineTension: 0.3,
@@ -46,7 +66,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: [],
     }],
   },
   options: {
@@ -75,10 +95,11 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           maxTicksLimit: 5,
+          stepSize: 1,
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return  number_format(value)+'명';
           }
         },
         gridLines: {

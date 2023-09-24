@@ -2,6 +2,7 @@ package co.four.study;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,15 +41,20 @@ public class AdminHomeController extends HttpServlet {
 		MemberCourseService mcdao = new MemberCourseServiceImpl();
 		CourseService cdao = new CourseServiceImpl();
 		
+		//답변안한 질문 갯수
 		int unanswerQ = qdao.unanswerQuestion();
 		
+		//현재 회원수
 		List<MemberVO> mlist = mdao.memberList();
 		int memberCount = mlist.size();
 		
+		//현재 매출액
 		int totalP = mcdao.totalPrice();
 		
+		//현재 강의수
 		List<CourseVO> clist = cdao.courseSelectList(null);
 		int courseCount = clist.size();
+		
 		
 		request.setAttribute("newQ", unanswerQ);
 		request.setAttribute("members", memberCount);

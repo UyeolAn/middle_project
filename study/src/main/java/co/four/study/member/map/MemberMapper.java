@@ -1,6 +1,7 @@
 package co.four.study.member.map;
 
 import java.util.List;
+import java.util.Map;
 
 import co.four.study.member.service.MemberVO;
 
@@ -37,6 +38,9 @@ public interface MemberMapper {
 	
 	//직원 등록
 	int employeeInsert(MemberVO vo);
+	
+	//월별 이용자수 조회
+	List<Map<String, Object>> monthlyClient();
 }
 			
 		
