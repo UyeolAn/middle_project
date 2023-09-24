@@ -109,7 +109,6 @@
 		select count(*) as count, to_char(to_date(member_enter_date), 'YYYY-MM') as monthly
 		from members
 		where member_author = 'client'
-		and ROWNUM <![CDATA[<=]]> 5
 		group by  to_char(to_date(member_enter_date), 'YYYY-MM')
 		order by monthly
 	</select>

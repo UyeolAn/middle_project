@@ -54,16 +54,16 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: [],
     datasets: [{
-      label: "Earnings",
+      label: "가입자수",
       lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
+      backgroundColor: "rgba(252, 186, 3, 0.05)",
+      borderColor: "rgba(252, 186, 3, 1)",
       pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
+      pointBackgroundColor: "rgba(252, 186, 3, 1)",
+      pointBorderColor: "rgba(252, 186, 3, 1)",
       pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+      pointHoverBackgroundColor: "rgba(252, 186, 3, 1)",
+      pointHoverBorderColor: "rgba(252, 186, 3, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
       data: [],
@@ -131,7 +131,7 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel+": "+ number_format(tooltipItem.yLabel) + "명";
         }
       }
     }
