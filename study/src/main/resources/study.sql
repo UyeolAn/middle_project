@@ -337,6 +337,7 @@ CREATE TABLE questions
 , question_update_date DATE
 , question_img VARCHAR2(100)
 , question_hit NUMBER DEFAULT 0 NOT NULL
+, question_solve VARCHAR2(15) DEFAULT 'not_solved' NOT NULL
 , CONSTRAINT questions_question_id_pk PRIMARY KEY 
   (
     question_id
@@ -371,6 +372,7 @@ COMMENT ON COLUMN questions.question_enter_date IS '질문 작성일';
 COMMENT ON COLUMN questions.question_update_date IS '질문 수정일';
 COMMENT ON COLUMN questions.question_img IS '질문 이미지첨부';
 COMMENT ON COLUMN questions.question_hit IS '질문 조회수';
+COMMENT ON COLUMN questions.question_solve IS '질문 해결여부';
 
 
 -- answers

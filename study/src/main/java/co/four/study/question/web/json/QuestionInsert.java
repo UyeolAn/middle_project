@@ -1,4 +1,4 @@
-package co.four.study.board.web.json;
+package co.four.study.question.web.json;
 
 import java.io.IOException;
 
@@ -9,37 +9,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import co.four.study.board.service.BoardService;
-import co.four.study.board.service.BoardVO;
-import co.four.study.board.serviceImpl.BoardServiceImpl;
 import co.four.study.common.ViewResolve;
+import co.four.study.question.service.QuestionService;
+import co.four.study.question.service.QuestionVO;
+import co.four.study.question.serviceImpl.QuestionServiceImpl;
 
-@WebServlet("/boardinsert.do")
-public class BoardInsert extends HttpServlet {
+@WebServlet("/questioninsert.do")
+public class QuestionInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public BoardInsert() {
+    public QuestionInsert() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		BoardService dao = new BoardServiceImpl();
-
-		BoardVO insertVO = new BoardVO();
+		QuestionService dao = new QuestionServiceImpl();
+		
+		String courseId = request.getParameter("selectCourse");
+		
+		QuestionVO insertVO = new QuestionVO();
 		insertVO.setMemberId((String)session.getAttribute("loginId"));
-		insertVO.setBoardTitle(request.getParameter("boardTitle"));
-		insertVO.setBoardContent(request.getParameter("boardContent"));
+		insertVO.setQuestionTitle(request.getParameter("questionTitle"));
+		if (!courseId.equals("etc")) {
+			insertVO.setCourseId(Integer.parseInt(courseId));
+		}
+		insertVO.setQuestionContent(request.getParameter("questionContent"));
 //		insertVO.setBoardImg(null); // 나중에 이미지 추가 기능도 넣어줘야함
 		
-		int numIns = dao.boardInsert(insertVO);
+		int numIns = dao.questionInsert(insertVO);
 		if (numIns != 0) {
-			response.sendRedirect("communityfreepage.do");
+			response.sendRedirect("communityqnapage.do");
 		} else {
 			System.out.println("추가 실패!!");
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

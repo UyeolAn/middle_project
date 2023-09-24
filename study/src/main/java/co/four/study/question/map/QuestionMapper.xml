@@ -17,7 +17,7 @@
          	SELECT NVL(MAX(QUESTION_ID), 0) + 1 AS QUESTION_ID FROM QUESTIONS
       	</selectKey>
       	INSERT INTO QUESTIONS VALUES (#{questionId}, #{memberId}, #{courseId}, #{questionTitle}, 
-      	#{questionContent}, SYSDATE, null, #{questionImg}, 0 );
+      	#{questionContent}, SYSDATE, null, #{questionImg}, 0, 'not_solved')
 	</insert>
 	
 	<delete id="questionDelete" parameterType="co.four.study.question.service.QuestionVO">
@@ -52,10 +52,21 @@
 							AND member_id LIKE '%' || #{searchContent} || '%'
 						</if>
 						<if test="searchCourse != ''">
-							AND course_id IN (SELECT course_id
+							<if test="searchCourse != '기타/홈페이지 질문'">
+								AND course_id IN (SELECT course_id
 											  FROM courses
 											  WHERE course_name LIKE '%' || #{searchCourse} || '%')
+							</if>
+							<if test="searchCourse == '기타/홈페이지 질문'">
+								AND course_id IS NULL
+							</if>
 						</if>
+					    <if test="solveType == 'solveNotSolved'">
+					    	AND question_solve = 'not_solved'
+					    </if>
+					    <if test="solveType == 'solveSolved'">
+					    	AND question_solve = 'solved'
+					    </if>
 					</where> 
 				    <trim prefix="ORDER BY">
 		                <if test="sortType == 'mostRecent'">question_id DESC</if>
@@ -79,10 +90,21 @@
 				AND member_id LIKE '%' || #{searchContent} || '%'
 			</if>
 			<if test="searchCourse != ''">
-				AND course_id IN (SELECT course_id
+				<if test="searchCourse != '기타/홈페이지 질문'">
+					AND course_id IN (SELECT course_id
 								  FROM courses
 								  WHERE course_name LIKE '%' || #{searchCourse} || '%')
+				</if>
+				<if test="searchCourse == '기타/홈페이지 질문'">
+					AND course_id IS NULL
+				</if>
 			</if>
+			<if test="solveType == 'solveNotSolved'">
+		    	AND question_solve = 'not_solved'
+		    </if>
+		    <if test="solveType == 'solveSolved'">
+		    	AND question_solve = 'solved'
+		    </if>
 		</where> 
 	</select>
 	

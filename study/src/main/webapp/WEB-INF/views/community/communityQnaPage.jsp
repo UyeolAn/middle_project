@@ -7,6 +7,10 @@
       <meta charset="UTF-8">
       <title>Insert title here</title>
       <style type="text/css">
+        input[type=text] {
+          color: #333;
+        }
+
         /* 해당 페이지 전용 클래스 */
         .comm__qna__question__issolved>li {
           margin-left: 2%;
@@ -18,6 +22,11 @@
         }
 
         .comm__qna__question__issolved>li:hover {
+          color: #333;
+          cursor: pointer;
+        }
+
+        .comm__qna__question__issolved>.solve__active {
           color: #333;
         }
 
@@ -31,6 +40,19 @@
 
         .comm__qna__question__sort>li:hover {
           color: #333;
+          cursor: pointer;
+        }
+
+        .comm__qna__question__sort>.sort__active {
+          color: #333;
+        }
+
+        comm__qna__question__content {
+          width: 100%;
+          height: 25px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         .qna__not__solved {
@@ -68,6 +90,7 @@
         /* 외부 탬플릿 클래스 */
         .product__details__tab__content__item:hover {
           background-color: #F3F2EE;
+          cursor: pointer;
         }
       </style>
       <script src="client/js/jquery-3.3.1.min.js"></script>
@@ -119,7 +142,7 @@
               <div class="col-lg-10">
                 <div class="checkout__input">
                   <input type="text" id="searchCourse" name="searchCourse"
-                    placeholder="어떤 강의에 대한 질문인가요? (강의 외 질문 : '기타/홈페이지 질문')">
+                    placeholder="어떤 강의의 질문을 원하시나요?(강의 외 질문 : '기타/홈페이지 질문')">
                 </div>
               </div>
             </div>
@@ -136,7 +159,8 @@
             </div>
             <div class="col-lg-2">
               <div class="checkout__input">
-                <button type="button" class="site-btn" style="border-radius: 10px; font-size: medium;">글쓰기</button>
+                <button type="button" id="writeBtn" class="site-btn" onclick="location.href='communityqnainsertpage.do'"
+                  style="border-radius: 10px; font-size: medium;">글쓰기</button>
               </div>
             </div>
           </div>
@@ -147,10 +171,19 @@
 
         <!--Community Question List Start-->
         <div class="comm__qna__question">
-          
+          <!-- loadQuestions() -> showQuestions(questionsJson) -->
         </div>
-
         <!--Community Question List End-->
+
+        <!--Page Bar Start-->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="product__pagination">
+              <!-- <a class="active" href="#">1</a> -->
+            </div>
+          </div>
+        </div>
+        <!--Page Bar End-->
       </div>
 
       <script>
@@ -158,6 +191,7 @@
         let loginMemberId = '<%=(String)session.getAttribute("loginId")%>';
 
         let searchContent = $('#searchContent').val();
+        let solveType = 'solveAll'
         let sortType = 'mostRecent';
 
         let totalCount; // 총 개시글 수
@@ -166,11 +200,15 @@
         let totalPage; // 전체 페이지 수
 
         // 처음 로딩
+        setSolveBtn();
+        setSortBtn();
+        setInsertBtn();
         loadQuestions();
 
         // 처음 로딩 시 질문 리스트를 불러오는 함수
         function loadQuestions() {
           let searchData = convertToObject($("#searchForm").serializeArray());
+          searchData.solveType = solveType;
           searchData.sortType = sortType;
           $.ajax({
             url: 'questionsearchwithpaging.do',
@@ -179,6 +217,7 @@
               searchType: searchData.searchType,
               searchContent: searchData.searchContent,
               searchCourse: searchData.searchCourse,
+              solveType: searchData.solveType,
               sortType: searchData.sortType,
               page: currentPage
             },
@@ -196,14 +235,13 @@
         function showQuestions(questionsJson) {
           $('div.comm__qna__question').empty();
           questionsJson.forEach(question => {
-            console.log(`\${question.questionSolve}`);
             $('div.comm__qna__question')
               .append(
                 $('<div class="product__details__tab__content__item"> /')
                   .append($(
                     `<h5 class="col-lg-12"><span class="` +
-                    (question.questionSolve == 'not_solved' ? 'qna__not__solved' : 'qna_solved') + `">` +
-                    (question.questionSolve == 'not_solved' ? '미해결' : '해결') +
+                    (question.questionSolve == 'not_solved' ? 'qna__not__solved' : 'qna__solved') + `">` +
+                    (question.questionSolve == 'not_solved' ? '미해결' : '해결됨') +
                     `</span>\${question.questionTitle}</h5>`
                   ))
                   .append($('<p class="col-lg-9 comm__qna__question__content"> /').text(`\${question.questionContent}`))
@@ -226,7 +264,103 @@
 
         // 페이지 바 생성 함수
         function showPageList() {
+          let searchData = convertToObject($("#searchForm").serializeArray());
+          searchData.solveType = solveType;
+          searchData.sortType = sortType;
+          $.ajax({
+            url: 'questioncount.do',
+            method: 'post',
+            data: {
+              searchType: searchData.searchType,
+              searchContent: searchData.searchContent,
+              searchCourse: searchData.searchCourse,
+              solveType: searchData.solveType,
+              sortType: searchData.sortType,
+            },
+            success: function (countJson) {
+              totalCount = countJson.totalCount;
+              let totalPage = Math.ceil(totalCount / 5);
 
+              let endPage = totalPage < Math.ceil(currentPage / 10) * 10 ? totalPage : Math.ceil(currentPage / 10) * 10;
+              let startPage = Math.floor(currentPage / 10) * 10 + 1;
+
+              let prev = startPage > 1;
+              let next = endPage < totalPage;
+
+              console.log(totalCount);
+              console.log(endPage);
+              console.log(startPage);
+              console.log(currentPage);
+              console.log(prev);
+              console.log(next);
+
+              $('.product__pagination').empty();
+              if (prev) {
+                makePageAtag("&laquo", startPage - 1);
+              }
+              for (let i = startPage; i <= endPage; i++) {
+                makePageAtag(i, i);
+              }
+              if (next) {
+                makePageAtag("&raquo", endPage + 1);
+              }
+            },
+            error: function (err) {
+              console.log(err);
+            }
+          });
+        }
+
+        // 페이지 a태그 생성 함수
+        function makePageAtag(inner, page) {
+          let atag = $('<a />');
+          atag.removeAttr('href');
+          if (page == currentPage) {
+            atag.attr('class', 'active')
+          }
+          atag.attr('style', 'cursor: pointer;');
+          atag.html(inner);
+          atag.on('click', function () {
+            currentPage = page;
+            loadBoards();
+          });
+          $('.product__pagination').append(atag);
+        }
+
+        // 해결여부 버튼 활성화 함수
+        function setSolveBtn() {
+          $('ul.comm__qna__question__issolved>li').on('click', function () {
+            console.log('log')
+            solveType = $(this).attr('id');
+
+            let lis = $(this).parent().children();
+            lis.each(function (idx, li) {
+              if ($(li).attr('id') == solveType) {
+                $(li).attr('class', 'solve__active');
+              } else {
+                $(li).attr('class', 'solve__nonactive');
+              }
+            });
+            loadQuestions();
+          });
+        }
+
+        // 정렬 버튼 활성화 함수
+        function setSortBtn() {
+          $('ul.comm__qna__question__sort>li').on('click', function () {
+            console.log('log')
+            sortType = $(this).attr('id');
+
+            let lis = $(this).parent().children();
+            lis.each(function (idx, li) {
+              if ($(li).attr('id') == sortType) {
+                $(li).attr('class', 'sort__active');
+              } else {
+                $(li).attr('class', 'sort__nonactive');
+              }
+            });
+            loadQuestions();
+          });
         }
 
         // Form 데이터 -> Javascript Object 변환 함수
@@ -236,6 +370,41 @@
             object[arrayData[i]['name']] = arrayData[i]['value'];
           }
           return object;
+        }
+
+        // 글쓰기 버튼 관련 함수
+        function setInsertBtn() {
+          if (loginMemberId == 'null') {
+            $('#writeBtn').hide();
+          }
+          // onclick 은 태그에 정의해놓았음
+        }
+
+        // 질문 검색 함수
+        function searchQuestions() {
+          let searchData = convertToObject($("#searchForm").serializeArray());
+          searchData.solveType = solveType;
+          searchData.sortType = sortType;
+          $.ajax({
+            url: 'questionsearchwithpaging.do',
+            method: 'post',
+            data: {
+              searchType: searchData.searchType,
+              searchContent: searchData.searchContent,
+              searchCourse: searchData.searchCourse,
+              solveType: searchData.solveType,
+              sortType: searchData.sortType,
+              page: 1
+            },
+            success: function (questionsJson) {
+              console.log(questionsJson);
+              showQuestions(questionsJson);
+              showPageList();
+            },
+            error: function (err) {
+              console.log(err);
+            }
+          });
         }
       </script>
     </body>

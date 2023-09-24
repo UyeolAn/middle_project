@@ -12,6 +12,8 @@ public class QuestionSearchVO {
 	
 	private String searchCourse;
 	
+	private String solveType;
+	
 	private String sortType;
 	
 	// 페이징 정보

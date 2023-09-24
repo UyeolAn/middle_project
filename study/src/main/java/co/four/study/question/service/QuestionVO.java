@@ -12,7 +12,7 @@ public class QuestionVO {
 	
 	private String memberId;
 	
-	private int courseId;
+	private Integer courseId;
 	
 	private String questionTitle;
 	
