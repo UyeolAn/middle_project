@@ -14,18 +14,18 @@
           <div class="accordion" id="accordionExample">
             <div class="card">
               <div class="card-heading">
-                <a data-toggle="collapse" data-target="#collapseOne">Community</a>
+                <a data-toggle="collapse" data-target="#collapseOne">MY PAGE</a>
               </div>
               <div id="collapseOne" class="collapseshow" data-parent="#accordionExample">
                 <div class="card-body">
                   <div class="shop__sidebar__categories">
                     <ul class="nice-scroll">
                       <li><a href="profile.do">프로필</a></li>
-                      <li><a href="communityfreepage.do">장바구니</a></li>
-					  <li><a href="communityfreepage.do">수강 강좌</a></li>
-					  <li><a href="communityfreepage.do">구매내역</a></li>
-					  <li><a href="communityfreepage.do">My Community</a></li>
-					  <li><a href="communityfreepage.do" style="font-size: 8px;">회원탈퇴</a></li>
+                      <li><a href="#">장바구니</a></li>
+                      <li><a href="#">수강 강좌</a></li>
+                      <li><a href="#">구매내역</a></li>
+                      <li><a href="#">My Community</a></li>
+                      <li><a href="#" style="font-size: 8px;">회원탈퇴</a></li>
 
                     </ul>
                   </div>
