@@ -1,4 +1,4 @@
-package co.four.study.reply.web;
+package co.four.study.answer.web;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,33 +12,33 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import co.four.study.reply.service.ReplyService;
-import co.four.study.reply.service.ReplyVO;
-import co.four.study.reply.serviceImpl.ReplyServiceImpl;
+import co.four.study.answer.service.AnswerService;
+import co.four.study.answer.service.AnswerVO;
+import co.four.study.answer.serviceImpl.AnswerServiceImpl;
 
-@WebServlet("/replyupdate.do")
-public class ReplyUpdate extends HttpServlet {
+@WebServlet("/answerupdate.do")
+public class AnswerUpdate extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-    public ReplyUpdate() {
+    public AnswerUpdate() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ReplyService dao = new ReplyServiceImpl();
+		AnswerService dao = new AnswerServiceImpl();
 		
-		ReplyVO updateVO = new ReplyVO();
-		updateVO.setReplyId(Integer.parseInt(request.getParameter("replyId")));
-		updateVO.setReplyContent(request.getParameter("updateContent"));
+		AnswerVO updateVO = new AnswerVO();
+		updateVO.setAnswerId(Integer.parseInt(request.getParameter("answerId")));
+		updateVO.setAnswerContent(request.getParameter("answerContent"));
 		
-		int numUpd = dao.replyUpdate(updateVO);
+		int numUpd = dao.answerUpdate(updateVO);
 		Map<String, String> messageMap = new HashMap<>();
 		
 		if (numUpd != 0) {
-			messageMap.put("message", "댓글이 수정되었습니다!!");
+			messageMap.put("message", "답변이 수정되었습니다!!");
 		} else {
-			messageMap.put("message", "댓글 수정에 실패하였습니다.");
+			messageMap.put("message", "답변 수정에 실패하였습니다.");
 		}
 		
 		ObjectMapper objectMapper = new ObjectMapper();

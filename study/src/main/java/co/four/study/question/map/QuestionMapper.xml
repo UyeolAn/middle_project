@@ -127,6 +127,12 @@
 		WHERE q.question_id = #{id}
 	</select>
 	
+	<update id="updateQuestionSolve" parameterType="co.four.study.question.service.etcvo.QuestionSolveVO">
+		UPDATE questions
+		SET question_solve = #{questionSolve}
+		WHERE question_id = #{questionId}
+	</update>
+	
 	<update id="updateQuestionHit" parameterType="int">
 		UPDATE questions
 		SET question_hit = question_hit + 1

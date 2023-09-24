@@ -1,4 +1,4 @@
-package co.four.study.question.web.json;
+package co.four.study.answer.web;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,30 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import co.four.study.question.service.QuestionService;
-import co.four.study.question.service.etcvo.QuestionSearchVO;
-import co.four.study.question.serviceImpl.QuestionServiceImpl;
+import co.four.study.answer.service.AnswerService;
+import co.four.study.answer.serviceImpl.AnswerServiceImpl;
 
-@WebServlet("/questioncount.do")
-public class QuestionCount extends HttpServlet {
+@WebServlet("/answercount.do")
+public class AnswerCount extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-    public QuestionCount() {
+    public AnswerCount() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		QuestionService dao = new QuestionServiceImpl();
+		AnswerService dao = new AnswerServiceImpl();
 		
-		QuestionSearchVO searchVO = new QuestionSearchVO();
-		searchVO.setSearchType(request.getParameter("searchType"));
-		searchVO.setSearchContent(request.getParameter("searchContent"));
-		searchVO.setSearchCourse(request.getParameter("searchCourse"));
-		searchVO.setSolveType(request.getParameter("solveType"));
-		searchVO.setSortType(request.getParameter("sortType"));
-		
-		int cnt = dao.countQuestions(searchVO);
+		int cnt = dao.countQuestionAnswer(Integer.parseInt(request.getParameter("questionId")));
 		
 		Map<String, Integer> cntMap = new HashMap<>();
 		cntMap.put("totalCount", cnt);

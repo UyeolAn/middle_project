@@ -19,6 +19,7 @@ import co.four.study.reply.serviceImpl.ReplyServiceImpl;
 
 @WebServlet("/replyinsert.do")
 public class ReplyInsert extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
     public ReplyInsert() {

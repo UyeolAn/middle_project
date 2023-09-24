@@ -10,6 +10,7 @@ import co.four.study.question.map.QuestionMapper;
 import co.four.study.question.service.QuestionService;
 import co.four.study.question.service.QuestionVO;
 import co.four.study.question.service.etcvo.QuestionSearchVO;
+import co.four.study.question.service.etcvo.QuestionSolveVO;
 
 public class QuestionServiceImpl implements QuestionService{
 	
@@ -66,6 +67,11 @@ public class QuestionServiceImpl implements QuestionService{
 	@Override
 	public String getQuestionCourseName(int id) {
 		return map.getQuestionCourseName(id);
+	}
+
+	@Override
+	public int updateQuestionSolve(QuestionSolveVO vo) {
+		return map.updateQuestionSolve(vo);
 	}
 
 }

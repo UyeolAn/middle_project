@@ -15,7 +15,7 @@
 	
 	<insert id="answerInsert" parameterType="co.four.study.answer.service.AnswerVO">
 		<selectKey keyProperty="answerId" resultType="int" order="BEFORE">
-			SELECT NVL(MAX(ANSWER_ID), 0) + 1 AS ANSWER_ID FROM COURSES
+			SELECT NVL(MAX(ANSWER_ID), 0) + 1 AS ANSWER_ID FROM ANSWERS
 		</selectKey>
 		INSERT INTO ANSWERS (ANSWER_ID, QUESTION_ID, MEMBER_ID, ANSWER_CONTENT, ANSWER_ENTER_DATE, ANSWER_IMG)
 		VALUES (#{answerId}, #{questionId}, #{memberId}, #{answerContent}, SYSDATE,
@@ -30,6 +30,7 @@
 			<if test="answerImg != null">ANSWER_IMG = #{answerImg},</if>
 			<if test="answerImg != 'delete'">ANSWER_IMG = null</if>
 		</set>
+		WHERE ANSWER_ID = #{answerId}
 	</update>
 	
 	<delete id="answerDelete" parameterType="co.four.study.answer.service.AnswerVO">
@@ -37,10 +38,42 @@
 		WHERE ANSWER_ID = #{answerId}
 	</delete>
 	
+	<select id="sortAnswersWithPaging" resultType="co.four.study.answer.service.AnswerVO">
+		SELECT *
+		FROM (SELECT ROWNUM AS rm, a.*
+			  FROM (SELECT *
+				    FROM answers
+				    WHERE question_id = #{questionId}
+				    <trim prefix="ORDER BY">
+		                <if test="sortType == 'mostRecent'">answer_id DESC</if>
+		                <if test="sortType == 'registDate'">answer_id</if>
+		            </trim>) a )
+	     WHERE rm BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
 	<select id="countQuestionAnswer" resultType="int">
 		SELECT COUNT(*)
 		FROM answers
 		WHERE question_id = #{id}
 	</select>
+	
+	<select id="countQuestionSolvedAnswer" resultType="int">
+		SELECT COUNT(*)
+		FROM answers
+		WHERE question_id = #{id} AND
+			  answer_solve = 'solved'
+	</select>
+	
+	<update id="setAnswerSolved" parameterType="co.four.study.answer.service.AnswerVO">
+		UPDATE answers
+		SET answer_solve = 'solved'
+		WHERE answer_id = #{answerId}
+	</update>
+	
+	<update id="setAnswerNotSolved" parameterType="co.four.study.answer.service.AnswerVO">
+		UPDATE answers
+		SET answer_solve = 'not_solved'
+		WHERE answer_id = #{answerId}
+	</update>
 	
 </mapper>

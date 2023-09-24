@@ -18,6 +18,7 @@ import co.four.study.reply.serviceImpl.ReplyServiceImpl;
 
 @WebServlet("/replydelete.do")
 public class ReplyDelete extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
     public ReplyDelete() {

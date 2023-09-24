@@ -1,4 +1,4 @@
-package co.four.study.reply.web;
+package co.four.study.answer.web;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,36 +9,42 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import co.four.study.reply.service.ReplyService;
-import co.four.study.reply.service.ReplyVO;
-import co.four.study.reply.serviceImpl.ReplyServiceImpl;
+import co.four.study.answer.service.AnswerService;
+import co.four.study.answer.service.AnswerVO;
+import co.four.study.answer.serviceImpl.AnswerServiceImpl;
 
-@WebServlet("/replyupdate.do")
-public class ReplyUpdate extends HttpServlet {
+@WebServlet("/answerinsert.do")
+public class AnswerInsert extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-    public ReplyUpdate() {
+    public AnswerInsert() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ReplyService dao = new ReplyServiceImpl();
+		HttpSession session = request.getSession();
 		
-		ReplyVO updateVO = new ReplyVO();
-		updateVO.setReplyId(Integer.parseInt(request.getParameter("replyId")));
-		updateVO.setReplyContent(request.getParameter("updateContent"));
+		AnswerService dao = new AnswerServiceImpl();
 		
-		int numUpd = dao.replyUpdate(updateVO);
+		int questionId = Integer.parseInt(request.getParameter("questionId"));
+		
+		AnswerVO insertVO = new AnswerVO();
+		insertVO.setMemberId((String)session.getAttribute("loginId"));
+		insertVO.setQuestionId(questionId);
+		insertVO.setAnswerContent(request.getParameter("answerContent"));
+		
+		int numIns = dao.answerInsert(insertVO);
 		Map<String, String> messageMap = new HashMap<>();
 		
-		if (numUpd != 0) {
-			messageMap.put("message", "댓글이 수정되었습니다!!");
+		if (numIns != 0) {
+			messageMap.put("message", "답변이 추가가 되었습니다");
 		} else {
-			messageMap.put("message", "댓글 수정에 실패하였습니다.");
+			messageMap.put("message", "답변 추가에 실패하였습니다.");
 		}
 		
 		ObjectMapper objectMapper = new ObjectMapper();

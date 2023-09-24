@@ -463,7 +463,7 @@
           atag.html(inner);
           atag.on('click', function () {
             currentPage = page;
-            loadBoards();
+            loadAnswers();
           });
           $('.product__pagination').append(atag);
         }
@@ -519,7 +519,7 @@
               $(this).hide();
             }
             $(this).on('click', function () {
-              let replyId = $('.reply-id-hidden').val();
+              let replyId = $(this).parent().find('.reply-id-hidden').val();
               let replyBox = $(this).parent().find('.reply-content-box');
               let replyContent = replyBox.find('.reply-content').text();
 
@@ -555,7 +555,7 @@
               $(this).hide();
             }
             $(this).on('click', function () {
-              let replyId = $('.reply-id-hidden').val();
+              let replyId = $(this).parent().find('.reply-id-hidden').val();
               $.ajax({
                 url: 'replydelete.do',
                 method: 'post',

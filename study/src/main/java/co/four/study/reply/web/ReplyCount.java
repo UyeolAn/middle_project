@@ -17,6 +17,7 @@ import co.four.study.reply.serviceImpl.ReplyServiceImpl;
 
 @WebServlet("/replycount.do")
 public class ReplyCount extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
     public ReplyCount() {
@@ -32,10 +33,10 @@ public class ReplyCount extends HttpServlet {
 		cntMap.put("totalCount", cnt);
 		
 		ObjectMapper objectMapper = new ObjectMapper();
-		String messageJson = objectMapper.writeValueAsString(cntMap);
+		String countJson = objectMapper.writeValueAsString(cntMap);
 		
 		response.setContentType("text/json;charset=utf-8");
-		response.getWriter().print(messageJson);
+		response.getWriter().print(countJson);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
