@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public interface CourseService {
 	List<CourseVO> courseSelectList(CourseVO vo); // 강의 전체조회
@@ -19,8 +18,8 @@ public interface CourseService {
 	// 페이징 관련
 	int courseTotalCount(CourseVO vo);
 	List<CourseVO> coursePagingList(CourseVO vo);
-	public String makeSubCateCourseList(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate);
-	public String makeGradeCourseList(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String grade);
+	public String subcateCoursePagingTag(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate);
+	public String gradeCoursePagingTag(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String grade);
 	// 강의 페이지 사이드 메뉴 만들기
 	public void makeSideMenu(HttpServletRequest request);
 	

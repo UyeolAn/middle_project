@@ -425,3 +425,45 @@
 .reviw_content {
 	padding-top: 15px;
 }
+#reviw_write_area {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	margin-bottom: 50px;
+}
+.review_item_title {
+	padding: 10px 0;
+}
+.review_item_title,
+.review_item_title .required {
+	font-size: 18px;
+	font-weight: 700;
+}
+.review_item_title .required {
+	color: red;
+}
+.review_item_title span {
+	font-size: 14px;
+	font-weight: 500;
+	color: #888;
+}
+.nice-select {
+	float: none;
+	max-width: 160px
+}
+.textarea_wrap {
+	width: 100%;
+	height: 100px;
+}
+.textarea_wrap textarea {
+	width: 100%;
+	height: 100%;
+	resize: none;
+	border: none;
+	padding: 10px;
+	border: 1px solid #e6e6e6;
+	border-radius: 5px;
+}
+.textarea_wrap textarea::placeholder {
+	color: #e6e6e6;
+}

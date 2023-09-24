@@ -22,12 +22,12 @@ function courseList(type, value, nowPage, target) {
 	
 	$.ajax({
 		url: 'ajaxCourseList.do',
-        method: 'post',
-        data: { subCate: subCateVal, grade: gradeVal, nowPage: nowPage, cntPerPage: sel },
-        success: function (result) {
-            appendCourseList(result); // [func] 강의 리스트 태그 생성
-            appendPaging(result); // [func] 페이징 태그 생성
-        }
+    method: 'post',
+    data: { subCate: subCateVal, grade: gradeVal, nowPage: nowPage, cntPerPage: sel },
+    success: function (result) {
+        appendCourseList(result); // [func] 강의 리스트 태그 생성
+        appendPaging(result); // [func] 페이징 태그 생성
+    }
 	})
 }
 

@@ -1,6 +1,6 @@
 package co.four.study.review.service;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.Data;
 

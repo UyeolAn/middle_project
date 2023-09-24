@@ -33,7 +33,7 @@ public class CourseList extends HttpServlet {
 		// 강의 페이지 사이드 메뉴 만들기
 		dao.makeSideMenu(request);
 		
-		// subCategory를 누른건지 grade를 누른건지 구분(상품 디테일 페이지에서 사용함)
+		// subCategory를 누른건지 grade를 누른건지 구분(상품 디테일 페이지에서 이동할때 사용함)
 		String subCate;
 		String grade;
 		try {
@@ -43,7 +43,7 @@ public class CourseList extends HttpServlet {
 			}
 			System.out.println("subCate = " + subCate);
 		} catch (NullPointerException e) {
-			System.out.println("courseList.do::subCate try catch");
+			System.out.println("courseList.do::subCate is null");
 		}
 		try {
 			grade = request.getParameter("grade");
@@ -52,7 +52,7 @@ public class CourseList extends HttpServlet {
 			}
 			System.out.println("grade = " + grade);
 		} catch (NullPointerException e) {
-			System.out.println("courseList.do::grade try catch");
+			System.out.println("courseList.do::grade is null");
 		}
 		
 		
@@ -72,7 +72,6 @@ public class CourseList extends HttpServlet {
 		
 		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		request.setAttribute("paging", pvo); // 페이징 완료
-		System.out.println(pvo);
 		
 		// 강의 리스트 가져오기
 		String mainCate = request.getParameter("mainCate"); // 넘어온 메인카테고리

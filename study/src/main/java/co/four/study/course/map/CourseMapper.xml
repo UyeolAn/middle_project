@@ -2,55 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.four.study.course.map.CourseMapper">
 
-	<select id="courseSelectList" resultType="co.four.study.course.service.CourseVO">
+	<select id="courseSelectList"
+		resultType="co.four.study.course.service.CourseVO">
 		SELECT *
 		FROM COURSES
 		WHERE 1=1
 		<if test="courseMainCategory != null">
-		AND COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
+			AND COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
 		</if>
 		<if test="courseSubCategory != null">
-		AND COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
+			AND COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
 		</if>
 		<if test="courseGrade != null">
-	    AND COURSE_GRADE = LOWER(#{courseGrade})
-	    </if>
-	</select>
-	
-	<select id="courseSelect" resultType="co.four.study.course.service.CourseVO">
-		SELECT	*
-		FROM	COURSES
-		<if test="courseId != null">		
-		WHERE	COURSE_ID = #{courseId}
-		</if>
-		<if test="courseName != null and courseScript != null and courseId == null">
-		WHERE COURSE_NAME = #{courseName} AND COURSE_SCRIPT = #{courseScript}
+			AND COURSE_GRADE = LOWER(#{courseGrade})
 		</if>
 	</select>
-	
 
-<select id="courseReviewSelect" resultType="co.four.study.course.service.CourseVO">
-        SELECT   A.*, B.*
-      FROM   COURSES A,
-              (SELECT COURSE_ID, ROUND(SUM(REVIEW_STARS)/COUNT(REVIEW_STARS)) COURSE_STARS
-              FROM REVIEWS
-              WHERE COURSE_ID = #{courseId}
-              GROUP BY COURSE_ID) B
-      WHERE A.COURSE_ID = B.COURSE_ID(+)
-      AND A.COURSE_ID = #{courseId}
-    </select>
-  
-	<insert id="courseInsert" parameterType="co.four.study.course.service.CourseVO">
-		<selectKey keyProperty="courseId" resultType="int" order="BEFORE">
+	<select id="courseSelect"
+		resultType="co.four.study.course.service.CourseVO">
+		SELECT *
+		FROM COURSES
+		<if test="courseId != null">
+			WHERE COURSE_ID = #{courseId}
+		</if>
+		<if
+			test="courseName != null and courseScript != null and courseId == null">
+			WHERE COURSE_NAME = #{courseName} AND COURSE_SCRIPT = #{courseScript}
+		</if>
+	</select>
+
+	<select id="courseReviewSelect"
+		resultType="co.four.study.course.service.CourseVO">
+		SELECT A.*, B.*
+		FROM COURSES A,
+		(SELECT COURSE_ID, ROUND(SUM(REVIEW_STARS)/COUNT(REVIEW_STARS)) COURSE_STARS
+		FROM REVIEWS
+		WHERE COURSE_ID = #{courseId}
+		GROUP BY COURSE_ID) B
+		WHERE A.COURSE_ID = B.COURSE_ID(+)
+		AND A.COURSE_ID = #{courseId}
+	</select>
+
+	<insert id="courseInsert"
+		parameterType="co.four.study.course.service.CourseVO">
+		<selectKey keyProperty="courseId" resultType="int"
+			order="BEFORE">
 			SELECT NVL(MAX(COURSE_ID), 0) + 1 AS COURSE_ID FROM COURSES
 		</selectKey>
 		INSERT INTO COURSES
-		VALUES (#{courseId}, #{courseName}, #{courseScript}, #{coursePrice}, #{courseMainCategory},
-				#{courseSubCategory}, #{courseTeacher}, #{courseGrade}, #{courseImg})
+		VALUES (#{courseId}, #{courseName},
+		#{courseScript}, #{coursePrice}, #{courseMainCategory},
+		#{courseSubCategory}, #{courseTeacher}, #{courseGrade}, #{courseImg})
 	</insert>
-	
-	<update id="courseUpdate" parameterType="co.four.study.course.service.CourseVO">
-		UPDATE	COURSES
+
+	<update id="courseUpdate"
+		parameterType="co.four.study.course.service.CourseVO">
+		UPDATE COURSES
 		<set>
 			<if test="courseName != null">COURSE_NAME = #{courseName},</if>
 			<if test="coursePrice != -1">COURSE_PRICE = #{coursePrice},</if>
@@ -64,74 +71,67 @@
 		</set>
 		WHERE COURSE_ID = #{courseId}
 	</update>
-	
-	<delete id="courseDelete" parameterType="co.four.study.course.service.CourseVO">
+
+	<delete id="courseDelete"
+		parameterType="co.four.study.course.service.CourseVO">
 		DELETE FROM COURSES
 		WHERE COURSE_ID = #{courseId}
 	</delete>
-	
-	<select id="courseSubCategory" resultType="co.four.study.course.service.CourseVO">
-		SELECT	UPPER(COURSE_SUB_CATEGORY) COURSE_SUB_CATEGORY, COUNT(1) AS SUB_CATEGORY_COUNT
-		FROM	COURSES
-		WHERE	COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
+
+	<select id="courseSubCategory"
+		resultType="co.four.study.course.service.CourseVO">
+		SELECT UPPER(COURSE_SUB_CATEGORY) COURSE_SUB_CATEGORY,
+		COUNT(1) AS SUB_CATEGORY_COUNT
+		FROM COURSES
+		WHERE COURSE_MAIN_CATEGORY =
+		LOWER(#{courseMainCategory})
 		GROUP BY COURSE_SUB_CATEGORY
 	</select>
-	
+
 	<select id="courseMainCategory" resultType="map">
-		SELECT	UPPER(COURSE_MAIN_CATEGORY) COURSE_MAIN_CATEGORY
-		FROM	COURSES
-		GROUP BY COURSE_MAIN_CATEGORY
+		SELECT
+		UPPER(COURSE_MAIN_CATEGORY) COURSE_MAIN_CATEGORY
+		FROM COURSES
+		GROUP BY
+		COURSE_MAIN_CATEGORY
 	</select>
-	
+
 	<select id="courseTotalCount" resultType="int">
 		SELECT COUNT(1) FROM COURSES
 		WHERE 1=1
 		<if test="courseSubCategory != null">
-	    AND COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
-	    </if>
+			AND COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
+		</if>
 		<if test="courseGrade != null">
-	    AND COURSE_GRADE = LOWER(#{courseGrade})
-	    </if>
+			AND COURSE_GRADE = LOWER(#{courseGrade})
+		</if>
 	</select>
-	
-	<!-- <select id="coursePagingList" resultType="co.four.study.course.service.CourseVO">
-		SELECT  T.*
-		FROM   (SELECT ROWNUM RNM, A.*
-		        FROM ( SELECT * 
-		               FROM   COURSES 
-		               <if test="courseMainCategory != null">
-		               WHERE COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
-		               </if>
-		               <if test="courseSubCategory != null">
-					   WHERE COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
-					   </if>
-		             ) A
-		        ) T
-		WHERE RNM BETWEEN #{start} AND #{end}
-	</select> -->
-	
-	<select id="coursePagingList" resultType="co.four.study.course.service.CourseVO">
+
+	<select id="coursePagingList"
+		resultType="co.four.study.course.service.CourseVO">
 		SELECT T.*, B.*
 		FROM (SELECT ROWNUM RNM, A.*
-		      FROM  (SELECT * FROM COURSES
-		      		 WHERE 1=1
-		      		 <if test="courseMainCategory != null">
-		             	AND COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
-		             </if>
-		             <if test="courseSubCategory != null">
-					 	AND COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
-					 </if> 
-		             <if test="courseGrade != null">
-					 	AND COURSE_GRADE = LOWER(#{courseGrade})
-					 </if> 
-		      		 ORDER BY COURSE_ID) A
-		      ) T
+		FROM (SELECT * FROM COURSES
+		WHERE 1=1
+		<if test="courseMainCategory != null">
+			AND COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
+		</if>
+		<if test="courseSubCategory != null">
+			AND COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
+		</if>
+		<if test="courseGrade != null">
+			AND COURSE_GRADE = LOWER(#{courseGrade})
+		</if>
+		ORDER BY COURSE_ID) A
+		) T
 		LEFT JOIN
-		(SELECT COURSE_ID, ROUND(SUM(REVIEW_STARS)/COUNT(REVIEW_STARS)) COURSE_STARS
+		(SELECT COURSE_ID,
+		ROUND(SUM(REVIEW_STARS)/COUNT(REVIEW_STARS)) COURSE_STARS
 		FROM REVIEWS
 		GROUP BY COURSE_ID) B
 		ON T.COURSE_ID = B.COURSE_ID
-		WHERE RNM BETWEEN #{start} AND #{end}
+		WHERE RNM BETWEEN
+		#{start} AND #{end}
 	</select>
 
 </mapper>
