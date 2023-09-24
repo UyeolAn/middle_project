@@ -118,7 +118,7 @@
 											<li><a href="./shopping-cart.html">고급</a></li>
 										</ul>
 									</li>
-									<li><a href="communitymainpage.do">Community</a>
+									<li><a href="communityqnapage.do">Community</a>
 										<ul class="dropdown">
 											<li><a href="communityqnapage.do">질문게시판</a></li>
 											<li><a href="communityfreepage.do">자유게시판</a></li>

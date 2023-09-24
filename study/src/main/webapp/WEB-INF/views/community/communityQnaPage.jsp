@@ -81,9 +81,9 @@
           <div class="row">
             <div class="col-lg-12">
               <ul class="comm__qna__question__issolved">
-                <li>전체</li>
-                <li>미해결</li>
-                <li>해결됨</li>
+                <li class="solve__active" id="solveAll">전체</li>
+                <li id="solveNotSolved">미해결</li>
+                <li id="solveSolved">해결됨</li>
               </ul>
             </div>
           </div>
@@ -147,26 +147,7 @@
 
         <!--Community Question List Start-->
         <div class="comm__qna__question">
-          <div class="product__details__tab__content__item">
-            <h5 class="col-lg-12"><span class="qna__not__solved">미해결</span>질문 게시글 제목1</h5>
-            <p class="col-lg-9">질문 게시글 내용1 입니다...</p>
-            <br>
-            <div class="col-lg-12 comm__qna__question__etc__info">
-              <span class="etc__info__left">[uyeol] · 예제로 배우는 스프링 입문 (개정판) · 1시간 전</span>
-              <span class="etc__info__right">조회수:19 답변:3</span>
-            </div>
-          </div>
-          <hr>
-          <div class="product__details__tab__content__item">
-            <h5 class="col-lg-12"><span class="qna__solved">해결됨</span>질문 게시글 제목3</h5>
-            <p class="col-lg-9">질문 게시글 내용3 입니다...</p>
-            <br>
-            <div class="col-lg-12 comm__qna__question__etc__info">
-              <span class="etc__info__left">[uyeol] · 자바 ORM 표준 JPA 프로그래밍 - 기본편 · 12시간 전</span>
-              <span class="etc__info__right">조회수:202 답변:10</span>
-            </div>
-          </div>
-          <hr>
+          
         </div>
 
         <!--Community Question List End-->
@@ -219,20 +200,18 @@
             $('div.comm__qna__question')
               .append(
                 $('<div class="product__details__tab__content__item"> /')
-                  .append($(`
-                    <c:if test="\${question.questionSolve eq 'not_solved'}">
-                      <h5 class="col-lg-12"><span class="qna__not__solved">미해결</span>\${question.questionTitle}</h5>
-                    </c:if>
-                    <c:if test="\${question.questionSolve eq 'solved'}">
-                      <h5 class="col-lg-12"><span class="qna__solved">해결됨</span>\${question.questionTitle}</h5>
-                    </c:if>
-                    `))
+                  .append($(
+                    `<h5 class="col-lg-12"><span class="` +
+                    (question.questionSolve == 'not_solved' ? 'qna__not__solved' : 'qna_solved') + `">` +
+                    (question.questionSolve == 'not_solved' ? '미해결' : '해결') +
+                    `</span>\${question.questionTitle}</h5>`
+                  ))
                   .append($('<p class="col-lg-9 comm__qna__question__content"> /').text(`\${question.questionContent}`))
                   .append($('<br>'))
                   .append(
                     $('<div class="col-lg-12 comm__qna__question__etc__info"> /')
                       .append($('<span class="etc__info__left"> /')
-                        .text(`[\${question.memberId}] \${question.courseName}`))
+                        .text(`[\${question.memberId}] ` + (question.courseName == null ? '기타/홈페이지 질문' : question.courseName)))
                       .append($('<span class="etc__info__right"> /')
                         .text(`조회수:\${question.questionHit}   답변:\${question.answerCount}`))
                   )
