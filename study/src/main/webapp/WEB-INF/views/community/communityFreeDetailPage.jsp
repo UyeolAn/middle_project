@@ -258,15 +258,6 @@
           }
         }
 
-        // 게시글 삭제 함수
-        function deleteBoard() {
-          if (confirm("정말 삭제하시겠습니까??") == true) {
-            $('#deleteForm').submit();
-          } else {
-            return false;
-          }
-        }
-
         // 좋아요 버튼 활성화
         function setLikeBtn() {
           $('#likeBtn').on('click', function () {
@@ -362,6 +353,15 @@
           if (loginMemberId == 'null' || loginMemberId != '${board.memberId}') {
             $('#updateBtn').hide();
             $('#deleteBtn').hide();
+          }
+        }
+
+        // 게시글 삭제 함수
+        function deleteBoard() {
+          if (confirm("정말 삭제하시겠습니까??") == true) {
+            $('#deleteForm').submit();
+          } else {
+            return false;
           }
         }
 

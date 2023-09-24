@@ -16,6 +16,7 @@
         color: white;
         background: #B7B7B7;
         cursor: pointer;
+        border-radius: 10px;
       }
 
       .input__file__btn:hover {
@@ -24,6 +25,7 @@
 
       .small-btn {
         padding: 9px 20px;
+        border-radius: 10px;
       }
     </style>
   </head>

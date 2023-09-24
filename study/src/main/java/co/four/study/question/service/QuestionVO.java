@@ -1,6 +1,6 @@
 package co.four.study.question.service;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import lombok.Data;
 
@@ -18,9 +18,9 @@ public class QuestionVO {
 	
 	private String questionContent;
 	
-	private Date questionEnterDate;
+	private LocalDate questionEnterDate;
 	
-	private Date questionUpdateDate;
+	private LocalDate questionUpdateDate;
 	
 	private String questionImg;
 	

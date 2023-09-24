@@ -47,7 +47,7 @@
           color: #333;
         }
 
-        comm__qna__question__content {
+        .comm__qna__question__content {
           width: 100%;
           height: 25px;
           overflow: hidden;
