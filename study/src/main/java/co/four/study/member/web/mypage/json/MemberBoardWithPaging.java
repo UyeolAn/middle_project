@@ -48,7 +48,6 @@ public class MemberBoardWithPaging extends HttpServlet {
 		searchVO.setEndRow(end);
 		
 		List<BoardVO> boards = boardDao.searchBoardsWithPaging(searchVO);
-		System.out.println(boards);
 		
 		for (BoardVO board : boards) {
 			int rCnt =  replyDao.countBoardReply(board.getBoardId());

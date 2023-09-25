@@ -45,7 +45,6 @@ public class MemberQuestionWithPaging extends HttpServlet {
 		searchVO.setEndRow(end);
 		
 		List<QuestionVO> questions = questionDao.searchQuestionsWithPaging(searchVO);
-		System.out.println(questions);
 		
 		for (QuestionVO question : questions) {	
 			int aCnt =  answerDao.countQuestionAnswer(question.getQuestionId());

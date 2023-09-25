@@ -135,17 +135,6 @@
       <div class="mypage__mycomm__body"
         style="padding-bottom: 3%; border: 1px solid rgba(0,0,0,.1); border-radius: 5px;">
         <div class="col-lg-12 mypage__mycomm__body__content">
-          <div class="col-lg-12 row">
-            <div class="col-lg-9">
-              <ul class="mycomm__qna__solve">
-                <li class="type__active" id="solveAll">전체</li>
-                <li id="solveNotSolved">미해결</li>
-                <li id="solveSolved">해결됨</li>
-              </ul>
-            </div>
-          </div>
-
-
           <!-- <div class="product__details__tab__content__item">
             <div class="mycomm__qna__info" style="overflow: hidden;">
               <span class="col-lg-9 list__title">
@@ -194,7 +183,7 @@
       setCommTypeBtn();
       loadBody();
 
-
+      // 내 커뮤니티 타입 버튼 활성화 함수
       function setCommTypeBtn() {
         $('ul.mycomm__type>li').on('click', function () {
           console.log('log')
@@ -205,9 +194,25 @@
             if ($(li).attr('id') == commType) {
               $(li).attr('class', 'type__active');
             } else {
-              $(li).attr('class', 'type__active');
+              $(li).attr('class', 'type__non__active');
             }
           });
+          loadBody();
+        });
+      }
+
+      // 해결여부 버튼 활성화 함수
+      function setSolveBtn() {
+        $('ul.mycomm__qna__solve>li').each(function (idx, li) {
+          if ($(li).attr('id') == solveType) {
+            $(li).attr('class', 'type__active');
+          } else {
+            $(li).attr('class', 'type__non__active');
+          }
+        });
+        $('ul.mycomm__qna__solve>li').on('click', function () {
+          console.log('log')
+          solveType = $(this).attr('id');
           loadBody();
         });
       }
@@ -237,6 +242,7 @@
           },
           success: function (questionsJson) {
             showQuestions(questionsJson);
+            setSolveBtn();
             showPageList();
           },
           error: function (err) {
@@ -252,7 +258,7 @@
             <div class="col-lg-12 row">
               <div class="col-lg-9">
                 <ul class="mycomm__qna__solve">
-                  <li class="type__active" id="solveAll">전체</li>
+                  <li id="solveAll">전체</li>
                   <li id="solveNotSolved">미해결</li>
                   <li id="solveSolved">해결됨</li>
                 </ul>
