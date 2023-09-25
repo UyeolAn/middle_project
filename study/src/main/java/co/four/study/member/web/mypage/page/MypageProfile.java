@@ -33,42 +33,50 @@ public class MypageProfile extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		MemberVO mvo = new MemberVO();
 		MemberService memberDao = new MemberServiceImpl();
 		MemberCourseService memberCourseDao = new MemberCourseServiceImpl();
 		HttpSession session = request.getSession();
+		String checkAuthor = (String) session.getAttribute("loginAuthor");
 
-		mvo.setMemberId((String) session.getAttribute("loginId"));
-		mvo = memberDao.memberSelect(mvo);
+		if (checkAuthor == "admin") {
+			//홈화면에서 마이페이지 접근시 관리자 마이페이지로 리디렉트
+			response.sendRedirect("adminmypage.do");
+		} else {
 
-		System.out.println(mvo.getMemberId());
-		// 수강중인 강의 상위3개 미리보기
-		List<MemberCourseVO> mclist = memberCourseDao.selectMemberCourseListDetail(mvo);
-		int courseCount = 0;
+			mvo.setMemberId((String) session.getAttribute("loginId"));
+			mvo = memberDao.memberSelect(mvo);
 
-		// 수강중 강의 목록
-		for (int i = 0; i < mclist.size(); i++) {
-			// 수강중인강의 개수
-			courseCount++;
+			System.out.println(mvo.getMemberId());
+			// 수강중인 강의 상위3개 미리보기
+			List<MemberCourseVO> mclist = memberCourseDao.selectMemberCourseListDetail(mvo);
+			int courseCount = 0;
+
+			// 수강중 강의 목록
+			for (int i = 0; i < mclist.size(); i++) {
+				// 수강중인강의 개수
+				courseCount++;
+			}
+			System.out.println(mclist);
+			request.setAttribute("menu", "mypage");
+			// 프로필
+			request.setAttribute("memberId", mvo.getMemberId());
+			request.setAttribute("memberPassword", mvo.getMemberPassword());
+			request.setAttribute("memberName", mvo.getMemberName());
+			request.setAttribute("memberTel", mvo.getMemberTel());
+			request.setAttribute("memberAddress", mvo.getMemberAddress());
+			request.setAttribute("memberEmail", mvo.getMemberEmail());
+			request.setAttribute("memberEnterDate", mvo.getMemberEnterDate());
+
+			// 강의 정보
+			request.setAttribute("memberCourseCount", courseCount);
+			request.setAttribute("mycourse", mclist);
+
+			String page = "mypage/mypageProfile";
+
+			ViewResolve.foward(request, response, page);
 		}
-		System.out.println(mclist);
-		request.setAttribute("menu", "mypage");
-		// 프로필
-		request.setAttribute("memberId", mvo.getMemberId());
-		request.setAttribute("memberPassword", mvo.getMemberPassword());
-		request.setAttribute("memberName", mvo.getMemberName());
-		request.setAttribute("memberTel", mvo.getMemberTel());
-		request.setAttribute("memberAddress", mvo.getMemberAddress());
-		request.setAttribute("memberEmail", mvo.getMemberEmail());
-		request.setAttribute("memberEnterDate", mvo.getMemberEnterDate());
-
-		// 강의
-		request.setAttribute("memberCourseCount", courseCount);
-		request.setAttribute("mycourse", mclist);
-
-		String page = "mypage/mypageProfile";
-
-		ViewResolve.foward(request, response, page);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

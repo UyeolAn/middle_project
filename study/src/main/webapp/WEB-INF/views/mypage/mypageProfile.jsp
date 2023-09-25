@@ -6,15 +6,52 @@
 		<head>
 			<meta charset="UTF-8">
 			<title>Insert title here</title>
+			<style>
+				#modal {
+					position: fixed;
+					z-index: 1;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+					overflow: auto;
+					background-color: rgba(0, 0, 0, 0.4);
+					display: none;
+				}
+
+				.modal-content {
+					background-color: #fefefe;
+					margin: 15% auto;
+					padding: 20px;
+					border: 1px solid #888;
+					width: 80%;
+				}
+
+				.close {
+					color: #aaa;
+					float: right;
+					font-size: 28px;
+					font-weight: bold;
+				}
+
+				.close:hover,
+				.close:focus {
+					color: black;
+					text-decoration: none;
+					cursor: pointer;
+				}
+			</style>
 		</head>
 
 		<body>
 
 			<!-- Page Heading -->
 			<div class="d-sm-flex align-items-center justify-content-between mb-4">
-				<h1 class="h3 mb-0 text-gray-800">${loginId} 's PAGE</h1>
+				<h1 class="h3 mb-0 text-gray-800">MYPAGE</h1>
 			</div>
-
+			<p class="mb-4">
+				${memberName }님의 정보
+			</p>
 			<!-- Content Row -->
 			<div class="row">
 
@@ -60,11 +97,9 @@
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
 									<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-										새로운 질문</div>
-									<div class="h5 mb-0 font-weight-bold text-gray-800">${newQ }</div>
-								</div>
-								<div class="col-auto">
-									<i class="fas fa-comments fa-2x text-gray-300"></i>
+										작성한 게시물 수</div>
+									<!-- <div class="h5 mb-0 font-weight-bold text-gray-800">게시물 ${newQ }</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800">댓글${newQ }</div> -->
 								</div>
 							</div>
 						</div>
@@ -74,80 +109,123 @@
 
 			<div class="row">
 				<!-- 프로필 -->
-				<div class="col-xl-4 col-lg-5">
-					<div class="card shadow mb-4">
-						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary">${loginName}</h6>
-
-						</div>
-					</div>
-
-					<!-- 회원 상세 정보 -->
-					<div class="card mb-4">
-						<div class="card-body">
-							<div>
-								<div class="col-sm-3">
-									<p class="mb-0 font-weight-bold">이름</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">${m.memberName}</p>
-								</div>
-							</div>
-							<hr>
-							<div>
-								<div class="col-sm-3">
-									<p class="mb-0 font-weight-bold">아이디</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0" id="mid" value="${m.memberId}">${m.memberId}</p>
-								</div>
-							</div>
-							<hr>
-							<div>
-								<div class="col-sm-3">
-									<p class="mb-0 font-weight-bold">이메일</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">${m.memberEmail}</p>
-								</div>
-							</div>
-							<hr>
-							<div>
-								<div class="col-sm-3">
-									<p class="mb-0 font-weight-bold">연락처</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">${m.memberTel}</p>
-								</div>
-							</div>
-							<hr>
-							<div>
-								<div class="col-sm-3">
-									<p class="mb-0 font-weight-bold">주소</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">${m.memberAddress}</p>
-								</div>
-							</div>
-							<hr>
-							<div>
-								<div class="col-sm-3">
-									<p class="mb-0 font-weight-bold">가입일</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">${m.memberEnterDate}</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- 강의목록 -->
-					<div class="card mb-4">
+				<div class="col-12 col-md-6 col-lg-12 mb-4">
+					
+					<div class="card">
 						<div class="card-header">
-							<h6 class="m-0 font-weight-bold text-primary">강의 목록</h6>
+							<h6 class="m-0 font-weight-bold text-primary">${memberName} 님</h6>
 						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<div class="card-body" style="padding: 50px;">
+
+							<!-- 회원 상세 정보 -->
+							<form id="frm">
+								<div class="form-group">
+									<label class="font-weight-bold" style="display: block;">이름</label>
+									<span>${memberName}</span>
+								</div>
+								<div class="form-group">
+									<label class="font-weight-bold" style="display: block;">아이디</label>
+									<span>${memberId}</span>
+								</div>
+								<div class="form-group">
+									<label class="font-weight-bold" style="display: block;">연락처</label>
+									<span>${memberTel}</span>
+								</div>
+								<div class="form-group">
+									<label class="font-weight-bold" style="display: block;">주소</label>
+									<span>${memberAddress}</span>
+								</div>
+								<div class="form-group">
+									<label class="font-weight-bold" style="display: block;">이메일</label>
+									<span>${memberEmail}</span>
+								</div>
+								<div class="form-group">
+									<label class="font-weight-bold">가입일</label>
+									<p>${memberEnterDate}</p>
+								</div>
+								<a class="btn btn-secondary btn-icon-split modify">
+									<span class="text" onclick="modalOpen()" style="color: white;">수정</span>
+								</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+
+			<div class="card shadow mb-4" id="modal">
+				<div class="card-header py-3 modal-content" style="width: 50%;">
+					<h5 class="m-0 mb-2 font-weight-bold text-primary" id="modalTitle">내 정보 수정</h5>
+					<div class="card-body">
+						<form id="frm2">
+							<div class="form-group">
+								<label class="font-weight-bold" style="display: block;">이름</label>
+								<input value="${memberName}" id="modalName" type="text">
+							</div>
+							<div class="form-group">
+								<label class="font-weight-bold" style="display: block;">아이디</label>
+								<input value="${memberId}" id="modalId" type="text" readonly>
+							</div>
+							<div class="form-group">
+								<label class="font-weight-bold" style="display: block;">비밀번호</label>
+								<input id="modalPw" type="password">
+							</div>
+							<div class="form-group">
+								<label class="font-weight-bold" style="display: block;">연락처</label>
+								<input value="${memberTel}" id="modalTel" type="tel">
+							</div>
+							<div class="form-group">
+								<label class="font-weight-bold">주소</label><br>
+								<input type="text" id="sample6_postcode" class="form-control mb-2"
+									style="display: inline; width: 50%;" placeholder="우편번호">
+								<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+								<input type="text" id="sample6_address" class="form-control mb-2"
+									style="width: 100%; display: inline;" value="${m.memberAddress}" placeholder="주소"
+									required>
+								<div class="row mb-2" style="width: 100%; margin-left: 0;">
+									<input type="text" id="sample6_detailAddress" class="form-control col-lg-6"
+										style="width: 50%; display: inline;" placeholder="상세주소"><!--
+								--><input type="text" id="sample6_extraAddress" class="form-control col-lg-6"
+										style="width: 50%; display: inline;" placeholder="참고항목">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="font-weight-bold" style="display: block;">이메일</label>
+								<input value="${memberEmail}" id="modalEmail" type="email">
+							</div>
+
+						</form>
+						<a class="btn btn-primary btn-icon-split" id="sub-modal">
+							<span class="icon text-white-50">
+								<i class="fas fa-arrow-right"></i>
+							</span>
+							<span class="text">완료</span>
+						</a>
+						<a class="btn btn-danger btn-icon-split" id="close-modal">
+							<span class="icon text-white-50">
+								<i class="fas fa-trash"></i>
+							</span>
+							<span class="text">취소</span>
+						</a>
+					</div>
+				</div>
+			</div>
+
+
+
+			<!-- 강의목록 -->
+			<div class="col-12 col-md-6 col-lg-12 mb-4">
+				<div class="card">
+					<div class="card-header">
+						<h6 class="m-0 font-weight-bold text-primary">강의 목록</h6>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+								<c:if test="${courseName eq null}">
+									<h3>수강중인 강의가 없습니다.</h3>
+								</c:if>
+								<c:if test="${courseName ne null}">
 									<thead>
 										<tr>
 											<th>NAME</th>
@@ -167,90 +245,169 @@
 											</tr>
 										</c:forEach>
 									</tbody>
-								</table>
-							</div>
+								</c:if>
+							</table>
 						</div>
-					</div>
-
-
-
-					<!-- Content Column -->
-					<div class="col-lg-6 mb-4">
-
-						<!-- Project Card Example -->
-						<div class="card shadow mb-4">
-							<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">수강중인 강의 진도</h6>
-							</div>
-							<div class="card-body">
-								<h4 class="small font-weight-bold">
-									Server Migration <span class="float-right">20%</span>
-								</h4>
-								<div class="progress mb-4">
-									<div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-										aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-								<h4 class="small font-weight-bold">
-									Sales Tracking <span class="float-right">40%</span>
-								</h4>
-								<div class="progress mb-4">
-									<div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-										aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-								<h4 class="small font-weight-bold">
-									Customer Database <span class="float-right">60%</span>
-								</h4>
-								<div class="progress mb-4">
-									<div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60"
-										aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-								<h4 class="small font-weight-bold">
-									Payout Details <span class="float-right">80%</span>
-								</h4>
-								<div class="progress mb-4">
-									<div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-										aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-								<h4 class="small font-weight-bold">
-									Account Setup <span class="float-right">Complete!</span>
-								</h4>
-								<div class="progress">
-									<div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-										aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-						</div>
-
-
-					</div>
-
-					<div class="col-lg-6 mb-4">
-
-						<!-- Approach -->
-						<div class="card shadow mb-4">
-							<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">Development
-									Approach</h6>
-							</div>
-							<div class="card-body">
-								<p>SB Admin 2 makes extensive use of Bootstrap 4 utility
-									classes in order to reduce CSS bloat and poor page performance.
-									Custom CSS classes are used to create custom components and
-									custom utility classes.</p>
-								<p class="mb-0">Before working with this theme, you should
-									become familiar with the Bootstrap framework, especially the
-									utility classes.</p>
-							</div>
-						</div>
-
 					</div>
 				</div>
 			</div>
 
+
+			<!-- Content Column -->
+			<div class="col-12 col-md-6 col-lg-12 mb-4">
+
+				<!-- Project Card Example -->
+				<div class="card">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">수강중인 강의 진도</h6>
+					</div>
+					<div class="card-body">
+						<h4 class="small font-weight-bold">
+							Server Migration <span class="float-right">20%</span>
+						</h4>
+						<div class="progress mb-4">
+							<div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20"
+								aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<h4 class="small font-weight-bold">
+							Sales Tracking <span class="float-right">40%</span>
+						</h4>
+						<div class="progress mb-4">
+							<div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
+								aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<h4 class="small font-weight-bold">
+							Customer Database <span class="float-right">60%</span>
+						</h4>
+						<div class="progress mb-4">
+							<div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60"
+								aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<h4 class="small font-weight-bold">
+							Payout Details <span class="float-right">80%</span>
+						</h4>
+						<div class="progress mb-4">
+							<div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80"
+								aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<h4 class="small font-weight-bold">
+							Account Setup <span class="float-right">Complete!</span>
+						</h4>
+						<div class="progress">
+							<div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+								aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+
+
+			</div>
+			</div>
+			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 			<script>
+				const modal = document.getElementById("modal");
+				const subModalBtn = document.getElementById("sub-modal");
+				const closeModalBtn = document.getElementById("close-modal");
+				const modalFields = ['이름', '아이디', '연락처', '주소', '이메일'];
 
+				modal.style.display = "none";
+				document.body.style.overflow = "auto";
+
+				function modalOpen() {
+					// const m = {id:'${m.memberId}', name:'${m.memberName}', tel:'${m.memberTel}', addr:'${m.memberAddress}', email:'${m.memberEmail}'};
+
+					modal.style.display = "block";
+					document.body.style.overflow = "hidden";
+
+
+					subModalBtn.addEventListener("click", () => {
+						let id = $('#modalId').val();
+						let pw = $('#modalPw').val();
+						let name = $('#modalName').val();
+						let tel = $('#modalTel').val();
+						let addr = $('#sample6_address').val() + " " + $('#sample6_detailAddress').val() + $('#sample6_extraAddress').val();
+						let email = $('#modalEmail').val();
+						console.log(id);
+
+						let url = 'ajaxemployeemypageupdate.do';
+						let payload = 'id=' + id + '&pw=' + pw + '&name=' + name + '&tel=' + tel + '&addr=' + addr + '&email=' + email;
+						fetch(url, {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+							body: payload
+						})
+							.then(resolve => resolve.json())
+							.then(result => {
+								console.log(result);
+								console.log(result);
+								modal.style.display = "none";
+								document.body.style.overflow = "auto";
+								location.reload(true);
+							});
+					})
+				}
+
+
+				//수정 모달 취소버튼누르면 닫기
+				closeModalBtn.addEventListener("click", () => {
+					modal.style.display = "none";
+					document.body.style.overflow = "auto"; // 스크롤바 보이기
+				});
+
+
+				function sample6_execDaumPostcode() {
+					new daum.Postcode({
+						oncomplete: function (data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+							// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var addr = ''; // 주소 변수
+							var extraAddr = ''; // 참고항목 변수
+
+							//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+							if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+								addr = data.roadAddress;
+							} else { // 사용자가 지번 주소를 선택했을 경우(J)
+								addr = data.jibunAddress;
+							}
+
+							// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+							if (data.userSelectedType === 'R') {
+								// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+								// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+								if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+									extraAddr += data.bname;
+								}
+								// 건물명이 있고, 공동주택일 경우 추가한다.
+								if (data.buildingName !== '' && data.apartment === 'Y') {
+									extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+								}
+								// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+								if (extraAddr !== '') {
+									extraAddr = ' (' + extraAddr + ')';
+								}
+								// 조합된 참고항목을 해당 필드에 넣는다.
+								document.getElementById("sample6_extraAddress").value = extraAddr;
+
+							} else {
+								document.getElementById("sample6_extraAddress").value = '';
+							}
+
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							document.getElementById('sample6_postcode').value = data.zonecode;
+							document.getElementById("sample6_address").value = addr;
+							// 커서를 상세주소 필드로 이동한다.
+							document.getElementById("sample6_detailAddress").focus();
+						}
+					}).open();
+				}
 			</script>
-
 		</body>
 
 		</html>
