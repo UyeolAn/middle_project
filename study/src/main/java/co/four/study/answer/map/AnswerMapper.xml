@@ -22,9 +22,8 @@
 		<selectKey keyProperty="answerId" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(ANSWER_ID), 0) + 1 AS ANSWER_ID FROM ANSWERS
 		</selectKey>
-		INSERT INTO ANSWERS (ANSWER_ID, QUESTION_ID, MEMBER_ID, ANSWER_CONTENT, ANSWER_ENTER_DATE, ANSWER_IMG)
-		VALUES (#{answerId}, #{questionId}, #{memberId}, #{answerContent}, SYSDATE,
-				#{answerImg})
+		INSERT INTO ANSWERS (ANSWER_ID, QUESTION_ID, MEMBER_ID, ANSWER_CONTENT, ANSWER_ENTER_DATE)
+		VALUES (#{answerId}, #{questionId}, #{memberId}, #{answerContent}, SYSDATE)
 	</insert>
 	
 	<update id="answerUpdate" parameterType="co.four.study.answer.service.AnswerVO">

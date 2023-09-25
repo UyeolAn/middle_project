@@ -9,55 +9,40 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import co.four.study.answer.service.AnswerService;
 import co.four.study.answer.service.AnswerVO;
 import co.four.study.answer.serviceImpl.AnswerServiceImpl;
-import co.four.study.question.service.QuestionService;
-import co.four.study.question.service.QuestionVO;
-import co.four.study.question.service.etcvo.QuestionSolveVO;
-import co.four.study.question.serviceImpl.QuestionServiceImpl;
 
-
-@WebServlet("/ajaxansweradd.do")
-public class AjaxAnswerAdd extends HttpServlet {
+@WebServlet("/ajaxanswerdel.do")
+public class AjaxAnswerDel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
 
-    public AjaxAnswerAdd() {
+    public AjaxAnswerDel() {
         super();
-
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		ObjectMapper objectMapper = new ObjectMapper();
 		AnswerVO vo = new AnswerVO();
 		AnswerService dao = new AnswerServiceImpl();
-		QuestionService qdao = new QuestionServiceImpl();
-		QuestionSolveVO qvo = new QuestionSolveVO();
 		
-		vo.setQuestionId(Integer.parseInt(request.getParameter("qid")));
-		vo.setAnswerContent(request.getParameter("content"));
-	
-		vo.setMemberId((String)session.getAttribute("loginId"));
+		vo.setAnswerId(Integer.parseInt(request.getParameter("aid")));
+		
 		Map<String, Object> resultMap = new HashMap<>();
 		
-		if (dao.answerInsert(vo) == 1) {
+		if (dao.answerDelete(vo) == 1) {
 			resultMap.put("retCode", "Success");
-			resultMap.put("data", vo);
 		}
 		else {
 			resultMap.put("retCode", "Fail");
 			
 		}
 		
-		qvo.setQuestionId(Integer.parseInt(request.getParameter("qid")));
-		qvo.setQuestionSolve("solved");
-		int i = qdao.updateQuestionSolve(qvo);
 		
 		String json = objectMapper.writeValueAsString(resultMap);
 		response.setContentType("text/json; charset=UTF-8");
@@ -66,6 +51,7 @@ public class AjaxAnswerAdd extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 

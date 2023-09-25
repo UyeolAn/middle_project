@@ -64,7 +64,7 @@
                                 <!-- <td>${q.questionSolve}</td> -->
 								<!-- 정지계정여부 체크 표시 -->
 								<c:choose>
-									<c:when test="${q.questionSolve eq 'solve'}">
+									<c:when test="${q.questionSolve eq 'solved'}">
 										<td>Y</td>
 									</c:when>
 									<c:otherwise>

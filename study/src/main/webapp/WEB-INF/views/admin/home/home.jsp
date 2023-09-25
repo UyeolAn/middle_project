@@ -202,7 +202,7 @@
 					<!-- Card Body -->
 					<div class="card-body">
 						<h4 class="small font-weight-bold">
-							Server Migration <span class="float-right">20%</span>
+							Server Migration <span class="float-right">임의</span>
 						</h4>
 						<div class="progress mb-4">
 							<div class="progress-bar bg-danger" role="progressbar"
@@ -303,25 +303,7 @@
 			</div>
 		</div>
 <script>
-	const Qmodal = document.getElementById("Qmodal");
-	const closeModalBtn = document.getElementById("close-modal");
 
-	// $('#Qmodalopen').click(function(){
-	// 	Qmodal.style.display = "block";
-    //     document.body.style.overflow = "hidden";
-
-	// });
-
-	// closeModalBtn.addEventListener("click", () => {
-    //   Qmodal.style.display = "none";
-    //   document.body.style.overflow = "auto"; // 스크롤바 보이기
-    //   });
-
-
-	// $('.answer').click(function() {
-	// 	console.log(this.parentElement.parentElement.id);
-
-	// })
 
 </script>
 </body>

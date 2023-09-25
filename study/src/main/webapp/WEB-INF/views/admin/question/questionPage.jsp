@@ -46,7 +46,8 @@
                 <hr>
                 <p class="font-weight-bold text-primary" style="text-align: left;">답변</p>
                 <c:if test="${empty alist}">
-                    답변이 없습니다.
+                    <p>답변이 없습니다.</p>
+                    <br>
                 </c:if>
                 <c:if test="${not empty alist}">
                     <c:forEach items="${alist}" var="a">
@@ -55,25 +56,31 @@
                             <br>
                         </c:if>
                         <p style="text-align: left;">
+                            [내용]<br>
                             ${a.answerContent}<br>
                             작성일 : ${a.answerEnterDate}<br>
                             <i class="bi bi-hand-thumbs-up-fill"></i>
                             <i class="bi bi-hand-thumbs-down-fill"></i>
+	                        <a class="btn btn-danger btn-icon-split" id="${a.answerId}" onclick="delAns('${a.answerId}')">
+		            			<span class="icon text-white-50">
+						                <i class="fas fa-trash"></i>
+						        </span>
+					        </a>
                         </p>
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <input placeholder="답변을 달아주세요" style="width: 80%;" id="aContent">
-                                <a class="btn btn-primary btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </span>
-                                    <span class="text search answer"id="${q.questionId}" onclick="subAns('${q.questionId}')">완료</span>
-                                </a>
-                            </div>
-                        </div>
-                        
+                        <hr>
                     </c:forEach>
                 </c:if>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <input placeholder="답변을 달아주세요" style="width: 80%;" id="aContent">
+                        <a class="btn btn-primary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-arrow-right"></i>
+                            </span>
+                            <span class="text search answer"id="${q.questionId}" onclick="subAns('${q.questionId}')">완료</span>
+                        </a>
+                    </div>
+                </div>
             </div>
          </div>
         </div>
@@ -87,7 +94,7 @@
         console.log(id);
         let content = $('#aContent').val();
         const a = {qid:id, content:content, img:''};
-        
+        console.log(a);
         answer.answerAdd(a,function(data){
             if(data.retCode == "Success") {
                 alert("답변이 달렸습니다.");
@@ -100,12 +107,15 @@
                 alert("알 수 없는 반환코드");
             }
         })
+        
     }
 
     function delAns(aid) {
+        console.log(aid);
         const response = confirm("삭제하시겠습니까?");
         if(response) {
-        sc.subcourseRemove(aid, function(result) {
+        answer.answerRemove(aid, function(result) {
+            console.log(result);
             if (result.retCode == "Success") {
             alert("답변이 삭제되었습니다.");
             location.reload(true);

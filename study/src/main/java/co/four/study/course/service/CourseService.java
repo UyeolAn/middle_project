@@ -21,6 +21,10 @@ public interface CourseService {
 	public String subcateCoursePagingTag(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate);
 	public String gradeCoursePagingTag(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String grade);
 	// 강의 페이지 사이드 메뉴 만들기
-	public void makeSideMenu(HttpServletRequest request);	
+	public void makeSideMenu(HttpServletRequest request);
+	
+	//it강의
+	List<CourseVO> itcourselist();
+	List<CourseVO> itcourseSub(CourseVO vo);
 	
 }
