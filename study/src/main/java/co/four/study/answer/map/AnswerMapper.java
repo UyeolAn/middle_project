@@ -27,6 +27,9 @@ public interface AnswerMapper {
 	// 특정 질문의 해결된 답변수 카운트
 	int countQuestionSolvedAnswer(int id);
 	
+	// 회원이 단 답변수 카운트
+	int countMemberAnswer(String id);
+	
 	// 답변 해결여부 '해결'로 세팅
 	int setAnswerSolved(AnswerVO vo);
 	

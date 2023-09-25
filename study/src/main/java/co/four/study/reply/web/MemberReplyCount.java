@@ -1,4 +1,4 @@
-package co.four.study.board.web.json;
+package co.four.study.reply.web;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,29 +12,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import co.four.study.board.service.BoardService;
-import co.four.study.board.service.etcvo.BoardSearchVO;
-import co.four.study.board.serviceImpl.BoardServiceImpl;
+import co.four.study.member.service.MemberVO;
+import co.four.study.reply.service.ReplyService;
+import co.four.study.reply.serviceImpl.ReplyServiceImpl;
 
-@WebServlet("/boardcount.do")
-public class BoardCount extends HttpServlet {
+@WebServlet("/memberreplycount.do")
+public class MemberReplyCount extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-    public BoardCount() {
+    public MemberReplyCount() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BoardService dao = new BoardServiceImpl();
+		ReplyService dao = new ReplyServiceImpl();
 		
-		BoardSearchVO searchVO = new BoardSearchVO();
-		searchVO.setSearchType(request.getParameter("searchType"));
-		searchVO.setSearchContent(request.getParameter("searchContent"));
-		searchVO.setSortType(request.getParameter("sortType"));
-		searchVO.setMemberId(request.getParameter("memberId"));
+		String memberId = request.getParameter("memberId");
 		
-		int cnt = dao.countBoards(searchVO);
+		MemberVO mvo = new MemberVO();
+		mvo.setMemberId(memberId);
+		int cnt = dao.countReply(mvo);
 		
 		Map<String, Integer> cntMap = new HashMap<>();
 		cntMap.put("totalCount", cnt);

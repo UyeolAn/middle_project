@@ -205,12 +205,12 @@
         let loginMemberId = '<%=(String)session.getAttribute("loginId")%>';
         let questionId = '${question.questionId}';
 
-        let sortType = 'mostRecent'; // 댓글 정렬 기준
+        let sortType = 'mostRecent'; // 답변 정렬 기준
 
-        let totalCount; // 총 댓글 수
+        let totalCount; // 총 답변 수
 
-        let currentPage = 1; // 댓글 현재 페이지
-        let totalPage; // 댓글 전체 페이지 수
+        let currentPage = 1; // 답변 현재 페이지
+        let totalPage; // 전체 페이지 수
 
         setUpdDelBtn();
         loadAnswerCount();
