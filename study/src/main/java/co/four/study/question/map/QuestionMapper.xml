@@ -51,7 +51,7 @@
 						<if test="searchType == 'questionWriter'">
 							AND member_id LIKE '%' || #{searchContent} || '%'
 						</if>
-						<if test="searchCourse != ''">
+						<if test="searchCourse != '' and searchCourse != null">
 							<if test="searchCourse != '기타/홈페이지 질문'">
 								AND course_id IN (SELECT course_id
 											  FROM courses
@@ -67,9 +67,12 @@
 					    <if test="solveType == 'solveSolved'">
 					    	AND question_solve = 'solved'
 					    </if>
+					    <if test="memberId != null">
+					    	AND member_id = #{memberId}
+					    </if>
 					</where> 
 				    <trim prefix="ORDER BY">
-		                <if test="sortType == 'mostRecent'">question_id DESC</if>
+		                <if test="sortType != 'mostHit'">question_id DESC</if>
 		                <if test="sortType == 'mostHit'">question_hit DESC</if>
 		            </trim>) a )
 	     WHERE rm BETWEEN #{startRow} AND #{endRow}
@@ -89,7 +92,7 @@
 			<if test="searchType == 'questionWriter'">
 				AND member_id LIKE '%' || #{searchContent} || '%'
 			</if>
-			<if test="searchCourse != ''">
+			<if test="searchCourse != '' and searchCourse != null">
 				<if test="searchCourse != '기타/홈페이지 질문'">
 					AND course_id IN (SELECT course_id
 								  FROM courses
@@ -104,6 +107,9 @@
 		    </if>
 		    <if test="solveType == 'solveSolved'">
 		    	AND question_solve = 'solved'
+		    </if>
+		    <if test="memberId != null">
+		    	AND member_id = #{memberId}
 		    </if>
 		</where> 
 	</select>

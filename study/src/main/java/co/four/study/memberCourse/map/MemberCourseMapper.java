@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.four.study.course.service.CourseVO;
 import co.four.study.member.service.MemberVO;
+import co.four.study.memberCourse.service.MemberCourseQnaVO;
 import co.four.study.memberCourse.service.MemberCourseVO;
 
 public interface MemberCourseMapper {
@@ -35,6 +36,10 @@ public interface MemberCourseMapper {
 	//회원수강여부 체크
 	int memberCourseStatus(MemberCourseVO vo);
 	
+	//회원이 수강신청한 강의 ID/이름 가져오기
+	List<MemberCourseQnaVO> selectMemberCourseWithName(String id);
+	
 	//현재 수강하는 과목들 서브카테고리별 분포
 	int distributionSubcategory(CourseVO vo);
+
 }

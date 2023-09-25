@@ -69,10 +69,19 @@
 		AND COURSE_ID = #{courseId}
 	</select>
 	
+	<select id="selectMemberCourseWithName" parameterType="String" resultType="co.four.study.memberCourse.service.MemberCourseQnaVO">
+		SELECT mc.course_id, c.course_name
+		FROM members_courses mc
+			JOIN courses c
+			ON mc.course_id = c.course_id
+		WHERE mc.member_id = #{memberId}
+   </select>
+
 	<select id="distributionSubcategory" parameterType="co.four.study.course.service.CourseVO" resultType="Integer">
 		SELECT COUNT(*) 
 		FROM MEMBERS_COURSES MC JOIN COURSES C ON MC.COURSE_ID = C.COURSE_ID 
 		WHERE COURSE_SUB_CATEGORY = #{courseSubCategory}
+
 	</select>
 
 </mapper>
