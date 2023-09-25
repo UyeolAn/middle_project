@@ -70,4 +70,9 @@ public class AnswerServiceImpl implements AnswerService{
 		return map.setAnswerNotSolved(vo);
 	}
 
+	@Override
+	public List<AnswerVO> answerSelectListbyQ(AnswerVO vo) {
+		return map.answerSelectListbyQ(vo);
+	}
+
 }
