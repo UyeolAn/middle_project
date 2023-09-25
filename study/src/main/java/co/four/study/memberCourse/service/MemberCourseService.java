@@ -34,4 +34,7 @@ public interface MemberCourseService {
 	
 	//회원수강여부 체크
 	int memberCourseStatus(MemberCourseVO vo);
+	
+	//현재 수강하는 과목들 서브카테고리별 분포
+	int distributionSubcategory(CourseVO vo);
 }

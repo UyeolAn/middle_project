@@ -77,4 +77,9 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 		return map.memberCourseStatus(vo);
 	}
 
+	@Override
+	public int distributionSubcategory(CourseVO vo) {
+		return map.distributionSubcategory(vo);
+	}
+
 }

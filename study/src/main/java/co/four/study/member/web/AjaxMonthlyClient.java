@@ -33,7 +33,7 @@ public class AjaxMonthlyClient extends HttpServlet {
 		//월별 사용자 유입
 		List<Map<String, Object>> monthlyClient = mdao.monthlyClient();
 		
-		System.out.println(monthlyClient);
+
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(monthlyClient);
