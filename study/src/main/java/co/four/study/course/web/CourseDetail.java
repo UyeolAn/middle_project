@@ -91,9 +91,9 @@ public class CourseDetail extends HttpServlet {
 		request.setAttribute("subCourses", subCourses);
 		
 		// 강의별 리뷰 조회
-		int rcount = rdao.courseReviewCount(vo);
+		String rcount = rdao.courseReviewCount(vo);
 		List<ReviewVO> reviews = rdao.courseReviewSortedList(vo);
-		request.setAttribute("rcount", rcount);
+		request.setAttribute("rcount", Integer.valueOf(rcount));
 		request.setAttribute("reviews", reviews);
 		
 		// 강의 페이지 사이드 메뉴 만들기

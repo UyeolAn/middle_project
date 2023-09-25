@@ -296,9 +296,7 @@
 	<!-- 강의 관련 자바스크립트 연결 -->
 	<script type="text/javascript" src="client/js/coursedetail.js"></script>
 	<script type="text/javascript">
-		$(window).load(
-			showReviewList(${course.courseId}); // 리뷰 리스트 만들기
-		);
+		$(window).load(showReviewList(${course.courseId}));// 리뷰 리스트 만들기
 	</script>
 
 </body>

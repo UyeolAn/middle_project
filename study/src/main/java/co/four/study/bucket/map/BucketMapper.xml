@@ -3,6 +3,7 @@
 <mapper namespace="co.four.study.bucket.map.BucketMapper">
 	<select id="bucketSelectList" resultType="co.four.study.bucket.service.BucketVO">
 		SELECT * FROM BUCKET
+		<if test="memberId != null">WHERE MEMBER_ID = #{memberId}</if>
 	</select>
 	
 	<select id="bucketSelect" resultType="co.four.study.bucket.service.BucketVO">
@@ -36,4 +37,8 @@
 		WHERE A.COURSE_ID = B.COURSE_ID
 		AND   B.MEMBER_ID = #{memberId}
 	</select>
+	
+	<delete id="bucketDeleteAll" parameterType="co.four.study.bucket.service.BucketVO">
+		DELETE BUCKET WHERE MEMBER_ID = #{memberId}
+	</delete>
 </mapper>

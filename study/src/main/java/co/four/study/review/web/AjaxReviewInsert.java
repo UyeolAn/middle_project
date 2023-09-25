@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import co.four.study.course.service.CourseVO;
 import co.four.study.review.service.ReviewService;
 import co.four.study.review.service.ReviewVO;
 import co.four.study.review.serviceImpl.ReviewServiceImpl;
@@ -31,6 +32,7 @@ public class AjaxReviewInsert extends HttpServlet {
 		ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 		ReviewService dao = new ReviewServiceImpl();
 		ReviewVO vo = new ReviewVO();
+		CourseVO cvo = new CourseVO();
 		List<Object> reviews = new ArrayList<Object>();
 		
 		vo.setMemberId(request.getParameter("memberId"));
@@ -45,8 +47,10 @@ public class AjaxReviewInsert extends HttpServlet {
 		if(check.size() == 0) {
 			result = dao.reviewInsert(vo);
 			if(result > 0) {
-				messageMap.put("message", "success");
-				reviews.add(messageMap); // 성공여부
+				messageMap.put("message", "success"); // 성공여부
+				cvo.setCourseId(Integer.valueOf(request.getParameter("courseId")));
+				messageMap.put("count", dao.courseReviewCount(cvo)); // 리뷰개수
+				reviews.add(messageMap);
 				reviews.add(dao.memberReviewSelect(vo)); // 방금 등록된 리뷰가져오기
 			}
 		} else {

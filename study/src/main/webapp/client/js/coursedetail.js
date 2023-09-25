@@ -154,7 +154,7 @@ function ajaxAddBucketList() {
 				if(message = 'success') {
 			        const check = confirm('장바구니에 추가되었습니다! 장바구니로 이동하시려면 확인을 눌러주세요.');
 					if(check ==  true) {
-						location.href = 'bucketlist.do';
+						location.href = 'bucketlist.do?memberId=' + memberId;
 					} else {
 						$('.button_wrap').empty();
 						$('.button_wrap').append('<a href="bucketlist.do?memberId=' + memberId +'"><button type="button" class="btn btn-green btn-green-p course-add">장바구니로 이동</button></a>');
@@ -176,11 +176,10 @@ function showReviewList(courseId) {
 	    method: 'post',
 	    data: { courseId: courseId },
 	    success: function (result) {
-			console.log(result);
-			$('.review_count').text($('.review_tab_content').children().length);
 			for(let i=0; i<result.length; i++){
 				makeReviwTags(result[i]);
 			}
+			$('.review_count').text(result.length);
 	    }
 	})//ajax end
 }
@@ -199,6 +198,7 @@ function reviewInsert() {
 	    data: { courseId: courseId, memberId: memberId, reviewStars: reviewStars, reviwContent: reviwContent},
 	    success: function (result) {
 			let message = result[0].message;
+			let count = result[0].count;
 			
 			if(message == 'success') {
 				makeReviwTags(result[1]); //작성한 리뷰 추가해서 보여주기
@@ -207,9 +207,13 @@ function reviewInsert() {
 				alert('이미 등록된 리뷰가 있습니다.');
 			}
 			
+			$('.review_count').text(count);
 			$('#reviwContent').val(''); //작성한 내용 지우기
+			$('#reviewStars').val(5).prop("selected", true); //리뷰별점 5로 고정하기
 	    }
 	})//ajax end
+	console.log($('.col_7').length);
+	$('.review_count').text($('.col_7').length);
 	
 }
 
@@ -231,24 +235,28 @@ function reviewEdit(reviewId) {
 	$.ajax({
 		url: 'ajaxreviewupdate.do',
 		method: 'post',
-		data: {reviewId: reviewId, reviwContent: $('#reviwContent').val(), reviewStars: $('#reviewStars').val()},
+		data: {reviewId: reviewId, reviwContent: $('#reviwContent').val(), reviewStars: $('#reviewStars').val(), courseId: $('#courseId').val()},
 		success: function (result) {
-			console.log(result);
 			$('.review_' + reviewId).remove();
 			
 			let message = result[0].message;
+			let count = result[0].count;
 			
 			if(message == 'success') {
 				makeReviwTags(result[1]); //작성한 리뷰 추가해서 보여주기
 				alert('리뷰가 정상적으로 수정되었습니다!');
+				$('.review_submit').text('등록');
+				$('.review_submit').attr('onclick', 'reviewInsert()');
 			} else {
 				alert('오류 발생, 리뷰를 수정하지 못했습니다.');
 			}
 			
+			$('.review_count').text(count);
 			$('#reviwContent').val(''); //작성한 내용 지우기
 			$('#reviewStars').val(5).prop("selected", true); //리뷰별점 5로 고정하기
 		}
 	})
+	
 }
 
 /* 리뷰삭제 처리 */
@@ -260,10 +268,8 @@ function reviewDelete(target, courseId) {
 		method: 'post',
 		data: {reviewId: reviewId, courseId: courseId},
 		success: function (result) {
-			console.log(result);
-			console.log(reviewId);
-			
 			let message = result[0].message;
+			let count = result[0].count;
 			
 			if(message == 'success') {
 				$('.review_' + reviewId).remove();
@@ -271,6 +277,8 @@ function reviewDelete(target, courseId) {
 			} else {
 				alert('죄송합니다, 리뷰를 삭제하지 못했습니다.\n오류가 계속 된다면 고객센터로 연락바랍니다.');
 			}
+			
+			$('.review_count').text(count);
 		}
 	})
 }
@@ -327,7 +335,6 @@ function makeReviwTags(data) {
 }
 
 function formatDate(date) {
-    
     let d = new Date(date),
     
     month = '' + (d.getMonth() + 1) , 
@@ -338,7 +345,6 @@ function formatDate(date) {
     if (day.length < 2) day = '0' + day; 
     
     return [year, month, day].join('-');
-    
 }
 
 
