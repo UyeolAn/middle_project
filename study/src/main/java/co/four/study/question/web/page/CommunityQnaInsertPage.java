@@ -25,6 +25,7 @@ public class CommunityQnaInsertPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CourseService dao = new CourseServiceImpl();
 		List<CourseVO> courses = dao.courseSelectList(null);
+		System.out.println(courses);
 		
 		String page = "community/communityQnaInsertPage";
 		request.setAttribute("menu", "community");

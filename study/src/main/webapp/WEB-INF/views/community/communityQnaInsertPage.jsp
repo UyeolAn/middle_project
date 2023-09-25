@@ -42,9 +42,9 @@
               <div class="col-lg-9">
                 <select name="selectCourse" id="selectCourse">
                   <option value="notSelect">========== 어떤 강의에 대한 질문인가요? ==========</option>
-                  <c:if test="{not empty courses}">
-                    <c:forEach var="course" items="courses">
-                      <option value="${courses.courseId}">${courses.courseName}</option>
+                  <c:if test="${not empty courses}">
+                    <c:forEach var="course" items="${courses}">
+                      <option value="${course.courseId}">${course.courseName}</option>
                     </c:forEach>
                   </c:if>
                   <option value="etc">기타/홈페이지 질문</option>
