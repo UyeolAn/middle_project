@@ -133,5 +133,4 @@
 		ON T.COURSE_ID = B.COURSE_ID
 		WHERE RNM BETWEEN #{start} AND #{end}
 	</select>
-
 </mapper>

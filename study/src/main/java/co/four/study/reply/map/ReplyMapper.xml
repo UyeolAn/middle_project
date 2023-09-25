@@ -24,7 +24,7 @@
 		UPDATE replies
 		<set>
 			<if test="replyContent != null">reply_content = #{replyContent},</if>
-			reply_update_date = SYSDATE;
+			reply_update_date = SYSDATE
 		</set>
 		WHERE reply_id = #{replyId}
 	</update>

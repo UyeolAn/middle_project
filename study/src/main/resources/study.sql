@@ -330,13 +330,14 @@ CREATE TABLE questions
 (
   question_id NUMBER NOT NULL
 , member_id VARCHAR2(100) NOT NULL
-, course_id NUMBER NOT NULL
+, course_id NUMBER
 , question_title VARCHAR2(100) NOT NULL
 , question_content VARCHAR2(512) NOT NULL
 , question_enter_date DATE DEFAULT SYSDATE NOT NULL
 , question_update_date DATE
 , question_img VARCHAR2(100)
 , question_hit NUMBER DEFAULT 0 NOT NULL
+, question_solve VARCHAR2(15) DEFAULT 'not_solved' NOT NULL
 , CONSTRAINT questions_question_id_pk PRIMARY KEY 
   (
     question_id
@@ -371,6 +372,7 @@ COMMENT ON COLUMN questions.question_enter_date IS '질문 작성일';
 COMMENT ON COLUMN questions.question_update_date IS '질문 수정일';
 COMMENT ON COLUMN questions.question_img IS '질문 이미지첨부';
 COMMENT ON COLUMN questions.question_hit IS '질문 조회수';
+COMMENT ON COLUMN questions.question_solve IS '질문 해결여부';
 
 
 -- answers

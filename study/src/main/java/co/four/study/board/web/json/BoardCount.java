@@ -18,6 +18,7 @@ import co.four.study.board.serviceImpl.BoardServiceImpl;
 
 @WebServlet("/boardcount.do")
 public class BoardCount extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
     public BoardCount() {
@@ -38,10 +39,10 @@ public class BoardCount extends HttpServlet {
 		cntMap.put("totalCount", cnt);
 		
 		ObjectMapper objectMapper = new ObjectMapper();
-		String messageJson = objectMapper.writeValueAsString(cntMap);
+		String countJson = objectMapper.writeValueAsString(cntMap);
 		
 		response.setContentType("text/json;charset=utf-8");
-		response.getWriter().print(messageJson);
+		response.getWriter().print(countJson);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

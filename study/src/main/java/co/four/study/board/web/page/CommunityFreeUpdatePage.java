@@ -15,6 +15,7 @@ import co.four.study.common.ViewResolve;
 
 @WebServlet("/communityfreeupdatepage.do")
 public class CommunityFreeUpdatePage extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
     public CommunityFreeUpdatePage() {
@@ -23,6 +24,7 @@ public class CommunityFreeUpdatePage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardService dao = new BoardServiceImpl();
+		
 		BoardVO dto = new BoardVO();
 		dto.setBoardId(Integer.parseInt(request.getParameter("boardId")));
 		

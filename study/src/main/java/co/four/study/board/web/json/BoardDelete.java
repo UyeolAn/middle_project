@@ -15,6 +15,7 @@ import co.four.study.common.ViewResolve;
 
 @WebServlet("/boarddelete.do")
 public class BoardDelete extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
     public BoardDelete() {
@@ -29,9 +30,7 @@ public class BoardDelete extends HttpServlet {
 		
 		int numDel = dao.boardDelete(deleteVO);
 		if (numDel != 0) {
-			request.setAttribute("menu", "community");
-			String page = "community/communityFreePage";
-			ViewResolve.foward(request, response, page);
+			response.sendRedirect("communityfreepage.do");
 		} else {
 			System.out.println("삭제 실패!!");
 		}

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import co.four.study.answer.map.AnswerMapper;
 import co.four.study.answer.service.AnswerService;
 import co.four.study.answer.service.AnswerVO;
+import co.four.study.answer.service.etcvo.AnswerSortVO;
 import co.four.study.common.DataSource;
 
 public class AnswerServiceImpl implements AnswerService{
@@ -37,6 +38,31 @@ public class AnswerServiceImpl implements AnswerService{
 	@Override
 	public int answerDelete(AnswerVO vo) {
 		return map.answerDelete(vo);
+	}
+	
+	@Override
+	public List<AnswerVO> sortAnswersWithPaging(AnswerSortVO vo) {
+		return map.sortAnswersWithPaging(vo);
+	}
+
+	@Override
+	public int countQuestionAnswer(int id) {
+		return map.countQuestionAnswer(id);
+	}
+	
+	@Override
+	public int countQuestionSolvedAnswer(int id) {
+		return map.countQuestionSolvedAnswer(id);
+	}
+
+	@Override
+	public int setAnswerSolved(AnswerVO vo) {
+		return map.setAnswerSolved(vo);
+	}
+
+	@Override
+	public int setAnswerNotSolved(AnswerVO vo) {
+		return map.setAnswerNotSolved(vo);
 	}
 
 }

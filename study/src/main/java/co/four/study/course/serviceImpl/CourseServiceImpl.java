@@ -134,6 +134,4 @@ public class CourseServiceImpl implements CourseService {
 		request.setAttribute("english", subCategory);
 	}
 
-
-
 }

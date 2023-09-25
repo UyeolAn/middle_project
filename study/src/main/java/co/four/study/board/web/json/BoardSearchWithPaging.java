@@ -24,6 +24,7 @@ import co.four.study.reply.serviceImpl.ReplyServiceImpl;
 
 @WebServlet("/boardsearchwithpaging.do")
 public class BoardSearchWithPaging extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
  
     public BoardSearchWithPaging() {

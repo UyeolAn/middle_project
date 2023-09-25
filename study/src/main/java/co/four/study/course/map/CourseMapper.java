@@ -17,6 +17,5 @@ public interface CourseMapper {
 	
 	// 페이징 관련
 	int courseTotalCount(CourseVO vo);
-	List<CourseVO> coursePagingList(CourseVO vo);
-	
+	List<CourseVO> coursePagingList(CourseVO vo);	
 }

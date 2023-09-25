@@ -37,16 +37,18 @@
               <input type="text" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요..">
             </div>
             <div class="col-lg-12">
-              <label class="input__file__btn" for="boardImg">
+              <label class="input__file__btn" for="boardImg" style="border-radius: 10px; font-size: medium;">
                 IMG
               </label>
               <input type="file" id="boardImg" name="boardImg" style="display: none;" disabled="disabled">
             </div>
             <div class="col-lg-12">
-              <textarea id="boardContent" name="boardContent" placeholder="내용을 입력하세요..." style="color: #333;"></textarea>
+              <textarea id="boardContent" name="boardContent" placeholder="내용을 입력하세요..."
+                style="color: #333;"></textarea>
               <button type="reset" class="site-btn small-btn"
-                style="font-size: medium; background: #B7B7B7;">취소</button>
-              <button type="submit" class="site-btn small-btn" style="font-size: medium;">등록</button>
+                style="font-size: medium; background: #B7B7B7; border-radius: 10px;">취소</button>
+              <button type="submit" class="site-btn small-btn"
+                style="font-size: medium; border-radius: 10px;">등록</button>
             </div>
           </div>
         </form>

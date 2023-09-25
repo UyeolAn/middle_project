@@ -15,6 +15,7 @@ import co.four.study.common.ViewResolve;
 
 @WebServlet("/boardupdate.do")
 public class BoardUpdate extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
     public BoardUpdate() {
@@ -24,16 +25,16 @@ public class BoardUpdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardService dao = new BoardServiceImpl();
 		
+		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		
 		BoardVO updateVO = new BoardVO();
-		updateVO.setBoardId(Integer.parseInt(request.getParameter("boardId")));
+		updateVO.setBoardId(boardId);
 		updateVO.setBoardTitle(request.getParameter("boardTitle"));
 		updateVO.setBoardContent(request.getParameter("boardContent"));
 		
 		int numUpd = dao.boardUpdate(updateVO);
 		if (numUpd != 0) {
-			request.setAttribute("menu", "community");
-			String page = "community/communityFreePage";
-			ViewResolve.foward(request, response, page);
+			response.sendRedirect("communityfreedetailpage.do?boardId=" + boardId);
 		} else {
 			System.out.println("수정 실패!!");
 		}
