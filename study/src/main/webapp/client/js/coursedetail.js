@@ -80,7 +80,7 @@ $(window).click(function(event) {
 });
 
 // 무료강의 수강신청하기
-function addMemberCourse() {
+function addMemberFreeCourse() {
 	const courseId = $('#courseId').val();
 	const memberId = $('#loginId').val();
 	$.ajax({
@@ -102,5 +102,23 @@ function addMemberCourse() {
 			}
 		}
 	})
+}
+
+function addBucketList() {
+	const courseId = $('#courseId').val();
+	const memberId = $('#loginId').val();
+	
+	if(memberId != null || memberId != '') {
+		$.ajax({
+			url: 'bucketinsert.do',
+			method: 'post',
+			data: {courseId: courseId, memberId: memberId},
+			success: function(result) {
+				
+			}
+		})
+	} else {
+		alert('로그인 후 이용하실 수 있습니다.');
+	}
 }
 

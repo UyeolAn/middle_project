@@ -251,7 +251,7 @@
 										<h5 class="course_price_free">무료, 지금 바로 수강하세요!</h5>
 										<h5 class="course_price">0원</h5>
 										<div class="button_wrap">
-											<button type="button" class="btn btn-green course-add" onclick="addMemberCourse()">바로 수강신청 하기</button>
+											<button type="button" class="btn btn-green course-add" onclick="addMemberFreeCourse()">바로 수강신청 하기</button>
 										</div>
 									</c:when>
 									<c:otherwise>
