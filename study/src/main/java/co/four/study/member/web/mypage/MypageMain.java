@@ -1,4 +1,4 @@
-package co.four.study.member.web;
+package co.four.study.member.web.mypage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
 @WebServlet("/mypagemain.do")
 public class MypageMain extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	// 프로필 개요, 수강중인강좌, 커뮤니티글 표시(내용 편집x)
 	public MypageMain() {
 		super();
 
@@ -44,12 +44,16 @@ public class MypageMain extends HttpServlet {
 		for (MemberCourseVO memberCourse : mclist) {
 			courseCount++;
 		}
-
+		
+		
+		
+		
+		
 		request.setAttribute("memberCourseCount", courseCount);
 
 		
 		
-		// 프로필 개요, 수강중인강좌, 커뮤니티글 표시(내용 편집x)
+		
 
 		String page = "mypage/mypageMain";
 

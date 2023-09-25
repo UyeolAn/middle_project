@@ -32,6 +32,5 @@ public interface MemberCourseService {
 	//현재 총 매출
 	int totalPrice();
 	
-	//회원수강여부 체크
-	int memberCourseStatus(MemberCourseVO vo);
+	
 }

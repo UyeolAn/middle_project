@@ -98,7 +98,7 @@
 							</a>
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-								aria-labelledby="dropdownMenuLink">
+								aria-labelledby="dropdownMenuLink" id = "memberCourseList">
 								<div class="dropdown-header">Dropdown Header:</div>
 								<a class="dropdown-item" href="#">Action</a> <a
 									class="dropdown-item" href="#">Another action</a>
