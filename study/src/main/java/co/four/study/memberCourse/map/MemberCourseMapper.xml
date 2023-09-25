@@ -58,7 +58,7 @@
 	</select>
 	
 	<select id="totalPrice" resultType="Integer">
-		SELECT SUM(C.COURSE_PRICE)
+		SELECT NVL(SUM(C.COURSE_PRICE),0)
 		FROM MEMBERS_COURSES MC JOIN COURSES C ON MC.COURSE_ID = C.COURSE_ID
 	</select>
 	

@@ -35,7 +35,7 @@
                                             <ul>
                                                 <li><a href="logout.do">LOGOUT</a></li>
                                                 
-                                                <li><a href="mypagemain.do">MY PAGE</a></li>
+                                                <li><a href="mypageprofile.do">MY PAGE</a></li>
                                             </ul>
                                     </c:if>
                                 </div>

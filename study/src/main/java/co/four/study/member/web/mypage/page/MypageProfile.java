@@ -34,27 +34,37 @@ public class MypageProfile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		MemberVO mvo = new MemberVO();
+		MemberService memberDao = new MemberServiceImpl();
 		MemberCourseService memberCourseDao = new MemberCourseServiceImpl();
 		HttpSession session = request.getSession();
 
 		mvo.setMemberId((String) session.getAttribute("loginId"));
+		mvo = memberDao.memberSelect(mvo);
 
 		System.out.println(mvo.getMemberId());
-		// 수강중인 강의 개수 상위 3개
+		// 수강중인 강의 상위3개 미리보기
 		List<MemberCourseVO> mclist = memberCourseDao.selectMemberCourseListDetail(mvo);
 		int courseCount = 0;
-		for (int i = 0; i < 3; i++) {
+
+		// 수강중 강의 목록
+		for (int i = 0; i < mclist.size(); i++) {
+			// 수강중인강의 개수
 			courseCount++;
 		}
-		// 수강중 강의 목록
-
-		System.out.println(courseCount);
-
 		System.out.println(mclist);
+		request.setAttribute("menu", "mypage");
+		// 프로필
+		request.setAttribute("memberId", mvo.getMemberId());
+		request.setAttribute("memberPassword", mvo.getMemberPassword());
+		request.setAttribute("memberName", mvo.getMemberName());
+		request.setAttribute("memberTel", mvo.getMemberTel());
+		request.setAttribute("memberAddress", mvo.getMemberAddress());
+		request.setAttribute("memberEmail", mvo.getMemberEmail());
+		request.setAttribute("memberEnterDate", mvo.getMemberEnterDate());
 
+		// 강의
 		request.setAttribute("memberCourseCount", courseCount);
 		request.setAttribute("mycourse", mclist);
-		request.setAttribute("menu", "mypage");
 
 		String page = "mypage/mypageProfile";
 
