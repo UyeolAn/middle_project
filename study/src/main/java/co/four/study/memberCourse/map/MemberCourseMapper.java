@@ -8,6 +8,9 @@ import co.four.study.memberCourse.service.MemberCourseVO;
 
 public interface MemberCourseMapper {
 	List<MemberCourseVO> selectMemberCourseList(MemberVO vo);
+	//회원이 수강하는 강의 목록 상세
+	List<MemberCourseVO> selectMemberCourseListDetail(MemberVO vo);
+	
 	MemberCourseVO selectMemberCourse(MemberCourseVO vo);
 	int insertMemberCourse(MemberCourseVO vo);
 	int deleteMemberCourse(MemberCourseVO vo);
@@ -34,4 +37,6 @@ public interface MemberCourseMapper {
 	
 	//회원수강여부 체크
 	int memberCourseStatus(MemberCourseVO vo);
+	
+
 }

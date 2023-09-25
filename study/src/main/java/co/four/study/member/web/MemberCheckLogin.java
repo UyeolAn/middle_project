@@ -16,11 +16,11 @@ import co.four.study.member.service.MemberService;
 import co.four.study.member.service.MemberVO;
 import co.four.study.member.serviceImpl.MemberServiceImpl;
 
-@WebServlet("/checkLogin.do")
-public class CheckLogin extends HttpServlet {
+@WebServlet("/memberchecklogin.do")
+public class MemberCheckLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public CheckLogin() {
+	public MemberCheckLogin() {
 		super();
 
 	}

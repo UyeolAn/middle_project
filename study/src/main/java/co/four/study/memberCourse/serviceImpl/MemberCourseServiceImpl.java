@@ -77,4 +77,10 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 		return map.memberCourseStatus(vo);
 	}
 
+	@Override
+	public List<MemberCourseVO> selectMemberCourseListDetail(MemberVO vo){
+		
+		return map.selectMemberCourseListDetail(vo);
+	}
+
 }

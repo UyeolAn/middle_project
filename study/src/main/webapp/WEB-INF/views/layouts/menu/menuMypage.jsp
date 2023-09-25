@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
   <!DOCTYPE html>
   <html>
 
@@ -6,8 +7,14 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
   </head>
+  <style>
+    .shop__sidebar__categories ul {
+      height: auto;
+    }
+  </style>
 
   <body>
+
     <div class="col-lg-3">
       <div class="shop__sidebar">
         <div class="shop__sidebar__accordion">
@@ -25,7 +32,20 @@
                       <li><a href="#">수강 강좌</a></li>
                       <li><a href="#">구매내역</a></li>
                       <li><a href="#">My Community</a></li>
-                      <li><a href="#" style="font-size: 8px;">회원탈퇴</a></li>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+
+                      <li><a href="mypagecancel.do" style="font-size: 8px;">회원탈퇴</a></li>
 
                     </ul>
                   </div>
@@ -36,6 +56,10 @@
         </div>
       </div>
     </div>
+
+    
+
+
   </body>
 
   </html>

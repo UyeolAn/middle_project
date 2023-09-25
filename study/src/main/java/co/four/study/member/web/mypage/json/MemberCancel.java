@@ -1,4 +1,4 @@
-package co.four.study.member.web;
+package co.four.study.member.web.mypage.json;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,20 +6,34 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import co.four.study.common.ViewResolve;
+import co.four.study.member.service.MemberService;
+import co.four.study.member.service.MemberVO;
+import co.four.study.member.serviceImpl.MemberServiceImpl;
 
-@WebServlet("/login.do")
-public class Login extends HttpServlet {
+@WebServlet("/membercancel.do")
+public class MemberCancel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public Login() {
+
+	// 회원탈퇴
+	public MemberCancel() {
 		super();
 
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String page = "common/login.jsp";
+		MemberVO vo = new MemberVO();
+		MemberService dao = new MemberServiceImpl();
+		HttpSession session = request.getSession();
+
+		vo.setMemberId((String) session.getAttribute("loginId"));
+		dao.memberDelete(vo);
+		session.invalidate();
+		String page = "home/home.jsp";
+
 		ViewResolve.foward(request, response, page);
 	}
 

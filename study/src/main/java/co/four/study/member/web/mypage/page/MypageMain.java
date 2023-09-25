@@ -1,4 +1,4 @@
-package co.four.study.member.web.mypage;
+package co.four.study.member.web.mypage.page;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,29 +35,33 @@ public class MypageMain extends HttpServlet {
 		MemberVO mvo = new MemberVO();
 		MemberCourseService memberCourseDao = new MemberCourseServiceImpl();
 		HttpSession session = request.getSession();
-
+		
 		mvo.setMemberId((String) session.getAttribute("loginId"));
+		
 		System.out.println(mvo.getMemberId());
-		//수강중인 강의 개수
-		List<MemberCourseVO> mclist = memberCourseDao.selectMemberCourseList(mvo);
+		//수강중인 강의 개수 상위 3개
+		List<MemberCourseVO> mclist = memberCourseDao.selectMemberCourseListDetail(mvo);
 		int courseCount = 0;
-		for (MemberCourseVO memberCourse : mclist) {
+		for (int i = 0; i<3; i++) {
 			courseCount++;
 		}
+		//수강중 강의 목록
 		
+		System.out.println(courseCount);
+					
+		System.out.println(mclist);
 		
 		
 		
 		
 		request.setAttribute("memberCourseCount", courseCount);
-
-		
+		request.setAttribute("mycourse", mclist);
+		request.setAttribute("menu", "mypage");
 		
 		
 
 		String page = "mypage/mypageMain";
-
-		request.setAttribute("menu", "mypage");
+	
 
 		ViewResolve.foward(request, response, page);
 	}

@@ -68,5 +68,12 @@
 		WHERE MEMBER_ID = #{memberId}
 		AND COURSE_ID = #{courseId}
 	</select>
+	
+	<select id="selectMemberCourseListDetail" resultType="co.four.study.memberCourse.service.MemberCourseVO">
+		SELECT MEMBER_ID, C.COURSE_ID, C.COURSE_NAME AS COURSE_NAME, C.COURSE_MAIN_CATEGORY AS COURSE_MAIN_CATEGORY, C.COURSE_SUB_CATEGORY AS COURSE_SUB_CATEGORY
+		FROM MEMBERS_COURSES MC JOIN COURSES C ON	MC.COURSE_ID = C.COURSE_ID 
+		WHERE MEMBER_ID = #{memberId}
+	</select>
+	
 
 </mapper>

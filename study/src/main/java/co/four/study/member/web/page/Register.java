@@ -1,4 +1,4 @@
-package co.four.study.member.web;
+package co.four.study.member.web.page;
 
 import java.io.IOException;
 
