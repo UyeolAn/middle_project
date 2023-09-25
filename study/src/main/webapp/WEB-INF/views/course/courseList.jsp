@@ -8,6 +8,7 @@
     <title>Insert title here</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <link rel="stylesheet" href="client/css/course.css">
+    <script src="client/js/jquery.nice-select.min.js"></script>
     <script type="text/javascript">
 	    /* 페이징 갯수 옵션 변경시 작동 */
 	    function selChange() {
