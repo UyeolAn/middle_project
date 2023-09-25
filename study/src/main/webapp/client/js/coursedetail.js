@@ -177,7 +177,7 @@ function showReviewList(courseId) {
 	    data: { courseId: courseId },
 	    success: function (result) {
 			console.log(result);
-			$('.review_count').text(result.length);
+			$('.review_count').text($('.review_tab_content').children().length);
 			for(let i=0; i<result.length; i++){
 				makeReviwTags(result[i]);
 			}
