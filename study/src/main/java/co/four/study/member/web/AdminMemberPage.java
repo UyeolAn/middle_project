@@ -75,6 +75,7 @@ public class AdminMemberPage extends HttpServlet {
 			vo.setTcnt(mcvo.getTcnt());
 			double jindo = Math.round(((double)vo.getCount()/vo.getTcnt()) * 100);
 			if(Double.isNaN(jindo)) jindo = 0;
+			if(jindo>100) jindo = 100;
 			vo.setJindo(jindo);
 			cvo.setCourseId(vo.getCourseId());
 			cvo = cdao.courseSelect(cvo);

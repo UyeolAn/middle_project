@@ -1,6 +1,7 @@
 package co.four.study.member.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -70,6 +71,21 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO memberPassReset(MemberVO vo) {
 		
 		return map.memberPassReset(vo);
+	}
+
+	@Override
+	public List<MemberVO> employeeList() {
+		return map.employeeList();
+	}
+
+	@Override
+	public int employeeInsert(MemberVO vo) {
+		return map.employeeInsert(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> monthlyClient() {
+		return map.monthlyClient();
 	}
 
 }

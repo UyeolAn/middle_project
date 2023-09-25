@@ -1,6 +1,7 @@
 package co.four.study.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MemberService {
 	
@@ -29,4 +30,13 @@ public interface MemberService {
 	
 	//비밀번호 리셋
 	MemberVO memberPassReset(MemberVO vo);
+	
+	//직원 리스트
+	List<MemberVO> employeeList();
+	
+	//직원 등록
+	int employeeInsert(MemberVO vo);
+	
+	//월별 이용자수 조회
+	List<Map<String, Object>> monthlyClient();
 }

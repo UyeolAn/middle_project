@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.four.study.member.map.MemberMapper">
 
+	<resultMap type="HashMap" id="clientMap">
+		<id column = "count" property="count"/>
+		<id column = "monthly" property="monthly"/>
+	</resultMap>
+
 	<select id="memberSelectList"
 		resultType="co.four.study.member.service.MemberVO">
 		SELECT * FROM MEMBERS
@@ -27,6 +32,15 @@
 		#{memberAddress},
 		#{memberEmail},
 		SYSDATE , null, 'client')
+	</insert>
+	
+	<insert id="employeeInsert" parameterType="co.four.study.member.service.MemberVO">
+		INSERT INTO MEMBERS
+		VALUES (#{memberId},
+		#{memberPassword}, #{memberName}, #{memberTel},
+		#{memberAddress},
+		#{memberEmail},
+		SYSDATE , null, 'admin')
 	</insert>
 
 	<update id="memberUpdate"
@@ -64,7 +78,7 @@
 	<select id="memberList"
 		resultType="co.four.study.member.service.MemberVO">
 		SELECT * FROM MEMBERS WHERE MEMBER_AUTHOR = 'client' ORDER
-		BY MEMBER_NAME
+		BY MEMBER_ENTER_DATE
 	</select>
 
 
@@ -86,6 +100,17 @@
 		WHERE MEMBER_ID = #{memberId}
 		AND MEMBER_EMAIL = #{memberEmail}
 	</update>
+	
+	<select id="employeeList" resultType="co.four.study.member.service.MemberVO">
+		SELECT * FROM MEMBERS WHERE MEMBER_AUTHOR = 'admin' ORDER BY MEMBER_ENTER_DATE
+	</select>
 
+	<select id="monthlyClient" resultMap="clientMap">
+		select count(*) as count, to_char(to_date(member_enter_date), 'YYYY-MM') as monthly
+		from members
+		where member_author = 'client'
+		group by  to_char(to_date(member_enter_date), 'YYYY-MM')
+		order by monthly
+	</select>
 
 </mapper>

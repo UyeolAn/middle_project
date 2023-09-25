@@ -55,6 +55,8 @@
     </section>
     <!-- Body Section End -->
 
+	<!--Start of Tawk.to Script-->
+
 
 
     <!-- Footer Section Begin -->
@@ -73,6 +75,7 @@
         </div>
     </div>
     <!-- Search End -->
+
 
     <!-- Js Plugins -->
     <script src="client/js/jquery-3.3.1.min.js"></script>
