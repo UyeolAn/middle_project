@@ -21,7 +21,7 @@
         <!-- Custom styles for this template-->
         <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-        
+
 
     <body class="bg-gradient-primary">
 
@@ -77,20 +77,13 @@
                                         onclick="">
                                         Register Account
                                     </button>
-                                    <hr>
-                                    <a href="index.html" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Register with Google
-                                    </a>
-                                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                        <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                    </a>
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="searchpassword.do">Forgot Password?</a>
+                                    <a class="small" href="passwordsearch.do">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="login.html">Already have an account? Login!</a>
+                                    <a class="small" href="login.do">Already have an account? Login!</a>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +106,7 @@
 
         <script type="text/javascript">
 
-
+//중복체크 버튼 클릭시 서블릿에 id체크
             $('#doubleCheck').click(function () {
 
                 $.ajax({
@@ -123,9 +116,9 @@
                     success: function (data) {
                         var aa = JSON.parse(data);
                         var str = aa.str;
-                      console.log(str)
-                    //   let str 
-                        
+                        console.log(str)
+                        //   let str 
+
 
                         if (str == "YES") {
 
@@ -134,21 +127,22 @@
                             document.getElementById("doubleCheck").disabled = true;
                             console.log(str);
                         } else if (str == "NO") {
-                            alert("이미 사용하는 아이디입니다");
+                            alert("이미 사용중인 아이디입니다");
                             document.getElementById("memberId").value = "";
                             document.getElementById("memberId").focus();
                             console.log(str);
                         }
                     },
                     error: function (result) {
-                        console.log("오류났어요");
+                        console.log("err");
                     }
                 })
             }
             )
 
-           
 
+//submit 버튼 작동시 중복체크 실행 여부 
+//패스워드 불일치 여부 확인
             function formCheck() {
                 let form = document.getElementById("frm");
 

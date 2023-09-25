@@ -148,9 +148,8 @@
 					let password = document.getElementById("memberPassword").value;
 					let repeatPassword = document.getElementById("checkPass").value;
 					if (password == repeatPassword) {
-						console.log("ak")
 						SubmitPass()
-						alert("next")
+						alert("비밀번호가 변경되었습니다.")
 
 					} else {
 						alert("비밀번호가 일치하지 않습니다.")
@@ -168,7 +167,12 @@
 							memberId: document.getElementById("memberIdcheck").value,
 							memberEmail: document.getElementById("memberEmailcheck").value,
 							memberPassword: document.getElementById("memberPassword").value
-						}
+						},
+						success:
+							location.href = "logout.do"
+
+
+
 					})
 				}
 

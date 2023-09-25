@@ -25,9 +25,14 @@
 		<link rel="stylesheet" href="admin/css/sb-admin-2.min.css">
 	</head>
 
-	<body class="bg-gradient-primary">
+	<body class="bg-gradient-primary" style="display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100dvh;">
 
-		<div class="container">
+		<div class="container" style="padding: 3rem;
+		font-size: 2rem;
+		border-radius: 1rem;">
 
 			<!-- Outer Row -->
 			<div class="row justify-content-center">
@@ -65,7 +70,6 @@
 												class="btn btn-primary btn-user btn-block">Login</button>
 											<hr>
 										</form>
-										<hr>
 										<div class="text-center">
 											<a class="small" href="passwordsearch.do">Forgot
 												Password?</a>

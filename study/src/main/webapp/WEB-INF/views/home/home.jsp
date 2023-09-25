@@ -85,7 +85,7 @@
 											<span>${loginName} 님 접속중<i class="arrow_carrot-down"></i></span>
 											<ul>
 												<li><a href="logout.do">LOGOUT</a></li>
-												<li><a href="#">MY PAGE</a></li>
+												<li><a href="mypagemain.do">MY PAGE</a></li>
 											</ul>
 									</c:if>
 								</div>
