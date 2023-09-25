@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -69,7 +68,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public String makeSubCateCourseList(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate) {
+	public String subcateCoursePagingTag(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate) {
 		String tags = "";
 		tags += "<div class='col-lg-12 col-paging'>";
 		tags += "<div class='product__pagination p-result'>";
@@ -93,8 +92,9 @@ public class CourseServiceImpl implements CourseService {
 		return tags;
 	}
 
+	
 	@Override
-	public String makeGradeCourseList(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String grade) {
+	public String gradeCoursePagingTag(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String grade) {
 		String tags = "";
 		tags += "<div class='col-lg-12 col-paging'>";
 		tags += "<div class='product__pagination p-result'>";

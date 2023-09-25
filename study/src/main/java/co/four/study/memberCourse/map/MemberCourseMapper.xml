@@ -62,5 +62,11 @@
 		FROM MEMBERS_COURSES MC JOIN COURSES C ON MC.COURSE_ID = C.COURSE_ID
 	</select>
 	
+	<select id="memberCourseStatus" parameterType="co.four.study.memberCourse.service.MemberCourseVO" resultType="Integer">
+		SELECT COUNT(*) count
+		FROM MEMBERS_COURSES
+		WHERE MEMBER_ID = #{memberId}
+		AND COURSE_ID = #{courseId}
+	</select>
 
 </mapper>

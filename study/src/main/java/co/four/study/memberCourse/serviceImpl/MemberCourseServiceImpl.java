@@ -72,4 +72,9 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 		return map.totalPrice();
 	}
 
+	@Override
+	public int memberCourseStatus(MemberCourseVO vo) {
+		return map.memberCourseStatus(vo);
+	}
+
 }

@@ -39,4 +39,19 @@
 		SELECT COUNT(*) 
 		FROM REVIEWS WHERE MEMBER_ID = #{memberId}
 	</select>
+	
+	<select id="courseReviewSortedList" resultType="co.four.study.review.service.ReviewVO" parameterType="co.four.study.course.service.CourseVO">
+		SELECT * 
+		FROM REVIEWS
+		WHERE COURSE_ID = #{courseId}
+		ORDER BY REVIEW_UPDATE_DATE DESC, REVIEW_ENTER_DATE DESC
+	</select>
+	
+	<select id="courseReviewCount" resultType="Integer" parameterType="co.four.study.course.service.CourseVO">
+		SELECT COUNT(*)
+		FROM REVIEWS
+		WHERE COURSE_ID = #{courseId}
+		ORDER BY REVIEW_UPDATE_DATE DESC, REVIEW_ENTER_DATE DESC
+	</select>
+	
 </mapper>

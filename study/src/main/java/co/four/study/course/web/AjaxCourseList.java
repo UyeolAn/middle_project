@@ -61,10 +61,10 @@ public class AjaxCourseList extends HttpServlet {
 		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
 		if(!subCate.trim().equals("") && subCate != null) {
-			paging = dao.makeSubCateCourseList(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), subCate);
+			paging = dao.subcateCoursePagingTag(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), subCate);
 		}
 		if(!grade.trim().equals("") && grade != null) {
-			paging = dao.makeGradeCourseList(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), grade);
+			paging = dao.gradeCoursePagingTag(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), grade);
 		}
 		
 		Map<String, String> pmap = new HashMap<String,String>();

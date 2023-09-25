@@ -12,15 +12,11 @@
 	    /* 페이징 갯수 옵션 변경시 작동 */
 	    function selChange() {
 			let sel = $('#cntPerPage').val();
-			location.href="courseList.do?nowPage=${paging.nowPage}&cntPerPage="+sel;
+			location.href="courselist.do?nowPage=${paging.nowPage}&cntPerPage="+sel;
 	    }
     </script>
 </head>
 <body>
-    <!-- Breadcrumb Section Begin -->
-
-    <!-- Breadcrumb Section End -->
-
     <!-- Shop Section Begin -->
     <div class="shop__product__option">
         <div class="row">
@@ -33,9 +29,9 @@
                 <div class="shop__product__option__right">
                 	<!-- 페이징 옵션 start -->
                     <select id="cntPerPage" name="sel" onchange="selChange()">
-                        <option value="10" <c:if test="${paging.cntPerPage == 10}">selected</c:if>>10개씩 보기</option>
+                        <option value="9" <c:if test="${paging.cntPerPage == 9}">selected</c:if>>9개씩 보기</option>
+                        <option value="12" <c:if test="${paging.cntPerPage == 12}">selected</c:if>>12개씩 보기</option>
                         <option value="15" <c:if test="${paging.cntPerPage == 15}">selected</c:if>>15개씩 보기</option>
-                        <option value="20" <c:if test="${paging.cntPerPage == 20}">selected</c:if>>20개씩 보기</option>
                     </select>
                     <!-- 페이징 옵션 end -->
                 </div>
@@ -98,16 +94,16 @@
         <div class="col-lg-12 col-paging">
             <div class="product__pagination">
             	<c:if test="${paging.startPage != 1 }">
-	                <a class="active beforeBtn" href="courseList.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+	                <a class="active beforeBtn" href="courselist.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
             	</c:if>
             	<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
             		<c:choose>
             			<c:when test="${p == paging.nowPage }"><a class="active">${p }</a></c:when>
-            			<c:when test="${p != paging.nowPage }"><a href="courseList.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></c:when>
+            			<c:when test="${p != paging.nowPage }"><a href="courselist.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a></c:when>
             		</c:choose>
             	</c:forEach>
             	<c:if test="${paging.endPage != paging.lastPage }">
-            		<a class="active afterBtn" href="courseList.do?nowPage=${paging.endPage + 1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+            		<a class="active afterBtn" href="courselist.do?nowPage=${paging.endPage + 1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
             	</c:if>
             </div>
         </div>
