@@ -43,9 +43,16 @@
 		FROM (SELECT ROWNUM AS rm, a.*
 			  FROM (SELECT *
 				    FROM answers
-				    WHERE question_id = #{questionId}
+				    <where>
+				    	<if test="questionId != 0">
+				    		AND question_id = #{questionId}
+				    	</if>
+				    	<if test="memberId != null">
+				    		AND member_id = #{memberId}
+				    	</if>
+				    </where>
 				    <trim prefix="ORDER BY">
-		                <if test="sortType == 'mostRecent'">answer_id DESC</if>
+		                <if test="sortType != 'registDate'">answer_id DESC</if>
 		                <if test="sortType == 'registDate'">answer_id</if>
 		            </trim>) a )
 	     WHERE rm BETWEEN #{startRow} AND #{endRow}
@@ -62,6 +69,12 @@
 		FROM answers
 		WHERE question_id = #{id} AND
 			  answer_solve = 'solved'
+	</select>
+	
+	<select id="countMemberAnswer" resultType="int">
+		SELECT COUNT(*)
+		FROM answers
+		WHERE member_id = #{id}
 	</select>
 	
 	<update id="setAnswerSolved" parameterType="co.four.study.answer.service.AnswerVO">

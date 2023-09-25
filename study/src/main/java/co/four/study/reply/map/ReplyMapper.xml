@@ -39,9 +39,16 @@
 		FROM (SELECT ROWNUM AS rm, a.*
 			  FROM (SELECT *
 				    FROM replies r
-				    WHERE board_id = #{boardId}
+				    <where>
+				    	<if test="boardId != 0">
+				    		AND board_id = #{boardId}
+				    	</if>
+				    	<if test="memberId != null">
+				    		AND member_id = #{memberId}
+				    	</if>
+				    </where>
 				    <trim prefix="ORDER BY">
-		                <if test="sortType == 'mostRecent'">reply_id DESC</if>
+		                <if test="sortType != 'registDate'">reply_id DESC</if>
 		                <if test="sortType == 'registDate'">reply_id</if>
 		            </trim>) a )
 	     WHERE rm BETWEEN #{startRow} AND #{endRow}

@@ -16,6 +16,8 @@ public class QuestionSearchVO {
 	
 	private String sortType;
 	
+	private String memberId;
+	
 	// 페이징 정보
 	private int startRow;
 	

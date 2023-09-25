@@ -54,6 +54,11 @@ public class AnswerServiceImpl implements AnswerService{
 	public int countQuestionSolvedAnswer(int id) {
 		return map.countQuestionSolvedAnswer(id);
 	}
+	
+	@Override
+	public int countMemberAnswer(String id) {
+		return map.countMemberAnswer(id);
+	}
 
 	@Override
 	public int setAnswerSolved(AnswerVO vo) {

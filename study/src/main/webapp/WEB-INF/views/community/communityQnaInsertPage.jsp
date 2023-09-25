@@ -26,8 +26,15 @@
         .small-btn {
           padding: 9px 20px;
         }
+
+        .list {
+          max-height: 200px; 
+          overflow-y: scroll !important;
+        }
       </style>
+      <link rel="stylesheet" href="client/css/nice-select.css">
       <script src="client/js/jquery-3.3.1.min.js"></script>
+      <script src="client/js/jquery.nice-select.min.js"></script>
     </head>
 
     <body>
@@ -70,6 +77,11 @@
         </div>
       </div>
       <script>
+
+        $(document).ready(function () {
+          $('select').niceSelect('update');
+        });
+
         // 질문 등록 함수
         function insertQuestion() {
           let insertData = convertToObject($("#insertForm").serializeArray());

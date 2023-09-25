@@ -185,7 +185,7 @@
 
         <!--Reply List Start-->
         <div class="comm__qna__answer">
-          <!--loadReplies() -> showReplies()-->
+          <!--loadReplies() -> showAnswers()-->
         </div>
         <!--Reply List End-->
 
@@ -205,14 +205,15 @@
         let loginMemberId = '<%=(String)session.getAttribute("loginId")%>';
         let questionId = '${question.questionId}';
 
-        let sortType = 'mostRecent'; // 댓글 정렬 기준
+        let sortType = 'mostRecent'; // 답변 정렬 기준
 
-        let totalCount; // 총 댓글 수
+        let totalCount; // 총 답변 수
 
-        let currentPage = 1; // 댓글 현재 페이지
-        let totalPage; // 댓글 전체 페이지 수
+        let currentPage = 1; // 답변 현재 페이지
+        let totalPage; // 전체 페이지 수
 
         setUpdDelBtn();
+        loadAnswerCount();
         loadAnswers();
         setSortBtn();
 
@@ -233,6 +234,22 @@
           }
         }
 
+        // 댓글수를 불러오는 함수
+        function loadAnswerCount() {
+          $.ajax({
+            url: 'answercount.do?questionId=' + questionId,
+            method: 'get',
+            success: function (countJson) {
+              let answerCount = countJson.totalCount;
+              $('.answer__info__count').empty();
+              $('.answer__info__count').text('ANSWER : ' + answerCount);
+            },
+            error: function (err) {
+              console.log(err);
+            }
+          });
+        }
+
         // 답변 불러오는 함수
         function loadAnswers() {
           $.ajax({
@@ -244,7 +261,7 @@
               page: currentPage
             },
             success: function (answersJson) {
-              showReplies(answersJson);
+              showAnswers(answersJson);
               showPageList();
               setAnswerUpdDelBtn();
               setSolveBtn();
@@ -256,7 +273,7 @@
         }
 
         // 댓글 목록을 보여주는 함수
-        function showReplies(answersJson) {
+        function showAnswers(answersJson) {
           $('div.comm__qna__answer').empty();
           answersJson.forEach(answer => {
             $('div.comm__qna__answer')

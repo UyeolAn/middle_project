@@ -1,6 +1,7 @@
 package co.four.study;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import co.four.study.memberCourse.service.MemberCourseService;
 import co.four.study.memberCourse.service.MemberCourseVO;
 import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
 import co.four.study.question.service.QuestionService;
+import co.four.study.question.service.QuestionVO;
 import co.four.study.question.serviceImpl.QuestionServiceImpl;
 
 
@@ -41,8 +43,6 @@ public class AdminHomeController extends HttpServlet {
 		MemberCourseService mcdao = new MemberCourseServiceImpl();
 		CourseService cdao = new CourseServiceImpl();
 		
-		//답변안한 질문 갯수
-		int unanswerQ = qdao.unanswerQuestion();
 		
 		//현재 회원수
 		List<MemberVO> mlist = mdao.memberList();
@@ -55,11 +55,29 @@ public class AdminHomeController extends HttpServlet {
 		List<CourseVO> clist = cdao.courseSelectList(null);
 		int courseCount = clist.size();
 		
+		//차트 임시
+		Map<String, Integer> submap = new HashMap<>();
+		String arr[] = new String[] {"java","python","c++","c","c#"};
+		for(int i = 0; i < arr.length; i++) {
+			CourseVO vo = new CourseVO();
+			vo.setCourseSubCategory(arr[i]);
+			submap.put(arr[i], mcdao.distributionSubcategory(vo));
+		}
+		
+		//답변안한 질문 리스트
+		List<QuestionVO> qlist = qdao.unanswerQuestionList();
+//		System.out.println(qlist);
+		
+		//답변안한 질문 갯수
+		int unanswerQ = qlist.size();
+		
 		
 		request.setAttribute("newQ", unanswerQ);
 		request.setAttribute("members", memberCount);
 		request.setAttribute("totalP", totalP);
 		request.setAttribute("courses", courseCount);
+		request.setAttribute("sub", submap);
+		request.setAttribute("qlist", qlist);
 		
 		String page = "admin/home/home";
 		ViewResolve.foward(request, response, page);

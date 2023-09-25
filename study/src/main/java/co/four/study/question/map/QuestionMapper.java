@@ -41,4 +41,7 @@ public interface QuestionMapper {
 	// 조회수 증가
 	int updateQuestionHit(int id);
 	
+	//답변안한 질문 리스트
+	List<QuestionVO> unanswerQuestionList();
+	
 }

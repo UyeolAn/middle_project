@@ -37,4 +37,7 @@ public interface QuestionService {
 	// 질문 해결여부 업데이트
 	int updateQuestionSolve(QuestionSolveVO vo);
 	
+	//답변안한 질문 리스트
+	List<QuestionVO> unanswerQuestionList();
+	
 }

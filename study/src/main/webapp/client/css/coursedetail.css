@@ -425,6 +425,15 @@
 .reviw_content {
 	padding-top: 15px;
 }
+#reviewStars {
+	border: 1px solid #e6e6e6;
+    padding: 10px;
+    border-radius: 5px;
+    color: #5d5d5d;
+}
+#reviewStars option {
+	border: 1px solid #e6e6e6;
+}
 #reviw_write_area {
 	display: flex;
 	flex-direction: column;
@@ -446,6 +455,29 @@
 	font-size: 14px;
 	font-weight: 500;
 	color: #888;
+}
+.review_write_top {
+	display: flex;
+	justify-content: space-between;
+}
+.review_write_top .review_submit {
+	border: none;
+	font-size: 13px;
+	background-color: #4e565f;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 5px;
+	margin: 10px 0 10px 10px;
+}
+.review_edit, .review_del {
+	border: none;
+	font-size: 13px;
+	color: #c5c5c5;
+	text-decoration: underline;
+	background-color: transparent;
+}
+.review_date {
+	margin-right: 10px;
 }
 .nice-select {
 	float: none;

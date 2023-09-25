@@ -44,9 +44,10 @@
                       <br>
                       <br>
                       <br>
-
                       <li><a href="mypagecancel.do" style="font-size: 8px;">회원탈퇴</a></li>
-
+                      <li><a href="mypagepaymentpage.do">구매내역</a></li>
+                      <li><a href="mypagemycommunitypage.do">나의 커뮤니티</a></li>
+                      <li><a href="#" style="font-size: 8px;">회원탈퇴</a></li>
                     </ul>
                   </div>
                 </div>
