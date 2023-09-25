@@ -253,7 +253,7 @@
                           <td><a href="${s.subcourseLink}" target="_blank"> ${s.subcourseLink}</a></td>
                           <td>${s.subcourseTime}분</td>
                           <td>
-                            <a class="btn btn-secondary btn-icon-split" id="modiS" onclick="modiSub(${s.subcourseId})">
+                            <a class="btn btn-secondary btn-icon-split modifySub" onclick="modiSub(${s.subcourseId})">
                               <span class="icon text-white-50">
                                   <i class="fas fa-arrow-right"></i>
                               </span>
@@ -294,12 +294,31 @@
       </section>
 
       <div class="card shadow mb-4" id="modal">
-        <div class="card-header py-3 modal-content">
-            <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
-            <button id="close-modal">닫기</button>
-        </div>
+        <div class="card-header py-3 modal-content" style="width: 50%;">
+          <h5 class="m-0 mb-2 font-weight-bold text-primary">서브강의 수정</h5>
         <div class="card-body">
-            <input type="text" placeholder="생각중">
+          <div class="row" style="width:100%; margin-left:0;">
+            <p>강의 이름</p>
+            <input class="form-group col-lg-12" id="modalName" placeholder="이름">
+            <p>강의 링크</p>
+            <textarea class="form-group col-lg-12" id="modalLink" placeholder="링크"></textarea>
+            <p>강의 시간(분)</p><br><br>
+            <input class="form-group col-lg-3" id="modalTime" placeholder="(분)">
+            <br>
+          </div>
+          <a class="btn btn-primary btn-icon-split" id="sub-modal">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+            <span class="text" >완료</span>
+          </a>
+          <a class="btn btn-danger btn-icon-split" id="close-modal">
+            <span class="icon text-white-50">
+                <i class="fas fa-trash"></i>
+            </span>
+            <span class="text" >취소</span>
+          </a>
+        </div>
         </div>
     </div>
 
@@ -317,16 +336,16 @@
   const sc = new SubCourse();
   const fields = ['subcourseName', 'subcourseLink', 'subcourseTime'];
   const modal = document.getElementById("modal");
-  const openModalBtn = document.getElementById("modiS");
+  const subModalBtn = document.getElementById("sub-modal");
   const closeModalBtn = document.getElementById("close-modal");
 
   sc.showInfo();
 
   // console.log(${empty subcourse});
   function saveSub(id) {
-    console.log($('#inputName').val());
-    console.log($('#inputLink').val());
-    console.log($('#inputTime').val());
+    // console.log($('#inputName').val());
+    // console.log($('#inputLink').val());
+    // console.log($('#inputTime').val());
 
     let name = $('#inputName').val();
     let link = $('#inputLink').val();
@@ -378,15 +397,61 @@
   }
 
   function modiSub(sid) {
-    alert("ㅇㅇ");
+    console.log("수정버튼 누름 : "+sid);
+
+    sc.subcourseSearch(sid, function(result) {
+      console.log(result);
+      console.log(result.subcourseName);
+
+      $('#modalName').val(result.subcourseName);
+      $('#modalLink').val(result.subcourseLink);
+      $('#modalTime').val(Math.round(result.subcourseTime/60));
+
+    })
     modal.style.display = "block";
     document.body.style.overflow = "hidden"; // 스크롤바 제거
+
+          //수정 모달 제출
+  subModalBtn.addEventListener("click", () => {
+      console.log(sid);
+
+      let name = $('#modalName').val();
+      let link = $('#modalLink').val();
+      let time = $('#modalTime').val()
+      let scid = sid;
+
+      const sUpdate = {scId:scid, scName:name, scLink:link, scTime:time};
+
+      sc.subcourseUpdate(sUpdate, function(data) {
+        if(data.retCode == 'Success') {
+          alert("서브강의가 수정되었습니다.");
+        }
+        else if(result.retCode == "Fail") {
+          alert("처리중 에러");
+        }
+        else {
+          alert("잘못된 코드 반환");
+        }
+
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+        location.reload(true);
+      })
+      });
+    
   }
+
+        //수정 모달 취소버튼누르면 닫기
+  closeModalBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto"; // 스크롤바 보이기
+      });
+
+
+
   
 
-
-  
-
+  //서브강의 tr만들기
   function MakeTr (sub) {
 
 			let tr = document.createElement('tr');
@@ -414,12 +479,12 @@
 			}
 			let td = document.createElement('td');
 			let a = document.createElement('a');
-      a.setAttribute("class", "btn btn-secondary btn-icon-split");
-      a.setAttribute("onclick",`modiSub(\${sub.subcourseId})`);
+      a.setAttribute("class", "btn btn-secondary btn-icon-split modifySub");
+      a.setAttribute("onclick", `modiSub(\${sub.subcourseId})`)
       let span = document.createElement('span');
       span.setAttribute("class","icon text-white-50");
       let i = document.createElement('i');
-      i.setAttribute("class", "fas fa-arrow-right");
+      i.setAttribute("class", "fas fa-arrow-right modiS");
       span.appendChild(i);
       a.appendChild(span);
       td.appendChild(a);
@@ -428,8 +493,8 @@
 
       td = document.createElement('td');
 			a = document.createElement('a');
-      a.setAttribute("class", "btn btn-danger btn-icon-split");
-      a.setAttribute("id","deleteSub");
+      a.setAttribute("class", "btn btn-danger btn-icon-split deleteSub");
+      // a.setAttribute("id","deleteSub");
       // a.addEventListener('click',delsub);
       a.setAttribute("onclick",`delSub(\${sub.subcourseId})`);
       span = document.createElement('span');
@@ -448,6 +513,8 @@
 			tr.appendChild(td);
 			return tr;
 		}
+
+
 
   function addSub() {
     $('.addInput').css("display","");
@@ -487,16 +554,6 @@ $('.modify').click(function(e) {
   form.submit();
 })
 
-// 모달창 열기
-// openModalBtn.addEventListener("click", () => {
-//   modal.style.display = "block";
-//   document.body.style.overflow = "hidden"; // 스크롤바 제거
-// });
-// 모달창 닫기
-closeModalBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-  document.body.style.overflow = "auto"; // 스크롤바 보이기
-});
 
 </script>
 </body>
