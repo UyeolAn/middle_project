@@ -1,6 +1,7 @@
 package co.four.study.member.web;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import co.four.study.common.Sha256;
-import co.four.study.common.ViewResolve;
 import co.four.study.member.service.MemberService;
 import co.four.study.member.service.MemberVO;
 import co.four.study.member.serviceImpl.MemberServiceImpl;

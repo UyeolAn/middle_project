@@ -1,4 +1,4 @@
-package co.four.study.member.web;
+package co.four.study.member.web.mypage.page;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
 @WebServlet("/mypagemain.do")
 public class MypageMain extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	// 프로필 개요, 수강중인강좌, 커뮤니티글 표시(내용 편집x)
 	public MypageMain() {
 		super();
 
@@ -35,25 +35,33 @@ public class MypageMain extends HttpServlet {
 		MemberVO mvo = new MemberVO();
 		MemberCourseService memberCourseDao = new MemberCourseServiceImpl();
 		HttpSession session = request.getSession();
-
+		
 		mvo.setMemberId((String) session.getAttribute("loginId"));
+		
 		System.out.println(mvo.getMemberId());
-		//수강중인 강의 개수
-		List<MemberCourseVO> mclist = memberCourseDao.selectMemberCourseList(mvo);
+		//수강중인 강의 개수 상위 3개
+		List<MemberCourseVO> mclist = memberCourseDao.selectMemberCourseListDetail(mvo);
 		int courseCount = 0;
-		for (MemberCourseVO memberCourse : mclist) {
+		for (int i = 0; i<3; i++) {
 			courseCount++;
 		}
-
+		//수강중 강의 목록
+		
+		System.out.println(courseCount);
+					
+		System.out.println(mclist);
+		
+		
+		
+		
 		request.setAttribute("memberCourseCount", courseCount);
-
+		request.setAttribute("mycourse", mclist);
+		request.setAttribute("menu", "mypage");
 		
 		
-		// 프로필 개요, 수강중인강좌, 커뮤니티글 표시(내용 편집x)
 
 		String page = "mypage/mypageMain";
-
-		request.setAttribute("menu", "mypage");
+	
 
 		ViewResolve.foward(request, response, page);
 	}

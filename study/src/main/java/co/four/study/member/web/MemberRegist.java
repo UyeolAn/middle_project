@@ -34,9 +34,10 @@ public class MemberRegist extends HttpServlet {
 		vo.setMemberPassword(Sha256.encrypt(request.getParameter("memberPassword")));
 		vo.setMemberName(request.getParameter("memberName"));
 		vo.setMemberTel(request.getParameter("memberTel"));
-		vo.setMemberAddress(request.getParameter("memberAddress"));
+		vo.setMemberAddress(request.getParameter("address1") +" "+request.getParameter("address2") + 
+				request.getParameter("address3"));
 		vo.setMemberEmail(request.getParameter("memberEmail"));
-		System.out.println(vo);
+//		System.out.println(vo);
 		dao.memberInsert(vo);
 
 		String page = "home/home.jsp";

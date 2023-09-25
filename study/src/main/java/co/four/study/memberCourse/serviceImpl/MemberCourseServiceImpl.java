@@ -79,6 +79,11 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 	}
 
 	@Override
+	public List<MemberCourseVO> selectMemberCourseListDetail(MemberVO vo){
+		return map.selectMemberCourseListDetail(vo);
+  }
+  
+  @Override
 	public List<MemberCourseQnaVO> selectMemberCourseWithName(String id) {
 		return map.selectMemberCourseWithName(id);
   }

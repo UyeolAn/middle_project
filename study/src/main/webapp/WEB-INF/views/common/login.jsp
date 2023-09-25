@@ -49,7 +49,7 @@
 										<div class="text-center">
 											<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
 										</div>
-										<form class="user" action="checkLogin.do" method="get">
+										<form class="user" action="memberchecklogin.do" method="get">
 											<div class="form-group">
 												<input type="text" class="form-control form-control-user" id="memberId"
 													name="memberId" aria-describedby="INPUT ID" placeholder="Enter ID">
