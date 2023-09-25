@@ -1,10 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	#Qmodal {
+	  position: fixed;
+	  z-index: 1;
+	  left: 0;
+	  top: 0;
+	  width: 100%;
+	  height: 100%;
+	  overflow: auto;
+	  background-color: rgba(0, 0, 0, 0.4);
+	  display: none;
+	}
+	
+	.modal-content {
+	  background-color: #fefefe;
+	  margin: 15% auto;
+	  padding: 20px;
+	  border: 1px solid #888;
+	  width: 80%;
+	}
+	
+	.close {
+	  color: #aaa;
+	  float: right;
+	  font-size: 28px;
+	  font-weight: bold;
+	}
+	
+	.close:hover,
+	.close:focus {
+	  color: black;
+	  text-decoration: none;
+	  cursor: pointer;
+	}
+	</style>
 </head>
 <body>
 
@@ -83,19 +119,21 @@
 			<!-- Pending Requests Card Example -->
 			<div class="col-xl-3 col-md-6 mb-4">
 				<div class="card border-left-danger shadow h-100 py-2">
-					<div class="card-body">
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
-								<div
-									class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-									새로운 질문</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800">${newQ }개</div>
-							</div>
-							<div class="col-auto">
-								<i class="fas fa-comments fa-2x text-gray-300"></i>
+					<a id="Qmodalopen">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div
+										class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+										새로운 질문</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800">${newQ }개</div>
+								</div>
+								<div class="col-auto">
+									<i class="fas fa-comments fa-2x text-gray-300"></i>
+								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -106,7 +144,7 @@
 
 			<!-- Area Chart -->
 			<div class="col-xl-8 col-lg-7">
-				<div class="card shadow mb-4">
+				<div class="card shadow mb-4" style="height:100%;">
 					<!-- Card Header - Dropdown -->
 					<div
 						class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -139,7 +177,7 @@
 
 			<!-- Pie Chart -->
 			<div class="col-xl-4 col-lg-5">
-				<div class="card shadow mb-4">
+				<div class="card shadow mb-4" style="height:100%;">
 					<!-- Card Header - Dropdown -->
 					<div
 						class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -162,35 +200,6 @@
 						</div>
 					</div>
 					<!-- Card Body -->
-					<div class="card-body">
-						<div class="chart-pie pt-4 pb-2">
-							<canvas id="myPieChart"></canvas>
-						</div>
-						<div class="mt-4 text-center small">
-							<span class="mr-2"> <i class="fas fa-circle text-primary"></i>
-								Direct
-							</span> <span class="mr-2"> <i class="fas fa-circle text-success"></i>
-								Social
-							</span> <span class="mr-2"> <i class="fas fa-circle text-info"></i>
-								Referral
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Content Row -->
-		<div class="row">
-
-			<!-- Content Column -->
-			<div class="col-lg-6 mb-4">
-
-				<!-- Project Card Example -->
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-					</div>
 					<div class="card-body">
 						<h4 class="small font-weight-bold">
 							Server Migration <span class="float-right">20%</span>
@@ -233,121 +242,101 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- Color System -->
-				<div class="row">
-					<div class="col-lg-6 mb-4">
-						<div class="card bg-primary text-white shadow">
-							<div class="card-body">
-								Primary
-								<div class="text-white-50 small">#4e73df</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 mb-4">
-						<div class="card bg-success text-white shadow">
-							<div class="card-body">
-								Success
-								<div class="text-white-50 small">#1cc88a</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 mb-4">
-						<div class="card bg-info text-white shadow">
-							<div class="card-body">
-								Info
-								<div class="text-white-50 small">#36b9cc</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 mb-4">
-						<div class="card bg-warning text-white shadow">
-							<div class="card-body">
-								Warning
-								<div class="text-white-50 small">#f6c23e</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 mb-4">
-						<div class="card bg-danger text-white shadow">
-							<div class="card-body">
-								Danger
-								<div class="text-white-50 small">#e74a3b</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 mb-4">
-						<div class="card bg-secondary text-white shadow">
-							<div class="card-body">
-								Secondary
-								<div class="text-white-50 small">#858796</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 mb-4">
-						<div class="card bg-light text-black shadow">
-							<div class="card-body">
-								Light
-								<div class="text-black-50 small">#f8f9fc</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 mb-4">
-						<div class="card bg-dark text-white shadow">
-							<div class="card-body">
-								Dark
-								<div class="text-white-50 small">#5a5c69</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-			<div class="col-lg-6 mb-4">
-
-				<!-- Illustrations -->
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-					</div>
-					<div class="card-body">
-						<div class="text-center">
-							<img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
-								style="width: 25rem;" src="admin/img/client.png"
-								alt="...">
-						</div>
-						<p>
-							Add some quality, svg illustrations to your project courtesy of <a
-								target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>,
-							a constantly updated collection of beautiful svg images that you
-							can use completely free and without attribution!
-						</p>
-						<a target="_blank" rel="nofollow" href="https://undraw.co/">Browse
-							Illustrations on unDraw &rarr;</a>
-					</div>
-				</div>
-
-				<!-- Approach -->
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Development
-							Approach</h6>
-					</div>
-					<div class="card-body">
-						<p>SB Admin 2 makes extensive use of Bootstrap 4 utility
-							classes in order to reduce CSS bloat and poor page performance.
-							Custom CSS classes are used to create custom components and
-							custom utility classes.</p>
-						<p class="mb-0">Before working with this theme, you should
-							become familiar with the Bootstrap framework, especially the
-							utility classes.</p>
-					</div>
-				</div>
-
 			</div>
 		</div>
 
 
+		<!-- 모달 -->
+		<div class="card shadow mb-4" id="Qmodal">
+			<div class="card-header py-3 modal-content" style="width: 70%;">
+			  <h5 class="m-0 mb-2 font-weight-bold text-primary" id="QmodalTitle">새로운 질문</h5>
+				<div class="card-body">
+					<table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
+						<thead>
+						  <tr>
+							<th style="width: 10%;">질문자</th>
+							<th style="width: 30%;">제목</th>
+							<th style="width: 30%;">내용</th>
+							<th style="width: 20%;">작성일</th>
+							<th style="width: 5%;">답변</th>
+							<th style="width: 5%;">삭제</th>
+						  </tr>
+						</thead>
+						<tbody id="qList">
+						  <c:if test="${empty qlist}">
+							<tr id="empty"><td class="font-weight-bold" colspan="5" style="text-align: center;">새로운 질문이 없습니다.</td></tr>
+						  </c:if>
+						  <c:if test="${not empty qlist}">
+							<c:forEach items="${qlist }" var="q">
+							  <tr id="${q.questionId}">
+								<td>${q.memberId}</td>
+								<td>${q.questionTitle}</td>
+								<td>${q.questionContent}</td>
+								<td>${q.questionEnterDate}</td>
+								<td>
+									<a class="btn btn-primary btn-icon-split answer">
+									  <span class="icon text-white-50">
+										  <i class="fas fa-arrow-right"></i>
+									  </span>
+									</a>
+								  </td>
+								<td>
+								  <a class="btn btn-danger btn-icon-split deleteSub">
+									<span class="icon text-white-50">
+										<i class="fas fa-trash"></i>
+									</span>
+								  </a>
+								</td>
+							  </tr>
+							</c:forEach>
+						  </c:if>
+						</tbody>
+					  </table>
+					
+					<a class="btn btn-danger btn-icon-split" id="close-modal">
+						<span class="icon text-white-50">
+							<i class="fas fa-trash"></i>
+						</span>
+						<span class="text" >닫기</span>
+					  </a>
+				</div>
+			</div>
+		</div>
+<script>
+	const Qmodal = document.getElementById("Qmodal");
+	const closeModalBtn = document.getElementById("close-modal");
+
+	$('#Qmodalopen').click(function(){
+		Qmodal.style.display = "block";
+        document.body.style.overflow = "hidden";
+
+	});
+
+	closeModalBtn.addEventListener("click", () => {
+      Qmodal.style.display = "none";
+      document.body.style.overflow = "auto"; // 스크롤바 보이기
+      });
+
+
+	$('.answer').click(function() {
+		// console.log(this.parentElement.parentElement.id);
+		// <tr style="display: none;" class="addInput" id="lasttable">
+        //               <td><input type="text" style="width: 100%;" placeholder="이름" name="scName" id="inputName"></td>
+        //               <td colspan="2"><input type="text" style="width: 100%;" placeholder="링크" name="scLink" id="inputLink"></td>
+        //               <td colspan="2"><input type="text" style="width: 100%;" name="scTime" placeholder="시간(분)" id="inputTime"></td>
+        //             </tr>
+		console.log(this.parentElement);
+		let tr = document.createElement('tr');
+		let td = document.createElement('td');
+		td.setAttribute("colspan",5);
+		let input = document.createElement('input');
+		input.setAttribute("placeholder","답변 입력");
+		td.appendChild(input);
+		tr.appendChild(td);
+		console.log(tr);
+		this.parentElement.parentElement.parentElement.appendChild(tr);
+	})
+
+</script>
 </body>
 </html>

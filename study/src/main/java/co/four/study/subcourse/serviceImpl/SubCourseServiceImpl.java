@@ -32,7 +32,7 @@ public class SubCourseServiceImpl implements SubCourseService{
 
 	@Override
 	public int subcourseUpdate(SubCourseVO vo) {
-		return map.subcourseInsert(vo);
+		return map.subcourseUpdate(vo);
 	}
 
 	@Override

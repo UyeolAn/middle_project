@@ -12,7 +12,7 @@
 		SELECT	*
 		FROM	SUBCOURSES
 		WHERE	SUBCOURSE_ID = #{subcourseId}
-		<if test="courseId != null">
+		<if test="courseId != 0">
 		AND		COURSE_ID = #{courseId}
 		</if>
 	</select>
@@ -41,7 +41,7 @@
 	</delete>
 	
 	<select id="subcourseByCourse" parameterType="co.four.study.course.service.CourseVO" resultType="co.four.study.subcourse.service.SubCourseVO">
-		SELECT * FROM SUBCOURSES WHERE COURSE_ID = #{courseId}
+		SELECT * FROM SUBCOURSES WHERE COURSE_ID = #{courseId} ORDER BY SUBCOURSE_ID
 	
 	</select>
 	

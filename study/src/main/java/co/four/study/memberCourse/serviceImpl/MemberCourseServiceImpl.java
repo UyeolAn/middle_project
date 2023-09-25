@@ -81,6 +81,11 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 	@Override
 	public List<MemberCourseQnaVO> selectMemberCourseWithName(String id) {
 		return map.selectMemberCourseWithName(id);
+  }
+   
+  @Override
+	public int distributionSubcategory(CourseVO vo) {
+		return map.distributionSubcategory(vo);
 	}
 
 }

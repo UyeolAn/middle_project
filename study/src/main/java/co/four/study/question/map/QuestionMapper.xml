@@ -144,4 +144,8 @@
 		SET question_hit = question_hit + 1
 		WHERE question_id = #{id}
 	</update>
+	
+	<select id="unanswerQuestionList" resultType="co.four.study.question.service.QuestionVO">
+		SELECT * FROM QUESTIONS WHERE QUESTION_SOLVE = 'not_solved' ORDER BY QUESTION_ENTER_DATE
+	</select>
 </mapper>

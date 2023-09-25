@@ -22,4 +22,5 @@ public interface CourseService {
 	public String gradeCoursePagingTag(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String grade);
 	// 강의 페이지 사이드 메뉴 만들기
 	public void makeSideMenu(HttpServletRequest request);	
+	
 }

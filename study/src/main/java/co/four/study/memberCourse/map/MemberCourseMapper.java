@@ -39,4 +39,7 @@ public interface MemberCourseMapper {
 	//회원이 수강신청한 강의 ID/이름 가져오기
 	List<MemberCourseQnaVO> selectMemberCourseWithName(String id);
 	
+	//현재 수강하는 과목들 서브카테고리별 분포
+	int distributionSubcategory(CourseVO vo);
+
 }
