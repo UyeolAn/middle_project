@@ -4,8 +4,12 @@
 	<select id="reviewSelectList" resultType="co.four.study.review.service.ReviewVO" parameterType="co.four.study.review.service.ReviewVO">
 		SELECT *
 		FROM REVIEWS
+		WHERE 1=1
 		<if test="courseId != null">
-		WHERE COURSE_ID = #{courseId}
+		AND COURSE_ID = #{courseId}
+		</if>
+		<if test="memberId != null">
+		AND MEMBER_ID = #{memberId}
 		</if>
 	</select>
 	
@@ -13,12 +17,19 @@
 		SELECT * FROM REVIEWS WHERE REVIEW_ID = #{reviewId}
 	</select>
 	
+	<select id="memberReviewSelect" resultType="co.four.study.review.service.ReviewVO">
+		SELECT *
+		FROM REVIEWS
+		WHERE COURSE_ID = #{courseId}
+		AND MEMBER_ID = #{memberId}
+	</select>
+	
 	<insert id="reviewInsert" parameterType="co.four.study.review.service.ReviewVO">
 		<selectKey keyProperty="reviewId" resultType="int" order="BEFORE">
          	SELECT NVL(MAX(REVIEW_ID), 0) + 1 AS REVIEW_ID FROM REVIEWS
       	</selectKey>
       	INSERT INTO REVIEWS VALUES (#{reviewId}, #{memberId}, #{courseId}, #{reviewContent}, #{reviewStars}, 
-      	SYSDATE, SYSDATE)
+      	SYSDATE, null)
 	</insert>
 	
 	<delete id="reviewDelete" parameterType="co.four.study.review.service.ReviewVO">

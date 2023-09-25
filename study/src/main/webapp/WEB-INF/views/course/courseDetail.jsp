@@ -82,13 +82,13 @@
 						<div class="product__details__tab">
 							<ul class="nav nav-tabs" role="tablist">
 								<li class="nav-item">
-									<a class="nav-link <c:if test='${message eq "impossible" }'>active</c:if>" data-toggle="tab" href="#tabs-5" role="tab">강의소개</a>
+									<a class="tab-menu-1 nav-link <c:if test='${message eq "impossible" }'>active</c:if>" data-toggle="tab" href="#tabs-5" role="tab">강의소개</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link <c:if test='${message eq "possible" }'>active</c:if>" data-toggle="tab" href="#tabs-6" role="tab">커리큘럼</a>
+									<a class="tab-menu-2 nav-link <c:if test='${message eq "possible" }'>active</c:if>" data-toggle="tab" href="#tabs-6" role="tab">커리큘럼</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" data-toggle="tab" href="#tabs-7" role="tab">수강생리뷰</a>
+									<a class="tab-menu-3 nav-link" data-toggle="tab" href="#tabs-7" role="tab">수강생리뷰</a>
 								</li>
 							</ul>
 							<div class="tab-content">
@@ -168,11 +168,12 @@
 									<div class="product__details__tab__content">
 										<div class="product__details__tab__content__item">
 											<div class="reviw_tab_title">
-												<h5>수강평 <span>총 ${rcount }개</span></h5>
+												<h5>수강평 총 <span class="review_count"></span>개</h5>
 												<p>수강생분들이 직접 작성하신 리뷰입니다.</p>
 											</div>
 											<c:if test="${message eq 'possible' }">
-												<form id="reviw_write_area" action="" method="post">
+												<!-- 리뷰작성 form start  -->
+												<div id="reviw_write_area">
 													<div class="stars_wrap">
 														<p class="review_item_title">
 															강의만족도<span class="required">*</span>
@@ -188,51 +189,38 @@
 														</select>
 													</div>
 													<div class="review_write_wrap">
-														<p class="review_item_title">수강후기 <span>(선택사항)</span></p>
+														<div class="review_write_top">
+															<p class="review_item_title">수강후기 <span>(선택사항)</span></p>
+															<button class="review_submit" onclick="reviewInsert()">등록</button>
+														</div>
 														<div class="textarea_wrap">
 															<textarea id="reviwContent" name="reviwContent" rows="3" placeholder="좋은 수강평을 남겨주시면 지식공유자와 이후 배우는 사람들에게 큰 도움이 됩니다!"></textarea>
 														</div>
 													</div>
-												</form>
+												</div>
+												<!-- 리뷰작성 form end  -->
 											</c:if>
 											<div class="review_tab_content">
-												<c:forEach items="${reviews}" var="r">
-													<div class="col_7">
-														<div class="reviw_col_top">
-															<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#b9c2c9"
-																class="bi bi-person-circle" viewBox="0 0 16 16">
-																<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-																<path fill-rule="evenodd"
-																	d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-															</svg>
-															<div>
-																<div class="rating">
-																	<c:if test="${r.reviewStars > 0 }">
-																		<c:forEach var="i" begin="1" end="${r.reviewStars}">
-																			<i class="fa fa-star"></i>
-																		</c:forEach>
-																		<c:forEach var="i" begin="1" end="${5 - r.reviewStars}">
-																			<i class="fa fa-star-o"></i>
-																		</c:forEach>
-																	</c:if>
-																	<c:if test="${r.reviewStars <= 0 }">
-																		<i class="fa fa-star-o"></i>
-																		<i class="fa fa-star-o"></i>
-																		<i class="fa fa-star-o"></i>
-																		<i class="fa fa-star-o"></i>
-																		<i class="fa fa-star-o"></i>
-																	</c:if>
-																</div>
-																<p>
-																	<span>${r.memberId } |</span>
-																	<c:if test="${r.reviewUpdateDate ne null }">${r.reviewUpdateDate}</c:if>
-																	<c:if test="${r.reviewUpdateDate eq null }">${r.reviewEnterDate}</c:if>
-																</p>
-															</div>
+												<!-- ajax용 태그 start -->
+												<div class="ajax_col_7" style="display: none;">
+													<div class="reviw_col_top">
+														<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#b9c2c9" class="bi bi-person-circle" viewBox="0 0 16 16">
+															<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
+															<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path>
+														</svg>
+														<div>
+															<div class="rating" data-star></div>
+															<p>
+																<span class="member_id">jyj |</span>
+																<span class="review_date">2023-09-25</span>
+																<button class="review_edit" data-edit onclick="edit(this)">수정</button>
+																<button class="review_del" data-del onclick="reviewDelete(this, ${course.courseId})">삭제</button>
+															</p>
 														</div>
-														<p class="reviw_content">${r.reviewContent }</p>
 													</div>
-												</c:forEach>
+													<p class="reviw_content">내용</p>
+												</div>
+												<!-- ajax용 태그 end -->
 											</div>
 										</div>
 									</div>
@@ -263,8 +251,8 @@
 										</h5>
 										<div class="button_wrap">
 											<c:if test="${bucket eq 'notIn' }">
-												<a href="bucketinsert.do?courseId=${course.courseId }&memberId=${loginId }"><button type="button" class="btn btn-green btn-green-p course-add">수강신청 하기</button></a>
-												<a href="ajaxbucketinsert.do?courseId=${course.courseId }"><button type="button" class="btn btn-green btn-green-p">장바구니 담기</button></a>
+												<button type="button" class="btn btn-green btn-green-p course-add" onclick="addBucketList()">수강신청 하기</button>
+												<button type="button" class="btn btn-green btn-green-p" onclick="ajaxAddBucketList()">장바구니 담기</button>
 											</c:if>
 											<c:if test="${bucket eq 'in' }">
 												<a href="bucketlist.do?memberId=${loginId }"><button type="button" class="btn btn-green btn-green-p course-add">장바구니로 이동</button></a>
@@ -296,13 +284,22 @@
 		<input type="hidden" name="nowPage" id="nowPage" value="" />
 		<input type="hidden" name="cntPerPage" id="cntPerPage" value="" />
 		<input type="hidden" name="message" id="message" value="${message }" />
-		<input type="hidden" name="courseId" id="courseId" value="${course.courseId }" />
 		<input type="hidden" name="loginId" id="loginId" value="${loginId }" />
+	</form>
+	
+	<form id="bucketform" action="bucketinsert.do" method="post">
+		<input type="hidden" name="courseId" id="courseId" value="${course.courseId }" />
+		<input type="hidden" name="memberId" id="memberId" value="${loginId }" />
 	</form>
 	
 
 	<!-- 강의 관련 자바스크립트 연결 -->
 	<script type="text/javascript" src="client/js/coursedetail.js"></script>
+	<script type="text/javascript">
+		$(window).load(
+			showReviewList(${course.courseId}); // 리뷰 리스트 만들기
+		);
+	</script>
 
 </body>
 
