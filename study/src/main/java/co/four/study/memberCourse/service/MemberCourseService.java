@@ -34,4 +34,8 @@ public interface MemberCourseService {
 	
 	//회원수강여부 체크
 	int memberCourseStatus(MemberCourseVO vo);
+	
+	//회원이 수강신청한 강의 ID/이름 가져오기
+	List<MemberCourseQnaVO> selectMemberCourseWithName(String id);
+	
 }

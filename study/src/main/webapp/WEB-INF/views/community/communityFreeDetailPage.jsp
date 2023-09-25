@@ -225,6 +225,7 @@
         setUpdDelBtn();
         loadMemberRecommend();
         setTimeout(() => { }, 500);
+        loadReplyCount();
         loadReplies();
         setSortBtn();
 
@@ -363,6 +364,11 @@
           } else {
             return false;
           }
+        }
+
+        // 
+        function loadReplyCount() {
+
         }
 
         // 댓글 불러오는 함수
