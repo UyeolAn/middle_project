@@ -64,7 +64,7 @@ public class MypageProfile extends HttpServlet {
 			// 강의 정보
 			request.setAttribute("memberCourseCount", courseCount);
 			request.setAttribute("mycourse", mclist);
-			String page = "mypage/mypageProfile";
+			String page = "mypage/mypageProfilePage";
 
 			ViewResolve.foward(request, response, page);
 		}
