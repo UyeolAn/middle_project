@@ -707,7 +707,23 @@
 				</div>
 			</div>
 			<!-- Search End -->
+			<script>
+				let loginMsg = `${loginmsg}`;
+				if(loginMsg != ""){
+					alert(loginMsg)
+					loginMsg = "";
+				}
 
+				
+				let logoutMsg = `${altmsg}`;
+				if(logoutMsg != ""){
+					alert(logoutMsg)
+					logoutMsg = "";
+				}
+				
+				
+
+			</script>
 			<!-- Js Plugins -->
 			<script src="client/js/jquery-3.3.1.min.js"></script>
 			<script src="client/js/bootstrap.min.js"></script>
