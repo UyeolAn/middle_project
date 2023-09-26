@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class AnswerVO {
 	
+	// 외부 필드
 	private int answerId;
 	
 	private int questionId;
@@ -23,4 +24,6 @@ public class AnswerVO {
 	
 	private String answerSolve;
 	
+	// 외부 필드
+	private String memberAuthor;
 }

@@ -113,5 +113,10 @@
 		group by  to_char(to_date(member_enter_date), 'YYYY-MM')
 		order by monthly
 	</select>
-
+	
+	<select id="selectMemberAuthor" parameterType="String" resultType="String">
+		SELECT member_author
+		FROM members
+		WHERE member_id = #{id}
+	</select>
 </mapper>

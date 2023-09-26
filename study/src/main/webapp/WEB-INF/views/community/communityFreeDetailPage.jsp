@@ -141,6 +141,11 @@
         <!--Board Main Body Start-->
         <div class="col-lg-12 row" style="margin-top: 5%;">
           <div class="col-lg-10">
+            <c:if test="${not empty board.boardImg}">
+              <div class="col-lg-10">
+                <img src="client/img/board/${board.boardImg}" alt="게시글 이미지">
+              </div>
+            </c:if>
             <p class="col-lg-12" id="boardContent" style="white-space:pre;">${board.boardContent}</p>
           </div>
           <div class="col-lg-7 comm__free__board__detail__buttons" style="margin-top: 5%;">
@@ -590,7 +595,7 @@
             });
           });
         }
-        
+
       </script>
 
     </body>

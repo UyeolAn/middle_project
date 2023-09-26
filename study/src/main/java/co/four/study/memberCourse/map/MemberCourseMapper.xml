@@ -11,7 +11,7 @@
 	</select>
 	
 	<insert id="insertMemberCourse" parameterType="co.four.study.memberCourse.service.MemberCourseVO">
-		INSERT INTO MEMBERS_COURSES VALUES (#{memberId}, #{courseId}, 0)
+		INSERT INTO MEMBERS_COURSES VALUES (#{memberId}, #{courseId}, DEFAULT, SYSDATE)
 	</insert>
 	
 	<delete id="deleteMemberCourse" parameterType="co.four.study.memberCourse.service.MemberCourseVO">
@@ -107,14 +107,44 @@
 		WHERE member_id = #{memberId}
 	</select>
 	
+	<select id="countPayments" parameterType="co.four.study.memberCourse.service.MemberCourseSearchVO" resultType="int">
+		SELECT COUNT(*) 
+		FROM members_courses mc
+			JOIN courses c
+			ON mc.course_id = c.course_id
+		WHERE mc.member_id = #{memberId} AND
+			  c.course_price > 0
+	</select>
+	
 	<select id="selectCourseWithPaging" parameterType="co.four.study.course.service.CourseSearchVO" resultType="co.four.study.course.service.CourseVO">
-		SELECT ROWNUM, a.*
-		FROM (SELECT c.*
-		      FROM members_courses mc
-		        JOIN courses c
-		        ON mc.course_id = c.course_id
-		      WHERE mc.member_id = #{memberId}) a 
-		WHERE ROWNUM BETWEEN #{startRow} AND #{endRow}
+		SELECT *
+		FROM (SELECT ROWNUM AS rm, a.*
+			  FROM (SELECT c.*
+			        FROM members_courses mc
+			          JOIN courses c
+			          ON mc.course_id = c.course_id
+			        WHERE mc.member_id = #{memberId}
+			  		<trim prefix="ORDER BY">
+			            <if test="sortType == 'mostRecent'">mc.enter_date DESC</if>
+			            <if test="sortType == 'mostOld'">mc.enter_date</if>
+			        </trim>) a )
+	     WHERE rm BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="selectPaymentWithPaging" parameterType="co.four.study.memberCourse.service.MemberCourseSearchVO" resultType="co.four.study.memberCourse.service.PaymentVO">
+		SELECT *
+		FROM (SELECT ROWNUM AS rm, a.*
+			  FROM (SELECT c.course_name, c.course_price, mc.enter_date
+			  		FROM members_courses mc
+			  		  JOIN courses c
+			  		  ON mc.course_id = c.course_id
+			  		WHERE mc.member_id = #{memberId} AND
+			  			  c.course_price > 0
+			  		<trim prefix="ORDER BY">
+			            <if test="sortType == 'mostRecent'">mc.enter_date DESC</if>
+			            <if test="sortType == 'mostOld'">mc.enter_date</if>
+			        </trim>) a )
+	     WHERE rm BETWEEN #{startRow} AND #{endRow}
 	</select>
 
 </mapper>

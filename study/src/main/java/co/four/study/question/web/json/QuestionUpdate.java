@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.four.study.common.ViewResolve;
 import co.four.study.question.service.QuestionService;
 import co.four.study.question.service.QuestionVO;
 import co.four.study.question.serviceImpl.QuestionServiceImpl;
