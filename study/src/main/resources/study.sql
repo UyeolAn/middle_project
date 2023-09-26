@@ -141,7 +141,7 @@ COMMENT ON COLUMN subcourses.subcourse_time IS '세부강의 시간';
 CREATE TABLE reviews 
 (
   review_id NUMBER NOT NULL
-, member_id VARCHAR2(100) NOT NULL
+, member_id VARCHAR2(100)
 , course_id NUMBER NOT NULL
 , review_content VARCHAR2(512)
 , review_stars NUMBER NOT NULL
@@ -207,7 +207,7 @@ COMMENT ON COLUMN bucket.count IS '진도';
 CREATE TABLE boards 
 (
   board_id NUMBER NOT NULL
-, member_id VARCHAR2(100) NOT NULL
+, member_id VARCHAR2(100)
 , board_title VARCHAR2(100) NOT NULL
 , board_content VARCHAR2(512) NOT NULL
 , board_enter_date DATE DEFAULT SYSDATE NOT NULL
@@ -262,6 +262,7 @@ CREATE TABLE recommends
   (
     member_id 
   )
+  ON DELETE CASCADE
 , CONSTRAINT recommends_board_id_fk FOREIGN KEY
   (
     board_id 
@@ -270,6 +271,7 @@ CREATE TABLE recommends
   (
     board_id 
   )
+  ON DELETE CASCADE
 );
 
 COMMENT ON COLUMN recommends.recommend_id IS '추천 ID';
@@ -287,7 +289,7 @@ CREATE TABLE replies
 (
   reply_id NUMBER NOT NULL
 , board_id NUMBER NOT NULL
-, member_id VARCHAR2(100) NOT NULL
+, member_id VARCHAR2(100)
 , reply_content VARCHAR2(512) NOT NULL
 , reply_enter_date DATE DEFAULT SYSDATE NOT NULL
 , reply_update_date DATE
@@ -331,7 +333,7 @@ COMMENT ON COLUMN replies.reply_update_date IS '댓글 수정일';
 CREATE TABLE questions
 (
   question_id NUMBER NOT NULL
-, member_id VARCHAR2(100) NOT NULL
+, member_id VARCHAR2(100)
 , course_id NUMBER
 , question_title VARCHAR2(100) NOT NULL
 , question_content VARCHAR2(512) NOT NULL
@@ -382,7 +384,7 @@ CREATE TABLE answers
 (
   answer_id NUMBER NOT NULL
 , question_id NUMBER NOT NULL
-, member_id VARCHAR2(100) NOT NULL
+, member_id VARCHAR2(100)
 , answer_content VARCHAR2(512) NOT NULL
 , answer_enter_date DATE DEFAULT SYSDATE NOT NULL
 , answer_update_date DATE
