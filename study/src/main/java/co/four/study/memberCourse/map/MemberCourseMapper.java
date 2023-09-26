@@ -2,6 +2,7 @@ package co.four.study.memberCourse.map;
 
 import java.util.List;
 
+import co.four.study.course.service.CourseSearchVO;
 import co.four.study.course.service.CourseVO;
 import co.four.study.member.service.MemberVO;
 import co.four.study.memberCourse.service.MemberCourseQnaVO;
@@ -47,5 +48,11 @@ public interface MemberCourseMapper {
 	
 	//진도율 올리기
 	int memberCourseCount(MemberCourseVO vo);
+
+	//회원이 수강신청한 강의 카운트
+	int countMemberCourses(CourseSearchVO vo);
+	
+	//회원이 수강신청한 강의 페이징해서 가져오기
+	List<CourseVO> selectCourseWithPaging(CourseSearchVO vo);
 
 }

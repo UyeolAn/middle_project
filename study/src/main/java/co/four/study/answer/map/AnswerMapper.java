@@ -35,4 +35,7 @@ public interface AnswerMapper {
 	
 	// 답변 해결여부 '미해결'로 세팅
 	int setAnswerNotSolved(AnswerVO vo);
+	
+	//질문별 답변
+	List<AnswerVO> answerSelectListbyQ(AnswerVO vo);
 }

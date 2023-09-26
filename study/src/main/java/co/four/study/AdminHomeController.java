@@ -55,14 +55,22 @@ public class AdminHomeController extends HttpServlet {
 		List<CourseVO> clist = cdao.courseSelectList(null);
 		int courseCount = clist.size();
 		
+		
+		//it강의수
+		List<CourseVO> itlist = cdao.itcourselist();
+		int it = itlist.size();
 		//차트 임시
-		Map<String, Integer> submap = new HashMap<>();
+		Map<String, Double> submap = new HashMap<>();
 		String arr[] = new String[] {"java","python","c++","c","c#"};
-		for(int i = 0; i < arr.length; i++) {
-			CourseVO vo = new CourseVO();
-			vo.setCourseSubCategory(arr[i]);
-			submap.put(arr[i], mcdao.distributionSubcategory(vo));
-		}
+//		for(int i = 0; i < arr.length; i++) {
+//			CourseVO vo = new CourseVO();
+//			vo.setCourseSubCategory(arr[i]);
+//			List<CourseVO> sublist = cdao.itcourseSub(vo);
+//			//int sub = sublist.size();
+//			double per = (it/sub)*100;
+//			System.out.println(arr[i]+": "+sub+" / "+it+" / "+per);
+//			submap.put(arr[i], per);
+//		}
 		
 		//답변안한 질문 리스트
 		List<QuestionVO> qlist = qdao.unanswerQuestionList();
@@ -71,12 +79,13 @@ public class AdminHomeController extends HttpServlet {
 		//답변안한 질문 갯수
 		int unanswerQ = qlist.size();
 		
+		System.out.println(submap);
 		
 		request.setAttribute("newQ", unanswerQ);
 		request.setAttribute("members", memberCount);
 		request.setAttribute("totalP", totalP);
 		request.setAttribute("courses", courseCount);
-		request.setAttribute("sub", submap);
+//		request.setAttribute("sub", submap);
 		request.setAttribute("qlist", qlist);
 		
 		String page = "admin/home/home";

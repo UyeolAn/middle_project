@@ -79,4 +79,9 @@ public class QuestionServiceImpl implements QuestionService{
 		return map.unanswerQuestionList();
 	}
 
+	@Override
+	public List<QuestionVO> questionListBynotsolved() {
+		return map.questionListBynotsolved();
+	}
+
 }

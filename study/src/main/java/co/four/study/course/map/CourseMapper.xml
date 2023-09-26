@@ -133,4 +133,13 @@
 		WHERE RNM BETWEEN
 		#{start} AND #{end}
 	</select>
+	
+	<select id="itcourselist" resultType="co.four.study.course.service.CourseVO">
+		SELECT * FROM COURSES WHERE COURSE_MAIN_CATEGORY = 'it'
+	</select>
+	
+	<select id="itcourseSub" resultType="co.four.study.course.service.CourseVO">
+		SELECT * FROM COURSES WHERE COURSE_SUB_CATEGORY = #{courseSubCategory}
+	</select>
+	
 </mapper>

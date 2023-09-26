@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import co.four.study.common.DataSource;
+import co.four.study.course.service.CourseSearchVO;
 import co.four.study.course.service.CourseVO;
 import co.four.study.member.service.MemberVO;
 import co.four.study.memberCourse.map.MemberCourseMapper;
@@ -81,21 +82,31 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 	@Override
 	public List<MemberCourseVO> selectMemberCourseListDetail(MemberVO vo){
 		return map.selectMemberCourseListDetail(vo);
-  }
+    }
   
-  @Override
+    @Override
 	public List<MemberCourseQnaVO> selectMemberCourseWithName(String id) {
 		return map.selectMemberCourseWithName(id);
-  }
+    }
    
-  @Override
+    @Override
 	public int distributionSubcategory(CourseVO vo) {
 		return map.distributionSubcategory(vo);
 	}
-
-	@Override
+	
+  @Override
 	public int memberCourseCount(MemberCourseVO vo) {
 		return map.memberCourseCount(vo);
+  }
+  
+  @Override
+	public int countMemberCourses(CourseSearchVO vo) {
+		return map.countMemberCourses(vo);
+	}
+	
+	@Override
+	public List<CourseVO> selectCourseWithPaging(CourseSearchVO vo) {
+		return map.selectCourseWithPaging(vo);
 	}
 
 }

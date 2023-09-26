@@ -119,7 +119,7 @@
 			<!-- Pending Requests Card Example -->
 			<div class="col-xl-3 col-md-6 mb-4">
 				<div class="card border-left-danger shadow h-100 py-2">
-					<a id="Qmodalopen">
+					<a id="Qmodalopen" href="adminquestionlist.do">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
@@ -202,7 +202,7 @@
 					<!-- Card Body -->
 					<div class="card-body">
 						<h4 class="small font-weight-bold">
-							Server Migration <span class="float-right">20%</span>
+							Server Migration <span class="float-right">임의</span>
 						</h4>
 						<div class="progress mb-4">
 							<div class="progress-bar bg-danger" role="progressbar"
@@ -303,39 +303,7 @@
 			</div>
 		</div>
 <script>
-	const Qmodal = document.getElementById("Qmodal");
-	const closeModalBtn = document.getElementById("close-modal");
 
-	$('#Qmodalopen').click(function(){
-		Qmodal.style.display = "block";
-        document.body.style.overflow = "hidden";
-
-	});
-
-	closeModalBtn.addEventListener("click", () => {
-      Qmodal.style.display = "none";
-      document.body.style.overflow = "auto"; // 스크롤바 보이기
-      });
-
-
-	$('.answer').click(function() {
-		// console.log(this.parentElement.parentElement.id);
-		// <tr style="display: none;" class="addInput" id="lasttable">
-        //               <td><input type="text" style="width: 100%;" placeholder="이름" name="scName" id="inputName"></td>
-        //               <td colspan="2"><input type="text" style="width: 100%;" placeholder="링크" name="scLink" id="inputLink"></td>
-        //               <td colspan="2"><input type="text" style="width: 100%;" name="scTime" placeholder="시간(분)" id="inputTime"></td>
-        //             </tr>
-		console.log(this.parentElement);
-		let tr = document.createElement('tr');
-		let td = document.createElement('td');
-		td.setAttribute("colspan",5);
-		let input = document.createElement('input');
-		input.setAttribute("placeholder","답변 입력");
-		td.appendChild(input);
-		tr.appendChild(td);
-		console.log(tr);
-		this.parentElement.parentElement.parentElement.appendChild(tr);
-	})
 
 </script>
 </body>
