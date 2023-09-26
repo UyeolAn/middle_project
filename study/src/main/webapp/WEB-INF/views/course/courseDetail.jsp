@@ -21,7 +21,14 @@
 		<!-- 강의 카테고리, 등급, 강의 이름, 설명 start -->
 		<div class="product__details__pic set-bg course_bg">
 			<div class="container course_container">
-				<div class="row set-bg course_pic" data-setbg="client/img/product/${course.courseImg }"></div>
+				<c:choose>
+					<c:when test="${course.courseImg != null}">
+						<div class="row set-bg course_pic" data-setbg="client/img/product/${course.courseImg }"></div>
+					</c:when>
+					<c:otherwise>
+						<div class="row set-bg course_pic" data-setbg="client/img/product/basic.png"></div>
+					</c:otherwise>
+				</c:choose>
 				<div class="course_info_wrap">
 					<div>
 						<p class="breadcrumb__links course_links"><span>${fn:toUpperCase(course.courseMainCategory)}</span>

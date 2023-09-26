@@ -12,4 +12,5 @@ public interface PackageCourseMapper {
 	
 	//패키지 정가계산
 	int priceSumByPackage(PackageCourseVO vo);
+
 }

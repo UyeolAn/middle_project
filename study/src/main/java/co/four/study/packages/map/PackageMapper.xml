@@ -5,6 +5,13 @@
 	<select id="packageSelectList" resultType="co.four.study.packages.service.PackageVO">
 		SELECT *
 		FROM PACKAGES
+		WHERE 1=1
+		<if test="packageCategory != null">
+			AND PACKAGE_CATEGORY = #{packageCategory}
+		</if>
+		<if test="packageGrade != null and packageGrade != 'all'">
+			AND PACKAGE_GRADE = #{packageGrade}
+		</if>
 	</select>
 	
 	<select id="packageSelect" resultType="co.four.study.packages.service.PackageVO">
@@ -41,5 +48,15 @@
 		DELETE FROM PACKAGES
 		WHERE PACKAGE_ID = #{packageId}	
 	</delete>
+	
+	<select id="salePrice" parameterType="co.four.study.packageCourse.service.PackageCourseVO" resultType="Integer">
+		SELECT (T.TOTAL_PRICE * (1 - (T.PACKAGE_DISCOUNT*0.01))) SALE_PRICE
+		FROM (SELECT C.PACKAGE_ID, SUM(A.COURSE_PRICE) TOTAL_PRICE, C.PACKAGE_DISCOUNT
+		      FROM COURSES A, PACKAGES_COURSES B, PACKAGES C
+		      WHERE A.COURSE_ID = B.COURSE_ID
+		      AND B.PACKAGE_ID = C.PACKAGE_ID
+		      AND B.PACKAGE_ID = #{packageId}
+		      GROUP BY C.PACKAGE_ID, C.PACKAGE_DISCOUNT) T
+	</select>
 
 </mapper>

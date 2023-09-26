@@ -15,8 +15,8 @@ public class PackageServiceImpl implements PackageService {
 	private PackageMapper map = sqlSession.getMapper(PackageMapper.class);
 
 	@Override
-	public List<PackageVO> packageSelectList() {
-		return map.packageSelectList();
+	public List<PackageVO> packageSelectList(PackageVO vo) {
+		return map.packageSelectList(vo);
 	}
 
 	@Override
@@ -37,6 +37,11 @@ public class PackageServiceImpl implements PackageService {
 	@Override
 	public int packageDelete(PackageVO vo) {
 		return map.packageDelete(vo);
+	}
+
+	@Override
+	public int salePrice(PackageVO vo) {
+		return map.salePrice(vo);
 	}
 
 }

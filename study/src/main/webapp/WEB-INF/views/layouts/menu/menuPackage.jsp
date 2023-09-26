@@ -49,7 +49,7 @@
 					<!-- 전체보기 -->
 					<div class="card">
 						<div class="course-all">
-							<a href="courselist.do">전체보기</a>
+							<a href="packagelist.do">전체보기</a>
 						</div>
 					</div>
 					<!-- IT -->
@@ -62,13 +62,16 @@
 							<div class="card-body">
 								<div class="shop__sidebar__categories">
 									<ul class="nice-scroll">
-										<li onclick="#" data-c="easy">
+										<li onclick="packageList('it', 'all', this)" data-c="null">
+											<span class="sub_menu">전체보기</span>
+										</li>
+										<li onclick="packageList('it', 'easy', this)" data-c="easy">
 											<span class="sub_menu">입문</span>
 										</li>
-										<li onclick="#" data-c="normal">
+										<li onclick="packageList('it', 'normal', this)" data-c="normal">
 											<span class="sub_menu">초급</span>
 										</li>
-										<li onclick="#" data-c="hard">
+										<li onclick="packageList('it', 'hard', this)" data-c="hard">
 											<span class="sub_menu">중급이상</span>
 										</li>
 									</ul>
@@ -86,13 +89,16 @@
 							<div class="card-body">
 								<div class="shop__sidebar__categories">
 									<ul class="nice-scroll">
-										<li onclick="#" data-c="easy">
+										<li onclick="packageList('english', 'all', this)" data-c="null">
+											<span class="sub_menu">전체보기</span>
+										</li>
+										<li onclick="packageList('english', 'easy', this)" data-c="easy">
 											<span class="sub_menu">입문</span>
 										</li>
-										<li onclick="#" data-c="normal">
+										<li onclick="packageList('english', 'normal', this)" data-c="normal">
 											<span class="sub_menu">초급</span>
 										</li>
-										<li onclick="#" data-c="hard">
+										<li onclick="packageList('english', 'hard', this)" data-c="hard">
 											<span class="sub_menu">중급이상</span>
 										</li>
 									</ul>
@@ -104,6 +110,9 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 패키지관련 자바스크립트 연결 -->
+	<script type="text/javascript" src="client/js/package.js"></script>
 </body>
 
 </html>

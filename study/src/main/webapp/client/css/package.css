@@ -1,19 +1,24 @@
 @charset "UTF-8";
 
-
-.course_tab_row .product__details__tab__content {
-	padding: 0 10px;
+.message_wrap {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 500px;
 }
-.course_script_wrap {
-	flex-direction: column;
-	gap: 35px;
+.result_no {
+	justify-content: center;
 }
-.course_script_wrap {
-	padding: 30px 20px;
-}
-.intro_text {
+.result_no p {
 	font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 30px;
+    height: 30px;
+    margin-left: 15px;
+    color: #6c757d;
 }
-.note {
-	width: 90%;
+.result_no svg {
+	margin-bottom: 5px;
 }

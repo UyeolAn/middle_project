@@ -25,8 +25,7 @@
 		<if test="courseId != null">
 			WHERE COURSE_ID = #{courseId}
 		</if>
-		<if
-			test="courseName != null and courseScript != null and courseId == null">
+		<if test="courseName != null and courseScript != null and courseId == null">
 			WHERE COURSE_NAME = #{courseName} AND COURSE_SCRIPT = #{courseScript}
 		</if>
 	</select>

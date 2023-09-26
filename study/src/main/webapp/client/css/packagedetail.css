@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+
+.course_tab_row .product__details__tab__content {
+	padding: 0 10px;
+}
+.course_script_wrap {
+	flex-direction: column;
+	gap: 35px;
+}
+.course_script_wrap {
+	padding: 30px 20px;
+}
+.intro_text {
+	font-size: 20px;
+}
+.note {
+	width: 90%;
+}
+.course_name_wrap_sgap {
+	gap: 0px;
+}
+.course_name_wrap_sgap .intro_text {
+	margin-bottom: 35px;
+}
+.impossible_alert {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: auto;
+	line-height: 50px;
+	padding: 20px;
+	background-color: #dc3545;
+}
+.impossible_alert div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.impossible_alert svg {
+	margin: 0 5px 5px 0;
+}
+.impossible_alert .message {
+	font-size: 20px;
+	font-weight: 700;
+	color: #fff;
+	margin: 0;
+}
+	

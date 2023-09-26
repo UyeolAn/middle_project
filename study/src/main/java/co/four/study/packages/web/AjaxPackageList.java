@@ -10,25 +10,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.four.study.common.ViewResolve;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import co.four.study.packages.service.PackageService;
 import co.four.study.packages.service.PackageVO;
 import co.four.study.packages.serviceImpl.PackageServiceImpl;
 
-@WebServlet("/packagelist.do")
-public class PackageList extends HttpServlet {
+@WebServlet("/ajaxpackagelist.do")
+public class AjaxPackageList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public PackageList() {
+    public AjaxPackageList() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 		PackageService dao = new PackageServiceImpl();
 		PackageVO vo = new PackageVO();
 		List<PackageVO> packages = new ArrayList<PackageVO>();
 		
-		packages = dao.packageSelectList(vo); //vo에 담긴 정보가 없어야함.
+		String category = request.getParameter("category");
+		String grade = request.getParameter("grade");
+		vo.setPackageCategory(category);
+		vo.setPackageGrade(grade);
+		
+		packages = dao.packageSelectList(vo);
 		
 		// 할인금액 구하기(반복문 돌아야함)
 		for(int i=0; i<packages.size(); i++) {
@@ -37,15 +45,11 @@ public class PackageList extends HttpServlet {
 			packages.get(i).setSalePrice(salePrice);
 		}
 		
-		request.setAttribute("packages", packages);
-		System.out.println(packages);
+		String list = objectMapper.writeValueAsString(packages); // list형태의 데이터 => json형태로
 		
-		
-		
-		// 페이지 포워딩
-		String page = "package/packageList";
-		request.setAttribute("menu", "package");
-		ViewResolve.foward(request, response, page);
+		response.setContentType("text/json; charset=UTF-8"); // 한글깨짐 방지
+		response.getWriter().append(list); //ajax를 return
+		return;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

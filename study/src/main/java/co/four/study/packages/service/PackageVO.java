@@ -12,4 +12,5 @@ public class PackageVO {
 	private String packageImg;
 	private String packageCategory;
 	private String packageGrade;
+	private int salePrice;
 }
