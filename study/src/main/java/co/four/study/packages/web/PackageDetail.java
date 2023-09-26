@@ -1,4 +1,4 @@
-package co.four.study.member.web.mypage.page;
+package co.four.study.packages.web;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.four.study.common.ViewResolve;
 
-@WebServlet("/mypagepaymentpage.do")
-public class MyPagePaymentPage extends HttpServlet {
-	
+@WebServlet("/packagedetail.do")
+public class PackageDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
-    public MyPagePaymentPage() {
+    public PackageDetail() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String page = "mypage/mypagePaymentPage";
-		request.setAttribute("menu", "mypage");
+		// 페이지 포워딩
+		String page = "package/packageDetail";
+		request.setAttribute("menu", "package");
 		ViewResolve.foward(request, response, page);
 	}
 

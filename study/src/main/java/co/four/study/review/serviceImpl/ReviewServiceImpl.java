@@ -46,7 +46,7 @@ public class ReviewServiceImpl implements ReviewService {
 		return map.courseReviewSortedList(vo);
 	}
 	@Override
-	public int courseReviewCount(CourseVO vo) {
+	public String courseReviewCount(CourseVO vo) {
 		return map.courseReviewCount(vo);
 	}
 	@Override

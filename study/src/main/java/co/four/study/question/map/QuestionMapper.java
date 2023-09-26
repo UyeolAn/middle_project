@@ -44,4 +44,7 @@ public interface QuestionMapper {
 	//답변안한 질문 리스트
 	List<QuestionVO> unanswerQuestionList();
 	
+	//답변안한 질문 먼저 출력되는 리스트
+	List<QuestionVO> questionListBynotsolved();
+	
 }

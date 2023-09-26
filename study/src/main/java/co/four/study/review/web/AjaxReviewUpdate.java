@@ -32,6 +32,7 @@ public class AjaxReviewUpdate extends HttpServlet {
 		ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 		ReviewService dao = new ReviewServiceImpl();
 		ReviewVO vo = new ReviewVO();
+		CourseVO cvo = new CourseVO();
 		List<Object> reviews = new ArrayList<Object>();
 		Map<String, String> messageMap = new HashMap<>();
 		
@@ -42,8 +43,10 @@ public class AjaxReviewUpdate extends HttpServlet {
 		int result = dao.reviewUpdate(vo);
 		
 		if(result > 0) {
-			messageMap.put("message", "success");
-			reviews.add(messageMap); // 성공여부
+			messageMap.put("message", "success"); // 성공여부
+			cvo.setCourseId(Integer.valueOf(request.getParameter("courseId")));
+			messageMap.put("count", dao.courseReviewCount(cvo)); // 리뷰개수
+			reviews.add(messageMap); 
 			reviews.add(dao.reviewSelect(vo)); // 방금 수정된 리뷰 가져오기
 		} else {
 			messageMap.put("message", "fail");

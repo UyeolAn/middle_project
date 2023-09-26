@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+
+.course_tab_row .product__details__tab__content {
+	padding: 0 10px;
+}
+.course_script_wrap {
+	flex-direction: column;
+	gap: 35px;
+}
+.course_script_wrap {
+	padding: 30px 20px;
+}
+.intro_text {
+	font-size: 20px;
+}
+.note {
+	width: 90%;
+}

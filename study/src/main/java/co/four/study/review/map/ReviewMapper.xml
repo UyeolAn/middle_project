@@ -29,7 +29,7 @@
          	SELECT NVL(MAX(REVIEW_ID), 0) + 1 AS REVIEW_ID FROM REVIEWS
       	</selectKey>
       	INSERT INTO REVIEWS VALUES (#{reviewId}, #{memberId}, #{courseId}, #{reviewContent}, #{reviewStars}, 
-      	SYSDATE, null)
+      	SYSDATE, SYSDATE)
 	</insert>
 	
 	<delete id="reviewDelete" parameterType="co.four.study.review.service.ReviewVO">
@@ -55,14 +55,14 @@
 		SELECT * 
 		FROM REVIEWS
 		WHERE COURSE_ID = #{courseId}
-		ORDER BY REVIEW_UPDATE_DATE DESC, REVIEW_ENTER_DATE DESC
+		ORDER BY REVIEW_UPDATE_DATE, REVIEW_ENTER_DATE
 	</select>
 	
-	<select id="courseReviewCount" resultType="Integer" parameterType="co.four.study.course.service.CourseVO">
+	<select id="courseReviewCount" resultType="String" parameterType="co.four.study.course.service.CourseVO">
 		SELECT COUNT(*)
 		FROM REVIEWS
 		WHERE COURSE_ID = #{courseId}
-		ORDER BY REVIEW_UPDATE_DATE DESC, REVIEW_ENTER_DATE DESC
+		ORDER BY REVIEW_UPDATE_DATE, REVIEW_ENTER_DATE
 	</select>
 	
 </mapper>

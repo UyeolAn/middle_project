@@ -111,7 +111,7 @@
 											<li><a href="courselist.do?mainCate=english">English</a></li>
 										</ul>
 									</li>
-									<li><a href="">Package</a>
+									<li><a href="packagelist.do">Package</a>
 										<ul class="dropdown">
 											<li><a href="./about.html">초급</a></li>
 											<li><a href="./shop-details.html">중급</a></li>

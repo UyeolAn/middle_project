@@ -59,9 +59,12 @@
       }
 
       .list__title {
+        width: 70%;
         font-size: medium;
         font-weight: bold;
         float: left;
+        overflow: hidden;
+        white-space: nowrap;
       }
 
       .list__date {
@@ -113,7 +116,8 @@
   <body>
     <div class="container">
       <h5 class="col-lg-12" style="margin-bottom: 2%; font-weight: 900;">나의 커뮤니티</h5>
-      <!--Community Top Bar Start-->
+
+      <!--My Community Top Bar Start-->
       <div class="mypage__mycomm__head"
         style="margin-bottom: 3%; border: 1px solid rgba(0,0,0,.1); border-radius: 5px;">
         <!--IsSolved Bar Start-->
@@ -129,30 +133,17 @@
         </div>
         <!--IsSolved Bar End-->
       </div>
-      <!--Community Top Bar End-->
+      <!--My Community Top Bar End-->
 
-      <!--Community Board List Start-->
+      <!--My Community Body Start-->
       <div class="mypage__mycomm__body"
         style="padding-bottom: 3%; border: 1px solid rgba(0,0,0,.1); border-radius: 5px;">
+
+        <!--My Board List Start-->
         <div class="col-lg-12 mypage__mycomm__body__content">
-          <!-- <div class="product__details__tab__content__item">
-            <div class="mycomm__qna__info" style="overflow: hidden;">
-              <span class="col-lg-9 list__title">
-                <span class="qna__not__solved">미해결</span>질문 게시글 제목1
-                <span class="list__date">ㆍ2023-09-25</span>
-              </span>
-              <span class="col-lg-3 list__etc" style="float: right;">조회수:19 답변:3</span>
-            </div>
-          </div> -->
-
-
-          <!-- <div class="product__details__tab__content__item">
-            <div class="mycomm__ans__info" style="overflow: hidden;">
-              <span class="col-lg-9 list__title">답변 내용...</span>
-              <span class="col-lg-3 list__etc" style="float: right;">2023-09-25</span>
-            </div>
-          </div> -->
+          <!--loadBody()-->
         </div>
+        <!--My Board List End-->
 
         <!--Page Bar Start-->
         <div class="row">
@@ -165,7 +156,8 @@
         <!--Page Bar End-->
 
       </div>
-      <!--Community Board List End-->
+      <!--My Community Body End-->
+
     </div>
     <script>
       // 변수
@@ -437,7 +429,7 @@
           },
           success: function (countJson) {
             totalCount = countJson.totalCount;
-            let totalPage = Math.ceil(totalCount / 5);
+            let totalPage = Math.ceil(totalCount / 10);
 
             let endPage = totalPage < Math.ceil(currentPage / 10) * 10 ? totalPage : Math.ceil(currentPage / 10) * 10;
             let startPage = Math.floor(currentPage / 10) * 10 + 1;
@@ -480,7 +472,7 @@
         atag.html(inner);
         atag.on('click', function () {
           currentPage = page;
-          loadBoards();
+          loadBody();
         });
         $('.product__pagination').append(atag);
       }
