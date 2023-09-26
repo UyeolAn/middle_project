@@ -24,9 +24,10 @@ public class Logout extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-					response.sendRedirect("home.do");
-			
-			
+		String msg = "로그아웃 되었습니다";
+		request.setAttribute("altmsg", msg);
+		String page = "home/home.jsp";
+		ViewResolve.foward(request, response, page);
 		}
 	
 

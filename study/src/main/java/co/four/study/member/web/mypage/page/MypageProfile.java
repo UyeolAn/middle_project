@@ -10,13 +10,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import co.four.study.board.service.BoardService;
+import co.four.study.board.service.BoardVO;
+import co.four.study.board.service.etcvo.BoardSearchVO;
+import co.four.study.board.serviceImpl.BoardServiceImpl;
 import co.four.study.common.ViewResolve;
+import co.four.study.course.service.CourseService;
+import co.four.study.course.service.CourseVO;
+import co.four.study.course.serviceImpl.CourseServiceImpl;
 import co.four.study.member.service.MemberService;
 import co.four.study.member.service.MemberVO;
 import co.four.study.member.serviceImpl.MemberServiceImpl;
 import co.four.study.memberCourse.service.MemberCourseService;
 import co.four.study.memberCourse.service.MemberCourseVO;
 import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
+import co.four.study.question.service.QuestionService;
+import co.four.study.question.service.QuestionVO;
+import co.four.study.question.serviceImpl.QuestionServiceImpl;
+import co.four.study.review.service.ReviewService;
+import co.four.study.review.service.ReviewVO;
+import co.four.study.review.serviceImpl.ReviewServiceImpl;
 
 @WebServlet("/mypageprofile.do")
 public class MypageProfile extends HttpServlet {
@@ -31,45 +44,80 @@ public class MypageProfile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		MemberVO mvo = new MemberVO();
-		MemberService memberDao = new MemberServiceImpl();
-		MemberCourseService memberCourseDao = new MemberCourseServiceImpl();
 		HttpSession session = request.getSession();
-		String checkAuthor = (String) session.getAttribute("loginAuthor");
+		MemberVO mvo = new MemberVO();
+		MemberService mdao = new MemberServiceImpl();
 
+		MemberCourseVO mcvo = new MemberCourseVO();
+		MemberCourseService mcdao = new MemberCourseServiceImpl();
+
+		CourseVO cvo = new CourseVO();
+		CourseService cdao = new CourseServiceImpl();
+		BoardVO bvo = new BoardVO();
+		BoardService bdao = new BoardServiceImpl();
+		QuestionService qdao = new QuestionServiceImpl();
+		ReviewService rdao = new ReviewServiceImpl();
+
+		String checkAuthor = (String) session.getAttribute("loginAuthor");
 		if (checkAuthor == "admin") {
 			// 홈화면에서 마이페이지 접근시 관리자 마이페이지로 리디렉트
 			response.sendRedirect("adminmypage.do");
 		} else {
 
 			mvo.setMemberId((String) session.getAttribute("loginId"));
-			mvo = memberDao.memberSelect(mvo);
+			mvo = mdao.memberSelect(mvo);
 
-			System.out.println(mvo.getMemberId());
-			// 수강중인 강의 상위3개 미리보기
-			List<MemberCourseVO> mclist = memberCourseDao.selectMemberCourseListDetail(mvo);
+			// System.out.println(mvo.getMemberId());
+			// 게시물 수 카운트
+			int cnt = 0;
+			bvo.setMemberId(mvo.getMemberId());
+			cnt = bdao.countBoardMember(bvo) + qdao.countQuestion(mvo) + rdao.countReview(mvo);
+
+			// 댓글 수
+			int rec = rdao.countReview(mvo);
+			int compcnt = 0;
+			// 강의 목록 및 진도율
+			List<MemberCourseVO> mcvolist = mcdao.selectMemberCourseListDetail(mvo);
+			for (MemberCourseVO vo : mcvolist) {
+				mcvo.setMemberId(mvo.getMemberId());
+				mcvo.setCourseId(vo.getCourseId());
+				mcvo = mcdao.countJindo(mcvo);
+				vo.setCount(mcvo.getCount());
+				vo.setTcnt(mcvo.getTcnt());
+
+				
+
+				// 진도율 체크
+				double jindo = Math.round(((double) vo.getCount() / vo.getTcnt()) * 100);
+				if (Double.isNaN(jindo)) {
+					jindo = 0;
+				}
+				if (jindo >= 100) {
+					jindo = 100;
+					compcnt++;
+				}
+				vo.setJindo(jindo);
+				cvo.setCourseId(vo.getCourseId());
+				cvo = cdao.courseSelect(cvo);
+				vo.setCourseName(cvo.getCourseName());
+			}
+
+			// 수강중인강의 개수
 			int courseCount = 0;
-
-			// 수강중 강의 목록
-			for (int i = 0; i < mclist.size(); i++) {
-				// 수강중인강의 개수
+			for (int i = 0; i < mcvolist.size(); i++) {
 				courseCount++;
 			}
 
-			System.out.println(mclist);
+//			System.out.println(mcvolist);
 			request.setAttribute("menu", "mypage");
 			// 프로필
-			request.setAttribute("memberId", mvo.getMemberId());
-			request.setAttribute("memberPassword", mvo.getMemberPassword());
-			request.setAttribute("memberName", mvo.getMemberName());
-			request.setAttribute("memberTel", mvo.getMemberTel());
-			request.setAttribute("memberAddress", mvo.getMemberAddress());
-			request.setAttribute("memberEmail", mvo.getMemberEmail());
-			request.setAttribute("memberEnterDate", mvo.getMemberEnterDate());
-
+			request.setAttribute("m", mvo);
 			// 강의 정보
 			request.setAttribute("memberCourseCount", courseCount);
-			request.setAttribute("mycourse", mclist);
+			request.setAttribute("mclist", mcvolist);
+			request.setAttribute("postCount", cnt);
+			request.setAttribute("countrec", rec);
+			request.setAttribute("compcnt", compcnt);
 			String page = "mypage/mypageProfilePage";
 
 			ViewResolve.foward(request, response, page);
