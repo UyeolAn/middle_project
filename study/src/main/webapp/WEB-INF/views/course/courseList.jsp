@@ -46,8 +46,8 @@
             <div class="col-lg-4 col-md-6 col-sm-6 course-col">
                 <div class="product__item course-item" onclick="courseDetail(${c.courseId})">
                     <div class="product__item__pic set-bg course-item-pic"
-                        <c:if test="${null eq c.courseImg}">data-setbg="client/img/product/basic.png" </c:if>
-                        <c:if test="${null ne c.courseImg }">data-setbg="client/img/product/${c.courseImg}" </c:if>
+                        <c:if test="${c.courseImg == null}">data-setbg="client/img/product/basic.png" </c:if>
+                        <c:if test="${c.courseImg != null}">data-setbg="client/img/product/${c.courseImg}" </c:if>
                      >
                         <ul class="product__hover">
                             <li><a href="#"><img src="client/img/icon/cart.png" alt=""></a></li>

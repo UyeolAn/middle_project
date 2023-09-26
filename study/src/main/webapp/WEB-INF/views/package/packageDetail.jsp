@@ -9,7 +9,8 @@
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="client/css/coursedetail.css" type="text/css">
 	<link rel="stylesheet" href="client/css/course.css" type="text/css">
-	<link rel="stylesheet" href="client/css/package.css" type="text/css">
+	<link rel="stylesheet" href="client/css/packagedetail.css" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 
 <body>
@@ -19,18 +20,27 @@
 
 	<!-- 강의 상세 정보 Begin -->
 	<section class="shop-details">
-		<!-- 강의 카테고리, 등급, 강의 이름, 설명 start -->
+		<!-- 강의 카테고리, 등급, 강의 이름, 설명 start package -->
 		<div class="product__details__pic set-bg course_bg">
 			<div class="container course_container">
-				<div class="row set-bg course_pic" data-setbg="client/img/product/package_thum1.png"></div>
+				<div class="row set-bg course_pic" 
+					<c:if test="${data.packageThumbnail == null}">data-setbg="client/img/product/basic.png" </c:if>
+                    <c:if test="${data.packageThumbnail != null}">data-setbg="client/img/product/${data.packageThumbnail}" </c:if>
+				></div>
 				<div class="course_info_wrap">
 					<div>
-						<p class="breadcrumb__links course_links"><span>Package</span>
-							<span>입문자 패키지</span></p>
+						<p class="breadcrumb__links course_links">
+							<span>Package</span>
+							<c:if test="${data.packageGrade eq 'easy' }"><span>입문</span></c:if>
+							<c:if test="${data.packageGrade eq 'normal' }"><span>초급</span></c:if>
+							<c:if test="${data.packageGrade eq 'hard' }"><span>중급이상</span></c:if>
+						</p>
 						<div class="course_grade_name">
 							<p>
-								<span class="course_grade">입문</span>
-								<span class="course_name">Java 입문자를 위한 패키지</span>
+								<c:if test="${data.packageGrade eq 'easy' }"><span class="course_grade">입문</span></c:if>
+								<c:if test="${data.packageGrade eq 'normal' }"><span class="course_grade">초급</span></c:if>
+								<c:if test="${data.packageGrade eq 'hard' }"><span class="course_grade">중급이상</span></c:if>
+								<span class="course_name">${data.packageTitle }</span>
 							</p>
 						</div>
 					</div>
@@ -39,26 +49,47 @@
 		</div>
 		<!-- 강의 카테고리, 등급, 강의 이름, 설명 end -->
 
+		<c:if test="${message eq 'impossible' }">
+			<div class="impossible_alert">
+				<div class="animate__animated animate__flash animate__repeat-2 2">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#fff" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+					  <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+					</svg>
+					<p class="message">이미 수강중인 강의가 포함되어 있어요!</p>
+				</div>
+			</div>
+		</c:if>
+
 		<div class="product__details__content">
 			<div class="container">
 				<div class="row course_tab_row">
 					<!-- 강의소개, 커리큘럽, 수강생리뷰 탭 start -->
-					<div class="col-lg-12">
+					<div class="col-lg-12" <c:if test="${message eq 'impossible' }">style="max-width:100%"</c:if>>
 						<div class="product__details__tab">
 							<div class="tab-content">
 								<!-- 강의소개 탭 start  -->
 								<div class="tab-pane active" id="tabs-5" role="tabpanel">
 									<div class="product__details__tab__content">
-										<div class="course_script_wrap">
+										<!-- 패키지에 포함된 강의 이름 -->
+										<div class="course_script_wrap course_name_wrap_sgap">
+											<div class="intro_text"><span>🎓</span>이런 강의들이<br> 포함되어 있어요!</div>
+											<c:forEach items="${courses}" var="c">
+												<p class="note course_data" data-c="${c.courseId }">${c.courseName }</p>
+											</c:forEach>
+										</div>
+										<!-- 패키지 스크립트(설명글) -->
+										<div class="course_script_wrap course_script_border_none">
 											<div class="intro_text"><span>🎓</span>이런분들께<br> 추천드려요!</div>
 											<p class="note">
-												${course.courseScript }
-												넓고 깊은 역량을 가진 풀스택 개발자가 되기 위해서는 각 포지션을 모두 집중적으로 학습해야 합니다. 프론트엔드는 주로 눈에 보이는 UI·UX를 다루기 때문에 상대적으로 쉽게 접근할 수 있죠. [고농축 프론트엔드 코스]에서는 원활한 프론트엔드 개발을 위해 데이터 통신이 가능하도록 실습용 API를 제공하고 있어요. 프론트엔드 코스에서 제공되는 API를 토대로 웹사이트를 구현해 본 후에 [고농축 백엔드 코스]에서 직접 API와 DB등을 구현 및 적용함으로써 실제 서비스를 고도화하는 것이 효율적인 학습 방법입니다.
+												${data.packageScript }
 											</p>
 										</div>
+										<!-- 패키지 이미지 -->
 										<div class="product__details__tab__content__item">
 											<div>
-												<img alt="" src="client/img/product/package1.png">
+												<c:if test="${data.packageImg ne null }">
+													<img alt="" src="client/img/product/${data.packageImg }">
+												</c:if>
 											</div>
 										</div>
 									</div>
@@ -69,41 +100,41 @@
 					<!-- 강의소개, 커리큘럽, 수강생리뷰 탭 end -->
 					
 					<!-- 금액, 장바구니 start -->
-					<div class="course_price_wrap">
-						<div class="course_price_top">
-							<c:choose>
-								<c:when test="${course.coursePrice <= 0}">
-									<h5 class="course_price_free">무료, 지금 바로 수강하세요!</h5>
-									<h5 class="course_price">0원</h5>
-									<div class="button_wrap">
-										<button type="button" class="btn btn-green course-add" onclick="addMemberFreeCourse()">바로 수강신청 하기</button>
-									</div>
-								</c:when>
-								<c:otherwise>
-									<c:if test="${course.coursePrice >= 100000 }">
-										<h5 class="course_price_pay">3개월 무이자 할부 가능!</h5>
-									</c:if>
-									<h5 class="course_price">
-										<fmt:formatNumber value="${course.coursePrice }" pattern="#,###" />원
-									</h5>
-									<div class="button_wrap">
-										<c:if test="${bucket eq 'notIn' }">
+					<c:if test="${message eq 'possible' }">
+						<div class="course_price_wrap">
+							<div class="course_price_top">
+								<c:choose>
+									<c:when test="${data.salePrice <= 0}">
+										<h5 class="course_price_free">무료, 지금 바로 수강하세요!</h5>
+										<h5 class="course_price">0원</h5>
+										<div class="button_wrap">
+											<button type="button" class="btn btn-green course-add" onclick="addMemberFreeCourse()">바로 수강신청 하기</button>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<c:if test="${data.salePrice >= 300000 }">
+											<h5 class="course_price_pay">6개월 무이자 할부 가능!</h5>
+										</c:if>
+										<h5 class="course_price">
+											<fmt:formatNumber value="${data.salePrice }" pattern="#,###" />원
+										</h5>
+										<!-- 장바구니 버튼 영역 -->
+										<div class="button_wrap">
 											<button type="button" class="btn btn-green btn-green-p course-add" onclick="addBucketList()">수강신청 하기</button>
 											<button type="button" class="btn btn-green btn-green-p" onclick="ajaxAddBucketList()">장바구니 담기</button>
-										</c:if>
-										<c:if test="${bucket eq 'in' }">
-											<a href="bucketlist.do?memberId=${loginId }"><button type="button" class="btn btn-green btn-green-p course-add">장바구니로 이동</button></a>
-										</c:if>
-									</div>
-								</c:otherwise>
-							</c:choose>
+										</div>
+										
+										<!-- 장바구니 버튼 영역 -->
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<ul class="course_price_bottom">
+								<li>수강기한: 무제한</li>
+								<li>난이도: 입문</li>
+								<li>질문 답변 제공</li>
+							</ul>
 						</div>
-						<ul class="course_price_bottom">
-							<li>수강기한: 무제한</li>
-							<li>난이도: 입문</li>
-							<li>질문 답변 제공</li>
-						</ul>
-					</div>
+					</c:if>
 					<!-- 금액, 장바구니 end -->
 				</div>
 			</div>
