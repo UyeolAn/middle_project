@@ -9,7 +9,7 @@
 	
 	<select id="answerSelectListbyQ" resultType="co.four.study.answer.service.AnswerVO">
 		SELECT	*
-		FROM	ANSWERS WHERE QUESTION_ID = #{questionId}
+		FROM	ANSWERS WHERE QUESTION_ID = #{questionId} ORDER BY ANSWER_ID
 	</select>
 	
 	<select id="answerSelect" resultType="co.four.study.answer.service.AnswerVO">

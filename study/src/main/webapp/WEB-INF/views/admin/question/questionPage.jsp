@@ -55,18 +55,29 @@
                             <img src="client/img/product/${a.answerImg}" style="width: 200px; text-align: left;">
                             <br>
                         </c:if>
-                        <p style="text-align: left;">
-                            [내용]<br>
-                            ${a.answerContent}<br>
-                            작성일 : ${a.answerEnterDate}<br>
-                            <i class="bi bi-hand-thumbs-up-fill"></i>
-                            <i class="bi bi-hand-thumbs-down-fill"></i>
-	                        <a class="btn btn-danger btn-icon-split" id="${a.answerId}" onclick="delAns('${a.answerId}')">
-		            			<span class="icon text-white-50">
-						                <i class="fas fa-trash"></i>
-						        </span>
-					        </a>
-                        </p>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <p style="text-align: left;">
+                                        [내용]<br>
+                                        ${a.answerContent}<br>
+                                        작성일 : ${a.answerEnterDate}<br>
+                                        <i class="bi bi-hand-thumbs-up-fill"></i>
+                                        <i class="bi bi-hand-thumbs-down-fill"></i>
+                                    </p>
+                                </div>
+                                <div class="col-lg-2" id="${q.questionId}">
+                                    <a class="btn btn-primary btn-icon-split" onclick="modAns('${a.answerId}')">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                    <a class="btn btn-danger btn-icon-split" id="${a.answerId}" onclick="delAns('${a.answerId}','${a.answerContent}')">
+                                        <span class="icon text-white-50">
+                                                <i class="fas fa-trash"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
                         <hr>
                     </c:forEach>
                 </c:if>
@@ -77,7 +88,7 @@
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
-                            <span class="text search answer"id="${q.questionId}" onclick="subAns('${q.questionId}')">완료</span>
+                            <span class="text search answer" onclick="subAns('${q.questionId}')">완료</span>
                         </a>
                     </div>
                 </div>
@@ -128,6 +139,16 @@
             }
         })
         }
+    }
+
+    function modAns(aid, content) {
+        console.log(aid);
+        let input = document.createElement('input');
+        document.getElementById(aid).after(input);
+        let btn = document.createElement('input');
+        btn.type = 'button';
+        btn.value = 'btn';
+        input.after(btn);
     }
 
     

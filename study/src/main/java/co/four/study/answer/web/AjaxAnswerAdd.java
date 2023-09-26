@@ -38,7 +38,6 @@ public class AjaxAnswerAdd extends HttpServlet {
 		AnswerVO vo = new AnswerVO();
 		AnswerService dao = new AnswerServiceImpl();
 		QuestionService qdao = new QuestionServiceImpl();
-		QuestionSolveVO qvo = new QuestionSolveVO();
 		
 		vo.setQuestionId(Integer.parseInt(request.getParameter("qid")));
 		vo.setAnswerContent(request.getParameter("content"));
@@ -55,9 +54,7 @@ public class AjaxAnswerAdd extends HttpServlet {
 			
 		}
 		
-		qvo.setQuestionId(Integer.parseInt(request.getParameter("qid")));
-		qvo.setQuestionSolve("solved");
-		int i = qdao.updateQuestionSolve(qvo);
+		
 		
 		String json = objectMapper.writeValueAsString(resultMap);
 		response.setContentType("text/json; charset=UTF-8");
