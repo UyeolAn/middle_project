@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin 2 - Register</title>
+        <title>회원가입!</title>
 
         <!-- Custom fonts for this template-->
         <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -65,7 +65,7 @@
                         <div class="col-lg-7">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">회원가입!</h1>
                                 </div>
 
                                 <form class="user" method="post" action="memberRegist.do" onsubmit="return formCheck()"
@@ -112,14 +112,16 @@
                                                 class="btn"><br>
                                             <input type="text" id="sample6_address" class="form-control mb-2"
                                                 style="width: 100%; display: inline;" name="address1" placeholder="주소"
-                                                required>
-                                            <div class="row mb-2" style="width: 100%; margin-left: 0;">
+                                                required readonly>
+                                            <div class="row mb-2" style="width: 101%; margin-left: 0;">
                                                 <input type="text" id="sample6_detailAddress"
-                                                    class="form-control col-lg-6" style="width: 50%; display: inline;"
-                                                    name="address2" placeholder="상세주소"><!--
+                                                    class="form-control col-lg-6"
+                                                    style="width: 50%; display: inline;" name="address2"
+                                                    placeholder="상세주소"><!--
                                             --><input type="text" id="sample6_extraAddress"
-                                                    class="form-control col-lg-6" style="width: 50%; display: inline;"
-                                                    name="address3" placeholder="참고항목">
+                                                    class="form-control col-lg-6"
+                                                    style="width: 50%; display: inline;" name="address3"
+                                                    placeholder="참고항목">
                                             </div>
                                         </div>
 
