@@ -46,5 +46,8 @@ public interface MemberCourseService {
 
 	//현재 수강하는 과목들 서브카테고리별 분포
 	int distributionSubcategory(CourseVO vo);
+	
+	//진도율 올리기
+	int memberCourseCount(MemberCourseVO vo);
 
 }

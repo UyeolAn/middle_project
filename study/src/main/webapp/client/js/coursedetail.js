@@ -82,36 +82,66 @@ function close() {
 			ifreamWrap.empty();
 		}
 	});
+	
+	jindoCount();
+}
+
+//진도율 올리기..
+function jindoCount() {
+	const memberId = $('#memberId').val();
+	const courseId = $('#courseId').val();
+	$.ajax({
+		url: 'ajaxmemberjindocount.do',
+		method: 'post',
+		data: {courseId: courseId, memberId: memberId},
+		success: function(result) {
+			if(result.message == 'success') {
+				console.log('진도율 반영됨.');
+			} else if(result.message == 'fail') {
+				console.log('진도율 반영 못함');
+			} else if(result.message == 'full') {
+				console.log('진도율 100%');
+			}
+		}
+	})
 }
 
 // 무료강의 수강신청하기
 function addMemberFreeCourse() {
 	const courseId = $('#courseId').val();
 	const memberId = $('#loginId').val();
-	$.ajax({
-		url: 'ajaxAddmembercourse.do',
-		method: 'post',
-		data: {courseId: courseId, memberId: memberId},
-		success: function(result) {
-			$('#message').val('possible');
-			$('.course_price_wrap').css('display', 'none');
-			$('.col-lg-12').css('max-width', '100%');
-			$('.play_btn svg').attr('fill', 'currentColor');
-			
-			const check = confirm('수강신청이 완료되었습니다.\n바로 학습하시겠습니까?');
-			console.log(check);
-			if(check == true) {
-				$('.tab-menu-1').removeClass('active');
-				$('.tab-menu-3').removeClass('active');
-				$('#tabs-5').removeClass('active');
-				$('#tabs-7').removeClass('active');
-				$('.tab-menu-2').addClass('active');
-				$('#tabs-6').addClass('active');
-			} else {
-				return true;
-			}
+	
+	if(memberId == null || memberId == '' || memberId == 'undefined') {
+		const check = confirm('로그인 후 수강신청을 먼저 진행해주세요. 로그인 하시겠습니까?');
+		if(check ==  true) {
+			location.href = 'login.do';
 		}
-	})
+		return true;
+	} else {
+		$.ajax({
+			url: 'ajaxAddmembercourse.do',
+			method: 'post',
+			data: {courseId: courseId, memberId: memberId},
+			success: function(result) {
+				$('#message').val('possible');
+				$('.course_price_wrap').css('display', 'none');
+				$('.col-lg-12').css('max-width', '100%');
+				$('.play_btn svg').attr('fill', 'currentColor');
+				
+				const check = confirm('수강신청이 완료되었습니다.\n바로 학습하시겠습니까?');
+				if(check == true) {
+					$('.tab-menu-1').removeClass('active');
+					$('.tab-menu-3').removeClass('active');
+					$('#tabs-5').removeClass('active');
+					$('#tabs-7').removeClass('active');
+					$('.tab-menu-2').addClass('active');
+					$('#tabs-6').addClass('active');
+				} else {
+					return true;
+				}
+			}
+		})
+	}
 }
 
 /* 수강신청 버튼 클릭 */
@@ -346,5 +376,4 @@ function formatDate(date) {
     
     return [year, month, day].join('-');
 }
-
 

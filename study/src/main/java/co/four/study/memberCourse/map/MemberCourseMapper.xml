@@ -89,5 +89,16 @@
 		FROM MEMBERS_COURSES MC JOIN COURSES C ON MC.COURSE_ID = C.COURSE_ID 
 		WHERE COURSE_SUB_CATEGORY = #{courseSubCategory}
 	</select>
+	
+	<insert id="memberCourseCount" parameterType="co.four.study.memberCourse.service.MemberCourseVO">
+		UPDATE MEMBERS_COURSES
+		SET COUNT = (SELECT (SELECT COUNT 
+		                     FROM MEMBERS_COURSES
+		                     WHERE MEMBER_ID = #{memberId}
+		                     AND COURSE_ID = #{courseId}) + 1 COUNT
+		             FROM DUAL)
+		WHERE MEMBERS_COURSES.COURSE_ID = #{courseId}
+		AND MEMBERS_COURSES.MEMBER_ID = #{memberId}
+	</insert>
 
 </mapper>

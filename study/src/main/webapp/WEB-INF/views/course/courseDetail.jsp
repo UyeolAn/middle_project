@@ -31,8 +31,6 @@
 								<c:if test="${course.courseGrade eq 'easy' }"><span class="course_grade">입문</span></c:if>
 								<c:if test="${course.courseGrade eq 'normal' }"><span class="course_grade">초급</span></c:if>
 								<c:if test="${course.courseGrade eq 'hard' }"><span class="course_grade">중급이상</span></c:if>
-								<%-- <c:if test="${course.courseGrade ne 'hard' }"><span class="c_space"></span></c:if>
-									<c:if test="${course.courseGrade eq 'hard' }"><span class="c_space"></span></c:if> --%>
 								<span class="course_name">${course.courseName }</span>
 							</p>
 						</div>
@@ -296,7 +294,9 @@
 	<!-- 강의 관련 자바스크립트 연결 -->
 	<script type="text/javascript" src="client/js/coursedetail.js"></script>
 	<script type="text/javascript">
-		$(window).load(showReviewList(${course.courseId}));// 리뷰 리스트 만들기
+		$(window).on('load', function() {
+			showReviewList(${course.courseId}); // 리뷰 리스트 만들기
+		})
 	</script>
 
 </body>
