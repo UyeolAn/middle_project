@@ -23,24 +23,36 @@
           background: #A7A7A7;
         }
 
+        .active__input__file__btn {
+          margin-top: 1%;
+          padding: 6px 25px;
+          color: white;
+          background: #E53637;
+          cursor: pointer;
+        }
+
+        .active__input__file__btn:hover {
+          background: #ffa9a9;
+        }
+
         .small-btn {
           padding: 9px 20px;
         }
 
         .list {
-          max-height: 200px; 
+          max-height: 200px;
           overflow-y: scroll !important;
         }
       </style>
       <link rel="stylesheet" href="client/css/nice-select.css">
-      <script src="client/js/jquery-3.3.1.min.js"></script>
       <script src="client/js/jquery.nice-select.min.js"></script>
+      <script src="client/js/jquery-3.3.1.min.js"></script>
     </head>
 
     <body>
       <div class="col-lg-12 container">
         <div class="contact__form">
-          <form id="insertForm" action="questioninsert.do" method="post">
+          <form id="insertForm" action="questioninsert.do" method="post" enctype="multipart/form-data">
             <div class="row">
               <div class="col-lg-9">
                 <input type="text" id="questionTitle" name="questionTitle" placeholder="제목을 입력하세요.."
@@ -58,11 +70,10 @@
                 </select>
               </div>
               <div class="col-lg-12">
-                <label class="input__file__btn" for="questionImg"
-                  style="margin-top: 3%; border-radius: 10px; font-size: medium;">
+                <label class="input__file__btn" style="margin-top: 3%; border-radius: 10px; font-size: medium;">
                   IMG
                 </label>
-                <input type="file" id="questionImg" name="questionImg" style="display: none;" disabled="disabled">
+                <input type="file" id="questionImg" name="questionImg" style="display: none;">
               </div>
               <div class="col-lg-12">
                 <textarea id="questionContent" name="questionContent" placeholder="내용을 입력하세요..."
@@ -81,6 +92,7 @@
         $(document).ready(function () {
           $('select').niceSelect('update');
         });
+        setInputFileBtn();
 
         // 질문 등록 함수
         function insertQuestion() {
@@ -101,6 +113,24 @@
           }
           return object;
         }
+
+        function setInputFileBtn() {
+
+          $('.input__file__btn').on('click', function () {
+            $('#questionImg').click();
+          });
+          $('#questionImg').on('change', function () {
+            if ($(this).parent().find('label').attr('class') == 'input__file__btn') {
+              $(this).parent().find('label').attr('class', 'active__input__file__btn');
+            } else if ($(this).parent().find('label').attr('class') == 'active__input__file__btn') {
+              $(this).parent().find('label').attr('class', 'input__file__btn');
+            }
+          });
+          $('.active__input__file__btn').on('click', function () {
+            $('#questionImg').val('');
+          });
+        }
+
       </script>
     </body>
 

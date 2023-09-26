@@ -142,6 +142,11 @@
         <!--Question Main Body Start-->
         <div class="col-lg-12 row" style="margin-top: 5%;">
           <div class="col-lg-10">
+            <c:if test="${not empty question.questionImg}">
+              <div class="col-lg-10">
+                <img src="client/img/question/${question.questionImg}" alt="질문 이미지">
+              </div>
+            </c:if>
             <p class="col-lg-12" id="questionContent" style="white-space:pre;">${question.questionContent}</p>
           </div>
           <div class="col-lg-7 comm__qna__question__detail__buttons" style="margin-top: 5%;">
@@ -272,6 +277,8 @@
           });
         }
 
+
+
         // 댓글 목록을 보여주는 함수
         function showAnswers(answersJson) {
           $('div.comm__qna__answer').empty();
@@ -279,8 +286,12 @@
             $('div.comm__qna__answer')
               .append(
                 $('<div class="col-lg-12 comm__qna__question__detail__etc__info" style="margin-top: 3%;"> /')
-                  .append($('<span class="etc__info__name"> /').text(`\${answer.memberId}`))
-                  .append($('<span class="etc__info__datehit"> /').text(`ㆍ\${answer.answerEnterDate}`))
+                  .append()
+                  .append(
+                    (answer.memberAuthor == 'client' ?
+                      $('<span class="etc__info__name"> /').text(`\${answer.memberId}`) :
+                      $('<span class="etc__info__name" style="color: #fb7f7f"> /').text(`\${answer.memberId}(관리자)`))
+                  )
                   .append($(
                     `<button type="button" class="site-btn answer-btn ` +
                     (answer.answerSolve == 'not_solved' ? 'answer-solve-btn' : 'active-answer-solve-btn') +

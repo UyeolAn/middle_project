@@ -30,11 +30,12 @@ public class MemberCourseWithPaging extends HttpServlet {
 		
 		CourseSearchVO searchVO = new CourseSearchVO();
 		searchVO.setMemberId(request.getParameter("memberId"));
+		searchVO.setSortType(request.getParameter("sortType"));
 		
 		int totalCount = dao.countMemberCourses(searchVO);
 		int page = Integer.parseInt(request.getParameter("page"));
-		int start = (page - 1) * 10 + 1;
-		int end = (page * 10) < totalCount ? (page * 10) : totalCount;
+		int start = (page - 1) * 9 + 1;
+		int end = (page * 9) < totalCount ? (page * 9) : totalCount;
 		
 		searchVO.setStartRow(start);
 		searchVO.setEndRow(end);

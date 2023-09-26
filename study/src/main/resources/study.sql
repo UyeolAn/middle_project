@@ -69,6 +69,8 @@ CREATE TABLE members_courses
 (
   member_id VARCHAR2(100) NOT NULL
 , course_id NUMBER NOT NULL
+, count NUMBER DEFAULT 0 NOT NULL
+, enter_date DATE DEFAULT SYSDATE NOT NULL
 , CONSTRAINT members_courses_pk PRIMARY KEY 
   (
     member_id, course_id
@@ -442,3 +444,77 @@ DROP TABLE boards CASCADE CONSTRAINTS;
 DROP TABLE replies CASCADE CONSTRAINTS;
 DROP TABLE questions CASCADE CONSTRAINTS;
 DROP TABLE answers CASCADE CONSTRAINTS;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- packages
+CREATE TABLE packages 
+(
+  package_id NUMBER NOT NULL
+, package_title VARCHAR2(100) NOT NULL
+, package_script VARCHAR2(1024)
+, package_discount NUMBER DEFAULT 0 NOT NULL
+, package_thumbnail VARCHAR2(30) NOT NULL
+, package_img VARCHAR2(30) NOT NULL
+, package_category VARCHAR2(50) NOT NULL
+, package_grade VARCHAR2(20) DEFAULT 'normal' NOT NULL
+, CONSTRAINT packages_package_id_pk PRIMARY KEY
+  (
+    package_id
+  )
+  ENABLE 
+);
+
+-- packages_courses
+CREATE TABLE packages_courses
+(
+  package_id NUMBER NOT NULL
+, course_id NUMBER NOT NULL
+, CONSTRAINT packages_courses_pk PRIMARY KEY 
+  (
+    package_id, course_id
+  )
+, CONSTRAINT packages_courses_package_id_fk FOREIGN KEY
+  (
+    package_id
+  )
+  REFERENCES packages
+  (
+    package_id 
+  )
+  ON DELETE CASCADE
+, CONSTRAINT packages_courses_course_id_fk FOREIGN KEY
+  (
+    course_id 
+  )
+  REFERENCES courses
+  (
+    course_id 
+  )
+  ON DELETE CASCADE
+  ENABLE 
+);
