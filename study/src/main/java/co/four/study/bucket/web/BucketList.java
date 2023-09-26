@@ -40,7 +40,7 @@ public class BucketList extends HttpServlet {
 		
 		//장바구니 페이지 포워딩
 		String page = "bucket/bucketList";
-		request.setAttribute("menu", "course");
+		request.setAttribute("menu", "mypage");
 		ViewResolve.foward(request, response, page);
 	}
 

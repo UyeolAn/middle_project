@@ -9,7 +9,7 @@
 
 </head>
 <body>
-  <div style="overflow:auto; width:100%; height:400px;">
+  <div style="overflow:auto; width:100%; height:100%;">
   <c:forEach items="${elist}" var="e">
     <!-- Dropdown Card Example -->
     <div class="card shadow mb-4 col-lg-12">

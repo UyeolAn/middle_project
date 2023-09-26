@@ -225,6 +225,7 @@
         setUpdDelBtn();
         loadMemberRecommend();
         setTimeout(() => { }, 500);
+        loadReplyCount();
         loadReplies();
         setSortBtn();
 
@@ -363,6 +364,22 @@
           } else {
             return false;
           }
+        }
+
+        // 댓글수를 불러오는 함수
+        function loadReplyCount() {
+          $.ajax({
+            url: 'replycount.do?boardId=' + boardId,
+            method: 'get',
+            success: function (countJson) {
+              let replyCount = countJson.totalCount;
+              $('.reply__info__count').empty();
+              $('.reply__info__count').text('REPLY : ' + replyCount);
+            },
+            error: function (err) {
+              console.log(err);
+            }
+          });
         }
 
         // 댓글 불러오는 함수
@@ -573,6 +590,7 @@
             });
           });
         }
+        
       </script>
 
     </body>

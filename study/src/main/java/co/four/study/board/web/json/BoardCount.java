@@ -32,6 +32,7 @@ public class BoardCount extends HttpServlet {
 		searchVO.setSearchType(request.getParameter("searchType"));
 		searchVO.setSearchContent(request.getParameter("searchContent"));
 		searchVO.setSortType(request.getParameter("sortType"));
+		searchVO.setMemberId(request.getParameter("memberId"));
 		
 		int cnt = dao.countBoards(searchVO);
 		

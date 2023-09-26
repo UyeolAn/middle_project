@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+select {
+	border: 1px solid #e6e6e6;
+    padding: 10px;
+    border-radius: 5px;
+    color: #5d5d5d;
+}
 .course-item {
 	border: 1px solid #e6e6e6;
 	border-radius: 10px;

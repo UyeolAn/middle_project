@@ -8,6 +8,7 @@ import co.four.study.common.DataSource;
 import co.four.study.course.service.CourseVO;
 import co.four.study.member.service.MemberVO;
 import co.four.study.memberCourse.map.MemberCourseMapper;
+import co.four.study.memberCourse.service.MemberCourseQnaVO;
 import co.four.study.memberCourse.service.MemberCourseService;
 import co.four.study.memberCourse.service.MemberCourseVO;
 
@@ -79,8 +80,17 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 
 	@Override
 	public List<MemberCourseVO> selectMemberCourseListDetail(MemberVO vo){
-		
 		return map.selectMemberCourseListDetail(vo);
+  }
+  
+  @Override
+	public List<MemberCourseQnaVO> selectMemberCourseWithName(String id) {
+		return map.selectMemberCourseWithName(id);
+  }
+   
+  @Override
+	public int distributionSubcategory(CourseVO vo) {
+		return map.distributionSubcategory(vo);
 	}
 
 }

@@ -56,6 +56,7 @@
       }
     </style>
     <script src="client/js/jquery-3.3.1.min.js"></script>
+    <script src="client/js/jquery.nice-select.min.js"></script>
   </head>
 
   <body>

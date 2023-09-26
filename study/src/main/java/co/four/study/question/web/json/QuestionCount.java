@@ -34,6 +34,7 @@ public class QuestionCount extends HttpServlet {
 		searchVO.setSearchCourse(request.getParameter("searchCourse"));
 		searchVO.setSolveType(request.getParameter("solveType"));
 		searchVO.setSortType(request.getParameter("sortType"));
+		searchVO.setMemberId(request.getParameter("memberId"));
 		
 		int cnt = dao.countQuestions(searchVO);
 		

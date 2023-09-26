@@ -31,16 +31,16 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 // Area Chart Example
 var ctx = document.getElementById('myAreaChart');
 
-console.log("차트불러옴");
+//console.log("차트불러옴");
 var idx = 0;
 fetch('ajaxmonthlyclient.do')
 .then(resolve => resolve.json())
 .then(json=> {
-  console.log(json[0].count);
+  //console.log(json[0].count);
   for(let prop of json) {
-    console.log(prop);
-    console.log(prop.count);
-    console.log(prop.monthly);
+    //console.log(prop);
+    //console.log(prop.count);
+    //console.log(prop.monthly);
 
     myLineChart.data.labels[idx] = prop.monthly;
     myLineChart.data.datasets[0].data[idx] = prop.count;

@@ -49,4 +49,8 @@ public class ReviewServiceImpl implements ReviewService {
 	public int courseReviewCount(CourseVO vo) {
 		return map.courseReviewCount(vo);
 	}
+	@Override
+	public ReviewVO memberReviewSelect(ReviewVO vo) {
+		return map.memberReviewSelect(vo);
+	}
 }

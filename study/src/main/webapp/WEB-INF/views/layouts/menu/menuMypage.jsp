@@ -30,22 +30,10 @@
                       <li><a href="profile.do">프로필</a></li>
                       <li><a href="#">장바구니</a></li>
                       <li><a href="#">수강 강좌</a></li>
-                      <li><a href="#">구매내역</a></li>
-                      <li><a href="#">My Community</a></li>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-
+                      <li><a href="mypagepaymentpage.do">구매내역</a></li>
+                      <li><a href="mypagemycommunitypage.do">나의 커뮤니티</a></li>
                       <li><a href="mypagecancel.do" style="font-size: 8px;">회원탈퇴</a></li>
+
 
                     </ul>
                   </div>
@@ -57,7 +45,7 @@
       </div>
     </div>
 
-    
+
 
 
   </body>

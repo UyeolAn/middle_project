@@ -34,8 +34,8 @@
                                             <span>${loginName} 님 접속중<i class="arrow_carrot-down"></i></span>
                                             <ul>
                                                 <li><a href="logout.do">LOGOUT</a></li>
-                                                
-                                                <li><a href="mypagemain.do">MY PAGE</a></li>
+
+                                                <li><a href="mypageprofile.do">MY PAGE</a></li>
                                             </ul>
                                     </c:if>
                                 </div>
@@ -98,7 +98,12 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="breadcrumb__text">
-                                <h4>Course</h4>
+                                <c:if test="${menu eq 'course'}">
+                                    <h4>Course</h4>
+                                </c:if>
+                                <c:if test="${menu eq 'mypage'}">
+                                    <h4>Mypage</h4>
+                                </c:if>
                                 <div class="breadcrumb__links">
                                     <a href="home.do">Home</a>
                                     <c:if test="${menu eq 'course' && cid eq null}">
@@ -116,7 +121,8 @@
                                     <c:if test="${menu eq 'package'}">
                                         <span>Package</span>
                                         <span class="subCate">전체보기</span>
-                                    </c:if> <c:if test="${menu eq 'mypage'}">
+                                    </c:if>
+                                    <c:if test="${menu eq 'mypage'}">
                                         <span>My Page</span>
                                         <span class="subCate">전체보기</span>
                                     </c:if>

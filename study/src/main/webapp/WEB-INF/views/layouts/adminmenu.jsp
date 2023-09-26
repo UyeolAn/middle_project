@@ -101,10 +101,19 @@
 		<!-- Divider -->
 		<hr class="sidebar-divider d-none d-md-block">
 
+		<div class="sidebar-heading">내 정보</div>
+		<li class="nav-item"><a class="nav-link" href="adminmypage.do">
+			<i class="fa-circle-info"></i> <span>마이 페이지</span>
+		</a></li>
+
+		<hr class="sidebar-divider d-none d-md-block">
+
 		<!-- Sidebar Toggler (Sidebar) -->
 		<div class="text-center d-none d-md-inline">
 			<button class="rounded-circle border-0" id="sidebarToggle"></button>
 		</div>
+
+
 
 		<!-- Sidebar Message -->
 		<!--  
