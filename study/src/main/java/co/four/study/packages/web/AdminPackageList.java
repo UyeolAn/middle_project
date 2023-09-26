@@ -28,7 +28,7 @@ public class AdminPackageList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PackageService dao = new PackageServiceImpl();
 		
-		List<PackageVO> plist = dao.packageSelectList();
+		List<PackageVO> plist = dao.packageSelectList(null);
 		
 		request.setAttribute("plist", plist);
 		
