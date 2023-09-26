@@ -59,14 +59,8 @@ public class MypageProfile extends HttpServlet {
 			System.out.println(mclist);
 			request.setAttribute("menu", "mypage");
 			// 프로필
-			request.setAttribute("memberId", mvo.getMemberId());
-			request.setAttribute("memberPassword", mvo.getMemberPassword());
-			request.setAttribute("memberName", mvo.getMemberName());
-			request.setAttribute("memberTel", mvo.getMemberTel());
-			request.setAttribute("memberAddress", mvo.getMemberAddress());
-			request.setAttribute("memberEmail", mvo.getMemberEmail());
-			request.setAttribute("memberEnterDate", mvo.getMemberEnterDate());
-
+			request.setAttribute("m", mvo);
+		
 			// 강의 정보
 			request.setAttribute("memberCourseCount", courseCount);
 			request.setAttribute("mycourse", mclist);
