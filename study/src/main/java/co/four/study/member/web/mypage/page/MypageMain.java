@@ -41,19 +41,18 @@ public class MypageMain extends HttpServlet {
 		System.out.println(mvo.getMemberId());
 		//수강중인 강의 개수 상위 3개
 		List<MemberCourseVO> mclist = memberCourseDao.selectMemberCourseListDetail(mvo);
+		int courseCountHome = 0;
 		int courseCount = 0;
 		for (int i = 0; i<3; i++) {
+			courseCountHome++;
+		}
+		
+		//수강중 강의 목록
+		for(int i =0; i<mclist.size(); i++) {
 			courseCount++;
 		}
-		//수강중 강의 목록
 		
-		System.out.println(courseCount);
-					
-		System.out.println(mclist);
-		
-		
-		
-		
+		request.setAttribute("memberCourseCountHome", courseCountHome);
 		request.setAttribute("memberCourseCount", courseCount);
 		request.setAttribute("mycourse", mclist);
 		request.setAttribute("menu", "mypage");
