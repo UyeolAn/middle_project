@@ -26,4 +26,6 @@ public interface BoardService {
 	// 게시글 카운트
 	int countBoards(BoardSearchVO vo);
 
+	//멤버별 게시물 개수
+	int countBoardMember(BoardVO vo);
 }

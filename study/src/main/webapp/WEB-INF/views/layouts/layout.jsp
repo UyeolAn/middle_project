@@ -78,6 +78,7 @@
 
 
     <!-- Js Plugins -->
+    <script src="client/js/demo/chart-pie-demo.js"></script>
     <script src="client/js/jquery-3.3.1.min.js"></script>
     <script src="client/js/bootstrap.min.js"></script>
     <!-- <script src="client/js/jquery.nice-select.min.js"></script> -->

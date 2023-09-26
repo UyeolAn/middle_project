@@ -58,4 +58,9 @@ public class BoardServiceImpl implements BoardService {
 		return map.countBoards(vo);
 	}
 
+	@Override
+	public int countBoardMember(BoardVO vo) {
+				return map.countBoardMember(vo);
+	}
+
 }

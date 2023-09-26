@@ -30,4 +30,6 @@ public interface BoardMapper {
 	// 조회수 증가
 	int updateBoardHit(int id);
 	
+	//멤버별 게시물 수
+	int countBoardMember(BoardVO vo);
 }
