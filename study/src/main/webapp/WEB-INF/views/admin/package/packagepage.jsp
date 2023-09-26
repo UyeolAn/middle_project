@@ -57,7 +57,6 @@
 	private String packageGrade; -->
 
         <section style="background-color: #eee;">
-            <div class="container py-5">
 
 
                 <div class="row">
@@ -78,7 +77,7 @@
                             <div class="card-body text-center">
                                 <img src="client/img/product/${p.packageThumbnail}" style="width: 100%;">
                                 <h6 class="my-3 font-weight-bold">${p.packageTitle}</h6>
-                                <a class="btn btn-secondary btn-icon-split modify">
+                                <a class="btn btn-secondary btn-icon-split" onclick="modify(${p.packageId})">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-arrow-right"></i>
                                     </span>
@@ -255,7 +254,7 @@
                           </div>
                     </div>
                 </div>
-            </div>
+
             <div class="card shadow mb-4" id="modal">
                 <div class="card-header py-3 modal-content" style="width: 50%;">
                     <h5 class="m-0 mb-2 font-weight-bold text-primary" id="modalTitle">강의 추가</h5>
@@ -286,10 +285,17 @@
                     </div>
                 </div>
             </div>
-            </div>
         </section>
+        <form id="sform" action="adminpackagedelete.do" method="post">
+            <input type="hidden" id="pid" name="pid">
+        </form> 
+        <form id="s2form" action="adminpackagemodify.do" method="post">
+            <input type="hidden" id="pid" name="pid">
+        </form> 
         <script src='admin/js/PackageCourse.js'></script>
     <script>
+
+
         const pc = new PackageCourse();
         const modal = document.getElementById("modal");
         const subModalBtn = document.getElementById("sub-modal");
@@ -361,6 +367,24 @@
                     }
                 })
             }
+        }
+
+
+        function remove(id) {
+            const response = confirm("삭제하시겠습니까?");
+            console.log(id);
+            console.log(name);
+            if(response) {
+                    let form = document.getElementById("sform");
+                    form.pid.value = id;
+                    form.submit();
+                }
+        }
+
+        function modify(id) {
+            let form = document.getElementById("s2form");
+            form.pid.value = id;
+            form.submit();
         }
     </script>
     </body>

@@ -24,7 +24,7 @@
     <div class="row" style="justify-content: center;">
         <div class="row col-lg-10" style="justify-content: start">
             <c:forEach items="${plist }" var="p">
-                <div class="card col-lg-3 m-4" style="width: 300px;">
+                <div class="card col-lg-4 m-1" style="width: 300px;">
                     <a href="adminpackagepage.do?pid=${p.packageId}" style="color: black;">
                         <img src="client/img/product/${p.packageThumbnail}" class="card-img-top" alt="..."">
                         <div class="card-body">

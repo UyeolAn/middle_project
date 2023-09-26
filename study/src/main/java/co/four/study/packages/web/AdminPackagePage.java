@@ -59,6 +59,8 @@ public class AdminPackagePage extends HttpServlet {
 		//패키지 할인가격 계산
 		int priceSale =(int) ((int) priceOriginal * (1 - (vo.getPackageDiscount()*0.01)));
 		
+		
+		
 		vo.setPackageCategory(vo.getPackageCategory().toUpperCase());
 		
 		request.setAttribute("p", vo);
