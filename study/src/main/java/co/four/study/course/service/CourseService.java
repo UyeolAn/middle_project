@@ -5,6 +5,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import co.four.study.packageCourse.service.PackageCourseVO;
+import co.four.study.packages.service.PackageVO;
+
 public interface CourseService {
 	List<CourseVO> courseSelectList(CourseVO vo); // 강의 전체조회
 	CourseVO courseSelect(CourseVO vo); // 강의 단건조회
@@ -27,4 +30,9 @@ public interface CourseService {
 	List<CourseVO> itcourselist();
 	List<CourseVO> itcourseSub(CourseVO vo);
 	
+	//패키지별 강의 리스트
+	List<CourseVO> packageCourseList(PackageCourseVO vo);
+	
+	//카테고리별 리스트 (해당 패키지에 속하지 않은)
+	List<CourseVO> ListNotInPackage(PackageVO vo);
 }

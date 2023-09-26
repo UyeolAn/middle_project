@@ -1,7 +1,6 @@
 package co.four.study.packages.web;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,26 +14,29 @@ import co.four.study.packages.service.PackageService;
 import co.four.study.packages.service.PackageVO;
 import co.four.study.packages.serviceImpl.PackageServiceImpl;
 
-@WebServlet("/packagelist.do")
-public class PackageList extends HttpServlet {
+
+@WebServlet("/adminpackagelist.do")
+public class AdminPackageList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public PackageList() {
+
+    public AdminPackageList() {
         super();
     }
 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PackageService dao = new PackageServiceImpl();
-		List<PackageVO> packages = new ArrayList<PackageVO>();
 		
-		packages = dao.packageSelectList();
+		List<PackageVO> plist = dao.packageSelectList();
 		
+		request.setAttribute("plist", plist);
 		
-		// 페이지 포워딩
-		String page = "package/packageList";
-		request.setAttribute("menu", "package");
+		String page = "admin/package/packagelist";
+		
 		ViewResolve.foward(request, response, page);
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

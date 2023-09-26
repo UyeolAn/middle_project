@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.four.study.packageCourse.map.PackageCourseMapper">
+
+	<select id="packageCourseSelectList" resultType="co.four.study.packageCourse.service.PackageCourseVO">
+		SELECT *
+		FROM PACKAGES_COURSES
+		WHERE PACKAGE_ID = #{packageId}
+	</select>
+	
+	<insert id="packageCourseInsert" parameterType="co.four.study.packageCourse.service.PackageCourseVO">
+		INSERT INTO PACKAGES_COURSES VALUES (#{packageId}, #{courseId})
+	</insert>
+	
+	<delete id="packageCourseDelete" parameterType="co.four.study.packageCourse.service.PackageCourseVO">
+		DELETE FROM PACKAGES_COURSES WHERE PACKAGE_ID = #{packageId} AND COURSE_ID = #{courseId}
+	</delete>
+	
+	<select id="priceSumByPackage" parameterType="co.four.study.packageCourse.service.PackageCourseVO" resultType="Integer">
+		SELECT SUM(C.COURSE_PRICE)
+		FROM COURSES C JOIN PACKAGES_COURSES PC ON C.COURSE_ID = PC.COURSE_ID
+		WHERE PC.PACKAGE_ID = #{packageId}
+	</select>
+</mapper>

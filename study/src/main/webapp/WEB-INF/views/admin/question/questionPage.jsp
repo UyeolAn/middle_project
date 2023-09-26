@@ -9,6 +9,42 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+<style>
+    #modal {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        display: none;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
 </head>
 <body>
           <div class="row">
@@ -27,8 +63,8 @@
           <div class="card mb-4">
             <div class="card-body text-center">
                 <p>
-                    <h4 class="font-weight-bold text-primary">${q.questionId}번 질문   </h4>
-                    <span class="font-weight-bold">제목 : ${q.questionTitle}</span>
+                    <h4 class="font-weight-bold text-primary">${q.questionTitle}</h4>
+                    <span class="font-weight-bold">${q.questionId}번 질문</span>
                 </p>
                 <p style="text-align: right;">
                     작성일 : ${q.questionEnterDate}<br> 
@@ -36,7 +72,7 @@
                         수정일 : ${q.questionUpdateDate}
                     </c:if>
                 </p>
-                <hr>
+                <br><br>
                 <p>
                     <c:if test="${not empty q.questionImg}">
                         <img src="client/img/product/${q.questionImg}" style="width: 300px;">
@@ -57,16 +93,22 @@
                         </c:if>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <p style="text-align: left;">
-                                        [내용]<br>
-                                        ${a.answerContent}<br>
-                                        작성일 : ${a.answerEnterDate}<br>
-                                        <i class="bi bi-hand-thumbs-up-fill"></i>
-                                        <i class="bi bi-hand-thumbs-down-fill"></i>
+                                    <p>
+                                        <br>
+                                        <h5 class="font-weight-bold" style="text-align: left;">${a.answerContent}</h5>
+                                        <div  style="text-align: left;">
+                                            <br>
+                                            작성일 : ${a.answerEnterDate}<br>
+                                            <c:if test="${not empty a.answerUpdateDate}">
+                                                수정일 : ${a.answerUpdateDate}<br>
+                                            </c:if>
+                                            <i class="bi bi-hand-thumbs-up-fill"></i>
+                                            <i class="bi bi-hand-thumbs-down-fill"></i>
+                                        </div>
                                     </p>
                                 </div>
                                 <div class="col-lg-2" id="${q.questionId}">
-                                    <a class="btn btn-primary btn-icon-split" onclick="modAns('${a.answerId}')">
+                                    <a class="btn btn-primary btn-icon-split" onclick="modAns('${a.answerId}','${a.answerContent}')">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-arrow-right"></i>
                                         </span>
@@ -96,9 +138,40 @@
          </div>
         </div>
     </div>
+
+
+    <div class="card shadow mb-4" id="modal">
+        <div class="card-header py-3 modal-content" style="width: 50%;">
+            <h5 class="m-0 mb-2 font-weight-bold text-primary" id="modalTitle">답변 수정</h5>
+            <div class="card-body">
+                <form id="frm2" class="row">
+                    <div class="form-group  col-12">
+                        <label id="contlabel" class="font-weight-bold" style="display: block;">내용</label>
+                        <input id="modAnswer" type="text" style="width: 100%;">
+                    </div>
+
+                </form>
+                <a class="btn btn-primary btn-icon-split" id="sub-modal">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                    <span class="text">완료</span>
+                </a>
+                <a class="btn btn-danger btn-icon-split" id="close-modal">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">취소</span>
+                </a>
+            </div>
+        </div>
+    </div>
     <script src='admin/js/Answer.js'></script>
 <script>
     const answer = new Answer();
+    const modal = document.getElementById("modal");
+    const subModalBtn = document.getElementById("sub-modal");
+    const closeModalBtn = document.getElementById("close-modal");
 
     function subAns(id) {
         
@@ -141,15 +214,47 @@
         }
     }
 
-    function modAns(aid, content) {
-        console.log(aid);
-        let input = document.createElement('input');
-        document.getElementById(aid).after(input);
-        let btn = document.createElement('input');
-        btn.type = 'button';
-        btn.value = 'btn';
-        input.after(btn);
+    function modAns(id, content) {
+        console.log(id);
+
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+
+        $('#modAnswer').val(content);
+        
+        $('#sub-modal').click(function() {
+            // console.log("클릭함");
+            let content = $('#modAnswer').val();
+            let aid = id;
+            // console.log(content);
+            // console.log(aid);
+            // console.log(qid);
+
+            const a = {aid:aid,content:content};
+            answer.answerUpdate(a, function(data){
+                if(data.retCode == "Success") {
+                alert("답변이 수정되었습니다.");
+                location.reload(true);
+                }
+                else if (data.retCode == "Fail" ) {
+                        alert("처리 중 에러");
+                }
+                else {
+                    alert("알 수 없는 반환코드");
+                }
+            })
+    
+        })
+
+
     }
+
+
+    //모달창 닫기
+    closeModalBtn.addEventListener("click", () => {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto"; // 스크롤바 보이기
+            });
 
     
 </script>

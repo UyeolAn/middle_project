@@ -23,9 +23,9 @@
 		.then(result=>callback(result));
 	}
 	
-	answerUpdate(answer = {qid:1, content:'', img:''}, callback) {
+	answerUpdate(answer = {aid:1,content:''}, callback) {
 		let url = 'ajaxanswerupdate.do';
-		let payload ='qid='+answer.qid+'&content='+answer.content+'&img='+answer.img;
+		let payload ='aid='+answer.aid+'&content='+answer.content;
 		fetch(url, {
 			 method:'POST',
 			 headers : {'Content-Type': 'application/x-www-form-urlencoded'},
