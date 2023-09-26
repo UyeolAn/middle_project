@@ -29,4 +29,9 @@ public class PackageCourseServiceImpl implements PackageCourseService {
 		return map.packageCourseDelete(vo);
 	}
 
+	@Override
+	public int priceSumByPackage(PackageCourseVO vo) {
+		return map.priceSumByPackage(vo);
+	}
+
 }

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import co.four.study.course.service.CourseVO;
+import co.four.study.packageCourse.service.PackageCourseVO;
+import co.four.study.packages.service.PackageVO;
 
 public interface CourseMapper {
 	List<CourseVO> courseSelectList(CourseVO vo); // 강의 전체조회, 메인카테고리별 조회
@@ -22,4 +24,10 @@ public interface CourseMapper {
 	//it강의
 	List<CourseVO> itcourselist();
 	List<CourseVO> itcourseSub(CourseVO vo);
+	
+	//패키지별 강의 리스트
+	List<CourseVO> packageCourseList(PackageCourseVO vo);
+	
+	//카테고리별 리스트 (해당 패키지에 속하지 않은)
+	List<CourseVO> ListNotInPackage(PackageVO vo);
 }
