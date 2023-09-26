@@ -17,7 +17,7 @@
 	</delete>
 	
 	<select id="priceSumByPackage" parameterType="co.four.study.packageCourse.service.PackageCourseVO" resultType="Integer">
-		SELECT SUM(C.COURSE_PRICE)
+		SELECT NVL(SUM(C.COURSE_PRICE),0)
 		FROM COURSES C JOIN PACKAGES_COURSES PC ON C.COURSE_ID = PC.COURSE_ID
 		WHERE PC.PACKAGE_ID = #{packageId}
 	</select>
