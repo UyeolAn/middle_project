@@ -115,7 +115,6 @@
         }
 
         function setInputFileBtn() {
-
           $('.input__file__btn').on('click', function () {
             $('#questionImg').click();
           });

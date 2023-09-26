@@ -250,7 +250,11 @@
                   .append(
                     $('<div class="col-lg-12 comm__qna__question__etc__info"> /')
                       .append($('<span class="etc__info__left"> /')
-                        .text(`[\${question.memberId}] ` + (question.courseName == null ? '기타/홈페이지 질문' : question.courseName)))
+                        .text(
+                          (question.memberId == null ? `[탈퇴 회원] ` : `[\${question.memberId}] `) + 
+                          (question.courseName == null ? '기타/홈페이지 질문' : question.courseName)
+                        )
+                      )
                       .append($('<span class="etc__info__right"> /')
                         .text(`조회수:\${question.questionHit}   답변:\${question.answerCount}`))
                   )

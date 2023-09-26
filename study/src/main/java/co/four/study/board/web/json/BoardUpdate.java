@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import co.four.study.board.service.BoardService;
 import co.four.study.board.service.BoardVO;
 import co.four.study.board.serviceImpl.BoardServiceImpl;
@@ -25,12 +28,19 @@ public class BoardUpdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardService dao = new BoardServiceImpl();
 		
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		String saveDir = getServletContext().getRealPath("client/img/board");
+		int maxSize = 1024*1024*100;
+		MultipartRequest multi = new MultipartRequest(request, saveDir, maxSize, "utf-8", new DefaultFileRenamePolicy());
+		
+		int boardId = Integer.parseInt(multi.getParameter("boardId"));
 		
 		BoardVO updateVO = new BoardVO();
 		updateVO.setBoardId(boardId);
-		updateVO.setBoardTitle(request.getParameter("boardTitle"));
-		updateVO.setBoardContent(request.getParameter("boardContent"));
+		updateVO.setBoardTitle(multi.getParameter("boardTitle"));
+		updateVO.setBoardContent(multi.getParameter("boardContent"));
+		
+		String realImg = multi.getFilesystemName("boardImg"); //저장되는 파일명
+		updateVO.setBoardImg(realImg); //이미지 파일 명을 저장한다.
 		
 		int numUpd = dao.boardUpdate(updateVO);
 		if (numUpd != 0) {

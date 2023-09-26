@@ -125,7 +125,12 @@
           <h4 class="col-lg-12" id="boardTitle" style="font-weight: 1000;">${board.boardTitle}</h4>
           <br>
           <div class="col-lg-12 comm__free__board__detail__etc__info">
-            <span class="etc__info__name" id="memberId">${board.memberId}</span>
+            <c:if test="${empty board.memberId}">
+              <span class="etc__info__name" id="memberId">탈퇴한 회원</span>
+            </c:if>
+            <c:if test="${not empty board.memberId}">
+              <span class="etc__info__name" id="memberId">${board.memberId}</span>
+            </c:if>
             <br>
             <span class="etc__info__datehit">작성일 ${board.boardEnterDate}</span>
             <span class="etc__info__datehit">수정일
