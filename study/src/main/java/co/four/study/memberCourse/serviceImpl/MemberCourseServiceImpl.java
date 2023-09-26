@@ -93,8 +93,13 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 	public int distributionSubcategory(CourseVO vo) {
 		return map.distributionSubcategory(vo);
 	}
-
-	@Override
+	
+  @Override
+	public int memberCourseCount(MemberCourseVO vo) {
+		return map.memberCourseCount(vo);
+  }
+  
+  @Override
 	public int countMemberCourses(CourseSearchVO vo) {
 		return map.countMemberCourses(vo);
 	}

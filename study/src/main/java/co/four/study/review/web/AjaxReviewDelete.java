@@ -40,9 +40,10 @@ public class AjaxReviewDelete extends HttpServlet {
 		int result = dao.reviewDelete(vo);
 		
 		if(result > 0) {
-			messageMap.put("message", "success");
-			reviews.add(messageMap); // 성공여부
+			messageMap.put("message", "success"); // 성공여부
 			cvo.setCourseId(Integer.valueOf(request.getParameter("courseId")));
+			messageMap.put("count", dao.courseReviewCount(cvo)); // 리뷰개수
+			reviews.add(messageMap);
 			reviews.add(dao.courseReviewSortedList(cvo)); // 삭제반영된 전체 리뷰 리스트 가져오기
 		} else {
 			messageMap.put("message", "fail");

@@ -18,7 +18,7 @@ public interface ReviewMapper {
 	//강의별 리뷰목록 가져오기
 	List<ReviewVO> courseReviewSortedList(CourseVO vo);
 	//강의별 리뷰개수 가져오기
-	int courseReviewCount(CourseVO vo);
+	String courseReviewCount(CourseVO vo);
 	//회원이 작성한 리뷰 한건
 	ReviewVO memberReviewSelect(ReviewVO vo);
 }

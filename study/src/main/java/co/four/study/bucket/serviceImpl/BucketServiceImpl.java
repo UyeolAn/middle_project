@@ -18,8 +18,8 @@ public class BucketServiceImpl implements BucketService{
 	private BucketMapper map = sqlSession.getMapper(BucketMapper.class);
 	
 	@Override
-	public List<BucketVO> bucketSelectList() {
-		return map.bucketSelectList();
+	public List<BucketVO> bucketSelectList(BucketVO vo) {
+		return map.bucketSelectList(vo);
 	}
 
 	@Override
@@ -53,8 +53,13 @@ public class BucketServiceImpl implements BucketService{
 	}
 
 	@Override
-	public int sumCoursesPrice(BucketVO vo) {
+	public Integer sumCoursesPrice(BucketVO vo) {
 		return map.sumCoursesPrice(vo);
+	}
+
+	@Override
+	public int bucketDeleteAll(BucketVO vo) {
+		return map.bucketDeleteAll(vo);
 	}
 
 }

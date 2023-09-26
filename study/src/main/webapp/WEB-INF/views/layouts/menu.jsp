@@ -18,6 +18,9 @@
   	<c:if test="${menu eq 'mypage' }">
 		<jsp:include page="menu/menuMypage.jsp"></jsp:include>
 	</c:if>
+	<c:if test="${menu eq 'package' }">
+		<jsp:include page="menu/menuPackage.jsp"></jsp:include>
+	</c:if>
   </body>
 
   </html>
