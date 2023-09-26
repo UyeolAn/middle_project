@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.four.study.packages.map.PackageMapper">
+
+	<select id="packageSelectList" resultType="co.four.study.packages.service.PackageVO">
+		SELECT *
+		FROM PACKAGES
+	</select>
+	
+	<select id="packageSelect" resultType="co.four.study.packages.service.PackageVO">
+		SELECT *
+		FROM PACKAGES
+		WHERE PACKAGE_ID = #{packageId}
+	</select>
+	
+	<insert id="packageInsert" parameterType="co.four.study.packages.service.PackageVO">
+		<selectKey keyProperty="packageId" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(PACKAGE_ID), 0) + 1 AS PACKAGE_ID FROM PACKAGES
+		</selectKey>
+		INSERT INTO PACKAGES
+		VALUES (#{packageId}, #{packageTitle},
+				#{packageScript}, #{packageDiscount}, #{packageThumbnail},
+				#{packageImg}, #{packageCategory}, #{packageGrade})
+	</insert>
+	
+	<update id="packageUpdate" parameterType="co.four.study.packages.service.PackageVO">
+		UPDATE PACKAGES
+		<set>
+			<if test="packageTitle != null">PACKAGE_TITLE = #{packageTitle},</if>
+			<if test="packageScript != null">PACKAGE_SCRIPT = #{packageScript},</if>
+			<if test="packageDiscount != -1">PACKAGE_DISCOUNT = #{packageDiscount},</if>
+			<if test="packageThumbnail != null">PACKAGE_THUMBNAIL = #{packageThumbnail},</if>
+			<if test="packageImg != null">PACKAGE_IMG = #{packageImg},</if>
+			<if test="packageCategory != null">PACKAGE_CATEGORY = #{packageCategory},</if>
+			<if test="packageGrade != null">PACKAGE_GRADE = #{courseScript},</if>
+		</set>
+		WHERE PACKAGE_ID = #{packageId}
+	</update>
+
+	<delete id="packageDelete" parameterType="co.four.study.packages.service.PackageVO">
+		DELETE FROM PACKAGES
+		WHERE PACKAGE_ID = #{packageId}	
+	</delete>
+
+</mapper>
