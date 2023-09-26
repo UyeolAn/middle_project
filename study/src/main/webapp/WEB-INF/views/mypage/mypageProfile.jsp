@@ -110,7 +110,7 @@
 			<div class="row">
 				<!-- 프로필 -->
 				<div class="col-12 col-md-6 col-lg-12 mb-4">
-					
+
 					<div class="card">
 						<div class="card-header">
 							<h6 class="m-0 font-weight-bold text-primary">${memberName} 님</h6>
@@ -151,7 +151,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 
 			<div class="card shadow mb-4" id="modal">
 				<div class="card-header py-3 modal-content" style="width: 50%;">
@@ -260,15 +260,30 @@
 				<div class="card">
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">수강중인 강의 진도</h6>
+						
+						<a class="btn btn-secondary btn-icon-split modify">
+							<span class="text" onclick="loadCoursList()" style="background-color: rgba(255, 255, 255, 0); border: 2px solid; display: inline-block; float: right;">새로고침</span>
+						</a>
 					</div>
 					<div class="card-body">
-						<h4 class="small font-weight-bold">
-							Server Migration <span class="float-right">20%</span>
-						</h4>
-						<div class="progress mb-4">
-							<div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20"
-								aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
+						<c:if test="${mycourse eq null}">
+							<h4>수강중인 강의가 없습니다.</h4>
+						</c:if>
+						<c:if test="${mycourse eq null}">
+							<c:forEach items="${mycourse}" var="mc">
+								<h4 class="small font-weight-bold">
+									Server Migration <span class="float-right">20%</span>
+								</h4>
+								<div class="progress mb-4">
+									<div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
+										aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</c:forEach>
+
+						</c:if>
+
+
+
 						<h4 class="small font-weight-bold">
 							Sales Tracking <span class="float-right">40%</span>
 						</h4>

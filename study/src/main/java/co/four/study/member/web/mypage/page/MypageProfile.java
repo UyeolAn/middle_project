@@ -1,7 +1,6 @@
 package co.four.study.member.web.mypage.page;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import co.four.study.board.service.BoardVO;
 import co.four.study.common.ViewResolve;
-import co.four.study.course.service.CourseVO;
 import co.four.study.member.service.MemberService;
 import co.four.study.member.service.MemberVO;
 import co.four.study.member.serviceImpl.MemberServiceImpl;
@@ -41,7 +38,7 @@ public class MypageProfile extends HttpServlet {
 		String checkAuthor = (String) session.getAttribute("loginAuthor");
 
 		if (checkAuthor == "admin") {
-			//홈화면에서 마이페이지 접근시 관리자 마이페이지로 리디렉트
+			// 홈화면에서 마이페이지 접근시 관리자 마이페이지로 리디렉트
 			response.sendRedirect("adminmypage.do");
 		} else {
 
@@ -58,6 +55,7 @@ public class MypageProfile extends HttpServlet {
 				// 수강중인강의 개수
 				courseCount++;
 			}
+
 			System.out.println(mclist);
 			request.setAttribute("menu", "mypage");
 			// 프로필
@@ -72,7 +70,6 @@ public class MypageProfile extends HttpServlet {
 			// 강의 정보
 			request.setAttribute("memberCourseCount", courseCount);
 			request.setAttribute("mycourse", mclist);
-
 			String page = "mypage/mypageProfile";
 
 			ViewResolve.foward(request, response, page);
