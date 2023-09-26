@@ -12,48 +12,6 @@
 	<!-- 장바구니 페이지 start -->
 	<section class="shopping-cart">
 		<div class="col-lg-8">
-			<!-- 일반강의 바구니영역 start -->
-			<div class="shopping__cart__table">
-				<table>
-					<thead>
-						<tr>
-							<th>강의명</th>
-							<th style="width: 140px;">금액</th>
-							<th style="width: 50px;"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${courses}" var="c">
-							<tr>
-								<td class="product__cart__item">
-									<div class="product__cart__item__pic" style="background-image: url(client/img/product/${c.courseImg });">
-									</div>
-									<div class="product__cart__item__text">
-										<h6>${c.courseName }</h6>
-									</div>
-								</td>
-								<td class="cart__price" style="width: 140px;">
-									<fmt:formatNumber value="${c.coursePrice }" pattern="#,###" />원
-								</td>
-								<td class="cart__close" style="width: 50px;"><i class="fa fa-close" onclick="bucketDelete('${member.memberId}', ${c.courseId }, this)"></i></td>
-							</tr>
-						</c:forEach>
-						<!-- 장바구니가 비어있으면 show -->
-						<tr class="empty_bucket_message <c:if test="${message eq 'empty'}">bucket_empty_show</c:if>">
-							<td colspan="3">
-								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#6c757d" class="bi bi-cart-x" viewBox="0 0 16 16">
-								  <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z"/>
-								  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-								</svg>
-								<span>담긴 강의가 없습니다</span>
-							</td>
-						</tr>
-						<!-- 장바구니가 비어있으면 show -->
-					</tbody>
-				</table>
-			</div>
-			<!-- 일반강의 바구니영역 end -->
-			
 			<!-- 패키지 바구니영역 start -->
 			<div class="shopping__cart__table">
 				<table>
