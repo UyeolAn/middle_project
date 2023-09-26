@@ -36,7 +36,7 @@ public class MemberCheckLogin extends HttpServlet {
 		vo.setMemberId(request.getParameter("memberId"));
 		vo.setMemberPassword(Sha256.encrypt(request.getParameter("memberPassword")));
 		// vo.setMemberPassword(request.getParameter("memberPassword"));
-
+		System.out.println(vo);
 		vo = dao.memberSelect(vo);
 		
 		
