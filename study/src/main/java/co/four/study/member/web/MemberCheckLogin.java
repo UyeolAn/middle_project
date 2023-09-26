@@ -51,7 +51,7 @@ public class MemberCheckLogin extends HttpServlet {
 				
 			} else {
 				msg = vo.getMemberName() + "님 어서오세요";
-				request.setAttribute("loginmsg", msg);
+				request.setAttribute("msg", msg);
 				String page = "home/home.jsp";
 				ViewResolve.foward(request, response, page);
 			}
