@@ -23,16 +23,36 @@
 			<!-- Custom styles for this template-->
 
 			<link rel="stylesheet" href="admin/css/sb-admin-2.min.css">
+			<style>
+				.small {
+					color: #737373;
+				}
+
+				.btn {
+					background-color: #999999;
+					border-color: #999999;
+				}
+
+				.bg-gradient-primary {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					min-height: 100dvh;
+					background-color: #f1f0ff;
+					background-image: none;
+				}
+
+				.container {
+					padding: 3rem;
+					font-size: 2rem;
+					border-radius: 1rem;
+				}
+			</style>
 		</head>
 
-		<body class="bg-gradient-primary" style="display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100dvh;">
+		<body class="bg-gradient-primary">
 
-			<div class="container" style="padding: 3rem;
-		font-size: 2rem;
-		border-radius: 1rem;">
+			<div class="container">
 
 				<!-- Outer Row -->
 				<div class="row justify-content-center">
@@ -67,7 +87,7 @@
 															for="idSaveCheck">
 
 
-															Remember Me </label>
+															ID 저장 </label>
 													</div>
 												</div>
 												<button type="submit"

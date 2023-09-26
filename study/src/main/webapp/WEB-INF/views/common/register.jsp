@@ -21,7 +21,37 @@
         <!-- Custom styles for this template-->
         <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <style>
+            .small {
+                color: #737373;
+            }
 
+            .btn {
+                background-color: #999999;
+                border-color: #999999;
+                color: #fff;
+
+            }
+
+            .bg-gradient-primary {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100dvh;
+                background-color: #f1f0ff;
+                background-image: none;
+            }
+
+            .btmagin4 {
+                margin-bottom: 4px;
+            }
+
+            .col-lg-7 {
+                flex: none;
+                max-width: 75%;
+                margin: 0 auto;
+            }
+        </style>
 
     <body class="bg-gradient-primary">
 
@@ -31,7 +61,7 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+
                         <div class="col-lg-7">
                             <div class="p-5">
                                 <div class="text-center">
@@ -41,10 +71,11 @@
                                 <form class="user" method="post" action="memberRegist.do" onsubmit="return formCheck()"
                                     id="frm">
                                     <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user" id="memberId"
-                                                name="memberId" placeholder="ID">
-                                            <button type="button" class="btn" id="doubleCheck" value="No">중복확인</button>
+                                        <div class="col-sm-6 mb-3 mb-sm-0 ">
+                                            <input type="text" class="form-control form-control-user btmagin4"
+                                                id="memberId" name="memberId" placeholder="ID">
+                                            <button type="button" class="small btn" id="doubleCheck" value="No"
+                                                style="float: right;">중복확인</button>
                                         </div>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control form-control-user" id="memberName"
@@ -68,25 +99,33 @@
                                             id="exampleInputEmail" name="memberEmail" placeholder="Email Address">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user"
-                                            id="exampleInputEmail" name="memberTel" placeholder="Phon Number">
+                                        <input type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                            name="memberTel" placeholder="Phon Number">
                                     </div>
                                     <div class="form-group">
-                                     
-                                    <div class="form-group">
-                                        <label class="font-weight-bold">주소</label><br>
-                                        <input type="text" id="sample6_postcode" class="form-control mb-2" style="display: inline; width: 50%;" placeholder="우편번호">
-                                        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                                        <input type="text" id="sample6_address" class="form-control mb-2" style="width: 100%; display: inline;" name="address1" placeholder="주소" required>
-                                        <div class="row mb-2" style="width: 100%; margin-left: 0;">
-                                            <input type="text" id="sample6_detailAddress" class="form-control col-lg-6" style="width: 50%; display: inline;" name="address2" placeholder="상세주소"><!--
-                                            --><input type="text" id="sample6_extraAddress" class="form-control col-lg-6" style="width: 50%; display: inline;" name="address3" placeholder="참고항목">
-                                        </div>
-                                    </div>
 
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                                        Register Account
-                                    </button>
+                                        <div class="form-group">
+                                            <label class="font-weight-bold">주소</label><br>
+                                            <input type="text" id="sample6_postcode" class="form-control mb-2"
+                                                style="display: inline; width: 50%;" placeholder="우편번호">
+                                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"
+                                                class="btn"><br>
+                                            <input type="text" id="sample6_address" class="form-control mb-2"
+                                                style="width: 100%; display: inline;" name="address1" placeholder="주소"
+                                                required>
+                                            <div class="row mb-2" style="width: 100%; margin-left: 0;">
+                                                <input type="text" id="sample6_detailAddress"
+                                                    class="form-control col-lg-6" style="width: 50%; display: inline;"
+                                                    name="address2" placeholder="상세주소"><!--
+                                            --><input type="text" id="sample6_extraAddress"
+                                                    class="form-control col-lg-6" style="width: 50%; display: inline;"
+                                                    name="address3" placeholder="참고항목">
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            Register Account
+                                        </button>
                                 </form>
                                 <hr>
                                 <div class="text-center">
