@@ -183,7 +183,10 @@
                 .append(
                   $('<div class="col-lg-12 comm__free__board__etc__info"> /')
                     .append($('<span class="etc__info__left"> /')
-                      .text(`[\${board.memberId}] \${board.boardEnterDate}`))
+                      .text(
+                        (board.memberId == null ? `[탈퇴 회원]` : `[\${board.memberId}]`) + 
+                        ` \${board.boardEnterDate}`
+                      ))
                     .append($('<span class="etc__info__right"> /')
                       .text(`조회수:\${board.boardHit}   좋아요:\${board.boardLike}   댓글:\${board.replyCount}`))
                 )

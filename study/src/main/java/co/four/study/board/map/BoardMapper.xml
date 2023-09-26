@@ -44,7 +44,7 @@
 			<if test="boardTitle != null">board_title = #{boardTitle},</if>
 			<if test="boardContent != null">board_content = #{boardContent},</if>
 			<if test="boardImg != null">board_img = #{boardImg},</if>
-			<if test="boardImg == 'delete'">board_img = null,</if>
+			<if test="boardImg == null">board_img = null,</if>
 			board_update_date = SYSDATE
 		</set>
 		WHERE board_id = #{boardId}

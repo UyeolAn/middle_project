@@ -29,7 +29,7 @@
 		<set>
 			<if test="questionTitle != null">QUESTION_TITLE = #{questionTitle},</if>
 			<if test="questionContent != null">QUESTION_CONTENT = #{questionContent},</if>
-			<if test="questionImg == 'delete'">QUESTION_IMG = null</if>
+			<if test="questionImg == null">QUESTION_IMG = null,</if>
 			<if test="questionImg != null">QUESTION_IMG = #{questionImg},</if>
 			QUESTION_UPDATE_DATE = SYSDATE
 		</set>

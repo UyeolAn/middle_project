@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import co.four.study.question.service.QuestionService;
 import co.four.study.question.service.QuestionVO;
 import co.four.study.question.serviceImpl.QuestionServiceImpl;
@@ -24,13 +27,21 @@ public class QuestionUpdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		QuestionService dao = new QuestionServiceImpl();
 		
-		int questionId = Integer.parseInt(request.getParameter("questionId"));
+		String saveDir = getServletContext().getRealPath("client/img/question");
+		int maxSize = 1024*1024*100;
+		MultipartRequest multi = new MultipartRequest(request, saveDir, maxSize, "utf-8", new DefaultFileRenamePolicy());
+		
+		int questionId = Integer.parseInt(multi.getParameter("questionId"));
 		
 		QuestionVO updateVO = new QuestionVO();
 		updateVO.setQuestionId(questionId);
-		updateVO.setQuestionTitle(request.getParameter("questionTitle"));
-		updateVO.setQuestionContent(request.getParameter("questionContent"));
+		updateVO.setQuestionTitle(multi.getParameter("questionTitle"));
+		updateVO.setQuestionContent(multi.getParameter("questionContent"));
+		
+		String realImg = multi.getFilesystemName("questionImg"); //저장되는 파일명
+		updateVO.setQuestionImg(realImg); //이미지 파일 명을 저장한다.
 
+		System.out.println(updateVO);
 		int numUpd = dao.questionUpdate(updateVO);
 		if (numUpd != 0) {
 			response.sendRedirect("communityqnadetailpage.do?questionId=" + questionId);

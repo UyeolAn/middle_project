@@ -23,25 +23,42 @@
         background: #A7A7A7;
       }
 
+      .delete__file__btn {
+        margin-top: 1%;
+        padding: 6px 25px;
+        color: white;
+        background: #B7B7B7;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+
+      .delete__file__btn:hover {
+        background: #A7A7A7;
+      }
+
       .small-btn {
         padding: 9px 20px;
         border-radius: 10px;
       }
     </style>
+    <script src="client/js/jquery-3.3.1.min.js"></script>
   </head>
 
   <body>
     <div class="col-lg-12 container">
       <div class="contact__form">
-        <form action="questionupdate.do" method="post">
+        <form action="questionupdate.do" method="post" enctype="multipart/form-data">
           <div class="row">
             <div class="col-lg-9">
               <input type="text" id="questionTitle" name="questionTitle" placeholder="제목을 입력하세요.."
                 value="${question.questionTitle}">
             </div>
             <div class="col-lg-12">
-              <label class="input__file__btn" for="questionImg">
+              <label class="input__file__btn" style="margin-top: 3%; border-radius: 10px; font-size: medium;">
                 IMG
+              </label>
+              <label class="delete__file__btn" style="margin-top: 3%; border-radius: 10px; font-size: medium;">
+                DEL
               </label>
               <input type="file" id="questionImg" name="questionImg" style="display: none;">
             </div>
@@ -57,6 +74,23 @@
         </form>
       </div>
     </div>
+    <script>
+      setInputFileBtn();
+      setDeteleFileBtn();
+
+      function setInputFileBtn() {
+        $('.input__file__btn').on('click', function () {
+          $('#questionImg').click();
+        });
+      }
+
+      function setDeteleFileBtn() {
+        $('.delete__file__btn').on('click', function () {
+          alert('이미지를 삭제하였습니다');
+          $('#questionImg').val('');
+        });
+      }
+    </script>
   </body>
 
   </html>

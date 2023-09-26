@@ -120,7 +120,12 @@
           </h4>
           <br>
           <div class="col-lg-12 comm__qna__question__detail__etc__info">
-            <span class="etc__info__name" id="memberId">${question.memberId}</span>
+            <c:if test="${empty question.memberId}">
+              <span class="etc__info__name" id="memberId">탈퇴한 회원</span>
+            </c:if>
+            <c:if test="${not empty question.memberId}">
+              <span class="etc__info__name" id="memberId">${question.memberId}</span>
+            </c:if>
             <c:if test="${not empty question.courseName}">
               <span class="etc__info__datehit"> ㆍ ${question.courseName}</span>
             </c:if>
