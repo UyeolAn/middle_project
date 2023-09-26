@@ -520,3 +520,31 @@ CREATE TABLE packages_courses
   ON DELETE CASCADE
   ENABLE 
 );
+
+CREATE TABLE PACKAGE_BUCKET
+(
+  member_id VARCHAR2(100) NOT NULL
+, package_id NUMBER NOT NULL
+, CONSTRAINT PACKAGE_BUCKET_pk PRIMARY KEY
+  (
+    member_id, package_id
+  )
+, CONSTRAINT PACKAGE_BUCKET_member_id_fk FOREIGN KEY
+  (
+    member_id 
+  )
+  REFERENCES members
+  (
+    member_id 
+  )
+  ON DELETE CASCADE
+, CONSTRAINT PACKAGE_BUCKET_package_id_fk FOREIGN KEY
+  (
+    package_id 
+  )
+  REFERENCES packages
+  (
+    package_id 
+  )
+  ON DELETE CASCADE
+);
