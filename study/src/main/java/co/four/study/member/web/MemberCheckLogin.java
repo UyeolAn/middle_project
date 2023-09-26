@@ -45,10 +45,9 @@ public class MemberCheckLogin extends HttpServlet {
 			session.setAttribute("loginName", vo.getMemberName());
 			session.setAttribute("loginAuthor", vo.getMemberAuthor());	
 			
+			
 			if (session.getAttribute("loginAuthor").equals("admin")) {
-				msg = vo.getMemberName() + "님 어서오세요";
 				response.sendRedirect("adminhome.do");// 관리자 페이지 링크
-				
 			} else {
 				msg = vo.getMemberName() + "님 어서오세요";
 				request.setAttribute("msg", msg);
