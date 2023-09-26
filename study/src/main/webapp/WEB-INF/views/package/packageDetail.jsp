@@ -141,18 +141,9 @@
 		</div>
 	</section>
 	<!-- 강의 상세 정보 End -->
-
-	<form id="cform" action="courselist.do" method="post">
-		<input type="hidden" name="subCate" id="subCate" value="" />
-		<input type="hidden" name="grade" id="grade" value="" />
-		<input type="hidden" name="nowPage" id="nowPage" value="" />
-		<input type="hidden" name="cntPerPage" id="cntPerPage" value="" />
-		<input type="hidden" name="message" id="message" value="${message }" />
-		<input type="hidden" name="loginId" id="loginId" value="${loginId }" />
-	</form>
 	
-	<form id="bucketform" action="bucketinsert.do" method="post">
-		<input type="hidden" name="courseId" id="courseId" value="${course.courseId }" />
+	<form id="bucketform" action="packagebucketinsert.do" method="post">
+		<input type="hidden" name="packageId" id="packageId" value="${data.packageId }" />
 		<input type="hidden" name="memberId" id="memberId" value="${loginId }" />
 	</form>
 	
