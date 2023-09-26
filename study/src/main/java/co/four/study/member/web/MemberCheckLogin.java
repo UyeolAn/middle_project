@@ -38,25 +38,27 @@ public class MemberCheckLogin extends HttpServlet {
 		// vo.setMemberPassword(request.getParameter("memberPassword"));
 		System.out.println(vo);
 		vo = dao.memberSelect(vo);
-		
+		String msg = "";
 		
 		if (vo != null) {
 			session.setAttribute("loginId", vo.getMemberId());
 			session.setAttribute("loginName", vo.getMemberName());
-			session.setAttribute("loginAuthor", vo.getMemberAuthor());
-			session.setAttribute("loginPassword", vo.getMemberPassword());
+			session.setAttribute("loginAuthor", vo.getMemberAuthor());	
 			
 			
 			if (session.getAttribute("loginAuthor").equals("admin")) {
-				
 				response.sendRedirect("adminhome.do");// 관리자 페이지 링크
-			
 			} else {
-				response.sendRedirect("home.do");// 관리자 페이지 링크
+				msg = vo.getMemberName() + "님 어서오세요";
+				request.setAttribute("msg", msg);
+				String page = "home/home.jsp";
+				ViewResolve.foward(request, response, page);
 			}
 			
 			
 		} else {
+			 msg = "아이디 또는 비밀번호가 틀렸습니다.";
+			request.setAttribute("loginmsg", msg);
 			String page = "common/login.jsp";
 			ViewResolve.foward(request, response, page);
 		}

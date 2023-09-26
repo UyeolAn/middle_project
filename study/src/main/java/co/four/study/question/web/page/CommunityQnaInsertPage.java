@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import co.four.study.common.ViewResolve;
-import co.four.study.course.service.CourseVO;
 import co.four.study.memberCourse.service.MemberCourseQnaVO;
 import co.four.study.memberCourse.service.MemberCourseService;
 import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;

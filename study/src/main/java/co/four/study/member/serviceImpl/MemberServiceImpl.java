@@ -88,4 +88,9 @@ public class MemberServiceImpl implements MemberService {
 		return map.monthlyClient();
 	}
 
+	@Override
+	public String selectMemberAuthor(String id) {
+		return map.selectMemberAuthor(id);
+	}
+
 }

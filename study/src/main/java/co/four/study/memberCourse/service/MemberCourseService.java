@@ -54,7 +54,13 @@ public interface MemberCourseService {
 	//회원이 수강신청한 강의 카운트
 	int countMemberCourses(CourseSearchVO vo);
 	
+	//회원 구매내역 카운트
+	int countPayments(MemberCourseSearchVO vo);
+	
 	//회원이 수강신청한 강의 페이징해서 가져오기
 	List<CourseVO> selectCourseWithPaging(CourseSearchVO vo);
+	
+	//회원이 구매내역 페이징해서 가져오기
+	List<PaymentVO> selectPaymentWithPaging(MemberCourseSearchVO vo);
 
 }

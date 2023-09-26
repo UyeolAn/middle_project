@@ -141,4 +141,22 @@
 		SELECT * FROM COURSES WHERE COURSE_SUB_CATEGORY = #{courseSubCategory}
 	</select>
 	
+	<select id="packageCourseList" resultType="co.four.study.course.service.CourseVO" parameterType="co.four.study.packageCourse.service.PackageCourseVO">
+		SELECT c.course_id, c.course_name, c.course_price,c.course_teacher
+		FROM PACKAGES_COURSES p join courses c on p.course_id = c.course_id
+		WHERE PACKAGE_ID = #{packageId}
+	</select>
+	
+	
+	<select id="ListNotInPackage" resultType="co.four.study.course.service.CourseVO" parameterType="co.four.study.packages.service.PackageVO">
+		SELECT *
+		FROM COURSES
+		WHERE COURSE_MAIN_CATEGORY = #{packageCategory}
+		AND COURSE_ID NOT IN(
+		SELECT COURSE_ID 
+		FROM PACKAGES_COURSES 
+		WHERE PACKAGE_ID = #{packageId}
+		)
+		ORDER BY COURSE_SUB_CATEGORY
+	</select>
 </mapper>

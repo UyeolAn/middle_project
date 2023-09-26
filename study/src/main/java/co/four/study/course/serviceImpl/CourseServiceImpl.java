@@ -11,6 +11,8 @@ import co.four.study.common.DataSource;
 import co.four.study.course.map.CourseMapper;
 import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
+import co.four.study.packageCourse.service.PackageCourseVO;
+import co.four.study.packages.service.PackageVO;
 
 public class CourseServiceImpl implements CourseService {
 	
@@ -142,6 +144,16 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public List<CourseVO> itcourseSub(CourseVO vo) {
 		return map.itcourseSub(vo);
+	}
+
+	@Override
+	public List<CourseVO> packageCourseList(PackageCourseVO vo) {
+		return map.packageCourseList(vo);
+	}
+
+	@Override
+	public List<CourseVO> ListNotInPackage(PackageVO vo) {
+		return map.ListNotInPackage(vo);
 	}
 
 

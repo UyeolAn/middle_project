@@ -69,6 +69,8 @@ CREATE TABLE members_courses
 (
   member_id VARCHAR2(100) NOT NULL
 , course_id NUMBER NOT NULL
+, count NUMBER DEFAULT 0 NOT NULL
+, enter_date DATE DEFAULT SYSDATE NOT NULL
 , CONSTRAINT members_courses_pk PRIMARY KEY 
   (
     member_id, course_id
@@ -139,7 +141,7 @@ COMMENT ON COLUMN subcourses.subcourse_time IS '세부강의 시간';
 CREATE TABLE reviews 
 (
   review_id NUMBER NOT NULL
-, member_id VARCHAR2(100) NOT NULL
+, member_id VARCHAR2(100)
 , course_id NUMBER NOT NULL
 , review_content VARCHAR2(512)
 , review_stars NUMBER NOT NULL
@@ -205,7 +207,7 @@ COMMENT ON COLUMN bucket.count IS '진도';
 CREATE TABLE boards 
 (
   board_id NUMBER NOT NULL
-, member_id VARCHAR2(100) NOT NULL
+, member_id VARCHAR2(100)
 , board_title VARCHAR2(100) NOT NULL
 , board_content VARCHAR2(512) NOT NULL
 , board_enter_date DATE DEFAULT SYSDATE NOT NULL
@@ -260,6 +262,7 @@ CREATE TABLE recommends
   (
     member_id 
   )
+  ON DELETE CASCADE
 , CONSTRAINT recommends_board_id_fk FOREIGN KEY
   (
     board_id 
@@ -268,6 +271,7 @@ CREATE TABLE recommends
   (
     board_id 
   )
+  ON DELETE CASCADE
 );
 
 COMMENT ON COLUMN recommends.recommend_id IS '추천 ID';
@@ -285,7 +289,7 @@ CREATE TABLE replies
 (
   reply_id NUMBER NOT NULL
 , board_id NUMBER NOT NULL
-, member_id VARCHAR2(100) NOT NULL
+, member_id VARCHAR2(100)
 , reply_content VARCHAR2(512) NOT NULL
 , reply_enter_date DATE DEFAULT SYSDATE NOT NULL
 , reply_update_date DATE
@@ -329,7 +333,7 @@ COMMENT ON COLUMN replies.reply_update_date IS '댓글 수정일';
 CREATE TABLE questions
 (
   question_id NUMBER NOT NULL
-, member_id VARCHAR2(100) NOT NULL
+, member_id VARCHAR2(100)
 , course_id NUMBER
 , question_title VARCHAR2(100) NOT NULL
 , question_content VARCHAR2(512) NOT NULL
@@ -380,7 +384,7 @@ CREATE TABLE answers
 (
   answer_id NUMBER NOT NULL
 , question_id NUMBER NOT NULL
-, member_id VARCHAR2(100) NOT NULL
+, member_id VARCHAR2(100)
 , answer_content VARCHAR2(512) NOT NULL
 , answer_enter_date DATE DEFAULT SYSDATE NOT NULL
 , answer_update_date DATE
@@ -442,3 +446,77 @@ DROP TABLE boards CASCADE CONSTRAINTS;
 DROP TABLE replies CASCADE CONSTRAINTS;
 DROP TABLE questions CASCADE CONSTRAINTS;
 DROP TABLE answers CASCADE CONSTRAINTS;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- packages
+CREATE TABLE packages 
+(
+  package_id NUMBER NOT NULL
+, package_title VARCHAR2(100) NOT NULL
+, package_script VARCHAR2(1024)
+, package_discount NUMBER DEFAULT 0 NOT NULL
+, package_thumbnail VARCHAR2(30) NOT NULL
+, package_img VARCHAR2(30) NOT NULL
+, package_category VARCHAR2(50) NOT NULL
+, package_grade VARCHAR2(20) DEFAULT 'normal' NOT NULL
+, CONSTRAINT packages_package_id_pk PRIMARY KEY
+  (
+    package_id
+  )
+  ENABLE 
+);
+
+-- packages_courses
+CREATE TABLE packages_courses
+(
+  package_id NUMBER NOT NULL
+, course_id NUMBER NOT NULL
+, CONSTRAINT packages_courses_pk PRIMARY KEY 
+  (
+    package_id, course_id
+  )
+, CONSTRAINT packages_courses_package_id_fk FOREIGN KEY
+  (
+    package_id
+  )
+  REFERENCES packages
+  (
+    package_id 
+  )
+  ON DELETE CASCADE
+, CONSTRAINT packages_courses_course_id_fk FOREIGN KEY
+  (
+    course_id 
+  )
+  REFERENCES courses
+  (
+    course_id 
+  )
+  ON DELETE CASCADE
+  ENABLE 
+);

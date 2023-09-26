@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import co.four.study.board.service.BoardService;
 import co.four.study.board.service.BoardVO;
 import co.four.study.board.serviceImpl.BoardServiceImpl;
-import co.four.study.common.ViewResolve;
 
 @WebServlet("/boardinsert.do")
 public class BoardInsert extends HttpServlet {
@@ -26,12 +28,18 @@ public class BoardInsert extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		BoardService dao = new BoardServiceImpl();
+		
+		String saveDir = getServletContext().getRealPath("client/img/board");
+		int maxSize = 1024*1024*100;
+		MultipartRequest multi = new MultipartRequest(request, saveDir, maxSize, "utf-8", new DefaultFileRenamePolicy());
 
 		BoardVO insertVO = new BoardVO();
 		insertVO.setMemberId((String)session.getAttribute("loginId"));
-		insertVO.setBoardTitle(request.getParameter("boardTitle"));
-		insertVO.setBoardContent(request.getParameter("boardContent"));
-//		insertVO.setBoardImg(null); // 나중에 이미지 추가 기능도 넣어줘야함
+		insertVO.setBoardTitle(multi.getParameter("boardTitle"));
+		insertVO.setBoardContent(multi.getParameter("boardContent"));
+		
+		String realImg = multi.getFilesystemName("boardImg"); //저장되는 파일명
+		insertVO.setBoardImg(realImg); //이미지 파일 명을 저장한다.
 		
 		int numIns = dao.boardInsert(insertVO);
 		if (numIns != 0) {

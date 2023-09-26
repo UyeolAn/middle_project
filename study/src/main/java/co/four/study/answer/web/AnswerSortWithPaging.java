@@ -16,6 +16,8 @@ import co.four.study.answer.service.AnswerService;
 import co.four.study.answer.service.AnswerVO;
 import co.four.study.answer.service.etcvo.AnswerSortVO;
 import co.four.study.answer.serviceImpl.AnswerServiceImpl;
+import co.four.study.member.service.MemberService;
+import co.four.study.member.serviceImpl.MemberServiceImpl;
 
 @WebServlet("/answersortwithpaging.do")
 public class AnswerSortWithPaging extends HttpServlet {
@@ -27,7 +29,8 @@ public class AnswerSortWithPaging extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AnswerService dao = new AnswerServiceImpl();
+		AnswerService answerDao = new AnswerServiceImpl();
+		MemberService memberDao = new MemberServiceImpl();
 		
 		int questionId = Integer.parseInt(request.getParameter("questionId"));
 		
@@ -35,7 +38,7 @@ public class AnswerSortWithPaging extends HttpServlet {
 		sortVO.setQuestionId(questionId);
 		sortVO.setSortType(request.getParameter("sortType"));
 		
-		int totalCount = dao.countQuestionAnswer(questionId);
+		int totalCount = answerDao.countQuestionAnswer(questionId);
 		int page = Integer.parseInt(request.getParameter("page"));
 		int start = (page - 1) * 10 + 1;
 		int end = (page * 10) < totalCount ? (page * 10) : totalCount;
@@ -43,10 +46,14 @@ public class AnswerSortWithPaging extends HttpServlet {
 		sortVO.setStartRow(start);
 		sortVO.setEndRow(end);
 		
-		List<AnswerVO> replies = dao.sortAnswersWithPaging(sortVO);
+		List<AnswerVO> answers = answerDao.sortAnswersWithPaging(sortVO);
+		for (AnswerVO answer : answers) {
+			String memberAuthor = memberDao.selectMemberAuthor(answer.getMemberId());
+			answer.setMemberAuthor(memberAuthor);
+		}
 		
 		ObjectMapper objectMapper = new ObjectMapper();
-		String boardsJson = objectMapper.registerModule(new JavaTimeModule()).writeValueAsString(replies);
+		String boardsJson = objectMapper.registerModule(new JavaTimeModule()).writeValueAsString(answers);
 		
 		response.setContentType("text/json;charset=utf-8");
 		response.getWriter().print(boardsJson);

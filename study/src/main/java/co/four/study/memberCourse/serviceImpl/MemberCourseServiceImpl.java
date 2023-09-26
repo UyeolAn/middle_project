@@ -10,8 +10,10 @@ import co.four.study.course.service.CourseVO;
 import co.four.study.member.service.MemberVO;
 import co.four.study.memberCourse.map.MemberCourseMapper;
 import co.four.study.memberCourse.service.MemberCourseQnaVO;
+import co.four.study.memberCourse.service.MemberCourseSearchVO;
 import co.four.study.memberCourse.service.MemberCourseService;
 import co.four.study.memberCourse.service.MemberCourseVO;
+import co.four.study.memberCourse.service.PaymentVO;
 
 public class MemberCourseServiceImpl implements MemberCourseService {
 	
@@ -94,19 +96,29 @@ public class MemberCourseServiceImpl implements MemberCourseService {
 		return map.distributionSubcategory(vo);
 	}
 	
-  @Override
+    @Override
 	public int memberCourseCount(MemberCourseVO vo) {
 		return map.memberCourseCount(vo);
-  }
+    }
   
-  @Override
+  	@Override
 	public int countMemberCourses(CourseSearchVO vo) {
 		return map.countMemberCourses(vo);
+	}
+  
+  	@Override
+	public int countPayments(MemberCourseSearchVO vo) {
+		return map.countPayments(vo);
 	}
 	
 	@Override
 	public List<CourseVO> selectCourseWithPaging(CourseSearchVO vo) {
 		return map.selectCourseWithPaging(vo);
+	}
+
+	@Override
+	public List<PaymentVO> selectPaymentWithPaging(MemberCourseSearchVO vo) {
+		return map.selectPaymentWithPaging(vo);
 	}
 
 }

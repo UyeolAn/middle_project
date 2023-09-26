@@ -189,6 +189,7 @@
               $(li).attr('class', 'type__non__active');
             }
           });
+          currentPage = 1;
           loadBody();
         });
       }

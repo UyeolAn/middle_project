@@ -27,8 +27,8 @@
                 <div class="card-body">
                   <div class="shop__sidebar__categories">
                     <ul class="nice-scroll">
-                      <li><a href="profile.do">프로필</a></li>
-                      <li><a href="#">장바구니</a></li>
+                      <li><a href="mypageprofile.do">프로필</a></li>
+                      <li><a href="bucketlist.do">장바구니</a></li>
                       <li><a href="mypagemycoursepage.do">수강 강좌</a></li>
 					            <li><a href="mypagepaymentpage.do">구매내역</a></li>
                       <li><a href="mypagemycommunitypage.do">나의 커뮤니티</a></li>

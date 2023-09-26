@@ -41,6 +41,9 @@ public interface MemberMapper {
 	
 	//월별 이용자수 조회
 	List<Map<String, Object>> monthlyClient();
+	
+	//회원 ID로 권한값 가져오기
+	String selectMemberAuthor(String id);
 }
 			
 		
