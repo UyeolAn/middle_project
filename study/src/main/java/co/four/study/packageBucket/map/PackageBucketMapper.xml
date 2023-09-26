@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.four.study.packageBucket.map.PackageBucketMapper">
+	<select id="pbucketSelectList" resultType="co.four.study.packageBucket.service.PackageBucketVO">
+		SELECT * FROM PACKAGE_BUCKET
+		<if test="memberId != null">WHERE MEMBER_ID = #{memberId}</if>
+	</select>
+	
+	<select id="pbucketSelect" resultType="co.four.study.packageBucket.service.PackageBucketVO">
+		SELECT * FROM PACKAGE_BUCKET WHERE MEMBER_ID = #{memberId}
+		<if test="packageId != 0">AND PACKAGE_ID = #{packageId}</if>
+	</select>
+	
+	<insert id="pbucketInsert" parameterType="co.four.study.packageBucket.service.PackageBucketVO">
+		INSERT INTO PACKAGE_BUCKET VALUES (#{memberId}, #{packageId})
+	</insert>
+	
+	<delete id="pbucketDelete" parameterType="co.four.study.packageBucket.service.PackageBucketVO">
+		DELETE PACKAGE_BUCKET WHERE MEMBER_ID = #{memberId} AND PACKAGE_ID = #{packageId}
+	</delete>
+	
+	<select id="countBucket" resultType="Integer" parameterType="co.four.study.member.service.MemberVO">
+		SELECT COUNT(*) 
+		FROM PACKAGE_BUCKET WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<select id="memberPackBucketList" resultType="co.four.study.packageBucket.service.PackageBucketVO">
+		SELECT A.PACKAGE_ID, A.PACKAGE_TITLE, A.PACKAGE_THUMBNAIL, B.MEMBER_ID
+		FROM PACKAGES A, PACKAGE_BUCKET B
+		WHERE A.PACKAGE_ID = B.PACKAGE_ID
+		AND   B.MEMBER_ID = #{memberId}
+	</select>
+	
+	<delete id="pbucketDeleteAll" parameterType="co.four.study.packageBucket.service.PackageBucketVO">
+		DELETE PACKAGE_BUCKET WHERE MEMBER_ID = #{memberId}
+	</delete>
+</mapper>

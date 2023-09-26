@@ -18,6 +18,12 @@ import co.four.study.course.service.CourseVO;
 import co.four.study.member.service.MemberService;
 import co.four.study.member.service.MemberVO;
 import co.four.study.member.serviceImpl.MemberServiceImpl;
+import co.four.study.packageBucket.service.PackageBucketService;
+import co.four.study.packageBucket.service.PackageBucketVO;
+import co.four.study.packageBucket.serviceImpl.PackageBucketServiceImpl;
+import co.four.study.packages.service.PackageService;
+import co.four.study.packages.service.PackageVO;
+import co.four.study.packages.serviceImpl.PackageServiceImpl;
 
 @WebServlet("/bucketlist.do")
 public class BucketList extends HttpServlet {
@@ -27,12 +33,15 @@ public class BucketList extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		BucketService dao = new BucketServiceImpl();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberService mdao = new MemberServiceImpl();
-		BucketVO vo = new BucketVO();
+		BucketService bdao = new BucketServiceImpl();
+		PackageService pdao = new PackageServiceImpl();
+		PackageBucketService pbdao = new PackageBucketServiceImpl();
 		MemberVO mvo = new MemberVO();
+		BucketVO bvo = new BucketVO();
+		PackageVO pvo = new PackageVO();
+		PackageBucketVO pbvo = new PackageBucketVO();
 		HttpSession session = request.getSession();
 		String memberId = request.getParameter("memberId");
 		//마이페이지에서 장바구니 접근시 memberId null값 반환
@@ -40,20 +49,41 @@ public class BucketList extends HttpServlet {
 		if (memberId == null) {
 			memberId = (String) session.getAttribute("loginId");
 		}
-		vo.setMemberId(memberId);
+		bvo.setMemberId(memberId);
 		mvo.setMemberId(memberId);
 
 		// 해당멤버의 장바구니에 있는 강의정보 담기
-		List<CourseVO> list = dao.memberBucketList(vo);
+		List<CourseVO> list = bdao.memberBucketList(bvo);
 		request.setAttribute("courses", list);
 		if (list.size() == 0) {
 			request.setAttribute("message", "empty");
 		}
+		// 해당멤버의 장바구니에 있는 패키지 정보 담기
+		List<PackageBucketVO> plist = pbdao.memberPackBucketList(pbvo);
+		request.setAttribute("packages", plist);
+		if (plist.size() == 0) {
+			request.setAttribute("message", "package_empty");
+		}
 
 		// 장바구니 강의금액 합
 		try {
-			int sum = dao.sumCoursesPrice(vo);
+			int sum = bdao.sumCoursesPrice(bvo);
 			request.setAttribute("sum", sum);
+		} catch (NullPointerException e) {
+			request.setAttribute("sum", 0);
+		}
+		// 장바구니 패키지금액 합
+		try {
+			int sum = 0;
+			for(int i=0; i<plist.size(); i++) {
+				pvo.setPackageId(plist.get(i).getPackageId());
+				System.out.println(i + "번째 패키지 가격:: " + pdao.salePrice(pvo));
+				sum += pdao.salePrice(pvo);
+				System.out.println(i + "번째 패키지 가격을 더한 결과:: " + sum);
+			}
+			request.setAttribute("psum", sum);
+			System.out.println("패키지 가격 최종 합:: " + sum);
+			
 		} catch (NullPointerException e) {
 			request.setAttribute("sum", 0);
 		}
