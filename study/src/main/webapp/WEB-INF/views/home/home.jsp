@@ -26,6 +26,9 @@
 			<link rel="stylesheet" href="client/css/style.css" type="text/css">
 			<link rel="stylesheet" href="client/css/course.css">
 			<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+			<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+			<link rel="icon" href="/favicon.ico" type="image/x-icon">
 			<style>
 				.recommend__course__container {
 					margin: 5%;
@@ -37,7 +40,10 @@
 				* {
 				font-family: 'NanumSquareRound';
 				}
-
+				
+				h5, h6{
+				font-family: 'NanumSquareRound' !important;
+				}
 			</style>
 		</head>
 
@@ -136,7 +142,7 @@
 							<div class="row">
 								<div class="col-lg-7">
 									<div class="hero__text">
-										<h6>SALE COURSE</h6>
+										<h6>SALE PACKAGE</h6>
 										<h2 style="font-family: 'NanumSquareRound';">현재 할인하는 패키지&#128176;</h2>
 										<p style="font-family: 'NanumSquareRound'; color: black;">다양한 강의들을 할인된 가격으로 만나보세요!</p>
 										<!-- <a href="#" class="primary-btn">신청하러가기<span class="arrow_right"></span></a> -->
@@ -155,7 +161,7 @@
 							<div class="row">
 								<div class="col-lg-7">
 									<div class="hero__text">
-										<h6>SALE COURSE</h6>
+										<h6>IT COURSES</h6>
 										<h2 style="font-family: 'NanumSquareRound'; color: white;">IT 강의들 잔뜩&#128218;</h2>
 										<p style="font-family: 'NanumSquareRound'; color: white;">예비 개발자들을 위한 강의들을 골라 들어보세요</p>
 									</div>
@@ -173,7 +179,7 @@
 							<div class="row">
 								<div class="col-lg-7">
 									<div class="hero__text">
-										<h6>SALE COURSE</h6>
+										<h6>QUESTION COMMUNITY</h6>
 										<h2 style="font-family: 'NanumSquareRound';">질문이 있다면 바로 &#128587;</h2>
 										<p style="font-family: 'NanumSquareRound'; color: black;">다양한 사람들과 소통을 하며 궁금증을 해소!</p>
 									</div>
@@ -209,400 +215,117 @@
 					<div class="row product__filter">
 						<c:forEach items="${reviewList}" var="r">
 							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix review">
-								<div class="product__item">
-									<img src="client/img/product/${r.courseImg}" style="width: 330px; height: 200px;">
-									<div class="product__item__text">
-										<h6>${r.courseName}</h6>
-										<a href="#" class="add-cart">+ Add To Cart</a>
-										<div class="rating">
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-										</div>
-										<h5>${r.coursePrice}원</h5>
-										<div class="product__color__select">
-											<label for="pc-1">
-												<input type="radio" id="pc-1">
-											</label>
-											<label class="active black" for="pc-2">
-												<input type="radio" id="pc-2">
-											</label>
-											<label class="grey" for="pc-3">
-												<input type="radio" id="pc-3">
-											</label>
+								<a href="coursedetail.do?courseId=${r.courseId}">
+									<div class="product__item">
+										<img src="client/img/product/${r.courseImg}" style="width: 330px; height: 200px;">
+										<div class="product__item__text">
+											<h6>${r.courseName}</h6>
+											<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
+												<c:forEach var = "i" begin = "1" end = "${r.courseStars}">
+												  <div class="bi-star-fill"></div>
+												</c:forEach>
+												<c:forEach var = "i" begin = "1" end = "${5 - r.courseStars}">
+												  <div class="bi-star"></div>
+												</c:forEach>
+											</div>
+											<c:choose>
+												<c:when test="${r.coursePrice eq 0}">
+													<h5>FREE</h5>
+												</c:when>
+												<c:otherwise>
+													<h5>${r.coursePrice}원</h5>
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</div>
-								</div>
+								</a>
 							</div>
 						</c:forEach>
 						<c:forEach items="${hotList}" var="h">
 							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot">
-								<div class="product__item">
-									<img src="client/img/product/${h.courseImg}" style="width: 330px; height: 200px;">
-									<div class="product__item__text">
-										<h6>${h.courseName}</h6>
-										<a href="#" class="add-cart">+ Add To Cart</a>
-										<div class="rating">
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-										</div>
-										<h5>${h.coursePrice}원</h5>
-										<div class="product__color__select">
-											<label for="pc-1">
-												<input type="radio" id="pc-1">
-											</label>
-											<label class="active black" for="pc-2">
-												<input type="radio" id="pc-2">
-											</label>
-											<label class="grey" for="pc-3">
-												<input type="radio" id="pc-3">
-											</label>
+								<a href="coursedetail.do?courseId=${h.courseId}">
+									<div class="product__item">
+										<img src="client/img/product/${h.courseImg}" style="width: 330px; height: 200px;">
+										<div class="product__item__text">
+											<h6>${h.courseName}</h6>
+											<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
+												<c:forEach var = "i" begin = "1" end = "${h.courseStars}">
+												  <div class="bi-star-fill"></div>
+												</c:forEach>
+												<c:forEach var = "i" begin = "1" end = "${5 - h.courseStars}">
+												  <div class="bi-star"></div>
+												</c:forEach>
+											</div>
+											<c:choose>
+												<c:when test="${h.coursePrice eq 0}">
+													<h5>FREE</h5>
+												</c:when>
+												<c:otherwise>
+													<h5>${h.coursePrice}원</h5>
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</div>
-								</div>
+								</a>
 							</div>
 						</c:forEach>
 						<c:forEach items="${itList}" var="i">
 							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix it">
-								<div class="product__item">
-									<img src="client/img/product/${i.courseImg}" style="width: 330px; height: 200px;">
-									<div class="product__item__text">
-										<h6>${i.courseName}</h6>
-										<a href="#" class="add-cart">+ Add To Cart</a>
-										<div class="rating">
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-										</div>
-										<h5>${i.coursePrice}원</h5>
-										<div class="product__color__select">
-											<label for="pc-1">
-												<input type="radio" id="pc-1">
-											</label>
-											<label class="active black" for="pc-2">
-												<input type="radio" id="pc-2">
-											</label>
-											<label class="grey" for="pc-3">
-												<input type="radio" id="pc-3">
-											</label>
+								<a href="coursedetail.do?courseId=${i.courseId}">
+									<div class="product__item">
+										<img src="client/img/product/${i.courseImg}" style="width: 330px; height: 200px;">
+										<div class="product__item__text">
+											<h6>${i.courseName}</h6>
+											<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
+												<c:forEach var = "i" begin = "1" end = "${i.courseStars}">
+												  <div class="bi-star-fill"></div>
+												</c:forEach>
+												<c:forEach var = "i" begin = "1" end = "${5 - i.courseStars}">
+												  <div class="bi-star"></div>
+												</c:forEach>
+											</div>
+											<c:if test="${i.coursePrice eq 0}">
+												<h5>FREE</h5>
+											</c:if>
+											<c:if test="${i.coursePrice ne 0}">
+												<h5>${i.coursePrice}원</h5>
+											</c:if>
 										</div>
 									</div>
-								</div>
+								</a>
 							</div>
 						</c:forEach>
-						<!-- <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot">
-							<div class="product__item">
-								<img src="client/img/product/course1.png" style="width: 330px; height: 200px;">
-								<div class="product__item__text">
-									<h6>Piqué Biker Jacket</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$67.24</h5>
-									<div class="product__color__select">
-										<label for="pc-1">
-											<input type="radio" id="pc-1">
-										</label>
-										<label class="active black" for="pc-2">
-											<input type="radio" id="pc-2">
-										</label>
-										<label class="grey" for="pc-3">
-											<input type="radio" id="pc-3">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot">
-							<div class="product__item sale">
-								<div class="product__item__pic set-bg" data-setbg="client/img/product/course1.png">
-									<span class="label">Sale</span>
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Multi-pocket Chest Bag</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$43.48</h5>
-									<div class="product__color__select">
-										<label for="pc-7">
-											<input type="radio" id="pc-7">
-										</label>
-										<label class="active black" for="pc-8">
-											<input type="radio" id="pc-8">
-										</label>
-										<label class="grey" for="pc-9">
-											<input type="radio" id="pc-9">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="client/img/product/course1.png">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Piqué Biker Jacket</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$67.24</h5>
-									<div class="product__color__select">
-										<label for="pc-4">
-											<input type="radio" id="pc-4">
-										</label>
-										<label class="active black" for="pc-5">
-											<input type="radio" id="pc-5">
-										</label>
-										<label class="grey" for="pc-6">
-											<input type="radio" id="pc-6">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="client/img/product/course1.png">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Diagonal Textured Cap</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$60.9</h5>
-									<div class="product__color__select">
-										<label for="pc-10">
-											<input type="radio" id="pc-10">
-										</label>
-										<label class="active black" for="pc-11">
-											<input type="radio" id="pc-11">
-										</label>
-										<label class="grey" for="pc-12">
-											<input type="radio" id="pc-12">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-5.jpg">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Lether Backpack</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$31.37</h5>
-									<div class="product__color__select">
-										<label for="pc-13">
-											<input type="radio" id="pc-13">
-										</label>
-										<label class="active black" for="pc-14">
-											<input type="radio" id="pc-14">
-										</label>
-										<label class="grey" for="pc-15">
-											<input type="radio" id="pc-15">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
-							<div class="product__item sale">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-6.jpg">
-									<span class="label">Sale</span>
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Ankle Boots</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$98.49</h5>
-									<div class="product__color__select">
-										<label for="pc-16">
-											<input type="radio" id="pc-16">
-										</label>
-										<label class="active black" for="pc-17">
-											<input type="radio" id="pc-17">
-										</label>
-										<label class="grey" for="pc-18">
-											<input type="radio" id="pc-18">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>T-shirt Contrast Pocket</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$49.66</h5>
-									<div class="product__color__select">
-										<label for="pc-19">
-											<input type="radio" id="pc-19">
-										</label>
-										<label class="active black" for="pc-20">
-											<input type="radio" id="pc-20">
-										</label>
-										<label class="grey" for="pc-21">
-											<input type="radio" id="pc-21">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-8.jpg">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Basic Flowing Scarf</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$26.28</h5>
-									<div class="product__color__select">
-										<label for="pc-22">
-											<input type="radio" id="pc-22">
-										</label>
-										<label class="active black" for="pc-23">
-											<input type="radio" id="pc-23">
-										</label>
-										<label class="grey" for="pc-24">
-											<input type="radio" id="pc-24">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div> -->
 					</div>
 				</div>
 			</section>
 			<!-- Hero Section End -->
 
+			<section class="latest spad">
 
-			<!-- Recommend Course Section Start-->
-			<!-- <div class="col-lg-12 recommend__course__container">
-				<h4 style="font-weight: 900;">추천 강의</h4>
-				<br>
-				<div class="col-lg-12 row">
-					<div class="col-lg-2 col-md-4 col-sm-6 course-col">
-						<div class="product__item course-item" onclick="">
-							<div class="product__item__pic set-bg course-item-pic">
-								<ul class="product__hover">
-									<li><a href="#"><img src="client/img/icon/cart.png" alt=""></a></li>
-									<li><a href="#"><img src="client/img/icon/heart.png" alt=""></a></li>
-								</ul>
-							</div>
-							<div class="product__item__text">
-								<h6>강의 이름</h6>
-								<div class="rating">
-									<i class="fa fa-star-o"></i>
-									<i class="fa fa-star-o"></i>
-									<i class="fa fa-star-o"></i>
-									<i class="fa fa-star-o"></i>
-									<i class="fa fa-star-o"></i>
-								</div>
-								<h5 class="course-price">
-									10,000 원
-								</h5>
-							</div>
+				<div class="row" style="justify-content: space-around;">
+					<div class="card col-lg-5 shadow" style="padding: 0; border: 0;">
+						<div class="card-head" style="padding: 20px;" >
+							<h4 style="font-family: 'NanumSquareRound'; text-align: center; line-height: 100%;">자유게시판</h4>
+						</div>
+						<hr style="border: 3px solid salmon; margin: 0;">
+						<div class="card-body" style="padding: 20px;">
+							<span>테스트</span>
 						</div>
 					</div>
+					<div class="card col-lg-5 shadow" style="padding: 0; border: 0;">
+						<div class="card-head" style="padding: 20px;" >
+							<h4 style="font-family: 'NanumSquareRound'; text-align: center; line-height: 100%;">질문게시판</h4>
+						</div>
+						<hr style="border: 3px solid salmon; margin: 0;">
+						<div class="card-body" style="padding: 20px;">
+							<span>테스트</span>
+						</div>
+					</div>
+				</div>
+			</section>
 
-				</div> -->
-				<!-- Recommend Course Section End-->
+
+
 
 				<!-- Footer Section Begin -->
 				<footer class="footer">
@@ -715,6 +438,6 @@
 				<script src="client/js/mixitup.min.js"></script>
 				<script src="client/js/owl.carousel.min.js"></script>
 				<script src="client/js/main.js"></script>
-		</body>
+			</body>
 
 		</html>

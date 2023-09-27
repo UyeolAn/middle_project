@@ -28,10 +28,20 @@ public class HomeController extends HttpServlet {
 		
 		//인기많은 강의
 		List<CourseVO> hotList = dao.hotCourseList();
+		for(CourseVO vo : hotList) {
+			vo = dao.courseReviewSelect(vo);
+		}
 		//리뷰많은 강의
 		List<CourseVO> reviewList = dao.reviewCourseList();
+		for(CourseVO vo : reviewList) {
+			vo = dao.courseReviewSelect(vo);
+		}
 		//랜덤 it강의
 		List<CourseVO> itList = dao.itRandomCourseList();
+		for(CourseVO vo : itList) {
+			vo = dao.courseReviewSelect(vo);
+			System.out.println(vo);
+		}
 //		List<CourseVO> courseList = new ArrayList<>();
 //		System.out.println(itList);
 //		for(int i = 0; i < 4; i++) {
