@@ -86,9 +86,9 @@
 					</div>
 					<div class="card">
 						<div class="card-heading">
-							<a data-toggle="collapse" data-target="#collapseTwo">Career</a>
+							<a data-toggle="collapse" data-target="#collapseThree">Career</a>
 						</div>
-						<div id="collapseTwo" class="collapse"
+						<div id="collapseThree" class="collapse"
 							data-parent="#accordionExample">
 							<div class="card-body">
 								<div class="shop__sidebar__categories">
