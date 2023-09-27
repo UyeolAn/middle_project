@@ -1,13 +1,18 @@
 package co.four.study.packageBucket.web;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import co.four.study.bucket.service.BucketService;
 import co.four.study.bucket.service.BucketVO;
@@ -19,26 +24,28 @@ import co.four.study.packageCourse.service.PackageCourseService;
 import co.four.study.packageCourse.service.PackageCourseVO;
 import co.four.study.packageCourse.serviceImpl.PackageCourseServiceImpl;
 
-@WebServlet("/packagebucketinsert.do")
-public class PackageBucketInsert extends HttpServlet {
+@WebServlet("/ajaxpackagebucketinsert.do")
+public class AjaxPackageBucketInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public PackageBucketInsert() {
+    public AjaxPackageBucketInsert() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 		PackageBucketService pbdao = new PackageBucketServiceImpl();
 		PackageBucketVO pbvo = new PackageBucketVO();
-		
 		int packageId = Integer.valueOf(request.getParameter("packageId"));
 		String memberId = request.getParameter("memberId");
-		System.out.println(packageId + ", " + memberId);
 		
-		pbvo.setPackageId(packageId); //패키지아이디 셋
-		pbvo.setMemberId(memberId); //멤버아이디 셋
+		pbvo.setPackageId(packageId);
+		pbvo.setMemberId(memberId);
+		
+		// 장바구니에 추가
 		int result = 0;
-			
+		Map<String, String> message = new HashMap<String, String>();
+		
 		//1. 단과강의 장바구니에 있는 강의리스트 가져오기
 		BucketVO bvo = new BucketVO();
 		BucketService bdao = new BucketServiceImpl();
@@ -65,11 +72,16 @@ public class PackageBucketInsert extends HttpServlet {
 		result = pbdao.pbucketInsert(pbvo);
 		
 		if(result > 0) {
-			//장바구니 페이지로 이동
-			response.sendRedirect("bucketlist.do?memberId=" + memberId);
+			message.put("message", "success");
 		} else {
-			System.out.println("이미 담겨있는 강의 이거나, packagebucketinsert.do에서 오류 발생함.");
+			message.put("message", "fail");
 		}
+		
+		String text = objectMapper.writeValueAsString(message); // list형태의 데이터 => json형태로
+		
+		response.setContentType("text/json; charset=UTF-8"); // 한글깨짐 방지
+		response.getWriter().append(text); //ajax를 return
+		return;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -2,7 +2,6 @@ package co.four.study.packageBucket.service;
 
 import java.util.List;
 
-import co.four.study.course.service.CourseVO;
 import co.four.study.member.service.MemberVO;
 
 public interface PackageBucketService {

@@ -1,4 +1,4 @@
-package co.four.study.bucket.web;
+package co.four.study.packageBucket.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,39 +15,33 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import co.four.study.bucket.service.BucketService;
-import co.four.study.bucket.service.BucketVO;
-import co.four.study.bucket.serviceImpl.BucketServiceImpl;
+import co.four.study.packageBucket.service.PackageBucketService;
+import co.four.study.packageBucket.service.PackageBucketVO;
+import co.four.study.packageBucket.serviceImpl.PackageBucketServiceImpl;
 
-@WebServlet("/ajaxbucketdelete.do")
-public class AjaxBucketDelete extends HttpServlet {
+@WebServlet("/ajaxpackagebucketdelete.do")
+public class AjaxPackageBucketDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AjaxBucketDelete() {
+    public AjaxPackageBucketDelete() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
-		BucketService dao = new BucketServiceImpl();
-		BucketVO vo = new BucketVO();
+		PackageBucketService pbdao = new PackageBucketServiceImpl();
+		PackageBucketVO pbvo = new PackageBucketVO();
+		int packageId = Integer.valueOf(request.getParameter("packageId"));
+		String memberId = request.getParameter("memberId");
 		
-		vo.setCourseId(Integer.valueOf(request.getParameter("courseId")));
-		vo.setMemberId(request.getParameter("memberId"));
+		pbvo.setPackageId(packageId);
+		pbvo.setMemberId(memberId);
 		
-		int result = dao.bucketDelete(vo);
-		List<Object> buckets = new ArrayList<Object>();
+		int result = pbdao.pbucketDelete(pbvo);
 		Map<String, String> message = new HashMap<String, String>();
 		
 		if(result > 0) { //삭제된게 있으면
 			message.put("message", "success");
-			//합계 다시 구해서 넘겨주기
-			int sum = 0;
-			if(dao.sumCoursesPrice(vo) != null) {
-				sum = dao.sumCoursesPrice(vo);
-			}
-			message.put("sum", String.valueOf(sum));
-			buckets.add(message);
 		} else {
 			message.put("message", "fail");
 		}

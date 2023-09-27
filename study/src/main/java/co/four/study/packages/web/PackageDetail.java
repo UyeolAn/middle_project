@@ -19,6 +19,9 @@ import co.four.study.member.service.MemberVO;
 import co.four.study.memberCourse.service.MemberCourseService;
 import co.four.study.memberCourse.service.MemberCourseVO;
 import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
+import co.four.study.packageBucket.service.PackageBucketService;
+import co.four.study.packageBucket.service.PackageBucketVO;
+import co.four.study.packageBucket.serviceImpl.PackageBucketServiceImpl;
 import co.four.study.packageCourse.service.PackageCourseService;
 import co.four.study.packageCourse.service.PackageCourseVO;
 import co.four.study.packageCourse.serviceImpl.PackageCourseServiceImpl;
@@ -45,6 +48,7 @@ public class PackageDetail extends HttpServlet {
 		MemberCourseService mcdao = new MemberCourseServiceImpl();
 		PackageCourseService pcdao = new PackageCourseServiceImpl();
 		CourseService cdao = new CourseServiceImpl();
+		PackageBucketService pbdao = new PackageBucketServiceImpl();
 		
 		int packageId = Integer.valueOf(request.getParameter("packageId"));
 		String memberId = (String) session.getAttribute("loginId");
@@ -59,15 +63,28 @@ public class PackageDetail extends HttpServlet {
 		for(int i=0; i<memberCourses.size(); i++) { //5개 (1,2,3,4,5)
 			for(int j=0; j<packageCourses.size(); j++) { //2개 (5,6)
 				if(memberCourses.get(i).getCourseId() == packageCourses.get(j).getCourseId()) {
-					result++;
+					result++; //수강중이면 result++
 				}
 			}
 		}
 		
-		if(result == 0) {
+		if(result == 0) { //수강중이 아니면
 			request.setAttribute("message", "possible");
 			
-		} else {
+			//장바구니에 담긴 패키지 인지 확인
+			PackageBucketVO pbvo = new PackageBucketVO();
+			pbvo.setPackageId(packageId);
+			pbvo.setMemberId(memberId);
+			PackageBucketVO check = pbdao.pbucketSelect(pbvo);
+			
+			if(check != null) {
+				//이미 담겨있으면
+				request.setAttribute("pbucket", "in");
+			} else if(check == null) {
+				request.setAttribute("pbucket", "notIn");
+			}
+			
+		} else { //수강중이면
 			request.setAttribute("message", "impossible");
 		}
 		
@@ -78,7 +95,6 @@ public class PackageDetail extends HttpServlet {
 		int salePrice = pdao.salePrice(pvo);
 		pvo.setSalePrice(salePrice);
 		request.setAttribute("data", pvo);
-		System.out.println("패키지 정보 :::::::::: " + pvo);
 		
 		// 패키지에 포함된 강의 정보 넘기기
 		List<CourseVO> courseList = new ArrayList<CourseVO>();
@@ -88,8 +104,6 @@ public class PackageDetail extends HttpServlet {
 		}
 		request.setAttribute("packageCourses", packageCourses);
 		request.setAttribute("courses", courseList);
-		System.out.println("패키지에 포함된 강의아이디 정보 :::::::::: " + packageCourses);
-		System.out.println("조회한 강의정보들 :::::::::: " + courseList);
 		
 		// 회원아이디 넘겨주기
 		request.setAttribute("loginId", memberId);
