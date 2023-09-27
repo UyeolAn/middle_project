@@ -72,7 +72,7 @@ public class AdminPackagePage extends HttpServlet {
 		String page = "admin/package/packagepage";
 		
 		
-		System.out.println(vo);
+//		System.out.println(vo);
 		ViewResolve.foward(request, response, page);
 	}
 
