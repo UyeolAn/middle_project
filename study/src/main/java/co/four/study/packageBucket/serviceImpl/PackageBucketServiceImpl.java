@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import co.four.study.common.DataSource;
-import co.four.study.course.service.CourseVO;
 import co.four.study.member.service.MemberVO;
 import co.four.study.packageBucket.map.PackageBucketMapper;
 import co.four.study.packageBucket.service.PackageBucketService;

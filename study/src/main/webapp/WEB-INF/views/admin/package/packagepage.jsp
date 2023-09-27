@@ -56,7 +56,7 @@
 	private String packageCategory;
 	private String packageGrade; -->
 
-        <section style="background-color: #eee;">
+        <section style="background-color: #eee; padding: 10px;">
 
 
                 <div class="row">
@@ -75,7 +75,7 @@
                     <div class="col-lg-4">
                         <div class="card mb-4">
                             <div class="card-body text-center">
-                                <img src="client/img/product/${p.packageThumbnail}" style="width: 100%;">
+                                <img src="client/img/product/${p.packageThumbnail}" style="width: 100%;" onclick="window.open(this.src)">
                                 <h6 class="my-3 font-weight-bold">${p.packageTitle}</h6>
                                 <a class="btn btn-secondary btn-icon-split" onclick="modify(${p.packageId})">
                                     <span class="icon text-white-50">
@@ -95,7 +95,7 @@
                         <div class="card mb-4">
                             <div class="card-body text-center">
                                 <h6 class="font-weight-bold">패키지 설명 이미지</h6>
-                                <img src="client/img/product/${p.packageImg}" style="width:100%;">
+                                <img src="client/img/product/${p.packageImg}" style="width:100%;" onclick="window.open(this.src)">
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                                     <div class="col-sm-9">
                                         <p class="text-muted mb-0">
                                             <c:choose>
-                                                <c:when test="${p.packageDiscount eq 0}">
+                                                <c:when test="${original eq 0}">
                                                     FREE
                                                 </c:when>
                                                 <c:otherwise>
@@ -154,7 +154,14 @@
                                         <p class="mb-0 font-weight-bold">가격</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0"><del>${original}원</del> => ${sale}원</p>
+                                        <c:choose>
+                                            <c:when test="${original eq 0}">
+                                                FREE
+                                            </c:when>
+                                            <c:otherwise>
+                                                <p class="text-muted mb-0"><del>${original}원</del> => ${sale}원</p>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                                 <hr>

@@ -57,7 +57,7 @@ public class CourseDetail extends HttpServlet {
 		if(result > 0) {
 			// 수강중이면
 			request.setAttribute("message", "possible");
-		} if(result <= 0) {
+		} if(result == 0) {
 			// 수강중이 아니면
 			request.setAttribute("message", "impossible");
 			

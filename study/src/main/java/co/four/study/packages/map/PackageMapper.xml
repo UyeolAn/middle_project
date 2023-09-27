@@ -39,7 +39,7 @@
 			<if test="packageThumbnail != null">PACKAGE_THUMBNAIL = #{packageThumbnail},</if>
 			<if test="packageImg != null">PACKAGE_IMG = #{packageImg},</if>
 			<if test="packageCategory != null">PACKAGE_CATEGORY = #{packageCategory},</if>
-			<if test="packageGrade != null">PACKAGE_GRADE = #{courseScript},</if>
+			<if test="packageGrade != null">PACKAGE_GRADE = #{packageGrade},</if>
 		</set>
 		WHERE PACKAGE_ID = #{packageId}
 	</update>

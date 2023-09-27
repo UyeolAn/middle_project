@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="client/css/style.css" type="text/css">
 </head>
 
-<body>
+<body id="page-top">
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -62,6 +62,10 @@
     <!-- Footer Section Begin -->
     <tiles:insertAttribute name="footer"/>
     <!-- Footer Section End -->
+    
+<!--   <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>  --> 
 
 
 
