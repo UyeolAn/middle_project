@@ -171,7 +171,6 @@ CREATE TABLE bucket
 (
   member_id VARCHAR2(100) NOT NULL
 , course_id NUMBER NOT NULL
-, count NUMBER DEFAULT 0 NOT NULL
 , CONSTRAINT bucket_pk PRIMARY KEY
   (
     member_id, course_id
@@ -198,7 +197,6 @@ CREATE TABLE bucket
 
 COMMENT ON COLUMN bucket.member_id IS '회원 ID';
 COMMENT ON COLUMN bucket.course_id IS '강의 ID';
-COMMENT ON COLUMN bucket.count IS '진도';
 
 
 
