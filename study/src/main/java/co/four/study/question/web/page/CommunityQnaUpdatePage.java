@@ -32,6 +32,7 @@ public class CommunityQnaUpdatePage extends HttpServlet {
 		if (selectedVO != null) {
 			String page = "community/communityQnaUpdatePage";
 			request.setAttribute("menu", "community");
+			request.setAttribute("cid", "question");
 			request.setAttribute("question", selectedVO);
 			ViewResolve.foward(request, response, page);
 		} else {

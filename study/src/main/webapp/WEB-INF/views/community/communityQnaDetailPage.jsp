@@ -14,7 +14,7 @@
           color: white;
           font-size: medium;
           background-color: #B7B7B7;
-          border-radius: 10%;
+          border-radius: 20px;
         }
 
         .qna__solved {
@@ -23,7 +23,7 @@
           color: white;
           font-size: medium;
           background-color: #E53637;
-          border-radius: 10%;
+          border-radius: 20px;
         }
 
         .comm__qna__question__detail__etc__info>.etc__info__name {
@@ -34,14 +34,30 @@
 
         .comm__qna__question__detail__etc__info>.etc__info__datehit {
           font-size: small;
+          font-weight: bold;
           color: #B7B7B7;
         }
 
-        .small-btn {
-          margin-right: 3%;
-          padding: 9px 20px;
+        .small-update-btn {
+          padding: 9px 15px;
           font-size: medium;
-          border-radius: 10px;
+          background: none;
+          color: #aaa;
+        }
+
+        .small-update-btn:hover {
+          color: #333;
+        }
+
+        .small-delete-btn {
+          padding: 9px 15px;
+          font-size: medium;
+          background: none;
+          color: #ffa9a9;
+        }
+
+        .small-delete-btn:hover {
+          color: #E53637;
         }
 
         .answer__info__count {
@@ -68,28 +84,34 @@
         }
 
         .answer-btn {
-          margin-right: 1%;
+          background: none;
           padding: 3px 7px;
           font-size: x-small;
-          background: #aaa;
+          color: #aaa;
           border-radius: 5px;
           float: right;
         }
 
+        .answer-btn:hover {
+          color: #333;
+        }
+
         .answer-solve-btn {
-          background: #ffa9a9;
+          background: none;
+          color: #ffa9a9;
         }
 
         .answer-solve-btn:hover {
-          background: #E53637;
+          color: #E53637;
         }
 
         .active-answer-solve-btn {
-          background: #E53637;
+          background: none;
+          color: #E53637;
         }
 
         .active-answer-solve-btn:hover {
-          background: #ffa9a9;
+          color: #ffa9a9;
         }
 
         .answer__textarea {
@@ -102,6 +124,7 @@
           resize: none;
         }
       </style>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
       <script src="client/js/jquery-3.3.1.min.js"></script>
     </head>
 
@@ -133,12 +156,13 @@
               <span class="etc__info__datehit"> ㆍ 기타/홈페이지 질문</span>
             </c:if>
             <br>
-            <span class="etc__info__datehit">작성일 ${question.questionEnterDate}</span>
-            <span class="etc__info__datehit">수정일
-              <c:if test="${empty question.questionUpdateDate}">0000-00-00</c:if>
-              <c:if test="${not empty question.questionUpdateDate}">${question.questionUpdateDate}</c:if>
+            <span class="etc__info__datehit">작성일&nbsp;&nbsp;${question.questionEnterDate}</span>
+            <span class="etc__info__datehit">
+              <c:if test="${not empty question.questionUpdateDate}">
+                &nbsp;&nbsp;수정일&nbsp;&nbsp;${question.questionUpdateDate}</c:if>
             </span>
-            <span class="etc__info__datehit">조회수 ${question.questionHit}</span>
+            <span class="etc__info__datehit">&nbsp;&nbsp;<i
+                class="bi bi-eye"></i>&nbsp;&nbsp;${question.questionHit}</span>
           </div>
         </div>
         <!--Question Title Bar End-->
@@ -155,10 +179,11 @@
             <p class="col-lg-12" id="questionContent" style="white-space:pre;">${question.questionContent}</p>
           </div>
           <div class="col-lg-7 comm__qna__question__detail__buttons" style="margin-top: 5%;">
-            <button type="button" id="updateBtn" class="site-btn small-btn"
-              onclick="location.href='communityqnaupdatepage.do?questionId=${question.questionId}'">수정</button>
-            <button type="button" id="deleteBtn" class="site-btn small-btn" style="background: #E53637;"
-              onclick="deleteQuestion()">삭제</button>
+            <button type="button" id="updateBtn" class="site-btn small-update-btn"
+              onclick="location.href='communityqnaupdatepage.do?questionId=${question.questionId}'"><i
+                class="bi bi-pencil-square" style="font-size: x-large !important;"></i></button>
+            <button type="button" id="deleteBtn" class="site-btn small-delete-btn" onclick="deleteQuestion()"><i
+                class="bi bi-trash" style="font-size: x-large !important;"></i></button>
             <form id="deleteForm" action="questiondelete.do">
               <input type="hidden" id="questionId" name="questionId" value="${question.questionId}">
             </form>
@@ -185,7 +210,8 @@
             <div class="col-lg-3">
               <div class="checkout__input">
                 <button type="button" id="writeBtn" class="site-btn small-btn"
-                  style="float: right; padding: 9px 20px; font-size: medium;" onclick="insertAnswer()">등록</button>
+                  style="float: right; padding: 9px 15px; background: #333; border-radius: 8px; font-size: small;"
+                  onclick="insertAnswer()"><i class="bi bi-pencil"></i>&nbsp;답변등록</button>
               </div>
             </div>
           </div>
@@ -301,13 +327,13 @@
                     `<button type="button" class="site-btn answer-btn ` +
                     (answer.answerSolve == 'not_solved' ? 'answer-solve-btn' : 'active-answer-solve-btn') +
                     `">`)
-                    .text('SOLVE').val(`\${answer.answerSolve}`))
+                    .html(`<i class="bi bi-check-square-fill"></i>`).val(`\${answer.answerSolve}`))
                   .append($('<button type="button" class="site-btn answer-btn answer-delete-btn">')
-                    .text('삭제').val(`\${answer.memberId}`))
+                    .html('<i class="bi bi-trash"></i>').val(`\${answer.memberId}`))
                   .append($('<button type="button" class="site-btn answer-btn answer-update-btn">')
-                    .text('수정').val(`\${answer.memberId}`))
-                  .append($(`<button type="button" class="site-btn answer-btn answer-update-check-btn" style="background: #E53637">`)
-                    .text('수정').val(`\${answer.memberId}`).hide())
+                    .html('<i class="bi bi-pencil-square"></i>').val(`\${answer.memberId}`))
+                  .append($(`<button type="button" class="site-btn answer-btn answer-update-check-btn" style="background:none; color: #E53637;">`)
+                    .html('<i class="bi bi-pencil-square"></i>').val(`\${answer.memberId}`).hide())
                   .append($('<br>'))
                   .append(
                     $('<div class="answer-content-box" style="margin-top: 1%; margin-bottom: 3%;"> /')

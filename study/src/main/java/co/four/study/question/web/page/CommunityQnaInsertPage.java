@@ -33,6 +33,7 @@ public class CommunityQnaInsertPage extends HttpServlet {
 		
 		String page = "community/communityQnaInsertPage";
 		request.setAttribute("menu", "community");
+		request.setAttribute("cid", "question");
 		request.setAttribute("courses", courses);
 		ViewResolve.foward(request, response, page);
 	}

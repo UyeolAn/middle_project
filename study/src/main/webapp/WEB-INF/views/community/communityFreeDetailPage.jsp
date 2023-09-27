@@ -15,62 +15,74 @@
 
         .comm__free__board__detail__etc__info>.etc__info__datehit {
           font-size: small;
+          font-weight: bold;
           color: #B7B7B7;
         }
 
-        .small-btn {
-          margin-right: 3%;
-          padding: 9px 20px;
+        .small-update-btn {
+          padding: 9px 15px;
           font-size: medium;
-          border-radius: 10px;
+          background: none;
+          color: #aaa;
+        }
+
+        .small-update-btn:hover {
+          color: #333;
+        }
+
+        .small-delete-btn {
+          padding: 9px 15px;
+          font-size: medium;
+          background: none;
+          color: #ffa9a9;
+        }
+
+        .small-delete-btn:hover {
+          color: #E53637;
         }
 
         .like-btn {
-          margin-right: 3%;
-          padding: 9px 20px;
-          font-size: medium;
-          background: #ffa9a9;
-          border-radius: 20px;
+          padding: 9px 15px;
+          font-size: large;
+          color: #ffa9a9;
+          background: none;
         }
 
         .active-like-btn {
-          margin-right: 3%;
-          padding: 9px 20px;
-          font-size: medium;
-          background: #E53637;
-          border-radius: 20px;
+          padding: 9px 15px;
+          font-size: large;
+          color: #E53637;
+          background: none;
         }
 
         .like-btn:hover {
-          background: #E53637;
+          color: #E53637;
         }
 
         .active-like-btn:hover {
-          background: #ffa9a9;
+          color: #ffa9a9;
         }
 
         .dislike-btn {
-          margin-right: 3%;
-          padding: 9px 20px;
-          font-size: medium;
-          background: #ccc;
-          border-radius: 20px;
+          padding: 9px 15px;
+          font-size: large;
+          color: #ccc;
+          background: none;
         }
 
         .active-dislike-btn {
-          margin-right: 3%;
-          padding: 9px 20px;
-          font-size: medium;
-          background: #777;
-          border-radius: 20px;
+          padding: 9px 15px;
+          font-size: large;
+          color: #777;
+          background: none;
         }
 
         .dislike-btn:hover {
-          background: #777;
+          color: #777;
         }
 
         .active-dislike-btn:hover {
-          background: #ccc;
+          color: #ccc;
         }
 
         .reply__info__count {
@@ -97,12 +109,16 @@
         }
 
         .reply-btn {
-          margin-right: 1%;
+          background: none;
           padding: 3px 7px;
           font-size: x-small;
-          background: #aaa;
+          color: #aaa;
           border-radius: 5px;
           float: right;
+        }
+
+        .reply-btn:hover {
+          color: #333;
         }
 
         .reply__textarea {
@@ -115,6 +131,7 @@
           resize: none;
         }
       </style>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
       <script src="client/js/jquery-3.3.1.min.js"></script>
     </head>
 
@@ -132,12 +149,11 @@
               <span class="etc__info__name" id="memberId">${board.memberId}</span>
             </c:if>
             <br>
-            <span class="etc__info__datehit">작성일 ${board.boardEnterDate}</span>
-            <span class="etc__info__datehit">수정일
-              <c:if test="${empty board.boardUpdateDate}">0000-00-00</c:if>
-              <c:if test="${not empty board.boardUpdateDate}">${board.boardUpdateDate}</c:if>
+            <span class="etc__info__datehit">작성일&nbsp;&nbsp;${board.boardEnterDate}</span>
+            <span class="etc__info__datehit">
+              <c:if test="${not empty board.boardUpdateDate}">&nbsp;&nbsp;수정일&nbsp;&nbsp;${board.boardUpdateDate}</c:if>
             </span>
-            <span class="etc__info__datehit">조회수 ${board.boardHit}</span>
+            <span class="etc__info__datehit">&nbsp;&nbsp;<i class="bi bi-eye"></i>&nbsp;&nbsp;${board.boardHit}</span>
           </div>
         </div>
         <!--Board Title Bar End-->
@@ -154,19 +170,22 @@
             <p class="col-lg-12" id="boardContent" style="white-space:pre;">${board.boardContent}</p>
           </div>
           <div class="col-lg-7 comm__free__board__detail__buttons" style="margin-top: 5%;">
-            <button type="button" id="updateBtn" class="site-btn small-btn"
-              onclick="location.href='communityfreeupdatepage.do?boardId=${board.boardId}'">수정</button>
-            <button type="button" id="deleteBtn" class="site-btn small-btn" style="background: #E53637;"
-              onclick="deleteBoard()">삭제</button>
+            <button type="button" id="updateBtn" class="site-btn small-update-btn"
+              onclick="location.href='communityfreeupdatepage.do?boardId=${board.boardId}'"><i
+                class="bi bi-pencil-square" style="font-size: x-large !important;"></i></button>
+            <button type="button" id="deleteBtn" class="site-btn small-delete-btn" onclick="deleteBoard()"><i
+                class="bi bi-trash" style="font-size: x-large !important;"></i></button>
             <form id="deleteForm" action="boarddelete.do">
               <input type="hidden" id="boardId" name="boardId" value="${board.boardId}">
             </form>
           </div>
           <div class="col-lg-5 comm__free__board__detail__like" style="margin-top: 5%;">
-            <button type="button" id="dislikeBtn" class="site-btn dislike-btn" style="float: right;">DISLIKE :
-              ${board.boardDislike}</button>
-            <button type="button" id="likeBtn" class="site-btn like-btn" style="float: right;">LIKE :
-              ${board.boardLike}</button>
+            <button type="button" id="dislikeBtn" class="site-btn dislike-btn" style="float: right;"><i
+                class="bi bi-hand-thumbs-down"
+                style="font-size: x-large !important;"></i>&nbsp;${board.boardDislike}</button>
+            <button type="button" id="likeBtn" class="site-btn like-btn" style="float: right;"><i
+                class="bi bi-hand-thumbs-up"
+                style="font-size: x-large !important;"></i>&nbsp;${board.boardLike}</button>
           </div>
         </div>
         <!--Board Main Body End-->
@@ -190,7 +209,8 @@
             <div class="col-lg-3">
               <div class="checkout__input">
                 <button type="button" id="writeBtn" class="site-btn small-btn"
-                  style="float: right; padding: 9px 20px; font-size: medium;" onclick="insertReply()">등록</button>
+                  style="float: right; padding: 9px 15px; background: #333; border-radius: 8px; font-size: small;"
+                  onclick="insertReply()"><i class="bi bi-pencil"></i>&nbsp;댓글등록</button>
               </div>
             </div>
           </div>
@@ -423,11 +443,11 @@
                   .append($('<span class="etc__info__name"> /').text(`\${reply.memberId}`))
                   .append($('<span class="etc__info__datehit"> /').text(`ㆍ\${reply.replyEnterDate}`))
                   .append($('<button type="button" class="site-btn reply-btn reply-delete-btn">')
-                    .text('삭제').val(`\${reply.memberId}`))
+                    .html('<i class="bi bi-trash"></i>').val(`\${reply.memberId}`))
                   .append($('<button type="button" class="site-btn reply-btn reply-update-btn">')
-                    .text('수정').val(`\${reply.memberId}`))
-                  .append($('<button type="button" class="site-btn reply-btn reply-update-check-btn" style="background: #E53637">')
-                    .text('수정').val(`\${reply.memberId}`).hide())
+                    .html('<i class="bi bi-pencil-square"></i>').val(`\${reply.memberId}`))
+                  .append($('<button type="button" class="site-btn reply-btn reply-update-check-btn" style="background: none; color: #E53637";>')
+                    .html('<i class="bi bi-pencil-square"></i>').val(`\${reply.memberId}`).hide())
                   .append($('<br>'))
                   .append(
                     $('<div class="reply-content-box" style="margin-top: 1%; margin-bottom: 3%;"> /')

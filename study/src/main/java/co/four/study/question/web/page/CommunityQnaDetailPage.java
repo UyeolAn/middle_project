@@ -33,6 +33,7 @@ public class CommunityQnaDetailPage extends HttpServlet {
 		QuestionVO selectedVO = dao.questionSelect(dto);
 		if (selectedVO != null) {
 			request.setAttribute("menu", "community");
+			request.setAttribute("cid", "question");
 			request.setAttribute("question", selectedVO);
 			
 			String page = "community/communityQnaDetailPage";

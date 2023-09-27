@@ -24,6 +24,17 @@
     <link rel="stylesheet" href="client/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="client/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="client/css/style.css" type="text/css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
+    
+    <style type="text/css">
+    * {
+    	font-family: 'NanumSquareRound' !important;
+    }
+    
+    i {
+    	font: normal normal normal 14px/1 FontAwesome !important;
+    }
+    </style>
 </head>
 
 <body>

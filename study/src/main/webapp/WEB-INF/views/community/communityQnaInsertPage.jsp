@@ -11,6 +11,14 @@
           color: #333;
         }
 
+        select {
+          padding: 10px;
+          color: #5D5D5D;
+          border: 1px solid #b7b7b7;
+          border-radius: 5px;
+          overflow-y: scroll !important;
+        }
+
         .input__file__btn {
           margin-top: 1%;
           padding: 6px 25px;
@@ -38,12 +46,8 @@
         .small-btn {
           padding: 9px 20px;
         }
-
-        .list {
-          max-height: 200px;
-          overflow-y: scroll !important;
-        }
       </style>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
       <link rel="stylesheet" href="client/css/nice-select.css">
       <script src="client/js/jquery.nice-select.min.js"></script>
       <script src="client/js/jquery-3.3.1.min.js"></script>
@@ -70,7 +74,8 @@
                 </select>
               </div>
               <div class="col-lg-12">
-                <label class="input__file__btn" style="margin-top: 3%; border-radius: 10px; font-size: medium;">
+                <label class="input__file__btn"
+                  style="margin-top: 3%; border-radius: 8px; font-size: medium; font-weight: 900;">
                   IMG
                 </label>
                 <input type="file" id="questionImg" name="questionImg" style="display: none;">
@@ -78,20 +83,20 @@
               <div class="col-lg-12">
                 <textarea id="questionContent" name="questionContent" placeholder="내용을 입력하세요..."
                   style="color: #333;"></textarea>
-                <button type="reset" class="site-btn small-btn"
-                  style="font-size: medium; background: #B7B7B7; border-radius: 10px;">취소</button>
-                <button type="button" class="site-btn small-btn" onclick="insertQuestion()"
-                  style="font-size: medium; border-radius: 10px;">등록</button>
+                <div class="col-lg-12 row">
+                  <button type="reset" class="site-btn"
+                    style="padding: 5px 12px 5px 15px; background: #B7B7B7; border-radius: 8px; font-size: small;"><i
+                      class="bi bi-arrow-repeat" style="font-size: x-large !important;"></i></button>
+                  <button type="button" class="site-btn" onclick="insertQuestion()"
+                    style="margin-left: 1%; padding: 9px 15px; background: #333; border-radius: 8px; font-size: small;"><i
+                      class="bi bi-pencil"></i>&nbsp;등록</button>
+                </div>
               </div>
             </div>
           </form>
         </div>
       </div>
       <script>
-
-        $(document).ready(function () {
-          $('select').niceSelect('update');
-        });
         setInputFileBtn();
 
         // 질문 등록 함수

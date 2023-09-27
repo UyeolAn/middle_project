@@ -10,11 +10,19 @@
         color: #333;
       }
 
+      select {
+        padding: 10px;
+        color: #5D5D5D;
+        border: 1px solid #b7b7b7;
+        border-radius: 5px;
+      }
+
       /* 해당 페이지 전용 클래스 */
       .comm__free__board__sort>li {
         margin-left: 5%;
         margin-top: 4%;
-        font-size: medium;
+        font-size: small;
+        font-weight: 900;
         color: #B7B7B7;
         float: left;
       }
@@ -42,10 +50,12 @@
       }
 
       .comm__free__board__etc__info>.etc__info__left {
+        font-weight: 600;
         float: left;
       }
 
       .comm__free__board__etc__info>.etc__info__right {
+        font-weight: 900;
         float: right;
       }
 
@@ -55,6 +65,7 @@
         cursor: pointer;
       }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <script src="client/js/jquery-3.3.1.min.js"></script>
     <script src="client/js/jquery.nice-select.min.js"></script>
   </head>
@@ -84,7 +95,8 @@
             <div class="col-lg-2">
               <div class="checkout__input">
                 <button type="button" class="site-btn" onclick="searchBoards()"
-                  style="border-radius: 10px; font-size: medium;">검색</button>
+                  style="padding: 14px 20px; background: #E53637; border-radius: 8px;">
+                  <i class="bi bi-search" style="font-size: large !important;"></i></button>
               </div>
             </div>
           </div>
@@ -103,7 +115,8 @@
           <div class="col-lg-2">
             <div class="checkout__input">
               <button type="button" id="writeBtn" class="site-btn" onclick="location.href='communityfreeinsertpage.do'"
-                style="border-radius: 10px; font-size: medium;">글쓰기</button>
+                style="padding: 9px 15px; background: #333; border-radius: 8px; font-size: small;"><i
+                  class="bi bi-pencil"></i>&nbsp;&nbsp;글쓰기</button>
             </div>
           </div>
         </div>
@@ -184,11 +197,16 @@
                   $('<div class="col-lg-12 comm__free__board__etc__info"> /')
                     .append($('<span class="etc__info__left"> /')
                       .text(
-                        (board.memberId == null ? `[탈퇴 회원]` : `[\${board.memberId}]`) + 
+                        (board.memberId == null ? `[탈퇴 회원] ㆍ ` : `[\${board.memberId}] ㆍ `) +
                         ` \${board.boardEnterDate}`
                       ))
-                    .append($('<span class="etc__info__right"> /')
-                      .text(`조회수:\${board.boardHit}   좋아요:\${board.boardLike}   댓글:\${board.replyCount}`))
+                    .append($(
+                      `<span class="etc__info__right">` +
+                      `<i class="bi bi-eye"></i> \${board.boardHit}&nbsp;&nbsp;&nbsp;` +
+                      `<i class="bi bi-hand-thumbs-up"></i> \${board.boardLike}&nbsp;&nbsp;&nbsp;` +
+                      `<i class="bi bi-chat-dots"></i> \${board.replyCount}` +
+                      `</span>`)
+                    )
                 )
                 .on('click', function () {
                   let url = 'communityfreedetailpage.do?boardId=' + board.boardId;

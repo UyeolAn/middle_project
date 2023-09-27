@@ -22,6 +22,7 @@ public class MypagePaymentPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = "mypage/mypagePaymentPage";
 		request.setAttribute("menu", "mypage");
+		request.setAttribute("mid", "payment");
 		ViewResolve.foward(request, response, page);
 	}
 

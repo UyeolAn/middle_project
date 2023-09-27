@@ -20,6 +20,7 @@ public class CommunityQnaPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = "community/communityQnaPage";
 		request.setAttribute("menu", "community");
+		request.setAttribute("cid", "question");
 		ViewResolve.foward(request, response, page);
 	}
 
