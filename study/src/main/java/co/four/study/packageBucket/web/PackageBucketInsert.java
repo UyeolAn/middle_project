@@ -39,7 +39,7 @@ public class PackageBucketInsert extends HttpServlet {
 		if(check != null) {
 			//이미 담겨있으면 bucketlist.do로..
 			System.out.println(packageId + "번 패키지는 이미 담겨있음");
-			response.sendRedirect("bucketlist.do?memberId=" + memberId);
+			response.sendRedirect("packagebucketlist.do?memberId=" + memberId);
 		} else if(check == null) {
 			//장바구니에 없으면 추가
 			System.out.println(packageId + "번 패키지를 장바구니에 추가함");
@@ -48,7 +48,7 @@ public class PackageBucketInsert extends HttpServlet {
 		
 		if(result > 0) {
 			//장바구니 페이지로 이동
-			response.sendRedirect("bucketlist.do?memberId=" + memberId);
+			response.sendRedirect("packagebucketlist.do?memberId=" + memberId);
 		} else {
 			System.out.println("이미 담겨있는 강의 이거나, packagebucketinsert.do에서 오류 발생함.");
 		}

@@ -118,11 +118,11 @@
 										</ul>
 									</li>
 									<li><a href="packagelist.do">Package</a>
-										<ul class="dropdown">
+										<!-- <ul class="dropdown">
 											<li><a href="./about.html">초급</a></li>
 											<li><a href="./shop-details.html">중급</a></li>
 											<li><a href="./shopping-cart.html">고급</a></li>
-										</ul>
+										</ul> -->
 									</li>
 									<li><a href="communityqnapage.do">Community</a>
 										<ul class="dropdown">

@@ -55,6 +55,7 @@
 }
 .shopping__cart__table table thead tr th {
 	text-align: center;
+	padding: 20px 0;
 }
 .shopping__cart__table table tbody tr td {
 	padding: 20px 0;
@@ -68,18 +69,19 @@
 }
 .empty_bucket_message {
 	display: none;
+	border: none !important;
 }
 .bucket_empty_show {
 	display: block;
 	display: flex;
     justify-content: center;
-    padding-left: 50px;
+    padding-left: 205px;
 }
 .bucket_empty_show td{
 	padding-left: 30px;
 }
 .bucket_empty_show td svg{
-	margin-right: 20px;
+	margin-right: 10px;
 	margin-bottom: 10px;
 }
 .bucket_empty_show td span {
