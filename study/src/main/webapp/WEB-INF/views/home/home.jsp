@@ -37,6 +37,7 @@
 				* {
 				font-family: 'NanumSquareRound';
 				}
+
 			</style>
 		</head>
 
@@ -80,28 +81,28 @@
 					<div class="row">
 						<div class="col-lg-3 col-md-3">
 							<div class="header__logo">
-								<a href="./index.html"><img src="client/img/product/student.png" style="width: 50px;" alt=""></a>
+								<a href="home.do"><img src="client/img/product/student.png" style="width: 50px;" alt=""></a>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6">
 							<nav class="header__menu mobile-menu">
 								<ul>
-									<li class="active"><a href="home.do">Home</a></li>
-									<li><a href="courselist.do">Course</a>
+									<li class="active"><a href="home.do">&#127968;Home</a></li>
+									<li><a href="courselist.do">&#128187;Course</a>
 										<ul class="dropdown">
 											<li><a href="courselist.do?mainCate=it">IT</a></li>
 											<li><a href="courselist.do?mainCate=english">English</a></li>
 											<li><a href="courselist.do?mainCate=career">Career</a></li>
 										</ul>
 									</li>
-									<li><a href="packagelist.do">Package</a>
+									<li><a href="packagelist.do">&#127873;Package</a>
 										<!-- <ul class="dropdown">
 											<li><a href="./about.html">초급</a></li>
 											<li><a href="./shop-details.html">중급</a></li>
 											<li><a href="./shopping-cart.html">고급</a></li>
 										</ul> -->
 									</li>
-									<li><a href="communityqnapage.do">Community</a>
+									<li><a href="communityqnapage.do">&#128106;Community</a>
 										<ul class="dropdown">
 											<li><a href="communityqnapage.do">질문게시판</a></li>
 											<li><a href="communityfreepage.do">자유게시판</a></li>
@@ -128,50 +129,79 @@
 			<!-- Header Section End -->
 
 			<!-- Hero Section Begin -->
-			<div class="hero__slider owl-carousel" style="height: 500px;">
-				<div class="hero__items set-bg" style="padding: 30px;" >
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-7">
-								<div class="hero__text">
-									<h6>SALE COURSE</h6>
-									<h2 style="font-family: 'NanumSquareRound';">현재 할인하는 패키지&#128176;</h2>
-									<p>A specialist label creating luxury essentials. Ethically
-										crafted with an unwavering commitment to exceptional quality.</p>
-									<a href="#" class="primary-btn">수업 들으러가기<span class="arrow_right"></span></a>
+			<div class="hero__slider owl-carousel" style="height: 300px;" >
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: pink;" >
+					<a href="packagelist.do">
+						<div class="container">
+							<div class="row">
+								<div class="col-lg-7">
+									<div class="hero__text">
+										<h6>SALE COURSE</h6>
+										<h2 style="font-family: 'NanumSquareRound';">현재 할인하는 패키지&#128176;</h2>
+										<p style="font-family: 'NanumSquareRound';">다양한 강의들을 할인된 가격으로 만나보세요!</p>
+										<!-- <a href="#" class="primary-btn">신청하러가기<span class="arrow_right"></span></a> -->
+									</div>
 								</div>
-							</div>
-							<div class="col-lg-5" style="padding: 30px;">
-								<img src="client/img/banner/code.png" style="width:200px;">
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="hero__items set-bg" data-setbg="client/img/home/banner2.jpg">
-					<div class="container">
-						<div class="row">
-							<div class="col-xl-5 col-lg-7 col-md-8">
-								<div class="hero__text">
-									<h6>SALE COURSE</h6>
-									<h2>약과 4조 짱</h2>
-									<p>A specialist label creating luxury essentials. Ethically
-										crafted with an unwavering commitment to exceptional quality.</p>
-									<a href="#" class="primary-btn">수업 들으러가기<span class="arrow_right"></span></a>
+								<div class="col-lg-5" style="padding: 30px;">
+									<img src="client/img/banner/surprise.png" style="width:200px;">
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				</div>
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px; background-color: #3188DB;" >
+					<a href="courselist.do">
+						<div class="container">
+							<div class="row">
+								<div class="col-lg-7">
+									<div class="hero__text">
+										<h6>SALE COURSE</h6>
+										<h2 style="font-family: 'NanumSquareRound'; color: white;">IT 강의들 잔뜩&#128218;</h2>
+										<p style="font-family: 'NanumSquareRound';">예비 개발자들을 위한 강의들을 골라 들어보세요</p>
+									</div>
+								</div>
+								<div class="col-lg-5" style="padding: 30px;">
+									<img src="client/img/banner/code.png" style="width:200px;">
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: greenyellow;" >
+					<a href="communityqnapage.do">
+						<div class="container">
+							<div class="row">
+								<div class="col-lg-7">
+									<div class="hero__text">
+										<h6>SALE COURSE</h6>
+										<h2 style="font-family: 'NanumSquareRound';">질문이 있다면 바로 &#128587;</h2>
+										<p style="font-family: 'NanumSquareRound';">다양한 사람들과 소통을 하며 궁금증을 해소!</p>
+									</div>
+								</div>
+								<div class="col-lg-5" style="padding: 30px;">
+									<img src="client/img/banner/board.png" style="width:200px;">
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+
+
+
+
+
+
+
 			</div>
 
 			<section class="product spad">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-12">
+						<div class="col-lg-12" style="margin: 30px;">
 							<ul class="filter__controls">
-								<li class="active" data-filter="*">Best Sellers</li>
-								<li data-filter=".new-arrivals">New Arrivals</li>
-								<li data-filter=".hot-sales">Hot Sales</li>
+								<li class="active" data-filter="*" style="width: 150px;"><img src="client/img/home/heart.png" style="width: 30px;" title="Best Hot"> HOT</li>
+								<li data-filter=".new-arrivals" style="width: 150px;"><img src="client/img/home/star.png" style="width: 30px;" title="Best Review"> REVIEW</li>
+								<li data-filter=".hot-sales"  style="width: 150px;"><img src="client/img/home/computer.png" style="width: 30px;" title="Best IT"> IT</li>
 							</ul>
 						</div>
 					</div>
