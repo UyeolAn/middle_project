@@ -169,13 +169,10 @@
 
 
             <script type="text/javascript">
-
-
-                let idCheck = "NO"
-
+                let DupCheck = "No"
+                console.log(DupCheck);
                 //중복체크 버튼 클릭시 서블릿에 id체크
                 $('#doubleCheck').click(function () {
-
                     $.ajax({
                         url: 'ajaxmembercheck.do',
                         method: 'post',
@@ -184,20 +181,18 @@
                             var idCheck = JSON.parse(data);
                             var str = idCheck.str;
                             console.log(str)
-
-
                             if (str == "YES") {
-
                                 alert("사용가능한 아이디입니다");
                                 document.getElementById("doubleCheck").value = "Yes";
                                 document.getElementById("doubleCheck").disabled = true;
                                 console.log(str);
-                                idCheck = "YES";
+                                return DupCheck = "YES";
                             } else if (str == "NO") {
                                 alert("이미 사용중인 아이디입니다");
                                 document.getElementById("memberId").value = "";
                                 document.getElementById("memberId").focus();
                                 console.log(str);
+                                return DupCheck = "NO";
                             }
                         },
                         error: function (result) {
@@ -211,31 +206,31 @@
                 //submit 버튼 작동시 중복체크 실행 여부 
                 //패스워드 불일치 여부 확인
                 function formCheck() {
-                    console.log(idCheck)
-                    let passchck = document.getElementById(memberPassword).value;
-                    let passchckrepeat = document.getElementById(checkPass).value;
-                    if (idCheck == "No") {
+                    console.log(DupCheck)
+                    let passchck = document.getElementById('memberPassword').value;
+                    let passchckrepeat = document.getElementById('checkPass').value;
+                    let passchckresult = "NO"
+                    if (DupCheck == "No") {
                         alert("아이디 중복체크를 하세요.");
-                        return false;
                     }
-                    if (passchck != passchckrepeat) {
+                    if (passchck == passchckrepeat) {
+                        passchckresult = "YES"
+                    } else {
                         alert("입력한 패스워드가 일치하지 않습니다.");
                         passchckrepeat = '';
                         passchck = '';
-                        passchck.focus();
-                        return false;
+                        passchck.focus;
                     }
 
-                    $('#frm').submit();
-                    alert("성공")
-
-                }
-
-                function regist(trigger) {
-                    if (trigger = true) {
-                        location.replace("register.do")
+                    if (DupCheck == passchckresult) {
+                        alert("회원가입이 완료되었습니다.")
+                        $('#frm').submit();
+                    } else {
+                        alert("양식을 다시 확인해 주세요.")
                     }
                 }
+
+
             </script>
             <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
