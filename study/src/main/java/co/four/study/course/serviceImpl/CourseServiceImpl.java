@@ -134,6 +134,10 @@ public class CourseServiceImpl implements CourseService {
 		vo.setCourseMainCategory("english"); 
 		subCategory = dao.courseSubCategory(vo);
 		request.setAttribute("english", subCategory);
+		// career 관련
+		vo.setCourseMainCategory("career");
+		subCategory = dao.courseSubCategory(vo);
+		request.setAttribute("career", subCategory);
 	}
 
 	@Override
