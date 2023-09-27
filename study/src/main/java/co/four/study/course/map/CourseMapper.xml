@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.four.study.course.map.CourseMapper">
+	
+	<resultMap type="HashMap" id="courseMap">
+		<id column = "count" property="count"/>
+		<id column = "sub" property="sub"/>
+	</resultMap>
 
 	<select id="courseSelectList"
 		resultType="co.four.study.course.service.CourseVO">
@@ -158,5 +163,13 @@
 		WHERE PACKAGE_ID = #{packageId}
 		)
 		ORDER BY COURSE_SUB_CATEGORY
+	</select>
+	
+	<select id="itCourse" resultMap="courseMap">
+		SELECT COUNT(*) AS COUNT,COURSE_SUB_CATEGORY AS SUB 
+		FROM COURSES 
+		WHERE COURSE_MAIN_CATEGORY='it' 
+		GROUP BY COURSE_SUB_CATEGORY 
+		ORDER BY COUNT(*) DESC
 	</select>
 </mapper>

@@ -24,14 +24,14 @@
     <div class="row" style="justify-content: center;">
         <div class="row col-lg-10" style="justify-content: start">
             <c:forEach items="${plist }" var="p">
-                <div class="card col-lg-4 m-1" style="width: 300px;">
-                    <a href="adminpackagepage.do?pid=${p.packageId}" style="color: black;">
-                        <img src="client/img/product/${p.packageThumbnail}" class="card-img-top" alt="..."">
+                <a href="adminpackagepage.do?pid=${p.packageId}" style="color: black;">
+                    <div class="card col-lg-12 m-1" style="width: 300px; height: 500px; padding: 0.75rem;">
+                        <img src="client/img/product/${p.packageThumbnail}" class="card-img-top" alt="..." style="height: 180px;">
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold" style="display: inline-block;">${p.packageTitle}</h5>
-                            <a class="btn btn-danger btn-icon-split" id="close-modal">
+                            <div class="btn btn-danger btn-icon-split" id="close-modal">
                                 <span class="text" style="padding: 0;">${p.packageDiscount}%</span>
-                            </a>
+                            </div>
                             <br>
                             <p>
                                 <c:choose>
@@ -47,8 +47,8 @@
                             <p class="font-weight-bold">카테고리 : <span class="text-primary">${p.packageCategory}</span></p>
                             <p class="font-weight-bold">난이도 : <span class="text-primary">${p.packageGrade}</span></p>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             </c:forEach>
 
         </div>

@@ -102,8 +102,6 @@
                                             <c:if test="${not empty a.answerUpdateDate}">
                                                 수정일 : ${a.answerUpdateDate}<br>
                                             </c:if>
-                                            <i class="bi bi-hand-thumbs-up-fill"></i>
-                                            <i class="bi bi-hand-thumbs-down-fill"></i>
                                         </div>
                                     </p>
                                 </div>

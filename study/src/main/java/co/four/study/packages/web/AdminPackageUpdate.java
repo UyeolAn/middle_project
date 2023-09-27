@@ -42,7 +42,7 @@ public class AdminPackageUpdate extends HttpServlet {
 		vo.setPackageImg(multi.getFilesystemName("packageImg"));
 		
 		if(dao.packageUpdate(vo) == 1) {
-			response.sendRedirect("admincoursepage.do?cid="+vo.getPackageId());
+			response.sendRedirect("adminpackagepage.do?pid="+vo.getPackageId());
 		}
 
 	}

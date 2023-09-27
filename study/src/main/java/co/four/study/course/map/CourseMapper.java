@@ -30,4 +30,7 @@ public interface CourseMapper {
 	
 	//카테고리별 리스트 (해당 패키지에 속하지 않은)
 	List<CourseVO> ListNotInPackage(PackageVO vo);
+	
+	//it강의 카테고리별 분포
+	List<Map<String, Object>> itCourse();
 }
