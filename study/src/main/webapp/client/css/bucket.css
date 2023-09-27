@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+.tr {
+	display: flex;
+}
+.td_1 {
+	width: 65%;
+	max-width: 530px;
+}
+
 
 .product__cart__item__pic {
 	width: 100px;

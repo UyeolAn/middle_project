@@ -49,10 +49,6 @@
                         <c:if test="${c.courseImg == null}">data-setbg="client/img/product/basic.png" </c:if>
                         <c:if test="${c.courseImg != null}">data-setbg="client/img/product/${c.courseImg}" </c:if>
                      >
-                        <ul class="product__hover">
-                            <li><a href="#"><img src="client/img/icon/cart.png" alt=""></a></li>
-                            <li><a href="#"><img src="client/img/icon/heart.png" alt=""></a></li>
-                        </ul>
                     </div>
                     <div class="product__item__text">
                         <h6>${c.courseName }</h6>
@@ -75,7 +71,7 @@
                         </div>
                         <c:choose>
                             <c:when test="${c.coursePrice <= 0}">
-                                <h5 style="color:red;" class="course-price">무료</h5>
+                                <h5 style="color:#e5503c;" class="course-price">무료</h5>
                             </c:when>
                             <c:otherwise>
                                 <h5 class="course-price">
@@ -117,11 +113,6 @@
             <div class="product__item course-item">
                 <div class="product__item__pic set-bg course-item-pic"
                     data-setbg>
-                    <img alt="강의이미지" src="" class="course-thum">
-                    <ul class="product__hover">
-                        <li><a href="#"><img src="client/img/icon/cart.png" alt=""></a></li>
-                        <li><a href="#"><img src="client/img/icon/heart.png" alt=""></a></li>
-                    </ul>
                 </div>
                 <div class="product__item__text">
                     <h6 class="course-name">${c.courseName }</h6>
@@ -130,7 +121,7 @@
                     </div>
                     <c:choose>
                         <c:when test="${c.coursePrice <= 0}">
-                            <h5 style="color:red;" class="course-price">무료</h5>
+                            <h5 style="color:#e5503c;" class="course-price">무료</h5>
                         </c:when>
                         <c:otherwise>
                             <h5 class="course-price">
