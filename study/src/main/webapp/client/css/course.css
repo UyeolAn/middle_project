@@ -13,7 +13,7 @@ select {
 }
 
 .course-item-pic {
-	height: 150px;
+	height: 190px;
 }
 
 .product__item__text h6 {
@@ -78,6 +78,9 @@ select {
 
 .product__item__text .rating i {
 	color: #ffbc00;
+}
+.col-lg-9 {
+	min-height: 1155px;
 }
 
 @media only screen and (max-width: 991px) {

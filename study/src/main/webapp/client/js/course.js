@@ -7,6 +7,8 @@
 function courseList(type, value, nowPage, target) {
 	$('.sub_menu').css('color','#b7b7b7');
 	$('.sub_menu_g').removeClass('active');
+	$('option[value="12"]').remove();
+	$('option[value="15"]').remove();
 	
 	let sel = $('#cntPerPage').val();
 	let subCateVal = '';
@@ -57,10 +59,13 @@ function appendCourseList(result) {
         clone.css('display', 'block');
         clone.find('.course-item-pic').css('overflow', 'hidden');
         clone.find('.course-item').attr('onclick', 'courseDetail(' + data[i].courseId + ')');
+        
         if(data[i].courseImg == null) {
-        	clone.find('.course-thum').attr('src', 'client/img/product/basic.png');
+			clone.find('.product__item__pic').attr('data-setbg', 'client/img/product/basic.png');
+        	clone.find('.product__item__pic').css('background-image', 'url(client/img/product/basic.png)' );
 		} else {
-        	clone.find('.course-thum').attr('src', 'client/img/product/' + data[i].courseImg);
+        	clone.find('.product__item__pic').attr('data-setbg', 'client/img/product/' + data[i].courseImg );
+        	clone.find('.product__item__pic').css('background-image', 'url(client/img/product/' + data[i].courseImg + ')' );
 		}
         clone.find('.course-name').text(data[i].courseName);
         if(data[i].courseStars > 0){

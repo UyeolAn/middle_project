@@ -1897,8 +1897,9 @@ ol {
 	border-bottom: 2px solid transparent;
 }
 
+/* 전유진 수정 */
 .product__details__tab .nav-tabs .nav-item .nav-link.active {
-	border-bottom: 2px solid #e53637;
+	border-bottom: 3px solid #3188db;
 }
 
 .product__details__tab__content {
