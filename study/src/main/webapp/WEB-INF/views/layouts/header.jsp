@@ -6,6 +6,7 @@
         <head>
             <meta charset="UTF-8">
             <title>Insert title here</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
         </head>
         <style>
             .header__top__hover a {
@@ -37,7 +38,7 @@
                                     </div>
                                     <c:if test="${not empty loginId}">
                                         <div class="header__top__hover">
-                                            <span>${loginName} 님 접속중<i class="arrow_carrot-down"></i></span>
+                                            <span>${loginName} 님 접속중&nbsp;&nbsp;<i class="bi bi-caret-down-fill"></i></span>
                                             <ul>
                                                 <li><a href="logout.do">LOGOUT</a></li>
 
@@ -111,6 +112,9 @@
                                 <c:if test="${menu eq 'mypage'}">
                                     <h4>Mypage</h4>
                                 </c:if>
+                                <c:if test="${menu eq 'community'}">
+                                    <h4>Community</h4>
+                                </c:if>
                                 <div class="breadcrumb__links">
                                     <a href="home.do">Home</a>
                                     <c:if test="${menu eq 'course' && cid eq null}">
@@ -129,9 +133,29 @@
                                         <span>Package</span>
                                         <span class="subCate">전체보기</span>
                                     </c:if>
-                                    <c:if test="${menu eq 'mypage'}">
+                                    <c:if test="${menu eq 'mypage' && mid eq null}">
                                         <span>My Page</span>
                                         <span class="subCate">전체보기</span>
+                                    </c:if>
+                                    <c:if test="${menu eq 'mypage' && mid eq 'mycomm'}">
+                                        <span>My Page</span>
+                                        <span class="subCate">나의 커뮤니티</span>
+                                    </c:if>
+                                    <c:if test="${menu eq 'mypage' && mid eq 'payment'}">
+                                        <span>My Page</span>
+                                        <span class="subCate">구매내역</span>
+                                    </c:if>
+                                    <c:if test="${menu eq 'mypage' && mid eq 'mycourse'}">
+                                        <span>My Page</span>
+                                        <span class="subCate">수강 강좌</span>
+                                    </c:if>
+                                    <c:if test="${menu eq 'community' && cid eq 'question'}">
+                                        <span>Community</span>
+                                        <span class="mainCate">질문게시판</span>
+                                    </c:if>
+                                    <c:if test="${menu eq 'community' && cid eq 'free'}">
+                                        <span>Community</span>
+                                        <span class="mainCate">자유게시판</span>
                                     </c:if>
                                 </div>
                             </div>

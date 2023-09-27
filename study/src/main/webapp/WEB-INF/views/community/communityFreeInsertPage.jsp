@@ -38,6 +38,7 @@
         padding: 9px 20px;
       }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <script src="client/js/jquery-3.3.1.min.js"></script>
   </head>
 
@@ -50,7 +51,8 @@
               <input type="text" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요..">
             </div>
             <div class="col-lg-12">
-              <label class="input__file__btn" style="border-radius: 10px; font-size: medium;">
+              <label class="input__file__btn"
+                style="margin-top: 3%; border-radius: 8px; font-size: medium; font-weight: 900;">
                 IMG
               </label>
               <input type="file" id="boardImg" name="boardImg" style="display: none;">
@@ -58,10 +60,14 @@
             <div class="col-lg-12">
               <textarea id="boardContent" name="boardContent" placeholder="내용을 입력하세요..."
                 style="color: #333;"></textarea>
-              <button type="reset" class="site-btn small-btn"
-                style="font-size: medium; background: #B7B7B7; border-radius: 10px;">취소</button>
-              <button type="submit" class="site-btn small-btn"
-                style="font-size: medium; border-radius: 10px;">등록</button>
+              <div class="col-lg-12 row">
+                <button type="reset" class="site-btn"
+                  style="padding: 5px 12px 5px 15px; background: #B7B7B7; border-radius: 8px; font-size: small;"><i
+                    class="bi bi-arrow-repeat" style="font-size: x-large !important;"></i></button>
+                <button type="submit" class="site-btn small-btn"
+                  style="margin-left: 1%; padding: 9px 15px; background: #333; border-radius: 8px; font-size: small;"><i
+                    class="bi bi-pencil"></i>&nbsp;등록</button>
+              </div>
             </div>
           </div>
         </form>

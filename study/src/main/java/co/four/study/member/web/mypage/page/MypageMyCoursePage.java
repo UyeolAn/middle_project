@@ -21,6 +21,7 @@ public class MypageMyCoursePage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = "mypage/mypageMyCoursePage";
 		request.setAttribute("menu", "mypage");
+		request.setAttribute("mid", "mycourse");
 		ViewResolve.foward(request, response, page);
 	}
 

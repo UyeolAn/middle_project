@@ -32,6 +32,7 @@ public class CommunityFreeUpdatePage extends HttpServlet {
 		if (selectedVO != null) {
 			String page = "community/communityFreeUpdatePage";
 			request.setAttribute("menu", "community");
+			request.setAttribute("cid", "free");
 			request.setAttribute("board", selectedVO);
 			ViewResolve.foward(request, response, page);
 		} else {

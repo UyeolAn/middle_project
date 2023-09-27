@@ -5,7 +5,8 @@
   <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-  </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+</head>
 
   <body>
        <!-- Footer Section Begin -->
@@ -50,7 +51,7 @@
                             <p>Be the first to know about new arrivals, look books, sales & promos!</p>
                             <form action="#">
                                 <input type="text" placeholder="Your email">
-                                <button type="submit"><span class="icon_mail_alt"></span></button>
+                                <button type="submit"><i class="bi bi-envelope"></i></button>
                             </form>
                         </div>
                     </div>

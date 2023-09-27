@@ -21,6 +21,7 @@ public class MypageMyCommunityPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = "mypage/myPageMyCommunityPage";
 		request.setAttribute("menu", "mypage");
+		request.setAttribute("mid", "mycomm");
 		ViewResolve.foward(request, response, page);
 	}
 

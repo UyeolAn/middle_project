@@ -41,6 +41,7 @@ public class CommunityFreeDetailPage extends HttpServlet {
 			selectedVO.setBoardDislike(countVO.getBoardDislike());
 			
 			request.setAttribute("menu", "community");
+			request.setAttribute("cid", "free");
 			request.setAttribute("board", selectedVO);
 			
 			String page = "community/communityFreeDetailPage";
