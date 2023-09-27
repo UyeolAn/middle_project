@@ -74,7 +74,6 @@ public class BucketList extends HttpServlet {
 		if (plist.size() == 0) {
 			request.setAttribute("pmessage", "package_empty");
 		}
-		System.out.println(memberId + "의 장바구니에 있는 패키지 번호 :: " + plist);
 		
 		// 장바구니 패키지금액 합, 패키지 정보
 		List<PackageVO> packages = new ArrayList<PackageVO>();
@@ -85,9 +84,9 @@ public class BucketList extends HttpServlet {
 				
 				int salePrice = pdao.salePrice(pvo);
 				sum += salePrice; // 합계
-				pvo = pdao.packageSelect(pvo); // 패키지 정보 조회
-				pvo.setSalePrice(salePrice); // 패키지 정보에 할인가격 추가
-				packages.add(pvo); //패키지 정보 리스트에 add
+				PackageVO data = pdao.packageSelect(pvo); // 패키지 정보 조회
+				data.setSalePrice(salePrice); // 패키지 정보에 할인가격 추가
+				packages.add(data); //패키지 정보 리스트에 add
 			}
 			request.setAttribute("packages", packages);
 			request.setAttribute("psum", sum);

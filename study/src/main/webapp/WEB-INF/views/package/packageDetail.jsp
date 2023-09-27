@@ -120,8 +120,13 @@
 										</h5>
 										<!-- 장바구니 버튼 영역 -->
 										<div class="button_wrap">
-											<button type="button" class="btn btn-green btn-green-p course-add" onclick="addBucketList()">수강신청 하기</button>
-											<button type="button" class="btn btn-green btn-green-p" onclick="ajaxAddBucketList()">장바구니 담기</button>
+											<c:if test="${pbucket eq 'notIn' }">
+												<button type="button" class="btn btn-green btn-green-p course-add" onclick="addPackageBucket()">수강신청 하기</button>
+												<button type="button" class="btn btn-green btn-green-p" onclick="ajaxAddPackageBucket()">장바구니 담기</button>
+											</c:if>
+											<c:if test="${pbucket eq 'in' }">
+												<a href="bucketlist.do?memberId=${loginId }"><button type="button" class="btn btn-green btn-green-p course-add">장바구니로 이동</button></a>
+											</c:if>
 										</div>
 										
 										<!-- 장바구니 버튼 영역 -->
@@ -150,6 +155,71 @@
 
 	<!-- 강의 관련 자바스크립트 연결 -->
 	<script type="text/javascript" src="client/js/coursedetail.js"></script>
+	<script type="text/javascript">
+		function addPackageBucket() {
+			let form = document.getElementById("bucketform");
+			const memberId = form.memberId.value;
+			console.log("memberId 값::::: " + memberId);
+			
+			if(memberId == null || memberId == ''){
+				let check = confirm('로그인 후 수강신청을 먼저 진행해주세요. 로그인 하시겠습니까?');
+				if(check ==  true) {
+					location.href = 'login.do';
+				}
+				return true;
+			} else {
+				let alert = confirm('패키지에 포함된 강의가 장바구니에 있을 경우,\n기존에 담긴 강의는 삭제됩니다.\n계속해서 진행하시려면 확인을 눌러주세요.');
+				
+				if(alert == true) {
+					form.submit();
+				} else {
+					alert('수강신청이 취소되었습니다.');
+				}
+			}
+		}
+	
+		function ajaxAddPackageBucket() {
+			//ajaxpackagebucketinsert.do
+			const memberId = $('#bucketform #memberId').val();
+			const packageId = $('#bucketform #packageId').val();
+			
+			if(memberId == null || memberId == ''){
+				const check = confirm('로그인 후 수강신청을 먼저 진행해주세요. 로그인 하시겠습니까?');
+				if(check ==  true) {
+					location.href = 'login.do';
+				}
+				return true;
+			} else {
+				let alert = confirm('패키지에 포함된 강의가 장바구니에 있을 경우,\n기존에 담긴 강의는 삭제됩니다.\n계속해서 진행하시려면 확인을 눌러주세요.');
+				
+				if(alert == true) {
+					$.ajax({
+					url: 'ajaxpackagebucketinsert.do',
+					    method: 'post',
+					    data: { packageId: packageId, memberId: memberId},
+					    success: function (result) {
+							let message = result.message;
+							
+							if(message = 'success') {
+						        const check = confirm('장바구니에 추가되었습니다! 장바구니로 이동하시려면 확인을 눌러주세요.');
+								if(check ==  true) {
+									location.href = 'bucketlist.do?memberId=' + memberId;
+								} else {
+									$('.button_wrap').empty();
+									$('.button_wrap').append('<a href="bucketlist.do?memberId=' + memberId +'"><button type="button" class="btn btn-green btn-green-p course-add">장바구니로 이동</button></a>');
+									return true;
+								}
+							} else if (message = 'fail') {
+								alert('죄송합니다, 오류가 발생했습니다. 다시 시도 부탁드립니다.\n오류가 지속적으로 반복된다면 고객센터로 연락바랍니다.');
+							}
+					    }
+					})
+				} else {
+					alert('수강신청이 취소되었습니다.');
+				}
+			}
+		}
+	</script>
 
 </body>
 

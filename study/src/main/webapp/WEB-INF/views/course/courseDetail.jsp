@@ -256,8 +256,8 @@
 										</h5>
 										<div class="button_wrap">
 											<c:if test="${bucket eq 'notIn' }">
-												<button type="button" class="btn btn-green btn-green-p course-add" onclick="addBucketList()">수강신청 하기</button>
-												<button type="button" class="btn btn-green btn-green-p" onclick="ajaxAddBucketList()">장바구니 담기</button>
+												<button type="button" class="btn btn-green btn-green-p course-add" onclick="addBucket()">수강신청 하기</button>
+												<button type="button" class="btn btn-green btn-green-p" onclick="ajaxAddBucket()">장바구니 담기</button>
 											</c:if>
 											<c:if test="${bucket eq 'in' }">
 												<a href="bucketlist.do?memberId=${loginId }"><button type="button" class="btn btn-green btn-green-p course-add">장바구니로 이동</button></a>
