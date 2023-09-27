@@ -73,20 +73,18 @@
 												<div class="form-group">
 													<input type="text" class="form-control form-control-user"
 														id="memberId" name="memberId" aria-describedby="INPUT ID"
-														placeholder="Enter ID">
+														placeholder="Enter ID" maxlength="20">
 												</div>
 												<div class="form-group">
 													<input type="password" class="form-control form-control-user"
-														name="memberPassword" id="memberPassword"
-														placeholder="Password">
+														name="memberPassword" id="memberPassword" placeholder="Password"
+														maxlength="50">
 												</div>
 												<div class="form-group">
 													<div class="custom-control custom-checkbox small">
 														<input type="checkbox" class="custom-control-input"
 															id="idSaveCheck"> <label class="custom-control-label"
 															for="idSaveCheck">
-
-
 															ID 저장 </label>
 													</div>
 												</div>
@@ -112,6 +110,13 @@
 				</div>
 
 			</div>
+			<script>
+				let loginMsg = `${loginmsg}`;
+				if(loginMsg != ""){
+					alert(loginMsg)
+					loginMsg = "";
+				}
+			</script>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 			<script>
 				$(document).ready(function () {
