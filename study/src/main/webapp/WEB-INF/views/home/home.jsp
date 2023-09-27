@@ -91,6 +91,7 @@
 										<ul class="dropdown">
 											<li><a href="courselist.do?mainCate=it">IT</a></li>
 											<li><a href="courselist.do?mainCate=english">English</a></li>
+											<li><a href="courselist.do?mainCate=career">Career</a></li>
 										</ul>
 									</li>
 									<li><a href="packagelist.do">Package</a>
