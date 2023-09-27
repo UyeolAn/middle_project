@@ -40,7 +40,7 @@ public class MemberRegist extends HttpServlet {
 //		System.out.println(vo);
 		dao.memberInsert(vo);
 
-		String page = "home/home.jsp";
+		String page = "common/login.jsp";
 		ViewResolve.foward(request, response, page);
 	}
 

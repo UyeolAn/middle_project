@@ -7,8 +7,14 @@
             <meta charset="UTF-8">
             <title>Insert title here</title>
         </head>
-
-
+        <style>
+            .header__top__hover a {
+                color: black;
+            }
+            .header__top__hover li:hover {
+                color: black;
+            }
+        </style>
 
         <body>
             <!-- Header Section Begin -->
@@ -62,7 +68,8 @@
                                             <li><a href="courselist.do?mainCate=english">English</a></li>
                                         </ul>
                                     </li>
-                                    <li class="<c:if test=" ${menu eq 'package' }">active</c:if>"><a href="packagelist.do">Package</a>
+                                    <li class="<c:if test=" ${menu eq 'package' }">active</c:if>"><a
+                                            href="packagelist.do">Package</a>
                                         <!-- <ul class="dropdown">
                                             <li><a href="./about.html">초급</a></li>
                                             <li><a href="./shop-details.html">중급</a></li>
