@@ -1,4 +1,4 @@
-package co.four.study.bucket.web;
+package co.four.study.packageBucket.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,11 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import co.four.study.bucket.service.BucketService;
-import co.four.study.bucket.service.BucketVO;
-import co.four.study.bucket.serviceImpl.BucketServiceImpl;
 import co.four.study.common.ViewResolve;
-import co.four.study.course.service.CourseVO;
 import co.four.study.member.service.MemberService;
 import co.four.study.member.service.MemberVO;
 import co.four.study.member.serviceImpl.MemberServiceImpl;
@@ -26,47 +22,29 @@ import co.four.study.packages.service.PackageService;
 import co.four.study.packages.service.PackageVO;
 import co.four.study.packages.serviceImpl.PackageServiceImpl;
 
-@WebServlet("/bucketlist.do")
-public class BucketList extends HttpServlet {
+@WebServlet("/packagebucketlist.do")
+public class PackageBucketList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	public BucketList() {
-		super();
-	}
+       
+    public PackageBucketList() {
+        super();
+    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberService mdao = new MemberServiceImpl();
-		BucketService bdao = new BucketServiceImpl();
 		PackageService pdao = new PackageServiceImpl();
 		PackageBucketService pbdao = new PackageBucketServiceImpl();
 		MemberVO mvo = new MemberVO();
-		BucketVO bvo = new BucketVO();
 		PackageVO pvo = new PackageVO();
 		PackageBucketVO pbvo = new PackageBucketVO();
 		HttpSession session = request.getSession();
 		String memberId = request.getParameter("memberId");
-		//마이페이지에서 장바구니 접근시 memberId null값 반환
 		
+		//마이페이지에서 장바구니 접근시 memberId null값 반환
 		if (memberId == null) {
 			memberId = (String) session.getAttribute("loginId");
 		}
-		bvo.setMemberId(memberId);
 		mvo.setMemberId(memberId);
-
-		// 해당멤버의 장바구니에 있는 강의정보 담기
-		List<CourseVO> list = bdao.memberBucketList(bvo);
-		request.setAttribute("courses", list);
-		if (list.size() == 0) {
-			request.setAttribute("message", "empty");
-		}
-
-		// 장바구니 강의금액 합
-		try {
-			int sum = bdao.sumCoursesPrice(bvo);
-			request.setAttribute("sum", sum);
-		} catch (NullPointerException e) {
-			request.setAttribute("sum", 0);
-		}
 		
 		// 해당멤버의 장바구니에 있는 패키지 정보 담기
 		pbvo.setMemberId(memberId);
@@ -94,20 +72,19 @@ public class BucketList extends HttpServlet {
 		} catch (NullPointerException e) {
 			request.setAttribute("psum", 0);
 		}
-
+		
 		// 회원정보 가져오기
 		mvo = mdao.memberSelect(mvo);
 		request.setAttribute("member", mvo);
 		System.out.println(mvo);
-
+		
 		// 장바구니 페이지 포워딩
-		String page = "bucket/bucketList";
+		String page = "bucket/packageBucketList";
 		request.setAttribute("menu", "mypage");
 		ViewResolve.foward(request, response, page);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 
