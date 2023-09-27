@@ -38,4 +38,13 @@ public interface CourseService {
 	
 	//it강의 카테고리별 분포
 	List<Map<String, Object>> itCourse();
+	
+	//인기강의 top8
+	List<CourseVO> hotCourseList();
+	
+	//리뷰많은 강의 top4
+	List<CourseVO> reviewCourseList();
+	
+	//랜덤 it강의 4개
+	List<CourseVO> itRandomCourseList();
 }

@@ -165,5 +165,20 @@ public class CourseServiceImpl implements CourseService {
 		return map.itCourse();
 	}
 
+	@Override
+	public List<CourseVO> hotCourseList() {
+		return map.hotCourseList();
+	}
+
+	@Override
+	public List<CourseVO> reviewCourseList() {
+		return map.reviewCourseList();
+	}
+
+	@Override
+	public List<CourseVO> itRandomCourseList() {
+		return map.itRandomCourseList();
+	}
+
 
 }

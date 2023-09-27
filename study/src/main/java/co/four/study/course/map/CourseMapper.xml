@@ -171,4 +171,34 @@
 		GROUP BY COURSE_SUB_CATEGORY 
 		ORDER BY COUNT(*) DESC
 	</select>
+	
+	<select id="hotCourseList" resultType="co.four.study.course.service.CourseVO">
+		SELECT * FROM
+		(SELECT C.COURSE_ID, C.COURSE_NAME, C.COURSE_PRICE,C.COURSE_IMG
+		FROM MEMBERS_COURSES MC JOIN COURSES C ON C.COURSE_ID = MC.COURSE_ID
+		GROUP BY C.COURSE_ID, C.COURSE_NAME,C.COURSE_PRICE,C.COURSE_IMG
+		ORDER BY COUNT(*) DESC, C.COURSE_ID)
+		WHERE ROWNUM <![CDATA[<=]]> 4
+	</select>
+	
+	<select id="reviewCourseList" resultType="co.four.study.course.service.CourseVO">
+		SELECT * FROM
+		(SELECT C.COURSE_ID, C.COURSE_NAME, C.COURSE_PRICE,C.COURSE_IMG
+		FROM REVIEWS R JOIN COURSES C ON C.COURSE_ID = R.COURSE_ID
+		GROUP BY C.COURSE_ID, C.COURSE_NAME,C.COURSE_PRICE,C.COURSE_IMG
+		ORDER BY COUNT(*) DESC, C.COURSE_ID)
+		WHERE ROWNUM <![CDATA[<=]]> 4
+	</select>
+	
+	<select id="itRandomCourseList" resultType="co.four.study.course.service.CourseVO">
+	  <![CDATA[
+	    SELECT * FROM (
+	      SELECT C.COURSE_ID, C.COURSE_NAME, C.COURSE_PRICE, C.COURSE_IMG
+	      FROM COURSES C
+	      WHERE C.COURSE_MAIN_CATEGORY = 'it'
+	      ORDER BY DBMS_RANDOM.VALUE
+	    )
+	    WHERE ROWNUM <= 4
+	  ]]>
+	</select>
 </mapper>

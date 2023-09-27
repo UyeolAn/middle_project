@@ -138,7 +138,7 @@
 									<div class="hero__text">
 										<h6>SALE COURSE</h6>
 										<h2 style="font-family: 'NanumSquareRound';">현재 할인하는 패키지&#128176;</h2>
-										<p style="font-family: 'NanumSquareRound';">다양한 강의들을 할인된 가격으로 만나보세요!</p>
+										<p style="font-family: 'NanumSquareRound'; color: black;">다양한 강의들을 할인된 가격으로 만나보세요!</p>
 										<!-- <a href="#" class="primary-btn">신청하러가기<span class="arrow_right"></span></a> -->
 									</div>
 								</div>
@@ -157,7 +157,7 @@
 									<div class="hero__text">
 										<h6>SALE COURSE</h6>
 										<h2 style="font-family: 'NanumSquareRound'; color: white;">IT 강의들 잔뜩&#128218;</h2>
-										<p style="font-family: 'NanumSquareRound';">예비 개발자들을 위한 강의들을 골라 들어보세요</p>
+										<p style="font-family: 'NanumSquareRound'; color: white;">예비 개발자들을 위한 강의들을 골라 들어보세요</p>
 									</div>
 								</div>
 								<div class="col-lg-5" style="padding: 30px;">
@@ -175,7 +175,7 @@
 									<div class="hero__text">
 										<h6>SALE COURSE</h6>
 										<h2 style="font-family: 'NanumSquareRound';">질문이 있다면 바로 &#128587;</h2>
-										<p style="font-family: 'NanumSquareRound';">다양한 사람들과 소통을 하며 궁금증을 해소!</p>
+										<p style="font-family: 'NanumSquareRound'; color: black;">다양한 사람들과 소통을 하며 궁금증을 해소!</p>
 									</div>
 								</div>
 								<div class="col-lg-5" style="padding: 30px;">
@@ -199,23 +199,107 @@
 					<div class="row">
 						<div class="col-lg-12" style="margin: 30px;">
 							<ul class="filter__controls">
-								<li class="active" data-filter="*" style="width: 150px;"><img src="client/img/home/heart.png" style="width: 30px;" title="Best Hot"> HOT</li>
-								<li data-filter=".new-arrivals" style="width: 150px;"><img src="client/img/home/star.png" style="width: 30px;" title="Best Review"> REVIEW</li>
-								<li data-filter=".hot-sales"  style="width: 150px;"><img src="client/img/home/computer.png" style="width: 30px;" title="Best IT"> IT</li>
+								<li class="active" data-filter=".mix" style="width: 150px;"><img src="client/img/home/all.png" style="width: 30px;" title="All"> ALL</li>
+								<li data-filter=".hot" style="width: 150px;"><img src="client/img/home/heart.png" style="width: 30px;" title="Best Hot"> HOT</li>
+								<li data-filter=".review" style="width: 150px;"><img src="client/img/home/star.png" style="width: 30px;" title="Best Review"> REVIEW</li>
+								<li data-filter=".it"  style="width: 150px;"><img src="client/img/home/computer.png" style="width: 30px;" title="Best IT"> IT</li>
 							</ul>
 						</div>
 					</div>
 					<div class="row product__filter">
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
-									<span class="label">New</span>
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
+						<c:forEach items="${reviewList}" var="r">
+							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix review">
+								<div class="product__item">
+									<img src="client/img/product/${r.courseImg}" style="width: 330px; height: 200px;">
+									<div class="product__item__text">
+										<h6>${r.courseName}</h6>
+										<a href="#" class="add-cart">+ Add To Cart</a>
+										<div class="rating">
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+										</div>
+										<h5>${r.coursePrice}원</h5>
+										<div class="product__color__select">
+											<label for="pc-1">
+												<input type="radio" id="pc-1">
+											</label>
+											<label class="active black" for="pc-2">
+												<input type="radio" id="pc-2">
+											</label>
+											<label class="grey" for="pc-3">
+												<input type="radio" id="pc-3">
+											</label>
+										</div>
+									</div>
 								</div>
+							</div>
+						</c:forEach>
+						<c:forEach items="${hotList}" var="h">
+							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot">
+								<div class="product__item">
+									<img src="client/img/product/${h.courseImg}" style="width: 330px; height: 200px;">
+									<div class="product__item__text">
+										<h6>${h.courseName}</h6>
+										<a href="#" class="add-cart">+ Add To Cart</a>
+										<div class="rating">
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+										</div>
+										<h5>${h.coursePrice}원</h5>
+										<div class="product__color__select">
+											<label for="pc-1">
+												<input type="radio" id="pc-1">
+											</label>
+											<label class="active black" for="pc-2">
+												<input type="radio" id="pc-2">
+											</label>
+											<label class="grey" for="pc-3">
+												<input type="radio" id="pc-3">
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+						<c:forEach items="${itList}" var="i">
+							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix it">
+								<div class="product__item">
+									<img src="client/img/product/${i.courseImg}" style="width: 330px; height: 200px;">
+									<div class="product__item__text">
+										<h6>${i.courseName}</h6>
+										<a href="#" class="add-cart">+ Add To Cart</a>
+										<div class="rating">
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+											<i class="fa fa-star-o"></i>
+										</div>
+										<h5>${i.coursePrice}원</h5>
+										<div class="product__color__select">
+											<label for="pc-1">
+												<input type="radio" id="pc-1">
+											</label>
+											<label class="active black" for="pc-2">
+												<input type="radio" id="pc-2">
+											</label>
+											<label class="grey" for="pc-3">
+												<input type="radio" id="pc-3">
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+						<!-- <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot">
+							<div class="product__item">
+								<img src="client/img/product/course1.png" style="width: 330px; height: 200px;">
 								<div class="product__item__text">
 									<h6>Piqué Biker Jacket</h6>
 									<a href="#" class="add-cart">+ Add To Cart</a>
@@ -241,43 +325,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Piqué Biker Jacket</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$67.24</h5>
-									<div class="product__color__select">
-										<label for="pc-4">
-											<input type="radio" id="pc-4">
-										</label>
-										<label class="active black" for="pc-5">
-											<input type="radio" id="pc-5">
-										</label>
-										<label class="grey" for="pc-6">
-											<input type="radio" id="pc-6">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot">
 							<div class="product__item sale">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
+								<div class="product__item__pic set-bg" data-setbg="client/img/product/course1.png">
 									<span class="label">Sale</span>
 									<ul class="product__hover">
 										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
@@ -312,7 +362,42 @@
 						</div>
 						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
 							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-4.jpg">
+								<div class="product__item__pic set-bg" data-setbg="client/img/product/course1.png">
+									<ul class="product__hover">
+										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
+										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
+									</ul>
+								</div>
+								<div class="product__item__text">
+									<h6>Piqué Biker Jacket</h6>
+									<a href="#" class="add-cart">+ Add To Cart</a>
+									<div class="rating">
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+									</div>
+									<h5>$67.24</h5>
+									<div class="product__color__select">
+										<label for="pc-4">
+											<input type="radio" id="pc-4">
+										</label>
+										<label class="active black" for="pc-5">
+											<input type="radio" id="pc-5">
+										</label>
+										<label class="grey" for="pc-6">
+											<input type="radio" id="pc-6">
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
+							<div class="product__item">
+								<div class="product__item__pic set-bg" data-setbg="client/img/product/course1.png">
 									<ul class="product__hover">
 										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
 										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
@@ -344,7 +429,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot">
 							<div class="product__item">
 								<div class="product__item__pic set-bg" data-setbg="img/product/product-5.jpg">
 									<ul class="product__hover">
@@ -413,7 +498,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot">
 							<div class="product__item">
 								<div class="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">
 									<ul class="product__hover">
@@ -480,7 +565,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</section>
