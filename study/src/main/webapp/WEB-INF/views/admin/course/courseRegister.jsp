@@ -63,6 +63,7 @@
 						<select class="form-control select2 main" id="courseMainCategory" name="courseMainCategory" onchange="changeSub()">
 							<option value="it">IT</option>
 							<option value="english">ENGLISH</option>
+							<option value="career">CAREER</option>
 						</select>
 					</div>
 					<div class="form-group col-lg-6">
@@ -123,6 +124,7 @@
 <script>
 	let it =['java', 'python', 'c', 'c++', 'c#'];
 	let english = ['비즈니스/마케팅', 'toeic', 'toefl'];
+	let career = ['취업/이직','개인 브랜딩','창업'];
 
 	let mainCategory = $('#courseMainCategory');
 	let subCategory = $('#courseSubCategory');
@@ -134,6 +136,7 @@
 		subCategory.children().remove();
 		if($('.main').val() === 'it') sub = it;
 		else if ($('.main').val() === 'english') sub = english;
+		else if ($('.main').val() === 'career') sub = career;
 
 		for( let s of sub) {
 			let opt = $('<option/>').text(s.toUpperCase()).attr('value',s);
