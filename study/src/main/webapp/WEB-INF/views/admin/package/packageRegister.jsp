@@ -46,6 +46,7 @@
                         <select class="form-control select2 main" id="courseMainCategory" name="packageCategory">
                             <option value="it">IT</option>
                             <option value="english">ENGLISH</option>
+                            <option value="career">CAREER</option>
                         </select>
                     </div>
                     </div>
