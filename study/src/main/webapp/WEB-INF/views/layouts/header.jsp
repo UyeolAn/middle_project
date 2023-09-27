@@ -67,14 +67,10 @@
                     <ul class="dropdown">
                       <li><a href="courselist.do?mainCate=it">IT</a></li>
                       <li><a href="courselist.do?mainCate=english">English</a></li>
+                      <li><a href="courselist.do?mainCate=career">Career</a></li>
                     </ul>
                   </li>
                   <li class="<c:if test=" ${menu eq 'package' }">active</c:if>"><a href="packagelist.do">Package</a>
-                    <!-- <ul class="dropdown">
-                                            <li><a href="./about.html">초급</a></li>
-                                            <li><a href="./shop-details.html">중급</a></li>
-                                            <li><a href="./shopping-cart.html">고급</a></li>
-                                        </ul> -->
                   </li>
                   <li class="<c:if test=" ${menu eq 'community' }">active</c:if>"><a
                       href="communityqnapage.do">Community</a>

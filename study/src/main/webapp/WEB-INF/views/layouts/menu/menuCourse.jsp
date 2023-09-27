@@ -86,6 +86,27 @@
 					</div>
 					<div class="card">
 						<div class="card-heading">
+							<a data-toggle="collapse" data-target="#collapseTwo">Career</a>
+						</div>
+						<div id="collapseTwo" class="collapse"
+							data-parent="#accordionExample">
+							<div class="card-body">
+								<div class="shop__sidebar__categories">
+									<ul class="nice-scroll">
+										<c:forEach items="${career}" var="c">
+											<li
+												onclick="courseList('subCate','${c.courseSubCategory }', 1, this)"
+												data-c="${c.courseSubCategory }"><span
+												class="sub_menu">${c.courseSubCategory }
+													(${c.subCategoryCount })</span></li>
+										</c:forEach>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-heading">
 							<a data-toggle="collapse" data-target="#collapseFour">Grade</a>
 						</div>
 						<div id="collapseFour" class="collapse"
