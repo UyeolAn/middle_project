@@ -9,25 +9,29 @@
 <body>
     <div class="section-body container py-5">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">패키지 등록</h1>
+        <h1 class="h3 mb-2 text-gray-800">패키지 수정</h1>
         <p class="mb-4">
-            등록할 패키지의 정보를 입력해주세요.
+            수정할 패키지의 정보를 입력해주세요.
         </p>
             <div class="row">
               <div class="col-12 col-md-6 col-lg-12">
                 <div class="card">
                   <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">New Package</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">${p.packageTitle}</h6>
                   </div>
                   <div class="card-body">
                     <form id="frm" action="adminpackageupdate.do" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
+                      <div class="form-group">
+                        <label class="font-weight-bold">패키지 아이디</label>
+                        <input type="text" class="form-control" name="packageId" value="${p.packageId}" readonly>
+                      </div>
+                      <div class="form-group">
                       <label class="font-weight-bold">패키지 이름</label>
                       <input type="text" class="form-control" name="packageTitle" value="${p.packageTitle}" required>
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">패키지 설명</label>
-                        <textarea class="form-control" name="packageScript" required></textarea>
+                        <textarea class="form-control" name="packageScript" required>${p.packageScript}</textarea>
                     </div>
                       <div class="col-lg-12 row">
                     <div class="form-group col-lg-6">
@@ -38,15 +42,8 @@
                             <i class="fa fa-credit-card"></i>
                           </div>
                         </div>
-                        <input type="text" class="form-control" name="packageDiscount" required>
+                        <input type="text" class="form-control" name="packageDiscount" value="${p.packageDiscount}" required>
                       </div>
-                    </div>
-                    <div class="form-group col-lg-6">
-                        <label class="font-weight-bold">카테고리</label>
-                        <select class="form-control select2 main" id="courseMainCategory" name="packageCategory">
-                            <option value="it">IT</option>
-                            <option value="english">ENGLISH</option>
-                        </select>
                     </div>
                     </div>
                     <div class="form-group">
