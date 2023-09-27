@@ -1,4 +1,4 @@
-  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 		<!DOCTYPE html>
@@ -24,6 +24,16 @@
 
 			<link rel="stylesheet" href="admin/css/sb-admin-2.min.css">
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+			<style>
+				.bg-gradient-primary {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					min-height: 100dvh;
+					background-color: #f1f0ff;
+					background-image: none;
+				}
+			</style>
 		</head>
 
 		<body class="bg-gradient-primary" style="display: flex;
@@ -45,8 +55,7 @@
 							<div class="card-body p-0">
 								<!-- Nested Row within Card Body -->
 								<div class="row">
-									<div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-									<div class="col-lg-6">
+									<div class="col-lg-6" style="margin: 0 auto; margin-top: 10%; margin-bottom: 10%;">
 										<div class="p-5">
 											<div class="text-center">
 												<h1 class="h4 text-gray-900 mb-4">RESET Password!</h1>
@@ -56,15 +65,15 @@
 													<div class="form-group">
 														<input type="text" class="form-control form-control-user"
 															id="memberId" name="memberId" aria-describedby="INPUT ID"
-															placeholder="Enter ID">
+															placeholder="Enter ID" maxlength="20">
 													</div>
 													<div class="form-group">
 														<input type="email" class="form-control form-control-user"
 															id="memberEmail" name="memberEmail"
-															placeholder="Email Address">
+															placeholder="Email Address" maxlength="70">
 													</div>
 													<button type="button" class="btn btn-primary btn-user btn-block"
-														id="IdEmailCheck">password reset</button>
+														id="IdEmailCheck" maxlength="50">password reset</button>
 												</form>
 											</c:if>
 
@@ -89,12 +98,12 @@
 															<input type="password"
 																class="form-control form-control-user"
 																name="memberPassword" id="memberPassword"
-																placeholder="Password">
+																placeholder="Password" maxlength="50">
 														</div>
 														<div class="col-sm-6">
 															<input type="password"
 																class="form-control form-control-user" id="checkPass"
-																placeholder="Repeat Password">
+																placeholder="Repeat Password" maxlength="50">
 														</div>
 													</div>
 													<a class="btn btn-primary btn-user btn-block"
@@ -104,7 +113,7 @@
 											</c:if>
 
 											<hr>
-											<a class="btn btn-primary btn-user btn-block" href="logout.do">HOME</a>
+											<a class="btn btn-primary btn-user btn-block" href="home.do">HOME</a>
 
 											<hr>
 										</div>

@@ -23,7 +23,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <style>
             .small {
-                color: #737373;
+                color: #727272;
             }
 
             .btn {
@@ -51,6 +51,12 @@
                 max-width: 75%;
                 margin: 0 auto;
             }
+
+            input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
         </style>
 
     <body class="bg-gradient-primary">
@@ -73,55 +79,57 @@
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0 ">
                                             <input type="text" class="form-control form-control-user btmagin4"
-                                                id="memberId" name="memberId" placeholder="ID">
-                                            <button type="button" class="small btn" id="doubleCheck" value="No"
+                                                id="memberId" name="memberId" placeholder="ID" maxlength="20"
+                                                spellcheck="false">
+                                            <button type="button" class="small btn btn-primary btn-user" id="doubleCheck" value="No"
                                                 style="float: right;">중복확인</button>
                                         </div>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control form-control-user" id="memberName"
-                                                name="memberName" placeholder="Name">
+                                                name="memberName" placeholder="Name" maxlength="10" spellcheck="false">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <input type="password" class="form-control form-control-user"
-                                                name="memberPassword" id="memberPassword" placeholder="Password">
+                                                name="memberPassword" id="memberPassword" placeholder="Password"
+                                                maxlength="50">
                                         </div>
                                         <div class="col-sm-6">
                                             <input type="password" class="form-control form-control-user" id="checkPass"
-                                                placeholder="Repeat Password">
+                                                placeholder="Repeat Password" maxlength="50">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
-                                            id="exampleInputEmail" name="memberEmail" placeholder="Email Address">
+                                            id="exampleInputEmail" name="memberEmail" placeholder="Email Address"
+                                            maxlength="70">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="exampleInputEmail"
-                                            name="memberTel" placeholder="Phon Number">
+                                        <input type="number" class="form-control form-control-user" id="exampleInputEmail"
+                                            name="memberTel" placeholder="Phon Number" maxlength="20">
                                     </div>
                                     <div class="form-group">
 
                                         <div class="form-group">
                                             <label class="font-weight-bold">주소</label><br>
                                             <input type="text" id="sample6_postcode" class="form-control mb-2"
-                                                style="display: inline; width: 50%;" placeholder="우편번호">
+                                                style="display: inline; width: 50%;" placeholder="우편번호" readonly
+                                                required>
                                             <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"
-                                                class="btn"><br>
+                                                class="small btn btn-primary btn-user"><br>
                                             <input type="text" id="sample6_address" class="form-control mb-2"
                                                 style="width: 100%; display: inline;" name="address1" placeholder="주소"
                                                 required readonly>
                                             <div class="row mb-2" style="width: 101%; margin-left: 0;">
                                                 <input type="text" id="sample6_detailAddress"
-                                                    class="form-control col-lg-6"
-                                                    style="width: 50%; display: inline;" name="address2"
-                                                    placeholder="상세주소"><!--
+                                                    class="form-control col-lg-6" style="width: 50%; display: inline;"
+                                                    name="address2" placeholder="상세주소" required maxlength="30"><!--
                                             --><input type="text" id="sample6_extraAddress"
-                                                    class="form-control col-lg-6"
-                                                    style="width: 50%; display: inline;" name="address3"
-                                                    placeholder="참고항목">
+                                                    class="form-control col-lg-6" style="width: 50%; display: inline;"
+                                                    name="address3" placeholder="참고항목" maxlength="30">
                                             </div>
                                         </div>
 
