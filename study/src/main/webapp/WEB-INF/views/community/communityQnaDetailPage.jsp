@@ -22,7 +22,7 @@
           margin-right: 1%;
           color: white;
           font-size: medium;
-          background-color: #E53637;
+          background-color: #3188DB;
           border-radius: 20px;
         }
 
@@ -53,11 +53,11 @@
           padding: 9px 15px;
           font-size: medium;
           background: none;
-          color: #ffa9a9;
+          color: #aaa;
         }
 
         .small-delete-btn:hover {
-          color: #E53637;
+          color: #333;
         }
 
         .answer__info__count {
@@ -69,7 +69,8 @@
         .comm__qna__answer__sort>li {
           margin-left: 5%;
           margin-top: 4%;
-          font-size: medium;
+          font-size: small;
+          font-weight: 900;
           color: #B7B7B7;
           float: left;
         }
@@ -98,20 +99,20 @@
 
         .answer-solve-btn {
           background: none;
-          color: #ffa9a9;
+          color: #88bdee;
         }
 
         .answer-solve-btn:hover {
-          color: #E53637;
+          color: #3188DB;
         }
 
         .active-answer-solve-btn {
           background: none;
-          color: #E53637;
+          color: #3188DB;
         }
 
         .active-answer-solve-btn:hover {
-          color: #ffa9a9;
+          color: #88bdee;
         }
 
         .answer__textarea {
@@ -332,7 +333,7 @@
                     .html('<i class="bi bi-trash"></i>').val(`\${answer.memberId}`))
                   .append($('<button type="button" class="site-btn answer-btn answer-update-btn">')
                     .html('<i class="bi bi-pencil-square"></i>').val(`\${answer.memberId}`))
-                  .append($(`<button type="button" class="site-btn answer-btn answer-update-check-btn" style="background:none; color: #E53637;">`)
+                  .append($(`<button type="button" class="site-btn answer-btn answer-update-check-btn" style="background:none; color: #3188DB;">`)
                     .html('<i class="bi bi-pencil-square"></i>').val(`\${answer.memberId}`).hide())
                   .append($('<br>'))
                   .append(

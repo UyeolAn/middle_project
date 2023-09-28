@@ -34,33 +34,33 @@
           padding: 9px 15px;
           font-size: medium;
           background: none;
-          color: #ffa9a9;
+          color: #aaa;
         }
 
         .small-delete-btn:hover {
-          color: #E53637;
+          color: #333;
         }
 
         .like-btn {
           padding: 9px 15px;
           font-size: large;
-          color: #ffa9a9;
+          color: #88bdee;
           background: none;
         }
 
         .active-like-btn {
           padding: 9px 15px;
           font-size: large;
-          color: #E53637;
+          color: #3188DB;
           background: none;
         }
 
         .like-btn:hover {
-          color: #E53637;
+          color: #3188DB;
         }
 
         .active-like-btn:hover {
-          color: #ffa9a9;
+          color: #88bdee;
         }
 
         .dislike-btn {
@@ -94,7 +94,8 @@
         .comm__free__reply__sort>li {
           margin-left: 5%;
           margin-top: 4%;
-          font-size: medium;
+          font-size: small;
+          font-weight: 900;
           color: #B7B7B7;
           float: left;
         }
@@ -446,7 +447,7 @@
                     .html('<i class="bi bi-trash"></i>').val(`\${reply.memberId}`))
                   .append($('<button type="button" class="site-btn reply-btn reply-update-btn">')
                     .html('<i class="bi bi-pencil-square"></i>').val(`\${reply.memberId}`))
-                  .append($('<button type="button" class="site-btn reply-btn reply-update-check-btn" style="background: none; color: #E53637";>')
+                  .append($('<button type="button" class="site-btn reply-btn reply-update-check-btn" style="background: none; color: #3188DB";>')
                     .html('<i class="bi bi-pencil-square"></i>').val(`\${reply.memberId}`).hide())
                   .append($('<br>'))
                   .append(

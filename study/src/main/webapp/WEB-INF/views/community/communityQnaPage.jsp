@@ -12,7 +12,7 @@
         }
 
         select {
-          padding: 10px;
+          padding: 14.5px;
           color: #5D5D5D;
           border: 1px solid #b7b7b7;
           border-radius: 5px;
@@ -78,7 +78,7 @@
           margin-right: 1%;
           color: white;
           font-size: small;
-          background-color: #E53637;
+          background-color: #3188DB;
           border-radius: 20px;
         }
 
@@ -146,7 +146,7 @@
               <div class="col-lg-2">
                 <div class="checkout__input">
                   <button type="button" class="site-btn" onclick="searchQuestions()"
-                    style="padding: 14px 20px; background: #E53637; border-radius: 8px;">
+                    style="padding: 14px 20px; background: #3188DB; border-radius: 8px;">
                     <i class="bi bi-search" style="font-size: large !important;"></i></button>
                 </div>
               </div>
@@ -278,7 +278,7 @@
                   )
                   .on('click', function () {
                     let url = 'communityqnadetailpage.do?questionId=' + question.questionId;
-                    location.replace(url);
+                    $(location).attr('href', url);
                   })
               )
               .append($('<hr>'));

@@ -21,26 +21,28 @@
 
         .input__file__btn {
           margin-top: 1%;
-          padding: 6px 25px;
+          margin-right: 1%;
+          padding: 6px 15px;
           color: white;
-          background: #B7B7B7;
+          background: #88bdee;
           cursor: pointer;
+          border-radius: 8px;
         }
 
         .input__file__btn:hover {
-          background: #A7A7A7;
+          background: #3188DB;
         }
 
         .active__input__file__btn {
           margin-top: 1%;
           padding: 6px 25px;
           color: white;
-          background: #E53637;
+          background: #3188DB;
           cursor: pointer;
         }
 
         .active__input__file__btn:hover {
-          background: #ffa9a9;
+          background: #88bdee;
         }
 
         .small-btn {
@@ -76,7 +78,7 @@
               <div class="col-lg-12">
                 <label class="input__file__btn"
                   style="margin-top: 3%; border-radius: 8px; font-size: medium; font-weight: 900;">
-                  IMG
+                  <i class="bi bi-image"></i>&nbsp;IMG
                 </label>
                 <input type="file" id="questionImg" name="questionImg" style="display: none;">
               </div>
@@ -85,7 +87,7 @@
                   style="color: #333;"></textarea>
                 <div class="col-lg-12 row">
                   <button type="reset" class="site-btn"
-                    style="padding: 5px 12px 5px 15px; background: #B7B7B7; border-radius: 8px; font-size: small;"><i
+                    style="padding: 5px 6px 5px 9px; background: #B7B7B7; border-radius: 8px; font-size: small;"><i
                       class="bi bi-arrow-repeat" style="font-size: x-large !important;"></i></button>
                   <button type="button" class="site-btn" onclick="insertQuestion()"
                     style="margin-left: 1%; padding: 9px 15px; background: #333; border-radius: 8px; font-size: small;"><i
