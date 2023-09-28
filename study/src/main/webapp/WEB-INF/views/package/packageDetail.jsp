@@ -11,6 +11,18 @@
 	<link rel="stylesheet" href="client/css/course.css" type="text/css">
 	<link rel="stylesheet" href="client/css/packagedetail.css" type="text/css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+	<style>
+		/* 배너관련 start */
+		.breadcrumb__links span {
+			color: #6c757d;
+		}
+		.breadcrumb-option {
+			background: url(client/img/banner/package_banner7.png) rgba(220, 219, 255, 0.3) no-repeat 95% 45%;
+			background-size: 100%;
+			background-blend-mode: color;
+		}
+		/* 배너관련 end */
+	</style>
 </head>
 
 <body>
@@ -50,7 +62,7 @@
 		<!-- 강의 카테고리, 등급, 강의 이름, 설명 end -->
 
 		<c:if test="${message eq 'impossible' }">
-			<div class="impossible_alert ">
+			<div class="impossible_alert">
 				<div class="animate__animated animate__flash">
 					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#fff" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
 					  <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
@@ -147,6 +159,10 @@
 	</section>
 	<!-- 강의 상세 정보 End -->
 	
+	<form id="pform" action="packagelist.do" method="post">
+		<input type="hidden" name="grade" id="grade"/>
+		<input type="hidden" name="category" id="category"/>
+	</form>
 	<form id="bucketform" action="packagebucketinsert.do" method="post">
 		<input type="hidden" name="packageId" id="packageId" value="${data.packageId }" />
 		<input type="hidden" name="memberId" id="memberId" value="${loginId }" />
@@ -156,6 +172,21 @@
 	<!-- 강의 관련 자바스크립트 연결 -->
 	<script type="text/javascript" src="client/js/coursedetail.js"></script>
 	<script type="text/javascript">
+		function packageList(category, grade, target) {
+			
+			let form  = document.getElementById("pform");
+			console.log("category = " + category);
+			console.log("grade = " + grade);
+			$('.sub_menu').css('color','#b7b7b7');
+			$('.sub_menu_g').removeClass('active');
+			$(target).children().css('color','#e53637');
+			
+			form.category.value = category;
+			form.grade.value = grade;
+			
+			form.submit();
+		}
+	
 		function addPackageBucket() {
 			let form = document.getElementById("bucketform");
 			const memberId = form.memberId.value;

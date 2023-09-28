@@ -121,9 +121,9 @@
 			<div class="cart__total">
 				<h6 class="cart_title">결제정보</h6>
 				<ul>
-					<li>단과 강의 <span class="cart_course_price"><fmt:formatNumber value="${sum }" pattern="#,###" /> 원</span></li>
-					<li>패키지 강의 <span class="cart_package_price"><fmt:formatNumber value="${psum }" pattern="#,###" /> 원</span></li>
-					<li>총 결제금액 <span class="cart_sum_price"><fmt:formatNumber value="${sum + psum }" pattern="#,###" /> 원</span></li>
+					<li>단과 강의 <span class="cart_course_price"><fmt:formatNumber value="${sum }" pattern="#,###" />원</span></li>
+					<li>패키지 강의 <span class="cart_package_price"><fmt:formatNumber value="${psum }" pattern="#,###" />원</span></li>
+					<li>총 결제금액 <span class="cart_sum_price"><fmt:formatNumber value="${sum + psum }" pattern="#,###" />원</span></li>
 				</ul>
 				<a href="#" class="primary-btn" onclick="payment('${member.memberId}')">결제하기</a>
 			</div>

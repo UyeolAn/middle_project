@@ -18,7 +18,6 @@ function packageList(category, grade, target) {
 	        appendCourseList(result); // [func] 강의 리스트 태그 생성
 	    }
 	})
-	
 }
 
 function appendCourseList(result) {
@@ -46,7 +45,7 @@ function appendCourseList(result) {
 	        clone.addClass('result');
 	        clone.css('display', 'block');
 	        clone.find('.course-item-pic').css('overflow', 'hidden');
-	        clone.find('.course-item').attr('onclick', 'packageDetail(' + result[i].packageId + ')');
+	        clone.find('.course-item').attr('onclick', 'location.href="packagedetail.do?packageId=' + result[i].packageId + '"');
 	        if(result[i].packageThumbnail == null) {
 	        	clone.find('.course-item-pic').css('background-image', 'url(client/img/product/basic.png)');
 			} else {

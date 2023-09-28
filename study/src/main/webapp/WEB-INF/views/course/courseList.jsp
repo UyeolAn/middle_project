@@ -16,6 +16,18 @@
 			location.href="courselist.do?nowPage=${paging.nowPage}&cntPerPage="+sel;
 	    }
     </script>
+    <style>
+    	/* 배너관련 start */
+		.breadcrumb__links span {
+			color: #6c757d;
+		}
+		.breadcrumb-option {
+			background: url(client/img/banner/course_banner3.webp) rgba(170, 232, 255, 0.4) no-repeat 0% 70%;
+			background-size: 150%;
+			background-blend-mode: color;
+		}
+		/* 배너관련 end */
+    </style>
 </head>
 <body>
     <!-- Shop Section Begin -->
@@ -23,7 +35,17 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="shop__product__option__left">
-                    <%-- <p class="course-count">조회건수 : ${tcnt }</p> --%>
+                	<!-- 검색창.. -->
+	                <div class="shop__sidebar__search hop__product__option__left">
+						<form id="searchForm" action="coursesearch.do" method="post">
+							<input type="text" placeholder="찾고싶은 강의 키워드를 입력하세요." id="courseName" name="courseName">
+							<button type="submit">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+								  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+								</svg>
+							</button>
+						</form>
+					</div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
