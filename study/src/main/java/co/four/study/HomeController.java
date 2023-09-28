@@ -10,10 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.four.study.board.service.BoardService;
+import co.four.study.board.service.BoardVO;
+import co.four.study.board.serviceImpl.BoardServiceImpl;
 import co.four.study.common.ViewResolve;
 import co.four.study.course.service.CourseService;
 import co.four.study.course.service.CourseVO;
 import co.four.study.course.serviceImpl.CourseServiceImpl;
+import co.four.study.question.service.QuestionService;
+import co.four.study.question.service.QuestionVO;
+import co.four.study.question.serviceImpl.QuestionServiceImpl;
 
 @WebServlet("/home.do")
 public class HomeController extends HttpServlet {
@@ -25,34 +31,39 @@ public class HomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CourseService dao = new CourseServiceImpl();
+		BoardService bdao = new BoardServiceImpl();
+		QuestionService qdao = new QuestionServiceImpl();
 		
 		//인기많은 강의
 		List<CourseVO> hotList = dao.hotCourseList();
 		for(CourseVO vo : hotList) {
 			vo = dao.courseReviewSelect(vo);
+			System.out.println(vo.getCourseStars());
 		}
 		//리뷰많은 강의
 		List<CourseVO> reviewList = dao.reviewCourseList();
 		for(CourseVO vo : reviewList) {
 			vo = dao.courseReviewSelect(vo);
+			System.out.println(vo.getCourseStars());
 		}
 		//랜덤 it강의
 		List<CourseVO> itList = dao.itRandomCourseList();
 		for(CourseVO vo : itList) {
 			vo = dao.courseReviewSelect(vo);
-			System.out.println(vo);
+			System.out.println(vo.getCourseStars());
 		}
-//		List<CourseVO> courseList = new ArrayList<>();
-//		System.out.println(itList);
-//		for(int i = 0; i < 4; i++) {
-//			courseList.add(hotList.get(i));
-//			courseList.add(reviewList.get(i));
-//			courseList.add(itList.get(i));
-//		}
+		
+		//최신 자유게시판 게시글
+		List<BoardVO> bList = bdao.homeRecentBoard();
+		
+		//최신 질문게시판 게시글
+		List<QuestionVO> qList = qdao.homeRecentQuestion();
 		
 		request.setAttribute("hotList", hotList);
 		request.setAttribute("reviewList", reviewList);
 		request.setAttribute("itList", itList);
+		request.setAttribute("blist", bList);
+		request.setAttribute("qlist", qList);
 		String page = "home/home.jsp";
 		ViewResolve.foward(request, response, page);
 	}

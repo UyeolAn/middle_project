@@ -150,4 +150,15 @@
 		FROM boards
 		WHERE member_id = #{memberId}
 	</select>
+	
+	<select id="homeRecentBoard" resultType="co.four.study.board.service.BoardVO">
+		<![CDATA[
+		    SELECT * FROM (
+		      SELECT *
+		      FROM boards
+		      ORDER BY board_id desc
+		    )
+		    WHERE ROWNUM <= 5
+	  	]]>
+	</select>
 </mapper>

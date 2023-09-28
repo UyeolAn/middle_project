@@ -221,10 +221,10 @@
 										<div class="product__item__text">
 											<h6>${r.courseName}</h6>
 											<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
-												<c:forEach var = "i" begin = "1" end = "${r.courseStars}">
+												<c:forEach var = "star1" begin = "1" end = "${r.courseStars}">
 												  <div class="bi-star-fill"></div>
 												</c:forEach>
-												<c:forEach var = "i" begin = "1" end = "${5 - r.courseStars}">
+												<c:forEach var = "star1" begin = "1" end = "${5 - r.courseStars}">
 												  <div class="bi-star"></div>
 												</c:forEach>
 											</div>
@@ -249,10 +249,10 @@
 										<div class="product__item__text">
 											<h6>${h.courseName}</h6>
 											<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
-												<c:forEach var = "i" begin = "1" end = "${h.courseStars}">
+												<c:forEach var = "star2" begin = "1" end = "${h.courseStars}">
 												  <div class="bi-star-fill"></div>
 												</c:forEach>
-												<c:forEach var = "i" begin = "1" end = "${5 - h.courseStars}">
+												<c:forEach var = "star2" begin = "1" end = "${5 - h.courseStars}">
 												  <div class="bi-star"></div>
 												</c:forEach>
 											</div>
@@ -269,27 +269,29 @@
 								</a>
 							</div>
 						</c:forEach>
-						<c:forEach items="${itList}" var="i">
+						<c:forEach items="${itList}" var="l">
 							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix it">
-								<a href="coursedetail.do?courseId=${i.courseId}">
+								<a href="coursedetail.do?courseId=${l.courseId}">
 									<div class="product__item">
-										<img src="client/img/product/${i.courseImg}" style="width: 330px; height: 200px;">
+										<img src="client/img/product/${l.courseImg}" style="width: 330px; height: 200px;">
 										<div class="product__item__text">
-											<h6>${i.courseName}</h6>
+											<h6>${l.courseName}</h6>
 											<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
-												<c:forEach var = "i" begin = "1" end = "${i.courseStars}">
+												<c:forEach var = "star3" begin = "1" end = "${l.courseStars}">
 												  <div class="bi-star-fill"></div>
 												</c:forEach>
-												<c:forEach var = "i" begin = "1" end = "${5 - i.courseStars}">
+												<c:forEach var = "star3" begin = "1" end = "${5 - l.courseStars}">
 												  <div class="bi-star"></div>
 												</c:forEach>
 											</div>
-											<c:if test="${i.coursePrice eq 0}">
-												<h5>FREE</h5>
-											</c:if>
-											<c:if test="${i.coursePrice ne 0}">
-												<h5>${i.coursePrice}원</h5>
-											</c:if>
+											<c:choose>
+												<c:when test="${l.coursePrice eq 0}">
+													<h5>FREE</h5>
+												</c:when>
+												<c:otherwise>
+													<h5>${l.coursePrice}원</h5>
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</div>
 								</a>
@@ -305,20 +307,44 @@
 				<div class="row" style="justify-content: space-around;">
 					<div class="card col-lg-5 shadow" style="padding: 0; border: 0;">
 						<div class="card-head" style="padding: 20px;" >
-							<h4 style="font-family: 'NanumSquareRound'; text-align: center; line-height: 100%;">자유게시판</h4>
+							<div style="display: flex; justify-content: space-between;">
+								<h4 style="font-family: 'NanumSquareRound'; text-align: left; line-height: 100%; display: inline-block; flex: 3;">질문게시판</h4>
+								<a href="communityqnapage.do">
+									<h6 style="text-align: right; display: inline-block; line-height: 24px; flex: 1;">+더보기</h6>
+								</a>
+							</div>
 						</div>
 						<hr style="border: 3px solid salmon; margin: 0;">
 						<div class="card-body" style="padding: 20px;">
-							<span>테스트</span>
+							<c:forEach items="${qlist}" var="q">
+								<a href="communityqnadetailpage.do?questionId=${q.questionId}">
+									<div class="mb-2" style="display: flex; justify-content: space-between;">
+										<span style="text-align: left; flex: 1;">${q.questionTitle}</span>
+										<span style="text-align: right; flex: 1;">${q.questionEnterDate}</span>
+									</div>
+								</a>
+							</c:forEach>
 						</div>
 					</div>
 					<div class="card col-lg-5 shadow" style="padding: 0; border: 0;">
 						<div class="card-head" style="padding: 20px;" >
-							<h4 style="font-family: 'NanumSquareRound'; text-align: center; line-height: 100%;">질문게시판</h4>
+							<div style="display: flex; justify-content: space-between;">
+								<h4 style="font-family: 'NanumSquareRound'; text-align: left; line-height: 100%; display: inline-block; flex: 3;">자유게시판</h4>
+								<a href="communityfreepage.do">
+									<h6 style="text-align: right; display: inline-block; line-height: 24px; flex: 1;">+더보기</h6>
+								</a>
+							</div>
 						</div>
 						<hr style="border: 3px solid salmon; margin: 0;">
 						<div class="card-body" style="padding: 20px;">
-							<span>테스트</span>
+							<c:forEach items="${blist}" var="b">
+								<a href="communityfreedetailpage.do?boardId=${b.boardId}">
+									<div class="mb-2" style="display: flex; justify-content: space-between;">
+										<span style="text-align: left; flex: 1;">${b.boardTitle}</span>
+										<span style="text-align: right; flex: 1;">${b.boardEnterDate}</span>
+									</div>
+								</a>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -328,27 +354,25 @@
 
 
 				<!-- Footer Section Begin -->
-				<footer class="footer">
+				<footer style="padding-top: 70px; background-color: #3188DB;">
 					<div class="container">
 						<div class="row">
 							<div class="col-lg-3 col-md-6 col-sm-6">
 								<div class="footer__about">
 									<div class="footer__logo">
-										<a href="#"><img src="client/img/footer-logo.png" alt=""></a>
+										<a href="#"><img src="client/img/product/student.png" style="width: 100px;" alt=""></a>
 									</div>
-									<p>The customer is at the heart of our unique business model,
-										which includes design.</p>
-									<a href="#"><img src="client/img/payment.png" alt=""></a>
+									<h6 class="font-weight-bold" style="color: white;">&#129293;방문해주셔서 감사합니다!!&#129293;</h6>
 								</div>
 							</div>
 							<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
 								<div class="footer__widget">
-									<h6>Shopping</h6>
+									<h6>약과 4조</h6>
 									<ul>
-										<li><a href="#">Clothing Store</a></li>
-										<li><a href="#">Trending Shoes</a></li>
-										<li><a href="#">Accessories</a></li>
-										<li><a href="#">Sale</a></li>
+										<li>송민주</li>
+										<li>안우열</li>
+										<li>양진우</li>
+										<li>전유진</li>
 									</ul>
 								</div>
 							</div>
@@ -400,16 +424,7 @@
 				</footer>
 				<!-- Footer Section End -->
 
-				<!-- Search Begin -->
-				<div class="search-model">
-					<div class="h-100 d-flex align-items-center justify-content-center">
-						<div class="search-close-switch">+</div>
-						<form class="search-model-form">
-							<input type="text" id="search-input" placeholder="Search here.....">
-						</form>
-					</div>
-				</div>
-				<!-- Search End -->
+
 				<script>
 					let loginMsg = `${loginmsg}`;
 					if (loginMsg != "") {
