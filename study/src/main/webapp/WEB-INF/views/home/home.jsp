@@ -31,13 +31,13 @@
 					margin: 5%;
 				}
 
-				.header__top__hover ul a{
+				.header__top__hover ul a {
 					color: black;
-        }
-				* {
-				font-family: 'NanumSquareRound';
 				}
 
+				* {
+					font-family: 'NanumSquareRound';
+				}
 			</style>
 		</head>
 
@@ -45,43 +45,15 @@
 			<!-- Page Preloder -->
 			<div id="preloder">
 				<div class="loader"></div>
-			</div>		
+			</div>
 			<!-- Header Section Begin -->
 			<header class="header">
-				<div class="header__top"  style="background-color: white;">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-6 col-md-7">
-								<div class="header__top__left">
-									<p>인터넷 강의 사이트</p>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-5">
-								<div class="header__top__right">
-									<div class="header__top__links">
-										<c:if test="${empty loginId}">
-											<a href="login.do" style="color: black;">Sign in</a>
-										</c:if>
-									</div>
-									<c:if test="${not empty loginId}">
-										<div class="header__top__hover">
-											<span>${loginName} 님 접속중<i class="arrow_carrot-down"></i></span>
-											<ul>
-												<li><a href="logout.do">LOGOUT</a></li>
-												<li><a href="mypageprofile.do">MY PAGE</a></li>
-											</ul>
-									</c:if>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				</div>
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-3 col-md-3">
 							<div class="header__logo">
-								<a href="home.do"><img src="client/img/product/student.png" style="width: 50px;" alt=""></a>
+								<a href="home.do"><img src="client/img/product/student.png" style="width: 50px;"
+										alt=""></a>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6">
@@ -113,12 +85,23 @@
 							</nav>
 						</div>
 						<div class="col-lg-3 col-md-3">
-							<div class="header__nav__option">
-								<a href="#" class="search-switch"><img src="client/img/icon/search.png" alt=""></a> <a href="#"><img
-										src="client/img/icon/heart.png" alt=""></a> <a href="#"><img src="client/img/icon/cart.png" alt="">
-									<span>0</span></a>
-								<div class="price">$0.00</div>
-							</div>
+							<nav class="header__menu mobile-menu">
+								<ul>
+									<c:if test="${not empty loginId}">
+										<li><a href="communityqnapage.do"><span>${loginName} 님 접속중</span></a>
+											<ul class="dropdown">
+												<li><a href="logout.do">LOGOUT</a></li>
+												<li><a href="mypageprofile.do">MY PAGE</a></li>
+											</ul>
+										</li>
+									</c:if>
+									<c:if test="${empty loginId}">
+										<li>
+											<a href="login.do" style="color: black;">Sign in</a>
+										</li>
+									</c:if>
+								</ul>
+							</nav>
 						</div>
 					</div>
 					<div class="canvas__open">
@@ -129,8 +112,8 @@
 			<!-- Header Section End -->
 
 			<!-- Hero Section Begin -->
-			<div class="hero__slider owl-carousel" style="height: 300px;" >
-				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: pink;" >
+			<div class="hero__slider owl-carousel" style="height: 300px;">
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: pink;">
 					<a href="packagelist.do">
 						<div class="container">
 							<div class="row">
@@ -149,14 +132,15 @@
 						</div>
 					</a>
 				</div>
-				<div class="hero__items set-bg" style="padding: 30px; height: 300px; background-color: #3188DB;" >
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px; background-color: #3188DB;">
 					<a href="courselist.do">
 						<div class="container">
 							<div class="row">
 								<div class="col-lg-7">
 									<div class="hero__text">
 										<h6>SALE COURSE</h6>
-										<h2 style="font-family: 'NanumSquareRound'; color: white;">IT 강의들 잔뜩&#128218;</h2>
+										<h2 style="font-family: 'NanumSquareRound'; color: white;">IT 강의들 잔뜩&#128218;
+										</h2>
 										<p style="font-family: 'NanumSquareRound';">예비 개발자들을 위한 강의들을 골라 들어보세요</p>
 									</div>
 								</div>
@@ -167,7 +151,7 @@
 						</div>
 					</a>
 				</div>
-				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: greenyellow;" >
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: greenyellow;">
 					<a href="communityqnapage.do">
 						<div class="container">
 							<div class="row">
@@ -199,9 +183,13 @@
 					<div class="row">
 						<div class="col-lg-12" style="margin: 30px;">
 							<ul class="filter__controls">
-								<li class="active" data-filter="*" style="width: 150px;"><img src="client/img/home/heart.png" style="width: 30px;" title="Best Hot"> HOT</li>
-								<li data-filter=".new-arrivals" style="width: 150px;"><img src="client/img/home/star.png" style="width: 30px;" title="Best Review"> REVIEW</li>
-								<li data-filter=".hot-sales"  style="width: 150px;"><img src="client/img/home/computer.png" style="width: 30px;" title="Best IT"> IT</li>
+								<li class="active" data-filter="*" style="width: 150px;"><img
+										src="client/img/home/heart.png" style="width: 30px;" title="Best Hot"> HOT</li>
+								<li data-filter=".new-arrivals" style="width: 150px;"><img
+										src="client/img/home/star.png" style="width: 30px;" title="Best Review"> REVIEW
+								</li>
+								<li data-filter=".hot-sales" style="width: 150px;"><img
+										src="client/img/home/computer.png" style="width: 30px;" title="Best IT"> IT</li>
 							</ul>
 						</div>
 					</div>
@@ -212,7 +200,8 @@
 									<span class="label">New</span>
 									<ul class="product__hover">
 										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a>
+										</li>
 										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
 									</ul>
 								</div>
@@ -246,7 +235,8 @@
 								<div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
 									<ul class="product__hover">
 										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a>
+										</li>
 										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
 									</ul>
 								</div>
@@ -281,7 +271,8 @@
 									<span class="label">Sale</span>
 									<ul class="product__hover">
 										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a>
+										</li>
 										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
 									</ul>
 								</div>
@@ -315,7 +306,8 @@
 								<div class="product__item__pic set-bg" data-setbg="img/product/product-4.jpg">
 									<ul class="product__hover">
 										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a>
+										</li>
 										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
 									</ul>
 								</div>
@@ -349,7 +341,8 @@
 								<div class="product__item__pic set-bg" data-setbg="img/product/product-5.jpg">
 									<ul class="product__hover">
 										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a>
+										</li>
 										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
 									</ul>
 								</div>
@@ -384,7 +377,8 @@
 									<span class="label">Sale</span>
 									<ul class="product__hover">
 										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a>
+										</li>
 										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
 									</ul>
 								</div>
@@ -418,7 +412,8 @@
 								<div class="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">
 									<ul class="product__hover">
 										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a>
+										</li>
 										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
 									</ul>
 								</div>
@@ -452,7 +447,8 @@
 								<div class="product__item__pic set-bg" data-setbg="img/product/product-8.jpg">
 									<ul class="product__hover">
 										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a>
+										</li>
 										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
 									</ul>
 								</div>
@@ -517,119 +513,119 @@
 					</div>
 
 				</div> -->
-				<!-- Recommend Course Section End-->
+			<!-- Recommend Course Section End-->
 
-				<!-- Footer Section Begin -->
-				<footer class="footer">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-3 col-md-6 col-sm-6">
-								<div class="footer__about">
-									<div class="footer__logo">
-										<a href="#"><img src="client/img/footer-logo.png" alt=""></a>
-									</div>
-									<p>The customer is at the heart of our unique business model,
-										which includes design.</p>
-									<a href="#"><img src="client/img/payment.png" alt=""></a>
+			<!-- Footer Section Begin -->
+			<footer class="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-3 col-md-6 col-sm-6">
+							<div class="footer__about">
+								<div class="footer__logo">
+									<a href="#"><img src="client/img/footer-logo.png" alt=""></a>
 								</div>
-							</div>
-							<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
-								<div class="footer__widget">
-									<h6>Shopping</h6>
-									<ul>
-										<li><a href="#">Clothing Store</a></li>
-										<li><a href="#">Trending Shoes</a></li>
-										<li><a href="#">Accessories</a></li>
-										<li><a href="#">Sale</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-2 col-md-3 col-sm-6">
-								<div class="footer__widget">
-									<h6>Shopping</h6>
-									<ul>
-										<li><a href="#">Contact Us</a></li>
-										<li><a href="#">Payment Methods</a></li>
-										<li><a href="#">Delivary</a></li>
-										<li><a href="#">Return & Exchanges</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-								<div class="footer__widget">
-									<h6>NewLetter</h6>
-									<div class="footer__newslatter">
-										<p>Be the first to know about new arrivals, look books, sales
-											& promos!</p>
-										<form action="#">
-											<input type="text" placeholder="Your email">
-											<button type="submit">
-												<span class="icon_mail_alt"></span>
-											</button>
-										</form>
-									</div>
-								</div>
+								<p>The customer is at the heart of our unique business model,
+									which includes design.</p>
+								<a href="#"><img src="client/img/payment.png" alt=""></a>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-lg-12 text-center">
-								<div class="footer__copyright__text">
-									<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-									<p>
-										Copyright ©
-										<script>
-											document.write(new Date().getFullYear());
-										</script>
-										2020 All rights reserved | This template is made with <i class="fa fa-heart-o"
-											aria-hidden="true"></i>
-										by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-									</p>
-									<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+							<div class="footer__widget">
+								<h6>Shopping</h6>
+								<ul>
+									<li><a href="#">Clothing Store</a></li>
+									<li><a href="#">Trending Shoes</a></li>
+									<li><a href="#">Accessories</a></li>
+									<li><a href="#">Sale</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-3 col-sm-6">
+							<div class="footer__widget">
+								<h6>Shopping</h6>
+								<ul>
+									<li><a href="#">Contact Us</a></li>
+									<li><a href="#">Payment Methods</a></li>
+									<li><a href="#">Delivary</a></li>
+									<li><a href="#">Return & Exchanges</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+							<div class="footer__widget">
+								<h6>NewLetter</h6>
+								<div class="footer__newslatter">
+									<p>Be the first to know about new arrivals, look books, sales
+										& promos!</p>
+									<form action="#">
+										<input type="text" placeholder="Your email">
+										<button type="submit">
+											<span class="icon_mail_alt"></span>
+										</button>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-				</footer>
-				<!-- Footer Section End -->
-
-				<!-- Search Begin -->
-				<div class="search-model">
-					<div class="h-100 d-flex align-items-center justify-content-center">
-						<div class="search-close-switch">+</div>
-						<form class="search-model-form">
-							<input type="text" id="search-input" placeholder="Search here.....">
-						</form>
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<div class="footer__copyright__text">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								<p>
+									Copyright ©
+									<script>
+										document.write(new Date().getFullYear());
+									</script>
+									2020 All rights reserved | This template is made with <i class="fa fa-heart-o"
+										aria-hidden="true"></i>
+									by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+								</p>
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</div>
+						</div>
 					</div>
 				</div>
-				<!-- Search End -->
-				<script>
-					let loginMsg = `${loginmsg}`;
-					if (loginMsg != "") {
-						alert(loginMsg)
-						loginMsg = "";
-					}
+			</footer>
+			<!-- Footer Section End -->
+
+			<!-- Search Begin -->
+			<div class="search-model">
+				<div class="h-100 d-flex align-items-center justify-content-center">
+					<div class="search-close-switch">+</div>
+					<form class="search-model-form">
+						<input type="text" id="search-input" placeholder="Search here.....">
+					</form>
+				</div>
+			</div>
+			<!-- Search End -->
+			<script>
+				let loginMsg = `${loginmsg}`;
+				if (loginMsg != "") {
+					alert(loginMsg)
+					loginMsg = "";
+				}
 
 
-					let logoutMsg = `${altmsg}`;
-					if (logoutMsg != "") {
-						alert(logoutMsg)
-						logoutMsg = "";
-					}
+				let logoutMsg = `${altmsg}`;
+				if (logoutMsg != "") {
+					alert(logoutMsg)
+					logoutMsg = "";
+				}
 
 
 
-				</script>
-				<!-- Js Plugins -->
-				<script src="client/js/jquery-3.3.1.min.js"></script>
-				<script src="client/js/bootstrap.min.js"></script>
-				<script src="client/js/jquery.nice-select.min.js"></script>
-				<script src="client/js/jquery.nicescroll.min.js"></script>
-				<script src="client/js/jquery.magnific-popup.min.js"></script>
-				<script src="client/js/jquery.countdown.min.js"></script>
-				<script src="client/js/jquery.slicknav.js"></script>
-				<script src="client/js/mixitup.min.js"></script>
-				<script src="client/js/owl.carousel.min.js"></script>
-				<script src="client/js/main.js"></script>
+			</script>
+			<!-- Js Plugins -->
+			<script src="client/js/jquery-3.3.1.min.js"></script>
+			<script src="client/js/bootstrap.min.js"></script>
+			<script src="client/js/jquery.nice-select.min.js"></script>
+			<script src="client/js/jquery.nicescroll.min.js"></script>
+			<script src="client/js/jquery.magnific-popup.min.js"></script>
+			<script src="client/js/jquery.countdown.min.js"></script>
+			<script src="client/js/jquery.slicknav.js"></script>
+			<script src="client/js/mixitup.min.js"></script>
+			<script src="client/js/owl.carousel.min.js"></script>
+			<script src="client/js/main.js"></script>
 		</body>
 
 		</html>
