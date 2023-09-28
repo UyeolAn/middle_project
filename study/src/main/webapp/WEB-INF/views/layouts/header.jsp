@@ -16,6 +16,9 @@
       .header__top__hover li:hover {
         color: black;
       }
+      .header__top {
+      	background: #fff;
+      }
     </style>
 
     <body>
@@ -56,24 +59,24 @@
           <div class="row">
             <div class="col-lg-3 col-md-3">
               <div class="header__logo">
-                <a href="home.do"><img src="client/img/logo.png" alt=""></a>
+                <a href="home.do"><img src="client/img/product/student.png" style="width: 50px;" alt=""></a>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <nav class="header__menu mobile-menu">
                 <ul>
-                  <li><a href="home.do">Home</a></li>
-                  <li class="<c:if test=" ${menu eq 'course' }">active</c:if>"><a href="courselist.do">Course</a>
+                  <li><a href="home.do">&#127968;Home</a></li>
+                  <li class="<c:if test="${menu eq 'course'}">active</c:if>"><a href="courselist.do">&#128187;Course</a>
                     <ul class="dropdown">
                       <li><a href="courselist.do?mainCate=it">IT</a></li>
                       <li><a href="courselist.do?mainCate=english">English</a></li>
                       <li><a href="courselist.do?mainCate=career">Career</a></li>
                     </ul>
                   </li>
-                  <li class="<c:if test=" ${menu eq 'package' }">active</c:if>"><a href="packagelist.do">Package</a>
+                  <li class="<c:if test="${menu eq 'package'}">active</c:if>"><a href="packagelist.do">&#127873;Package</a>
                   </li>
-                  <li class="<c:if test=" ${menu eq 'community' }">active</c:if>"><a
-                      href="communityqnapage.do">Community</a>
+                  <li class="<c:if test="${menu eq 'community'}">active</c:if>"><a
+                      href="communityqnapage.do">&#128106;Community</a>
                     <ul class="dropdown">
                       <li><a href="communityqnapage.do">질문게시판</a></li>
                       <li><a href="communityfreepage.do">자유게시판</a></li>
@@ -103,6 +106,9 @@
               <div class="breadcrumb__text">
                 <c:if test="${menu eq 'course'}">
                   <h4>Course</h4>
+                </c:if>
+                <c:if test="${menu eq 'package'}">
+                  <h4>Package</h4>
                 </c:if>
                 <c:if test="${menu eq 'mypage'}">
                   <h4>Mypage</h4>

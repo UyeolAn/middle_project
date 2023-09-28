@@ -1,5 +1,14 @@
 @charset "UTF-8";
-
+/* 배너관련 start */
+.breadcrumb__links span {
+	color: #6c757d;
+}
+.breadcrumb-option {
+	background: url(../img/banner/package_banner3.webp) rgba(255, 176, 176, 0.45) no-repeat 95% 70%;
+	background-size: 50%;
+	background-blend-mode: color;
+}
+/* 배너관련 end */
 .message_wrap {
 	display: flex;
 	justify-content: center;

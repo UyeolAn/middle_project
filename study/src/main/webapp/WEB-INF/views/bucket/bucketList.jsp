@@ -12,14 +12,26 @@
 	<!-- 장바구니 페이지 start -->
 	<section class="shopping-cart">
 		<div class="col-lg-8">
+			<div class="cart__total cart_member_info">
+				<h6 class="cart_title">회원정보</h6>
+				<ul>
+					<li>이름 <span>${member.memberName }</span></li>
+					<li>연락처 <span>${member.memberTel }</span></li>
+					<li>주소 <span>${member.memberAddress }</span></li>
+					<li>이메일 <span>${member.memberEmail }</span></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-lg-8">
 			<!-- 일반강의 바구니영역 start -->
 			<div class="shopping__cart__table">
+				<div class="cart_title"><span>&#128216;</span>단과 강의</div>
 				<div class="table">
 					<div class="thead">
 						<div class="tr">
-							<p class="td_1">강의명</p>
-							<p class="td_2">금액</p>
-							<p class="td_3">삭제</p>
+							<div class="td_1">강의명</div>
+							<div class="td_2">금액</div>
+							<div class="td_3"></div>
 						</div>
 					</div>
 					<div class="tbody">
@@ -31,20 +43,20 @@
 										<h6>${c.courseName }</h6>
 									</div>
 								</div>
-								<div class="cart__price td_2" style="width: 140px;">
+								<div class="cart__price td_2">
 									<fmt:formatNumber value="${c.coursePrice }" pattern="#,###" />원
 								</div>
-								<div class="cart__close td_3" style="width: 50px;"><i class="fa fa-close" onclick="bucketDelete('${member.memberId}', ${c.courseId }, this)"></i></div>
+								<div class="cart__close td_3" onclick="bucketDelete('${member.memberId}', ${c.courseId }, this)"><i class="fa fa-close" ></i></div>
 							</div>
 						</c:forEach>
 						<!-- 장바구니가 비어있으면 show -->
 						<div class="empty_bucket_message tr <c:if test="${message eq 'empty'}">bucket_empty_show</c:if>">
 							<div class="td_colspan3">
-								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#6c757d" class="bi bi-cart-x" viewBox="0 0 16 16">
-								  <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z"/>
-								  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#8b9299" class="bi bi-bag-x" viewBox="0 0 16 16">
+								  <path fill-rule="evenodd" d="M6.146 8.146a.5.5 0 0 1 .708 0L8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 0 1 0-.708z"/>
+								  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
 								</svg>
-								<span>담긴 강의가 없습니다</span>
+								<span style="color:#8b9299">담긴 강의가 없습니다</span>
 							</div>
 						</div>
 						<!-- 장바구니가 비어있으면 show -->
@@ -55,12 +67,13 @@
 			
 			<!-- 패키지 바구니영역 start -->
 			<div class="shopping__cart__table">
+				<div class="cart_title"><span>&#128218;</span>패키지 강의</div>
 				<div class="table">
 					<div class="thead">
 						<div class="tr">
-							<p class="td_1">패키지명</p>
-							<p class="td_2">금액</p>
-							<p class="td_3"></p>
+							<div class="td_1">패키지명</div>
+							<div class="td_2">금액</div>
+							<div class="td_3"></div>
 						</div>
 					</div>
 					<div class="tbody">
@@ -73,20 +86,20 @@
 										<h6>${p.packageTitle }</h6>
 									</div>
 								</div>
-								<div class="cart__price td_2" style="width: 140px;">
+								<div class="cart__price td_2">
 									<fmt:formatNumber value="${p.salePrice }" pattern="#,###" />원
 								</div>
-								<p class="cart__close td_3" style="width: 50px;"><i class="fa fa-close" onclick="packageDelete('${member.memberId}', ${p.packageId }, this)"></i></p>
+								<div class="cart__close td_3" onclick="packageDelete('${member.memberId}', ${p.packageId }, this)"><i class="fa fa-close" ></i></div>
 							</div>
 						</c:forEach>
 						<!-- 장바구니가 비어있으면 show -->
 						<div class="empty_bucket_message tr <c:if test="${pmessage eq 'package_empty'}">bucket_empty_show</c:if>">
 							<div class="td_colspan3">
-								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#6c757d" class="bi bi-cart-x" viewBox="0 0 16 16">
-								  <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z"/>
-								  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#8b9299" class="bi bi-bag-x" viewBox="0 0 16 16">
+								  <path fill-rule="evenodd" d="M6.146 8.146a.5.5 0 0 1 .708 0L8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 0 1 0-.708z"/>
+								  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
 								</svg>
-								<span>담긴 패키지가 없습니다</span>
+								<span style="color:#8b9299">담긴 패키지가 없습니다</span>
 							</div>						
 						</div>
 						<!-- 장바구니가 비어있으면 show -->
@@ -108,7 +121,9 @@
 			<div class="cart__total">
 				<h6 class="cart_title">결제정보</h6>
 				<ul>
-					<li>총 결제금액 <span class="cart_sum_price"><fmt:formatNumber value="${sum + psum }" pattern="#,###" />원</span></li>
+					<li>단과 강의 <span class="cart_course_price"><fmt:formatNumber value="${sum }" pattern="#,###" /> 원</span></li>
+					<li>패키지 강의 <span class="cart_package_price"><fmt:formatNumber value="${psum }" pattern="#,###" /> 원</span></li>
+					<li>총 결제금액 <span class="cart_sum_price"><fmt:formatNumber value="${sum + psum }" pattern="#,###" /> 원</span></li>
 				</ul>
 				<a href="#" class="primary-btn" onclick="payment('${member.memberId}')">결제하기</a>
 			</div>
@@ -128,7 +143,7 @@
 					if(result.message == 'success'){
 						let sum = result.sum;
 						sum = sum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-						$(target).closest('tr').remove();
+						$(target).closest('.tr').remove();
 						$('.cart_sum_price').text(sum + '원');
 						alert('선택하신 상품이 장바구니에서 삭제되었습니다.');
 						

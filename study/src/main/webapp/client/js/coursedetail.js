@@ -130,12 +130,13 @@ function addMemberFreeCourse() {
 				
 				const check = confirm('수강신청이 완료되었습니다.\n바로 학습하시겠습니까?');
 				if(check == true) {
-					$('.tab-menu-1').removeClass('active');
+					/*$('.tab-menu-1').removeClass('active');
 					$('.tab-menu-3').removeClass('active');
 					$('#tabs-5').removeClass('active');
 					$('#tabs-7').removeClass('active');
 					$('.tab-menu-2').addClass('active');
-					$('#tabs-6').addClass('active');
+					$('#tabs-6').addClass('active');*/
+					location.reload();
 				} else {
 					return true;
 				}
