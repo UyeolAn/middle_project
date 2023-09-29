@@ -34,23 +34,24 @@ public class HomeController extends HttpServlet {
 		BoardService bdao = new BoardServiceImpl();
 		QuestionService qdao = new QuestionServiceImpl();
 		
+		
 		//인기많은 강의
 		List<CourseVO> hotList = dao.hotCourseList();
-		for(CourseVO vo : hotList) {
-			vo = dao.courseReviewSelect(vo);
-			System.out.println(vo.getCourseStars());
+		for (int i = 0; i < hotList.size(); i++) {
+		    hotList.set(i, dao.courseReviewSelect(hotList.get(i)));
 		}
+		
+		System.out.println(hotList);
 		//리뷰많은 강의
 		List<CourseVO> reviewList = dao.reviewCourseList();
-		for(CourseVO vo : reviewList) {
-			vo = dao.courseReviewSelect(vo);
-			System.out.println(vo.getCourseStars());
+		for (int i = 0; i < reviewList.size(); i++) {
+			reviewList.set(i, dao.courseReviewSelect(reviewList.get(i)));
 		}
+		
 		//랜덤 it강의
 		List<CourseVO> itList = dao.itRandomCourseList();
-		for(CourseVO vo : itList) {
-			vo = dao.courseReviewSelect(vo);
-			System.out.println(vo.getCourseStars());
+		for (int i = 0; i < itList.size(); i++) {
+			itList.set(i, dao.courseReviewSelect(itList.get(i)));
 		}
 		
 		//최신 자유게시판 게시글

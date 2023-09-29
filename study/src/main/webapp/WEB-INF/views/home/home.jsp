@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 		<!DOCTYPE html>
 		<html>
 
@@ -214,9 +215,9 @@
 					</div>
 					<div class="row product__filter">
 						<c:forEach items="${reviewList}" var="r">
-							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix review">
+							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix review course-col">
 								<a href="coursedetail.do?courseId=${r.courseId}">
-									<div class="product__item">
+									<div class="product__item course-item">
 										<img src="client/img/product/${r.courseImg}" style="width: 330px; height: 200px;">
 										<div class="product__item__text">
 											<h6>${r.courseName}</h6>
@@ -230,7 +231,7 @@
 											</div>
 											<c:choose>
 												<c:when test="${r.coursePrice eq 0}">
-													<h5>FREE</h5>
+													<h5 class="text-danger">무료</h5>
 												</c:when>
 												<c:otherwise>
 													<h5>${r.coursePrice}원</h5>
@@ -242,9 +243,9 @@
 							</div>
 						</c:forEach>
 						<c:forEach items="${hotList}" var="h">
-							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot">
+							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot course-col">
 								<a href="coursedetail.do?courseId=${h.courseId}">
-									<div class="product__item">
+									<div class="product__item course-item">
 										<img src="client/img/product/${h.courseImg}" style="width: 330px; height: 200px;">
 										<div class="product__item__text">
 											<h6>${h.courseName}</h6>
@@ -258,7 +259,7 @@
 											</div>
 											<c:choose>
 												<c:when test="${h.coursePrice eq 0}">
-													<h5>FREE</h5>
+													<h5 class="text-danger">무료</h5>
 												</c:when>
 												<c:otherwise>
 													<h5>${h.coursePrice}원</h5>
@@ -270,9 +271,9 @@
 							</div>
 						</c:forEach>
 						<c:forEach items="${itList}" var="l">
-							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix it">
+							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix it course-col">
 								<a href="coursedetail.do?courseId=${l.courseId}">
-									<div class="product__item">
+									<div class="product__item course-item">
 										<img src="client/img/product/${l.courseImg}" style="width: 330px; height: 200px;">
 										<div class="product__item__text">
 											<h6>${l.courseName}</h6>
@@ -286,7 +287,7 @@
 											</div>
 											<c:choose>
 												<c:when test="${l.coursePrice eq 0}">
-													<h5>FREE</h5>
+													<h5 class="text-danger">무료</h5>
 												</c:when>
 												<c:otherwise>
 													<h5>${l.coursePrice}원</h5>
