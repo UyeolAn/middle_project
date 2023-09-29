@@ -27,7 +27,6 @@ public class KakaoLogin extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ObjectMapper objectMapper = new ObjectMapper();
 		MemberService dao = new MemberServiceImpl();
 		MemberVO vo = new MemberVO();
 		HttpSession session = request.getSession();
@@ -40,7 +39,8 @@ public class KakaoLogin extends HttpServlet {
 		if (vo != null) {
 			session.setAttribute("loginId", vo.getMemberId());
 			session.setAttribute("loginName", vo.getMemberName());
-			session.setAttribute("loginAuthor", "client");	
+			session.setAttribute("loginAuthor", "client");
+			session.setAttribute("isKakaoUser", true);
 			
 			
 			if (session.getAttribute("loginAuthor").equals("admin")) {

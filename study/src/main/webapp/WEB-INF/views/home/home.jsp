@@ -74,7 +74,8 @@
 										<div class="header__top__hover">
 											<span>${loginName} 님 접속중<i class="arrow_carrot-down"></i></span>
 											<ul>
-												<li><a href="logout.do">LOGOUT</a></li>
+												<li onclick="logout()">LOGOUT</li>
+												<!-- <li><a href="logout.do">LOGOUT</a></li> -->
 												<li><a href="mypageprofile.do">MY PAGE</a></li>
 											</ul>
 									</c:if>
@@ -467,6 +468,80 @@
 				})();
 				</script>
 				<!--End of Tawk.to Script-->
+
+				<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+				<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+				integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous">
+			</script>
+				<script>
+					Kakao.init('9c1eb3ec967ca14a10ddab8621bdddef');
+
+					
+					function logout() {
+						const isKakaoUser = <%= session.getAttribute("isKakaoUser") %>;
+						console.log(isKakaoUser);
+						if (isKakaoUser) {
+							// 카카오 로그아웃 처리 코드
+							if (Kakao.Auth.getAccessToken()) {
+								Kakao.API.request({
+									url: '/v1/user/unlink',
+									success: function (response) {
+										console.log(response)
+									},
+									fail: function (error) {
+									console.log(error)
+									},
+								})
+								Kakao.Auth.setAccessToken(undefined)
+								}
+							// Kakao.Auth.logout()
+							// .then(function(response) {
+							// 	console.log(Kakao.Auth.getAccessToken()); // null
+							// })
+							// .catch(function(error) {
+							// 	console.log('Not logged in.');
+							// });
+							fetch('logout.do', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/x-www-form-urlencoded'
+								}
+							})
+							.then(response => {
+								if (response.ok) {
+									console.log('카카오 로그아웃 성공');
+									window.location.href = 'home.do';
+								} else {
+									console.error('카카오 로그아웃 실패');
+								}
+							})
+							.catch(error => {
+								console.error('로그아웃 오류: ' + error);
+							});
+						} else {
+							// 일반 로그아웃 처리 코드
+							fetch('logout.do', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/x-www-form-urlencoded'
+								}
+							})
+							.then(response => {
+								if (response.ok) {
+									console.log('일반 로그아웃 성공');
+									window.location.href = 'home.do';								
+								} else {
+									console.error('일반 로그아웃 실패');
+								}
+							})
+							.catch(error => {
+								console.error('로그아웃 오류: ' + error);
+							});
+						}
+					}
+
+					
+				</script>
 			</body>
 
 		</html>

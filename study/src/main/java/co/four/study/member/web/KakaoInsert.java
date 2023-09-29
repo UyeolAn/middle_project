@@ -36,7 +36,7 @@ public class KakaoInsert extends HttpServlet {
 		vo.setMemberTel(request.getParameter("memberTel"));
 		vo.setMemberAddress(request.getParameter("address1") +" "+request.getParameter("address2") + 
 				request.getParameter("address3"));
-		vo.setMemberEmail(request.getParameter("memberEmail"));
+		vo.setMemberEmail(request.getParameter("memberId"));
 //		System.out.println(vo);
 		dao.memberInsert(vo);
 

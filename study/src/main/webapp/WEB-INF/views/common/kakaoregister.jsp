@@ -93,7 +93,7 @@
 
                                         <div class="form-group">
                                             <input type="number" class="form-control form-control-user"
-                                                id="exampleInputEmail" name="memberTel" placeholder="Phon Number"
+                                                id="exampleInputEmail" name="memberTel" placeholder="Phone Number"
                                                 maxlength="20">
                                         </div>
                                         <div class="form-group">

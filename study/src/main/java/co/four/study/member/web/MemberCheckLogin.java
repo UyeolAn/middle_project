@@ -44,7 +44,8 @@ public class MemberCheckLogin extends HttpServlet {
 			session.setAttribute("loginId", vo.getMemberId());
 			session.setAttribute("loginName", vo.getMemberName());
 			session.setAttribute("loginAuthor", vo.getMemberAuthor());	
-			
+			//카카오로그인 회원이 아니란걸 세션에 저장
+			session.setAttribute("isKakaoUser", false);
 			
 			if (session.getAttribute("loginAuthor").equals("admin")) {
 				response.sendRedirect("adminhome.do");// 관리자 페이지 링크
