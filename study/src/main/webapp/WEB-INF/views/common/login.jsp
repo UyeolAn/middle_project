@@ -89,14 +89,14 @@
 											</div>
 											<button type="submit"
 												class="btn btn-primary btn-user btn-block">Login</button>
-												<a id="kakao-login-btn" href="javascript:kakaoLogin()">
+												<!-- <a id="kakao-login-btn" href="javascript:kakaoLogin()">
 													<img src="img/kakao_login.png" width="100" margin = "0 auto"
 													  alt="카카오 로그인 버튼" />
+												  </a> -->
+												  <a id="kakao-login-btn" href="javascript:kakaoLogin()">
+													<img src="client/img/icon/kakao_login.png" width="421" height="44" margin = "0 auto"
+													  style="border-radius: 10rem;" alt="카카오 로그인 버튼" />
 												  </a>
-												<a id="kakao-login-btn2" href="javascript:loginWithKakao2()">
-												<img src="img/kakao_login.png" width="100" margin = "0 auto"
-													alt="카카오 로그인 버튼" />
-												</a>
 											<hr>
 										</form>
 										<div class="text-center">
@@ -270,19 +270,19 @@
 
 
 					//카카오로그아웃  
-					function kakaoLogout() {
-						if (Kakao.Auth.getAccessToken()) {
-						Kakao.API.request({
-							url: '/v1/user/unlink',
-							success: function (response) {
-								console.log(response)
-							},
-							fail: function (error) {
-							console.log(error)
-							},
-						})
-						Kakao.Auth.setAccessToken(undefined)
-						}}
+	//				function kakaoLogout() {
+	//					if (Kakao.Auth.getAccessToken()) {
+	//					Kakao.API.request({
+	//						url: '/v1/user/unlink',
+	//						success: function (response) {
+	//							console.log(response)
+	//						},
+	//						fail: function (error) {
+	//						console.log(error)
+	//						},
+	//					})
+	//					Kakao.Auth.setAccessToken(undefined)
+	//					}}
 
 	// 				//카카오
 	// 				function loginWithKakao2 () {

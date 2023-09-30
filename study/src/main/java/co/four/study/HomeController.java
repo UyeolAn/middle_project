@@ -41,7 +41,7 @@ public class HomeController extends HttpServlet {
 		    hotList.set(i, dao.courseReviewSelect(hotList.get(i)));
 		}
 		
-		System.out.println(hotList);
+//		System.out.println(hotList);
 		//리뷰많은 강의
 		List<CourseVO> reviewList = dao.reviewCourseList();
 		for (int i = 0; i < reviewList.size(); i++) {
