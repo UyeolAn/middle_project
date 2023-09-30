@@ -13,16 +13,16 @@
 }
 .table {
 	margin-bottom: 50px;
-	border-top: 1px solid #e5f2ff;
+	border-top: 1px solid #e3e6f0;
 }
 .tr {
 	display: flex;
 	justify-content: space-between;
-	border-bottom: 1px solid #e5f2ff;
+	border-bottom: 1px solid #e3e6f0;
 	padding: 10px 0;
 }
 .thead .tr {
-	background: #f6fcff;
+	background: #f8f9fc;
 	/*color: #1e4c7a;*/
 }
 .thead .tr .td_1,
@@ -95,14 +95,17 @@
 	font-weight: 700;
 }
 .cart__total {
-	background: #f7faff;
+	background: #fcfdff;
     padding: 30px;
     border: 1px solid #dae9ff;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 }
 .cart__total h6 {
-	margin-bottom: 20px;
+	display: inline-block;
+	padding-bottom: 5px;
+	border-bottom: 2px solid #e53637;
+	margin-bottom: 35px;
 }
 .cart__total ul {
 	display: flex;
@@ -203,7 +206,7 @@
 	display: flex;
     justify-content: center;
     padding: 50px;
-    border-bottom: 1px solid #e5f2ff !important;
+    border-bottom: 1px solid #e3e6f0 !important;
 }
 .bucket_empty_show td{
 	padding-left: 30px;
