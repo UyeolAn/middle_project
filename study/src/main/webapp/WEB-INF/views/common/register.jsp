@@ -75,7 +75,7 @@
                                         <h1 class="h4 text-gray-900 mb-4">회원가입!</h1>
                                     </div>
 
-                                    <form class="user" method="post" action="memberRegist.do" id="frm">
+                                    <form class="user" method="post" action="memberRegist.do" id="frm" onsubmit="return noPageBack()">
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0 ">
                                                 <input type="text" class="form-control form-control-user btmagin4"
@@ -226,8 +226,11 @@
                         alert("회원가입이 완료되었습니다.")
                         $('#frm').submit();
                     } else {
-                        alert("양식을 다시 확인해 주세요.")
+                        alert("중복체크 혹은 비밀번호를 다시 확인해 주세요")
                     }
+                }
+                function noPageBack(){
+                
                 }
 
 

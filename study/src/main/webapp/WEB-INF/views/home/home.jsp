@@ -599,14 +599,14 @@
 			</div>
 			<!-- Search End -->
 			<script>
-				let loginMsg = `${loginmsg}`;
+				let loginMsg = `${msg}`;
 				if (loginMsg != "") {
 					alert(loginMsg)
 					loginMsg = "";
 				}
 
 
-				let logoutMsg = `${altmsg}`;
+				let logoutMsg = `${msg}`;
 				if (logoutMsg != "") {
 					alert(logoutMsg)
 					logoutMsg = "";
