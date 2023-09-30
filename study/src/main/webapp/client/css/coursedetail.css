@@ -28,6 +28,15 @@
 	padding-bottom: 30px;
 }
 
+/* 강의 디테일페이지 헤더 */
+.product__details__tab .nav-tabs {
+	justify-content: left;
+}
+.product__details__tab .nav-tabs .nav-item {
+	margin-left: 25px;
+	margin-right: 0;
+}
+
 /* 강의사진 */
 .course_pic {
 	width: 50%;

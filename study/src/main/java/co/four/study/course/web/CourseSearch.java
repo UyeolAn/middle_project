@@ -42,10 +42,11 @@ public class CourseSearch extends HttpServlet {
 		vo.setEnd(pvo.getEnd());
 		List<CourseVO> courses = dao.coursePagingList(vo);
 		
-		if(courses != null) {
+		if(courses.size() > 0) {
 			request.setAttribute("courses", courses); // 강의 리스트 조회 완료
 		} else {
-			System.out.println("coursesearch.do 강의키워드 조회에서 오류 발생");
+			request.setAttribute("result", "empty");
+			System.out.println("coursesearch.do 강의키워드 조회결과 없거나 오류 발생");
 		}
 		
 		// 페이지 포워딩

@@ -177,7 +177,7 @@
 			let form  = document.getElementById("pform");
 			console.log("category = " + category);
 			console.log("grade = " + grade);
-			$('.sub_menu').css('color','#b7b7b7');
+			$('.sub_menu').css('color','#4e4e4e');
 			$('.sub_menu_g').removeClass('active');
 			$(target).children().css('color','#e53637');
 			
