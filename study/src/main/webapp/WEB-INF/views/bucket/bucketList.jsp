@@ -12,17 +12,6 @@
 	<!-- 장바구니 페이지 start -->
 	<section class="shopping-cart">
 		<div class="col-lg-8">
-			<div class="cart__total cart_member_info">
-				<h6 class="cart_title">회원정보</h6>
-				<ul>
-					<li>이름 <span>${member.memberName }</span></li>
-					<li>연락처 <span>${member.memberTel }</span></li>
-					<li>주소 <span>${member.memberAddress }</span></li>
-					<li>이메일 <span>${member.memberEmail }</span></li>
-				</ul>
-			</div>
-		</div>
-		<div class="col-lg-8">
 			<!-- 일반강의 바구니영역 start -->
 			<div class="shopping__cart__table">
 				<div class="cart_title"><span>&#128216;</span>단과 강의</div>
@@ -108,24 +97,25 @@
 			</div>
 			<!-- 패키지 바구니영역 start -->
 		</div>
-		<div class="col-lg-8">
+		<div class="col-lg-8 cart_info_wrap">
 			<div class="cart__total cart_member_info">
-				<h6 class="cart_title">회원정보</h6>
+				<h6 class="cart_info_title">회원정보</h6>
 				<ul>
-					<li>이름 <span>${member.memberName }</span></li>
-					<li>연락처 <span>${member.memberTel }</span></li>
-					<li>주소 <span>${member.memberAddress }</span></li>
-					<li>이메일 <span>${member.memberEmail }</span></li>
+					<li><span>이름</span> <span>${member.memberName }</span></li>
+					<li><span>연락처</span> <span>${member.memberTel }</span></li>
+					<li><span>주소</span> <span>${member.memberAddress }</span></li>
+					<li><span>이메일</span> <span>${member.memberEmail }</span></li>
 				</ul>
 			</div>
-			<div class="cart__total">
-				<h6 class="cart_title">결제정보</h6>
+			<div class="cart__total cart_price_info">
+				<h6 class="cart_info_title">결제정보</h6>
 				<ul>
 					<li>단과 강의 <span class="cart_course_price"><fmt:formatNumber value="${sum }" pattern="#,###" />원</span></li>
-					<li>패키지 강의 <span class="cart_package_price"><fmt:formatNumber value="${psum }" pattern="#,###" />원</span></li>
+					<li>패키지 강의 <span class="cart_package_price"><fmt:formatNumber value="${wonga }" pattern="#,###" />원</span></li>
+					<li>패키지 할인액 <span class="cart_package_price"><fmt:formatNumber value="${wonga-psum }" pattern="#,###" />원</span></li>
 					<li>총 결제금액 <span class="cart_sum_price"><fmt:formatNumber value="${sum + psum }" pattern="#,###" />원</span></li>
 				</ul>
-				<a href="#" class="primary-btn" onclick="payment('${member.memberId}')">결제하기</a>
+				<a href="#" class="primary-btn" onclick="payment('${member.memberId}','${bucketCount }')">결제하기</a>
 			</div>
 		</div>
 	</section>
@@ -177,23 +167,27 @@
 			})
 		}
 		
-		function payment(memberId) {
+		function payment(memberId, status) {
 			//ajaxmembercourseinsert.do
-			$.ajax({
-				url: 'ajaxmembercourseinsert.do',
-				method: 'post',
-				data: {memberId: memberId},
-				success: function(result) {
-					console.log(result);
-					
-					if(result.message == 'success' && result.pbmessage == 'success'){
-						alert('정상적으로 결제되었습니다!');
-					} else {
-						alert('죄송합니다, 오류가 발생했습니다. 다시 시도 부탁드립니다.\n오류가 지속적으로 반복된다면 고객센터로 연락바랍니다.');
+			if(status == 'notEmpty' ) {
+				$.ajax({
+					url: 'ajaxmembercourseinsert.do',
+					method: 'post',
+					data: {memberId: memberId},
+					success: function(result) {
+						console.log(result);
+						
+						if(result.message == 'success' && result.pbmessage == 'success'){
+							alert('정상적으로 결제되었습니다!');
+						} else {
+							alert('죄송합니다, 오류가 발생했습니다. 다시 시도 부탁드립니다.\n오류가 지속적으로 반복된다면 고객센터로 연락바랍니다.');
+						}
+						location.href = 'bucketlist.do?memberId=' + memberId;
 					}
-					location.href = 'bucketlist.do?memberId=' + memberId;
-				}
-			})
+				})
+			} else if(status == 'empty') {
+				alert('장바구니에 담긴 상품이 없습니다!');
+			}
 		}
 	</script>
 </body>

@@ -15,8 +15,8 @@
 			color: #6c757d;
 		}
 		.breadcrumb-option {
-			background: url(client/img/banner/package_banner7.png) rgba(220, 219, 255, 0.3) no-repeat 95% 45%;
-			background-size: 100%;
+			background: url(client/img/banner/course_banner3.webp) rgba(170, 232, 255, 0.4) no-repeat 0% 70%;
+			background-size: 150%;
 			background-blend-mode: color;
 		}
 		/* 배너관련 end */

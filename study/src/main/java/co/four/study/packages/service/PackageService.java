@@ -16,5 +16,6 @@ public interface PackageService {
 	 * @return 할인금액
 	 */
 	int salePrice(PackageVO vo);
+	int coursesPrice(PackageVO vo);
 	
 }

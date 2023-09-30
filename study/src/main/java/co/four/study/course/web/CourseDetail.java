@@ -101,6 +101,7 @@ public class CourseDetail extends HttpServlet {
 		// 페이지 포워딩
 		String page = "course/courseDetail";
 		request.setAttribute("menu", "course");
+		request.setAttribute("detail", "detail");
 		ViewResolve.foward(request, response, page);
 	}
 

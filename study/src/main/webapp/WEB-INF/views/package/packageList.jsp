@@ -50,6 +50,12 @@
 		            	<c:if test="${p.packageThumbnail == null}">data-setbg="client/img/product/basic.png" </c:if>
                         <c:if test="${p.packageThumbnail != null}">data-setbg="client/img/product/${p.packageThumbnail}" </c:if>
 		            >
+		            	<div class="course_discount">
+							<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+							  <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
+							</svg>
+							${p.packageDiscount }% 할인
+						</div>
 		            </div>
 		            <div class="product__item__text">
 		                <h6>${p.packageTitle }</h6>
@@ -59,7 +65,8 @@
                             </c:when>
                             <c:otherwise>
                                 <h5 class="course-price">
-                                    <fmt:formatNumber value="${p.salePrice }" pattern="#,###" />원
+                                	<span class="course-wonga"><fmt:formatNumber value="${p.coursesPrice }" pattern="#,###" />원</span>
+                                    <span><fmt:formatNumber value="${p.salePrice }" pattern="#,###" />원</span>
                                 </h5>
                             </c:otherwise>
                         </c:choose>

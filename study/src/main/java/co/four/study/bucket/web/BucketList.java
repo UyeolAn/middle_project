@@ -79,19 +79,33 @@ public class BucketList extends HttpServlet {
 		List<PackageVO> packages = new ArrayList<PackageVO>();
 		try {
 			int sum = 0;
+			int wonga = 0;
 			for(int i=0; i<plist.size(); i++) {
 				pvo.setPackageId(plist.get(i).getPackageId());
 				
 				int salePrice = pdao.salePrice(pvo);
-				sum += salePrice; // 합계
+				sum += salePrice; // 실결제액(할인가)
+				int coursesPrice = pdao.coursesPrice(pvo);
+				wonga += coursesPrice; // 강의원가합계
 				PackageVO data = pdao.packageSelect(pvo); // 패키지 정보 조회
-				data.setSalePrice(salePrice); // 패키지 정보에 할인가격 추가
+				data.setSalePrice(salePrice); // 패키지 정보에 할인가 추가
+				data.setCoursesPrice(wonga); // 패키지 정보에 강의원가합계 추가
 				packages.add(data); //패키지 정보 리스트에 add
 			}
-			request.setAttribute("packages", packages);
-			request.setAttribute("psum", sum);
+			System.out.println(packages);
+			if(packages.size() == 0) {
+				request.setAttribute("bucketCount", "empty");
+				request.setAttribute("psum", "0");
+				request.setAttribute("wonga", "0");
+			} else if(packages.size() > 0) {
+				request.setAttribute("bucketCount", "notEmpty");
+				request.setAttribute("packages", packages);
+				request.setAttribute("psum", sum);
+				request.setAttribute("wonga", wonga);
+			}
 		} catch (NullPointerException e) {
 			request.setAttribute("psum", 0);
+			request.setAttribute("wonga", 0);
 		}
 
 		// 회원정보 가져오기

@@ -81,7 +81,7 @@
 						<div class="card-heading">
 							<a data-toggle="collapse" data-target="#collapseThree">Career</a>
 						</div>
-						<div id="collapseThree" class="collapse"
+						<div id="collapseThree" class="collapse show"
 							data-parent="#accordionExample">
 							<div class="card-body">
 								<div class="shop__sidebar__categories">
@@ -102,7 +102,7 @@
 						<div class="card-heading">
 							<a data-toggle="collapse" data-target="#collapseFour">Grade</a>
 						</div>
-						<div id="collapseFour" class="collapse"
+						<div id="collapseFour" class="collapse show"
 							data-parent="#accordionExample">
 							<div class="card-body">
 								<div class="shop__sidebar__tags">

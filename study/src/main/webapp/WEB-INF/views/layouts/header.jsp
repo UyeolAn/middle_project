@@ -118,9 +118,13 @@
                 </c:if>
                 <div class="breadcrumb__links">
                   <a href="home.do">Home</a>
-                  <c:if test="${menu eq 'course' && cid eq null}">
+                  <c:if test="${menu eq 'course' && cid eq null && detail eq null}">
                     <span>Course</span>
                     <span class="subCate">전체보기</span>
+                  </c:if>
+                  <c:if test="${menu eq 'course' && cid eq null && detail eq 'detail' }">
+                    <span>Course</span>
+                    <span class="subCate">강의 상세보기</span>
                   </c:if>
                   <c:if test="${menu eq 'course' && cid eq 'it'}">
                     <span>Course</span>
@@ -130,9 +134,13 @@
                     <span>Course</span>
                     <span class="mainCate">English</span>
                   </c:if>
-                  <c:if test="${menu eq 'package'}">
+                  <c:if test="${menu eq 'package' && detail eq null}">
                     <span>Package</span>
                     <span class="subCate">전체보기</span>
+                  </c:if>
+                  <c:if test="${menu eq 'package' && detail eq 'detail'}">
+                    <span>Package</span>
+                    <span class="subCate">패키지 상세보기</span>
                   </c:if>
                   <c:if test="${menu eq 'mypage' && mid eq null}">
                     <span>My Page</span>

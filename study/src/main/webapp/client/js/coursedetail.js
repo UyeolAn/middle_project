@@ -7,7 +7,7 @@ $(document).ready(function() {
 	let link = $('#free_iframe_area_1').attr('data_link');
 	
 	$('#free_iframe_area_1').append(
-		'<iframe width="100%" height="328" src="'
+		'<iframe width="100%" height="500" src="'
 		+ link + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
 	);
 });

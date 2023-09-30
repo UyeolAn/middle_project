@@ -28,20 +28,23 @@ function courseList(type, value, nowPage, target) {
 	    method: 'post',
 	    data: { subCate: subCateVal, grade: gradeVal, nowPage: nowPage, cntPerPage: sel },
 	    success: function (result) {
-	        appendCourseList(result); // [func] 강의 리스트 태그 생성
+	        appendCourseList(result, type); // [func] 강의 리스트 태그 생성
 	        appendPaging(result); // [func] 페이징 태그 생성
 	    }
 	})
 }
 
 // 강의 리스트 태그 생성관련 함수
-function appendCourseList(result) {
+function appendCourseList(result, type) {
 	$('.all-list').remove(); // 초기 태그 삭제
 	$('.result').remove(); // ajax 통신으로 추가된 태그 삭제
 	
 	let data = result[1];
-	console.log(data);
-	categoryUpdate(data); // [func] 메인카테고리, 서브카테고리 가져오기
+	if(type == 'subCate'){
+		categoryUpdate(data); // [메뉴경로 설정 func] 메인카테고리, 서브카테고리 가져오기
+	} else if(type == 'grade') {
+		gradeUpdate(data); // [메뉴경로 설정func] 메인카테고리, 서브카테고리 가져오기
+	}
  	
     for (let i = 0; i < data.length; i++) {
         let clone = $('.course-col:eq(0)').clone(); // 태그 create
@@ -125,7 +128,7 @@ function categoryUpdate(data) {
 }
 
 //메뉴경로설정(grade) 함수
-function categoryUpdate(data) {
+function gradeUpdate(data) {
 	$('.mainCate').remove(); // 헤더쪽 메뉴경로 태그 삭제
 	$('.subCate').remove(); // 헤더쪽 메뉴경로 태그 삭제
 	

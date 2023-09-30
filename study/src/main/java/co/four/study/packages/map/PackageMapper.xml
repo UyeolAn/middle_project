@@ -49,7 +49,16 @@
 		WHERE PACKAGE_ID = #{packageId}	
 	</delete>
 	
-	<select id="salePrice" parameterType="co.four.study.packageCourse.service.PackageCourseVO" resultType="Integer">
+	<select id="coursesPrice" parameterType="co.four.study.packages.service.PackageVO" resultType="Integer">
+		SELECT SUM(A.COURSE_PRICE) courses_PRICE
+		FROM COURSES A, PACKAGES_COURSES B, PACKAGES C
+		WHERE A.COURSE_ID = B.COURSE_ID
+		AND B.PACKAGE_ID = C.PACKAGE_ID
+		AND B.PACKAGE_ID = #{packageId}
+		GROUP BY C.PACKAGE_ID
+	</select>
+	
+	<select id="salePrice" parameterType="co.four.study.packages.service.PackageVO" resultType="Integer">
 		SELECT (T.TOTAL_PRICE * (1 - (T.PACKAGE_DISCOUNT*0.01))) SALE_PRICE
 		FROM (SELECT C.PACKAGE_ID, SUM(A.COURSE_PRICE) TOTAL_PRICE, C.PACKAGE_DISCOUNT
 		      FROM COURSES A, PACKAGES_COURSES B, PACKAGES C

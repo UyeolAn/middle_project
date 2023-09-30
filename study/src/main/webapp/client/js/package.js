@@ -15,6 +15,31 @@ function packageList(category, grade, target) {
 	    success: function (result) {
 	        console.log(result);
 	        
+	        $('.mainCate').remove(); // 헤더쪽 메뉴경로 태그 삭제
+			$('.subCate').remove(); // 헤더쪽 메뉴경로 태그 삭제
+			
+			let mainCate = category;
+			let subCate = grade;
+			
+			if(mainCate == 'it') {
+				mainCate = mainCate.toUpperCase();
+			} else {
+				mainCate = mainCate.substring(0, 1).toUpperCase() + mainCate.substring(1);
+			}
+			
+			if(grade == 'all') {
+				subCate = '전체보기';
+			} else if(grade == 'easy') {
+				subCate = '입문';
+			} else if(grade == 'normal') {
+				subCate = '초급';
+			} else if(grade == 'hard') {
+				subCate = '중급이상';
+			}
+			
+			$('.breadcrumb__links').append('<span class="mainCate">'+ mainCate + '</span>');
+    		$('.breadcrumb__links').append('<span class="subCate">'+ subCate + '</span>');
+	        
 	        appendCourseList(result); // [func] 강의 리스트 태그 생성
 	    }
 	})

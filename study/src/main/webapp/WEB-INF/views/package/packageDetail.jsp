@@ -38,23 +38,34 @@
 				<div class="row set-bg course_pic" 
 					<c:if test="${data.packageThumbnail == null}">data-setbg="client/img/product/basic.png" </c:if>
                     <c:if test="${data.packageThumbnail != null}">data-setbg="client/img/product/${data.packageThumbnail}" </c:if>
-				></div>
+				>
+					<div class="course_discount">
+						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+						  <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
+						</svg>
+						${data.packageDiscount }% 할인
+					</div>
+				</div>
 				<div class="course_info_wrap">
-					<div>
-						<p class="breadcrumb__links course_links">
-							<span>Package</span>
-							<c:if test="${data.packageGrade eq 'easy' }"><span>입문</span></c:if>
-							<c:if test="${data.packageGrade eq 'normal' }"><span>초급</span></c:if>
-							<c:if test="${data.packageGrade eq 'hard' }"><span>중급이상</span></c:if>
+					<div class="course_grade_name">
+						<p>
+							<c:if test="${data.packageGrade eq 'easy' }"><span class="course_grade">입문</span></c:if>
+							<c:if test="${data.packageGrade eq 'normal' }"><span class="course_grade">초급</span></c:if>
+							<c:if test="${data.packageGrade eq 'hard' }"><span class="course_grade">중급이상</span></c:if>
+							<span class="course_name">${data.packageTitle }</span>
 						</p>
-						<div class="course_grade_name">
-							<p>
-								<c:if test="${data.packageGrade eq 'easy' }"><span class="course_grade">입문</span></c:if>
-								<c:if test="${data.packageGrade eq 'normal' }"><span class="course_grade">초급</span></c:if>
-								<c:if test="${data.packageGrade eq 'hard' }"><span class="course_grade">중급이상</span></c:if>
-								<span class="course_name">${data.packageTitle }</span>
-							</p>
+						<div class="tag">
+							<c:if test="${data.packageGrade eq 'easy' }"><span># 입문</span></c:if>
+							<c:if test="${data.packageGrade eq 'normal' }"><span># 초급</span></c:if>
+							<c:if test="${data.packageGrade eq 'hard' }"><span># 중급이상</span></c:if>
+							<span># ${fn:toUpperCase(data.packageCategory)}</span>
 						</div>
+					</div>
+					<div class="course_info_etc">
+						<h5 class="course-price">
+                        	<span class="course-wonga"><fmt:formatNumber value="${data.coursesPrice }" pattern="#,###" />원</span>
+                        	<span><fmt:formatNumber value="${data.salePrice }" pattern="#,###" />원</span>
+                       	</h5>
 					</div>
 				</div>
 			</div>
@@ -85,8 +96,21 @@
 										<!-- 패키지에 포함된 강의 이름 -->
 										<div class="course_script_wrap course_name_wrap_sgap">
 											<div class="intro_text"><span>🎓</span>이런 강의들이<br> 포함되어 있어요!</div>
+											<p class="note_info">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
+												  <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+												  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+												  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+												</svg>
+												강의 이름을 클릭하면 강의 상세정보를 확인 할 수 있어요!
+											</p>
 											<c:forEach items="${courses}" var="c">
-												<p class="note course_data" data-c="${c.courseId }">${c.courseName }</p>
+												<p class="note course_data" data-c="${c.courseId }" onclick="window.open('coursedetail.do?courseId=${c.courseId }')">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#266fb5" class="bi bi-patch-question-fill" viewBox="0 0 16 16">
+													  <path d="M5.933.87a2.89 2.89 0 0 1 4.134 0l.622.638.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636zM7.002 11a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm1.602-2.027c.04-.534.198-.815.846-1.26.674-.475 1.05-1.09 1.05-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.71 1.71 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745.336 0 .504-.24.554-.627z"/>
+													</svg>
+													${c.courseName }
+												</p>
 											</c:forEach>
 										</div>
 										<!-- 패키지 스크립트(설명글) -->
@@ -124,12 +148,7 @@
 										</div>
 									</c:when>
 									<c:otherwise>
-										<c:if test="${data.salePrice >= 300000 }">
-											<h5 class="course_price_pay">6개월 무이자 할부 가능!</h5>
-										</c:if>
-										<h5 class="course_price">
-											<fmt:formatNumber value="${data.salePrice }" pattern="#,###" />원
-										</h5>
+										<h5 class="course_price_pay">할인된 가격으로 수강시작하기</h5>
 										<!-- 장바구니 버튼 영역 -->
 										<div class="button_wrap">
 											<c:if test="${pbucket eq 'notIn' }">

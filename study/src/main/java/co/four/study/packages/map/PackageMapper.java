@@ -14,8 +14,9 @@ public interface PackageMapper {
 	
 	/**
 	 * packages_courses의 package_id를 받아서 할인율 반영한 금액 조회
-	 * @param PackageCourseVO (packageId)
+	 * @param PackageVO (packageId)
 	 * @return (int)할인금액
 	 */
 	int salePrice(PackageVO vo);
+	int coursesPrice(PackageVO vo);
 }
