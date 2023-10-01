@@ -131,18 +131,11 @@
 				success: function(result) {
 					console.log(result);
 					if(result.message == 'success'){
-						let sum = result.sum;
-						sum = sum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-						$(target).closest('.tr').remove();
-						$('.cart_sum_price').text(sum + '원');
 						alert('선택하신 상품이 장바구니에서 삭제되었습니다.');
-						
-						if(result.sum == '0') {
-							$('.empty_bucket_message').addClass('bucket_empty_show');
-						}
-						
+						location.href = 'bucketlist.do?memberId=' + memberId;
 					} else {
 						alert('죄송합니다, 오류가 발생했습니다. 다시 시도 부탁드립니다.\n오류가 지속적으로 반복된다면 고객센터로 연락바랍니다.');
+						location.href = 'bucketlist.do?memberId=' + memberId;
 					}
 				}
 			})
