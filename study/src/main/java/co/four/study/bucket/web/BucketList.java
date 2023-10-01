@@ -94,11 +94,9 @@ public class BucketList extends HttpServlet {
 			}
 			System.out.println(packages);
 			if(packages.size() == 0) {
-				request.setAttribute("bucketCount", "empty");
 				request.setAttribute("psum", "0");
 				request.setAttribute("wonga", "0");
 			} else if(packages.size() > 0) {
-				request.setAttribute("bucketCount", "notEmpty");
 				request.setAttribute("packages", packages);
 				request.setAttribute("psum", sum);
 				request.setAttribute("wonga", wonga);
@@ -108,6 +106,13 @@ public class BucketList extends HttpServlet {
 			request.setAttribute("wonga", 0);
 		}
 
+		// 장바구니에 담긴게 있는지 없는지 체크.
+		if(packages.size() == 0 && list.size() == 0) {
+			request.setAttribute("bucketCount", "empty");
+		} else {
+			request.setAttribute("bucketCount", "notEmpty");
+		}
+		
 		// 회원정보 가져오기
 		mvo = mdao.memberSelect(mvo);
 		request.setAttribute("member", mvo);

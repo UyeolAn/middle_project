@@ -115,7 +115,7 @@
 					<li>패키지 할인액 <span class="cart_package_price"><fmt:formatNumber value="${wonga-psum }" pattern="#,###" />원</span></li>
 					<li>총 결제금액 <span class="cart_sum_price"><fmt:formatNumber value="${sum + psum }" pattern="#,###" />원</span></li>
 				</ul>
-				<a href="#" class="primary-btn" onclick="payment('${member.memberId}','${bucketCount }')">결제하기</a>
+				<a href="#" class="primary-btn" onclick="kakaoapi('${member.memberId}','${bucketCount }')">결제하기</a>
 			</div>
 		</div>
 	</section>
@@ -177,12 +177,37 @@
 					success: function(result) {
 						console.log(result);
 						
-						if(result.message == 'success' && result.pbmessage == 'success'){
+						if(result.message == 'success' || result.pbmessage == 'success'){
 							alert('정상적으로 결제되었습니다!');
+							location.href = 'bucketlist.do?memberId=' + memberId;
 						} else {
+							console.log(result);
 							alert('죄송합니다, 오류가 발생했습니다. 다시 시도 부탁드립니다.\n오류가 지속적으로 반복된다면 고객센터로 연락바랍니다.');
 						}
-						location.href = 'bucketlist.do?memberId=' + memberId;
+					}
+				})
+			} else if(status == 'empty') {
+				alert('장바구니에 담긴 상품이 없습니다!');
+			}
+		}
+		
+		function kakaoapi(memberId, status) {
+			if(status == 'notEmpty' ) {
+				$.ajax({
+					url: 'ajaxkakaoapi.do',
+					method: 'post',
+					data: {memberId: memberId},
+					dataType: 'json',
+					success: function(result){
+						let data = eval("("+ result +")");
+						console.log(data);
+						console.log(data.tid);
+						let qrcode = data.next_redirect_pc_url;
+						window.open(qrcode);
+					},
+					error: function(error) {
+						alert("error");
+						console.log(error);
 					}
 				})
 			} else if(status == 'empty') {
