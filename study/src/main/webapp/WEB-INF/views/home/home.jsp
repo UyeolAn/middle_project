@@ -88,7 +88,7 @@
 							<nav class="header__menu mobile-menu">
 								<ul>
 									<c:if test="${not empty loginId}">
-										<li><a href="communityqnapage.do"><span>${loginName} 님 접속중</span></a>
+										<li><a href="mypageprofile.do"><span>${loginName} 님 접속중</span></a>
 											<ul class="dropdown">
 												<li><a href="logout.do">LOGOUT</a></li>
 												<li><a href="mypageprofile.do">MY PAGE</a></li>
