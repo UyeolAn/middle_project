@@ -7,6 +7,15 @@
       <meta charset="UTF-8">
       <title>Insert title here</title>
       <style>
+        .comm__detail__body {
+          margin-bottom: 40px;
+          padding-top: 30px;
+          padding-bottom: 30px;
+          border: 1px solid rgba(0, 0, 0, .1);
+          border-radius: 25px;
+          box-shadow: 1px 2px 3px 0px #ddd;
+        }
+
         .qna__not__solved {
           padding: 0.5% 1%;
           padding-right: 1%;
@@ -53,11 +62,11 @@
           padding: 9px 15px;
           font-size: medium;
           background: none;
-          color: #aaa;
+          color: #faaaaa;
         }
 
         .small-delete-btn:hover {
-          color: #333;
+          color: #e53637;
         }
 
         .answer__info__count {
@@ -99,7 +108,7 @@
 
         .answer-solve-btn {
           background: none;
-          color: #88bdee;
+          color: #a1d2ff;
         }
 
         .answer-solve-btn:hover {
@@ -112,7 +121,7 @@
         }
 
         .active-answer-solve-btn:hover {
-          color: #88bdee;
+          color: #a1d2ff;
         }
 
         .answer__textarea {
@@ -131,66 +140,69 @@
 
     <body>
       <div class="container col-lg-12">
-        <!--Question Title Bar Start-->
-        <div class="product__details__tab__content__item">
-          <h4 class="col-lg-12" id="questionTitle" style="font-weight: 1000;">
-            <c:if test="${question.questionSolve eq 'not_solved'}">
-              <span class="qna__not__solved">미해결</span>
-            </c:if>
-            <c:if test="${question.questionSolve eq 'solved'}">
-              <span class="qna__solved">해결됨</span>
-            </c:if>
-            ${question.questionTitle}
-          </h4>
-          <br>
-          <div class="col-lg-12 comm__qna__question__detail__etc__info">
-            <c:if test="${empty question.memberId}">
-              <span class="etc__info__name" id="memberId">탈퇴한 회원</span>
-            </c:if>
-            <c:if test="${not empty question.memberId}">
-              <span class="etc__info__name" id="memberId">${question.memberId}</span>
-            </c:if>
-            <c:if test="${not empty question.courseName}">
-              <span class="etc__info__datehit"> ㆍ ${question.courseName}</span>
-            </c:if>
-            <c:if test="${empty question.courseName}">
-              <span class="etc__info__datehit"> ㆍ 기타/홈페이지 질문</span>
-            </c:if>
+        <div class="comm__detail__body col-lg-12">
+          <!--Question Title Bar Start-->
+          <div class="product__details__tab__content__item">
+            <h4 class="col-lg-12" id="questionTitle" style="font-weight: 1000;">
+              <c:if test="${question.questionSolve eq 'not_solved'}">
+                <span class="qna__not__solved">미해결</span>
+              </c:if>
+              <c:if test="${question.questionSolve eq 'solved'}">
+                <span class="qna__solved">해결됨</span>
+              </c:if>
+              ${question.questionTitle}
+            </h4>
             <br>
-            <span class="etc__info__datehit">작성일&nbsp;&nbsp;${question.questionEnterDate}</span>
-            <span class="etc__info__datehit">
-              <c:if test="${not empty question.questionUpdateDate}">
-                &nbsp;&nbsp;수정일&nbsp;&nbsp;${question.questionUpdateDate}</c:if>
-            </span>
-            <span class="etc__info__datehit">&nbsp;&nbsp;<i
-                class="bi bi-eye"></i>&nbsp;&nbsp;${question.questionHit}</span>
+            <div class="col-lg-12 comm__qna__question__detail__etc__info">
+              <c:if test="${empty question.memberId}">
+                <span class="etc__info__name" id="memberId">탈퇴한 회원</span>
+              </c:if>
+              <c:if test="${not empty question.memberId}">
+                <span class="etc__info__name" id="memberId">${question.memberId}</span>
+              </c:if>
+              <c:if test="${not empty question.courseName}">
+                <span class="etc__info__datehit"> ㆍ ${question.courseName}</span>
+              </c:if>
+              <c:if test="${empty question.courseName}">
+                <span class="etc__info__datehit"> ㆍ 기타/홈페이지 질문</span>
+              </c:if>
+              <br>
+              <span class="etc__info__datehit">작성일&nbsp;&nbsp;${question.questionEnterDate}</span>
+              <span class="etc__info__datehit">
+                <c:if test="${not empty question.questionUpdateDate}">
+                  &nbsp;&nbsp;수정일&nbsp;&nbsp;${question.questionUpdateDate}</c:if>
+              </span>
+              <span class="etc__info__datehit">&nbsp;&nbsp;<i
+                  class="bi bi-eye"></i>&nbsp;&nbsp;${question.questionHit}</span>
+            </div>
           </div>
-        </div>
-        <!--Question Title Bar End-->
-        <hr>
+          <!--Question Title Bar End-->
+          <hr>
 
-        <!--Question Main Body Start-->
-        <div class="col-lg-12 row" style="margin-top: 5%;">
-          <div class="col-lg-10">
-            <c:if test="${not empty question.questionImg}">
-              <div class="col-lg-10">
-                <img src="client/img/question/${question.questionImg}" alt="질문 이미지">
-              </div>
-            </c:if>
-            <p class="col-lg-12" id="questionContent" style="white-space:pre;">${question.questionContent}</p>
+          <!--Question Main Body Start-->
+          <div class="col-lg-12 row" style="margin-top: 5%;">
+            <div class="col-lg-10">
+              <c:if test="${not empty question.questionImg}">
+                <div class="col-lg-10">
+                  <img src="client/img/question/${question.questionImg}" alt="질문 이미지">
+                </div>
+              </c:if>
+              <p class="col-lg-12" id="questionContent" style="white-space:pre;">${question.questionContent}</p>
+            </div>
+            <div class="col-lg-7 comm__qna__question__detail__buttons" style="margin-top: 5%;">
+              <button type="button" id="updateBtn" class="site-btn small-update-btn"
+                onclick="location.href='communityqnaupdatepage.do?questionId=${question.questionId}'"><i
+                  class="bi bi-pencil-square" style="font-size: x-large !important;"></i></button>
+              <button type="button" id="deleteBtn" class="site-btn small-delete-btn" onclick="deleteQuestion()"><i
+                  class="bi bi-trash" style="font-size: x-large !important;"></i></button>
+              <form id="deleteForm" action="questiondelete.do">
+                <input type="hidden" id="questionId" name="questionId" value="${question.questionId}">
+              </form>
+            </div>
           </div>
-          <div class="col-lg-7 comm__qna__question__detail__buttons" style="margin-top: 5%;">
-            <button type="button" id="updateBtn" class="site-btn small-update-btn"
-              onclick="location.href='communityqnaupdatepage.do?questionId=${question.questionId}'"><i
-                class="bi bi-pencil-square" style="font-size: x-large !important;"></i></button>
-            <button type="button" id="deleteBtn" class="site-btn small-delete-btn" onclick="deleteQuestion()"><i
-                class="bi bi-trash" style="font-size: x-large !important;"></i></button>
-            <form id="deleteForm" action="questiondelete.do">
-              <input type="hidden" id="questionId" name="questionId" value="${question.questionId}">
-            </form>
-          </div>
+          <!--Question Main Body End-->
         </div>
-        <!--Question Main Body End-->
+
         <hr>
 
         <!--Reply Top Bar Start-->
@@ -198,7 +210,7 @@
           <span class="col-lg-12 answer__info__count" id="answerCount">ANSWER : 10</span>
           <br>
           <div class="col-lg-12">
-            <textarea id="answerInput" name="answerInput" placeholder="답변을 입력하세요..."
+            <textarea id="answerInput" name="answerInput" maxlength="512" placeholder="답변을 입력하세요..."
               style="height: 70px; margin-top: 10px; color: #333; "></textarea>
           </div>
           <div class="col-lg-12 row">
@@ -279,7 +291,7 @@
             success: function (countJson) {
               let answerCount = countJson.totalCount;
               $('.answer__info__count').empty();
-              $('.answer__info__count').text('ANSWER : ' + answerCount);
+              $('.answer__info__count').html('답변&nbsp;&nbsp;' + answerCount);
             },
             error: function (err) {
               console.log(err);

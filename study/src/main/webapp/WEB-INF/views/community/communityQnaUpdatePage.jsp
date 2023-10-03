@@ -49,7 +49,7 @@
         <form action="questionupdate.do" method="post" enctype="multipart/form-data">
           <div class="row">
             <div class="col-lg-9">
-              <input type="text" id="questionTitle" name="questionTitle" placeholder="제목을 입력하세요.."
+              <input type="text" id="questionTitle" name="questionTitle" maxlength='99' placeholder="제목을 입력하세요.."
                 value="${question.questionTitle}">
             </div>
             <div class="col-lg-12">
@@ -64,7 +64,7 @@
               <input type="file" id="questionImg" name="questionImg" style="display: none;">
             </div>
             <div class="col-lg-12">
-              <textarea id="questionContent" name="questionContent" placeholder="내용을 입력하세요..."
+              <textarea id="questionContent" name="questionContent" maxlength="511" placeholder="내용을 입력하세요..."
                 style="color: #333;">${question.questionContent}</textarea>
               <div class="row col-lg-12">
                 <button type="reset" class="site-btn"
