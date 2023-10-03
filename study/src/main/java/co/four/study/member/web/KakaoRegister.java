@@ -21,7 +21,7 @@ public class KakaoRegister extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("도착");
+		//System.out.println("도착");
 		String page = "common/kakaoregister.jsp";
 		ViewResolve.foward(request, response, page);
 		

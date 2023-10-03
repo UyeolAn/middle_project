@@ -42,4 +42,7 @@ public interface CourseMapper {
 	
 	//랜덤 it강의 4개
 	List<CourseVO> itRandomCourseList();
+	
+	//해당 메인카테고리에 해당하는 서브카테고리 목록(중복x)
+	List<String> subCategoriesBymain(CourseVO vo);
 }

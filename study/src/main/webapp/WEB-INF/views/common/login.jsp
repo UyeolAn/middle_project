@@ -204,6 +204,7 @@
 						return unescape(cookieValue);
 					}
 
+					//카카오로그인
 					Kakao.init('9c1eb3ec967ca14a10ddab8621bdddef');
 					console.log(Kakao.isInitialized());
 
@@ -256,10 +257,10 @@
 						})
 						.then(data => {
 							if (data.isLoggedIn) {
-								// 로그인 상태인 경우 홈 페이지로 이동
+								//회원인 경우 홈 페이지로 이동
 								window.location.href = 'home.do';
 							} else {
-								// 로그인 상태가 아닌 경우 회원가입 페이지로 이동
+								//회원이 아닌 경우 회원가입 페이지로 이동
 								window.location.href = 'kakaoregister.do';
 							}
 						})
@@ -294,7 +295,7 @@
     // function loginWithKakao() {
         
         
-        // // 예제: 이메일, 성별 정보 가져오기
+    
         // Kakao.API.request({
         //     url: '/v2/user/me',
         //     data: {
@@ -315,7 +316,7 @@
         
 
     //     window.Kakao.Auth.login({
-    //             scope: 'profile_nickname, account_email, birthday', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+    //             scope: 'profile_nickname, account_email, birthday', 
     //             success: function(response) {
     //                 console.log(response);
     //                 console.log(response.access_token);
@@ -337,7 +338,7 @@
 	// 						});
     //                     }
     //                 });
-    //                  //window.location.href='http://localhost/prj' //리다이렉트 되는 코드
+    //                  //window.location.href='http://localhost/' //리다이렉트 되는 코드
     //             },
     //             fail: function(error) {
     //                 console.log(error);

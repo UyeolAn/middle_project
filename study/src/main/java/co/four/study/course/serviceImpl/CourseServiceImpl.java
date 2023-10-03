@@ -180,5 +180,10 @@ public class CourseServiceImpl implements CourseService {
 		return map.itRandomCourseList();
 	}
 
+	@Override
+	public List<String> subCategoriesBymain(CourseVO vo) {
+		return map.subCategoriesBymain(vo);
+	}
+
 
 }

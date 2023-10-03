@@ -11,7 +11,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
     
-        <title>SB Admin 2 - Dashboard</title>
+        <title>관리자 페이지</title>
     
         <!-- Custom fonts for this template-->
         <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -80,16 +80,16 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">정말 로그아웃 하시겠습니까?</h5>
                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">x</span>
                             </button>
                         </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.
+                        <div class="modal-body">로그아웃을 원할 시 로그아웃 버튼을 클릭하세요.
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="logout.do">Logout</a>
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                            <a class="btn btn-primary" href="logout.do">로그아웃</a>
                         </div>
                     </div>
                 </div>

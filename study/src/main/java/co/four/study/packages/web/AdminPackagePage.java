@@ -34,6 +34,7 @@ public class AdminPackagePage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PackageVO vo = new PackageVO();
 		PackageService dao = new PackageServiceImpl();
+		CourseVO cvo = new CourseVO();
 		CourseService cdao = new CourseServiceImpl();
 		PackageCourseVO pcvo = new PackageCourseVO();
 		PackageCourseService pcdao = new PackageCourseServiceImpl();
@@ -52,6 +53,10 @@ public class AdminPackagePage extends HttpServlet {
 		pvo.setPackageId(vo.getPackageId());
 		List<CourseVO> catelist = cdao.ListNotInPackage(pvo);
 		
+		//해당 메인카테고리에 해당하는 서브카테고리 리스트
+		cvo.setCourseMainCategory(vo.getPackageCategory());
+		List<String> sublist = cdao.subCategoriesBymain(cvo);
+		
 		//패키지 정가 계산
 		int priceOriginal = pcdao.priceSumByPackage(pcvo);
 		
@@ -68,7 +73,7 @@ public class AdminPackagePage extends HttpServlet {
 		request.setAttribute("catelist", catelist);
 		request.setAttribute("original", priceOriginal);
 		request.setAttribute("sale", priceSale);
-		
+		request.setAttribute("sublist", sublist);
 		String page = "admin/package/packagepage";
 		
 		

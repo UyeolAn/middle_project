@@ -160,6 +160,7 @@
 		AND COURSE_ID NOT IN(
 		SELECT COURSE_ID 
 		FROM PACKAGES_COURSES 
+		WHERE PACKAGES_COURSES.PACKAGE_ID = #{packageId}
 		)
 		ORDER BY COURSE_SUB_CATEGORY
 	</select>
@@ -200,5 +201,9 @@
 	    )
 	    WHERE ROWNUM <= 4
 	  ]]>
+	</select>
+	
+	<select id="subCategoriesBymain" parameterType="co.four.study.course.service.CourseVO" resultType="String">
+		SELECT DISTINCT COURSE_SUB_CATEGORY FROM COURSES WHERE COURSE_MAIN_CATEGORY=#{courseMainCategory}
 	</select>
 </mapper>

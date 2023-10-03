@@ -235,7 +235,9 @@
 													<h5 class="text-danger">무료</h5>
 												</c:when>
 												<c:otherwise>
-													<h5>${r.coursePrice}원</h5>
+													<h5>
+														<fmt:formatNumber value="${r.coursePrice }" pattern="#,###" />원
+													</h5>
 												</c:otherwise>
 											</c:choose>
 										</div>
@@ -263,8 +265,9 @@
 													<h5 class="text-danger">무료</h5>
 												</c:when>
 												<c:otherwise>
-													<h5>${h.coursePrice}원</h5>
-												</c:otherwise>
+													<h5>
+														<fmt:formatNumber value="${h.coursePrice }" pattern="#,###" />원
+													</h5>												</c:otherwise>
 											</c:choose>
 										</div>
 									</div>
@@ -291,7 +294,9 @@
 													<h5 class="text-danger">무료</h5>
 												</c:when>
 												<c:otherwise>
-													<h5>${l.coursePrice}원</h5>
+													<h5>
+														<fmt:formatNumber value="${l.coursePrice }" pattern="#,###" />원
+													</h5>
 												</c:otherwise>
 											</c:choose>
 										</div>
