@@ -4,7 +4,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>STUDY | pay</title>
     <style type="text/css">
       .mypage__title {
         margin-bottom: 27px;

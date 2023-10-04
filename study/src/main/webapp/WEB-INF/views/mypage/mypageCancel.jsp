@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Insert title here</title>
+        <title>STUDY</title>
         <style>
             .cancelbtn {
                 width: 100px;

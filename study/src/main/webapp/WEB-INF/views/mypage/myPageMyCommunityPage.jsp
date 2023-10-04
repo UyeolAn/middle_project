@@ -4,7 +4,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>STUDY | MyCommunity</title>
     <style type="text/css">
       /* 해당 페이지 전용 클래스 */
       .mypage__title {

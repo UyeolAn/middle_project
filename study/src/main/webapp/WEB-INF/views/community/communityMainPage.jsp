@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="client/css/community.css" type="text/css">
 </head>
 <body>
 	메인페이지

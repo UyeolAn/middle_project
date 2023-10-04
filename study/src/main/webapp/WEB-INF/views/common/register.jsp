@@ -23,7 +23,7 @@
             <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
             <style>
-              
+          
                 .bg-gradient-primary {
                     display: flex;
                     justify-content: center;
@@ -65,7 +65,7 @@
                                         <h1 class="h4 text-gray-900 mb-4">회원가입!</h1>
                                     </div>
 
-                                    <form class="user" method="post" action="memberRegist.do" id="frm" onsubmit="return noPageBack()">
+                                    <form class="user" method="post" action="memberRegist.do" id="frm">
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0 ">
                                                 <input type="text" class="form-control form-control-user btmagin4"
@@ -107,21 +107,21 @@
 
                                             <div class="form-group">
                                                 <label class="font-weight-bold">주소</label><br>
-                                                <input type="text" id="sample6_postcode" class="form-control form-control-user mb-2"
+                                                <input type="text" id="sample6_postcode" class="form-control mb-2"
                                                     style="display: inline; width: 50%;" placeholder="우편번호" readonly
                                                     required>
                                                 <input type="button" onclick="sample6_execDaumPostcode()"
                                                     value="우편번호 찾기" class="small btn btn-primary btn-user"><br>
-                                                <input type="text" id="sample6_address" class="form-control form-control-user mb-2"
+                                                <input type="text" id="sample6_address" class="form-control mb-2"
                                                     style="width: 100%; display: inline;" name="address1"
                                                     placeholder="주소" required readonly>
                                                 <div class="row mb-2" style="width: 101%; margin-left: 0;">
                                                     <input type="text" id="sample6_detailAddress"
-                                                        class="form-control form-control-user col-lg-6"
+                                                        class="form-control col-lg-6"
                                                         style="width: 50%; display: inline;" name="address2"
                                                         placeholder="상세주소" required maxlength="30"><!--
                                             --><input type="text" id="sample6_extraAddress"
-                                                        class="form-control form-control-user col-lg-6"
+                                                        class="form-control col-lg-6"
                                                         style="width: 50%; display: inline;" name="address3"
                                                         placeholder="참고항목" maxlength="30">
                                                 </div>
@@ -129,15 +129,15 @@
 
                                             <button type="button" class="btn btn-primary btn-user btn-block"
                                                 onclick="formCheck()">
-                                                회원가입
+                                                Register Account
                                             </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="passwordsearch.do">비밀번호 찾기</a>
+                                        <a class="small" href="passwordsearch.do">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="login.do">로그인하기</a>
+                                        <a class="small" href="login.do">Already have an account? Login!</a>
                                     </div>
                                 </div>
                             </div>
@@ -159,10 +159,13 @@
 
 
             <script type="text/javascript">
-                let DupCheck = "No"
-                console.log(DupCheck);
+
+
+                let idCheck = "NO"
+
                 //중복체크 버튼 클릭시 서블릿에 id체크
                 $('#doubleCheck').click(function () {
+
                     $.ajax({
                         url: 'ajaxmembercheck.do',
                         method: 'post',
@@ -171,18 +174,20 @@
                             var idCheck = JSON.parse(data);
                             var str = idCheck.str;
                             console.log(str)
+
+
                             if (str == "YES") {
+
                                 alert("사용가능한 아이디입니다");
                                 document.getElementById("doubleCheck").value = "Yes";
                                 document.getElementById("doubleCheck").disabled = true;
                                 console.log(str);
-                                return DupCheck = "YES";
+                                idCheck = "YES";
                             } else if (str == "NO") {
                                 alert("이미 사용중인 아이디입니다");
                                 document.getElementById("memberId").value = "";
                                 document.getElementById("memberId").focus();
                                 console.log(str);
-                                return DupCheck = "NO";
                             }
                         },
                         error: function (result) {
@@ -196,34 +201,32 @@
                 //submit 버튼 작동시 중복체크 실행 여부 
                 //패스워드 불일치 여부 확인
                 function formCheck() {
-                    console.log(DupCheck)
-                    let passchck = document.getElementById('memberPassword').value;
-                    let passchckrepeat = document.getElementById('checkPass').value;
-                    let passchckresult = "NO"
-                    if (DupCheck == "No") {
+                    console.log(idCheck)
+                    let passchck = document.getElementById(memberPassword);
+                    let passchckrepeat = document.getElementById(checkPass);
+                    console.log()
+                    if (idCheck == "No") {
                         alert("아이디 중복체크를 하세요.");
+                        return false;
                     }
-                    if (passchck == passchckrepeat) {
-                        passchckresult = "YES"
-                    } else {
+                    if (passchck != passchckrepeat) {
                         alert("입력한 패스워드가 일치하지 않습니다.");
                         passchckrepeat = '';
                         passchck = '';
-                        passchck.focus;
+                        passchck.focus();
+                        return false;
                     }
 
-                    if (DupCheck == passchckresult) {
-                        alert("회원가입이 완료되었습니다.")
-                        $('#frm').submit();
-                    } else {
-                        alert("중복체크 혹은 비밀번호를 다시 확인해 주세요")
+                    $('#frm').submit();
+                    alert("성공")
+
+                }
+
+                function regist(trigger) {
+                    if (trigger = true) {
+                        location.replace("register.do")
                     }
                 }
-                function noPageBack(){
-                
-                }
-
-
             </script>
             <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 

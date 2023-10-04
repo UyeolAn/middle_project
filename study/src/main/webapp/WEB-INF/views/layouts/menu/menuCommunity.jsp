@@ -5,12 +5,10 @@
   <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-
     <link rel="stylesheet" href="client/css/menu.css">
-
     <style type="text/css">
       .nice-scroll {
-        height: 89px !important;
+        height: auto !important;
       }
 
       .toptop__bar__hr {
@@ -26,11 +24,9 @@
         <div class="shop__sidebar__accordion">
           <div class="accordion" id="accordionExample">
             <div class="card">
-              <hr class="toptop__bar__hr">
               <div class="col-lg-12 card-heading">
                 <a data-toggle="collapse" data-target="#collapseOne">Community</a>
               </div>
-              <hr>
               <div id="collapseOne" class="col-lg-12 collapseshow" data-parent="#accordionExample">
                 <div class="card-body">
                   <div class="shop__sidebar__categories">
@@ -41,7 +37,6 @@
                   </div>
                 </div>
               </div>
-              <hr>
             </div>
           </div>
         </div>
