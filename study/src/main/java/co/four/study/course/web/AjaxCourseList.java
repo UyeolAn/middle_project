@@ -29,7 +29,6 @@ public class AjaxCourseList extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ajaxcourselist 들어옴");
 		CourseService dao = new CourseServiceImpl();
 		CourseVO vo = new CourseVO();
 		ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
@@ -70,8 +69,6 @@ public class AjaxCourseList extends HttpServlet {
 		
 		Map<String, String> pmap = new HashMap<String,String>();
 		pmap.put("paging", paging);
-		System.out.println(pvo);
-		System.out.println(paging);
 		
 		// 넘어온 서브카테고리로 데이터 조회
 		vo.setStart(pvo.getStart());

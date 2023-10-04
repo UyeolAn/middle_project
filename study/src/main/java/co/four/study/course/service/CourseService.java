@@ -21,6 +21,7 @@ public interface CourseService {
 	// 페이징 관련
 	int courseTotalCount(CourseVO vo);
 	List<CourseVO> coursePagingList(CourseVO vo);
+	public String maincateCoursePagingTag(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String mainCate);
 	public String subcateCoursePagingTag(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String subCate);
 	public String gradeCoursePagingTag(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage, String grade);
 	// 강의 페이지 사이드 메뉴 만들기
