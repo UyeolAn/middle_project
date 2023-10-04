@@ -337,8 +337,8 @@
 							<div class="card-body" style="padding: 20px;">
 								<c:forEach items="${qlist}" var="q">
 									<a href="communityqnadetailpage.do?questionId=${q.questionId}">
-										<div class="mb-2" style="display: flex; justify-content: space-between;">
-											<span style="text-align: left; flex: 1;">${q.questionTitle}</span>
+										<div class="mb-3" style="display: flex; justify-content: space-between;">
+											<span style="text-align: left; flex: 2;">${q.questionTitle}</span>
 											<span style="text-align: right; flex: 1;">${q.questionEnterDate}</span>
 										</div>
 									</a>
@@ -362,8 +362,8 @@
 							<div class="card-body" style="padding: 20px;">
 								<c:forEach items="${blist}" var="b">
 									<a href="communityfreedetailpage.do?boardId=${b.boardId}">
-										<div class="mb-2" style="display: flex; justify-content: space-between;">
-											<span style="text-align: left; flex: 1;">${b.boardTitle}</span>
+										<div class="mb-3" style="display: flex; justify-content: space-between;">
+											<span style="text-align: left; flex: 2;">${b.boardTitle}</span>
 											<span style="text-align: right; flex: 1;">${b.boardEnterDate}</span>
 										</div>
 									</a>

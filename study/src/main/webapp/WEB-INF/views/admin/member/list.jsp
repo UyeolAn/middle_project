@@ -18,7 +18,7 @@
 	<!-- 회원목록조회페이지 -->
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">회원 목록</h1>
+	<h1 class="h3 mb-2 text-gray-800">&#128587;회원 목록&#128587;</h1>
 	<p class="mb-4">
 		회원관리 페이지
 	</p>

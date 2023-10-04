@@ -45,7 +45,7 @@
     <body>
         <div class="section-body container py-5">
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">마이페이지</h1>
+            <h1 class="h3 mb-2 text-gray-800">&#128152;마이페이지&#128152;</h1>
             <p class="mb-4">
                 ${m.memberName }님의 정보
             </p>

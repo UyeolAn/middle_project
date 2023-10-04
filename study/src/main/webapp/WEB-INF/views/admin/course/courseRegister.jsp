@@ -13,7 +13,7 @@
 <body>
 	<div class="section-body container py-5">
 	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">강의 등록</h1>
+	<h1 class="h3 mb-2 text-gray-800">&#128175;강의 등록&#128175;</h1>
 	<p class="mb-4">
 		등록할 강의의 정보를 입력해주세요.
 	</p>
