@@ -16,7 +16,7 @@
 
         select {
           padding: 9.5px;
-          color: #5D5D5D;
+          color: #B7B7B7;
           border: 1px solid #e1e1e1;
           border-radius: 5px;
         }

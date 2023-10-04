@@ -3,7 +3,7 @@
 
 		<!DOCTYPE html>
 		<html>
-
+		
 		<head>
 			<meta charset="UTF-8">
 			<title>Insert title here</title>
@@ -43,35 +43,14 @@
 				}
 			</style>
 		</head>
+
 		<body>
 			<!-- Page Heading -->
 			<div class="d-sm-flex align-items-center justify-content-between mb-4">
 				<h1 class="h3 mb-0 text-gray-800">&#129390;약과 4조&#129390;</h1>
 				<a href="adminemployeeregister.do" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
 						class="bi bi-person-add fa-sm text-white-50"></i> 직원등록</a>
-       </div>
-      
-			<!-- Earnings (Monthly) Card Example -->
-			<div class="col-xl-3 col-md-6 mb-4">
-				<div class="card border-left-primary shadow h-100 py-2">
-					<a href="adminmemberlist.do">
-						<div class="card-body">
-							<div class="row no-gutters align-items-center">
-								<div class="col mr-2">
-									<div
-										class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-										회원 수</div>
-									<div class="h5 mb-0 font-weight-bold text-gray-800">${members}명</div>
-								</div>
-								<div class="col-auto">
-									<i class="fas fa-people-arrows fa-2x text-gray-300"></i>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
 			</div>
-        
 
 			<!-- Content Row -->
 			<div class="row">
@@ -88,7 +67,7 @@
 										<div class="h5 mb-0 font-weight-bold text-gray-800">${members}명</div>
 									</div>
 									<div class="col-auto">
-										<i class="fas fa-calendar fa-2x text-gray-300"></i>
+										<i class="fas fa-people-arrows fa-2x text-gray-300"></i>
 									</div>
 								</div>
 							</div>
@@ -107,7 +86,7 @@
 									<div class="h5 mb-0 font-weight-bold text-gray-800">${totalP }원</div>
 								</div>
 								<div class="col-auto">
-									<i class="fas fa-book fa-2x text-gray-300"></i>
+									<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
 								</div>
 							</div>
 						</div>
@@ -126,7 +105,7 @@
 										<div class="h5 mb-0 font-weight-bold text-gray-800">${courses }개</div>
 									</div>
 									<div class="col-auto">
-										<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+										<i class="fas fa-book fa-2x text-gray-300"></i>
 									</div>
 								</div>
 							</div>
@@ -166,8 +145,8 @@
 						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 							<h6 class="m-0 font-weight-bold text-secondary">&#128155;월별 가입자수&#128155;</h6>
 							<div class="dropdown no-arrow">
-								<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
+								<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false"> <i
 										class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
 								</a>
 							</div>
@@ -210,9 +189,8 @@
 											<c:set var="bgClass" value="" />
 										</c:when>
 									</c:choose>
-									<div class="progress-bar ${bgClass}" role="progressbar"
-										style="width: ${entry.value}%" aria-valuenow="${entry.value}" aria-valuemin="0"
-										aria-valuemax="100"></div>
+									<div class="progress-bar ${bgClass}" role="progressbar" style="width: ${entry.value}%"
+										aria-valuenow="${entry.value}" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</c:forEach>
 							<!-- 
@@ -273,8 +251,7 @@
 							<tbody id="qList">
 								<c:if test="${empty qlist}">
 									<tr id="empty">
-										<td class="font-weight-bold" colspan="5" style="text-align: center;">새로운 질문이
-											없습니다.</td>
+										<td class="font-weight-bold" colspan="5" style="text-align: center;">새로운 질문이 없습니다.</td>
 									</tr>
 								</c:if>
 								<c:if test="${not empty qlist}">
@@ -318,12 +295,12 @@
 				console.log(author);
 				if (author != "admin") {
 					location.href = "home.do";
-						
-					
-					
-					
+
+
+
+
 					alert("접근권한이 없습니다");
-					
+
 				}
 			</script>
 		</body>
