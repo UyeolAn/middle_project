@@ -16,7 +16,7 @@
           <div class="row">
             <div class="col-lg-3 col-md-3">
               <div class="header__logo">
-                <a href="home.do"><img src="client/img/product/student.png" style="width: 50px;" alt=""></a>
+                <a href="home.do"><img src="client/img/logo.png" style="width: 150px;" alt=""></a>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
@@ -52,7 +52,7 @@
                   <c:if test="${not empty loginId}">
                     <li><a href="mypageprofile.do"><span>${loginName} 님 접속중</span></a>
                       <ul class="dropdown">
-                        <li onclick="logout()">LOGOUT</li>
+                        <li><a href="#" onclick="logout()">LOGOUT</a></li>
                         <li><a href="mypageprofile.do">MY PAGE</a></li>
                       </ul>
                     </li>

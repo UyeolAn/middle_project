@@ -178,11 +178,11 @@
 							<!-- 강의 별 진도율 -->
 							<!-- 서블릿에서 함께 넘겨줌 -->
 
-							<div class="card-body">
+							<div class="card-body" style="text-align: center;">
 								<c:if test="${empty mclist}">
 									<!-- 서블릿에서 mclist로 담아서 보내줌 -->
 									<div style="width: 100%;">
-										<span class="font-weight-bold" style="text-align: center;">수강하는 강의가
+										<span class="font-weight-bold" style="text-align: center;">수강중인 강의가
 											없습니다.</span>
 									</div>
 								</c:if>
@@ -216,9 +216,10 @@
 						<div class="card-header">
 							<h6 class="m-0 font-weight-bold text-primary">강의 목록</h6>
 						</div>
-						<div class="card-body">
+						<div class="card-body" style="text-align: center;">
 							<c:if test="${empty mclist}">
-								<h3 style="text-align: center;">수강중인 강의가 없습니다.</h3>
+								<span class="font-weight-bold" style="text-align: center;">수강중인 강의가
+											없습니다.</span>
 							</c:if>
 							<c:if test="${not empty mclist }">
 								<div class="table-responsive">
