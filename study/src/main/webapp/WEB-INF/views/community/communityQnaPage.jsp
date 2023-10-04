@@ -377,7 +377,7 @@
           $('.product__pagination').append(atag);
         }
 
-        // 해결여부 버튼 활성화 함수
+        // '해결여부에 따른 검색' 버튼 활성화 함수
         function setSolveBtn() {
           $('ul.comm__qna__question__issolved>li').on('click', function () {
             console.log('log')
