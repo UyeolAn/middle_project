@@ -28,10 +28,7 @@
 					color: #737373;
 				}
 
-				.btn {
-					background-color: #999999;
-					border-color: #999999;
-				}
+				
 
 				.bg-gradient-primary {
 					display: flex;
@@ -119,13 +116,29 @@
 					}
 
 					//뒤로가기 방지
-					//회원가입 후 로그인페이지에서 뒤로가기>> 중복해서 회원가입
-					function noBack() {
-						history.pushState(null, null, location.href);
-						window.onpopstate = function (event) {
-							history.go(1);
-						};
+					//로그인페이지에서 뒤로가기 방지
+
+					history.pushState(null, null, location.href);
+					window.onpopstate = function (event) {
+						history.go(1);
+					};
+
+
+					// 로그인 후 페이지 접근 제한
+					//세션에 id있을시 강제로 로그아웃
+					let loginId = `${loginId}`;
+					loginAccess()
+
+					console.log(loginId)
+					function loginAccess() {
+						if (loginId != "") {
+							location.href("logout.do");
+							alert("로그아웃되었습니다")
+						}
+
 					}
+
+
 
 				</script>
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

@@ -19,81 +19,68 @@
     </style>
 
     <body>
-      <!-- Header Section Begin -->
       <header class="header">
-        <div class="header__top">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 col-md-7">
-                <div class="header__top__left">
-                  <p>인터넷 강의 사이트</p>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-5">
-                <div class="header__top__right">
-                  <div class="header__top__links">
-                    <c:if test="${empty loginId}">
-                      <a href="login.do">Sign in</a>
-                    </c:if>
-                    <a href="#">FAQs</a>
-                  </div>
-                  <c:if test="${not empty loginId}">
-                    <div class="header__top__hover">
-                      <span>${loginName} 님 접속중&nbsp;&nbsp;<i class="bi bi-caret-down-fill"></i></span>
-                      <ul>
-                        <li><a href="logout.do">LOGOUT</a></li>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-3 col-md-3">
+							<div class="header__logo">
+								<a href="home.do"><img src="client/img/product/student.png" style="width: 50px;"
+										alt=""></a>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6">
+							<nav class="header__menu mobile-menu">
+								<ul>
+									<li class="active"><a href="home.do">&#127968;Home</a></li>
+									<li><a href="courselist.do">&#128187;Course</a>
+										<ul class="dropdown">
+											<li><a href="courselist.do?mainCate=it">IT</a></li>
+											<li><a href="courselist.do?mainCate=english">English</a></li>
+											<li><a href="courselist.do?mainCate=career">Career</a></li>
+										</ul>
+									</li>
+									<li><a href="packagelist.do">&#127873;Package</a>
+										<!-- <ul class="dropdown">
+											<li><a href="./about.html">초급</a></li>
+											<li><a href="./shop-details.html">중급</a></li>
+											<li><a href="./shopping-cart.html">고급</a></li>
+										</ul> -->
+									</li>
+									<li><a href="communityqnapage.do">&#128106;Community</a>
+										<ul class="dropdown">
+											<li><a href="communityqnapage.do">질문게시판</a></li>
+											<li><a href="communityfreepage.do">자유게시판</a></li>
+										</ul>
+									</li>
 
-                        <li><a href="mypageprofile.do">MY PAGE</a></li>
-                      </ul>
-                  </c:if>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-3">
-              <div class="header__logo">
-                <a href="home.do"><img src="client/img/logo.png" alt=""></a>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-              <nav class="header__menu mobile-menu">
-                <ul>
-                  <li><a href="home.do">Home</a></li>
-                  <li class="<c:if test=" ${menu eq 'course' }">active</c:if>"><a href="courselist.do">Course</a>
-                    <ul class="dropdown">
-                      <li><a href="courselist.do?mainCate=it">IT</a></li>
-                      <li><a href="courselist.do?mainCate=english">English</a></li>
-                      <li><a href="courselist.do?mainCate=career">Career</a></li>
-                    </ul>
-                  </li>
-                  <li class="<c:if test=" ${menu eq 'package' }">active</c:if>"><a href="packagelist.do">Package</a>
-                  </li>
-                  <li class="<c:if test=" ${menu eq 'community' }">active</c:if>"><a
-                      href="communityqnapage.do">Community</a>
-                    <ul class="dropdown">
-                      <li><a href="communityqnapage.do">질문게시판</a></li>
-                      <li><a href="communityfreepage.do">자유게시판</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <div class="col-lg-3 col-md-3">
-              <div class="header__nav__option">
-                <a href="#" class="search-switch"><img src="client/img/icon/search.png" alt=""></a>
-                <a href="#"><img src="client/img/icon/heart.png" alt=""></a>
-                <a href="#"><img src="client/img/icon/cart.png" alt=""> <span>0</span></a>
-                <div class="price">$0.00</div>
-              </div>
-            </div>
-          </div>
-          <div class="canvas__open"><i class="fa fa-bars"></i></div>
-        </div>
-      </header>
+								</ul>
+							</nav>
+						</div>
+						<div class="col-lg-3 col-md-3">
+							<nav class="header__menu mobile-menu">
+								<ul>
+									<c:if test="${not empty loginId}">
+										<li><a href="mypageprofile.do"><span>${loginName} 님 접속중</span></a>
+											<ul class="dropdown">
+												<li><a href="logout.do">LOGOUT</a></li>
+												<li><a href="mypageprofile.do">MY PAGE</a></li>
+											</ul>
+										</li>
+									</c:if>
+									<c:if test="${empty loginId}">
+										<li>
+											<a href="login.do" style="color: black;">Sign in</a>
+										</li>
+									</c:if>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<div class="canvas__open">
+						<i class="fa fa-bars"></i>
+					</div>
+				</div>
+			</header>
       <!-- Header Section End -->
 
       <section class="breadcrumb-option">
@@ -130,7 +117,7 @@
                   </c:if>
                   <c:if test="${menu eq 'mypage' && mid eq null}">
                     <span>My Page</span>
-                    <span class="subCate">전체보기</span>
+                    <span class="subCate">내 정보</span>
                   </c:if>
                   <c:if test="${menu eq 'mypage' && mid eq 'mycomm'}">
                     <span>My Page</span>
