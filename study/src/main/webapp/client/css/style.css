@@ -431,7 +431,6 @@ ol {
 	margin-right: 45px;
 	position: relative;
 }
-
 .header__menu ul li.active a:after {
 	-webkit-transform: scale(1);
 	-ms-transform: scale(1);

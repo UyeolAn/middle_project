@@ -7,6 +7,15 @@
       <meta charset="UTF-8">
       <title>Insert title here</title>
       <style>
+        .comm__detail__body {
+          margin-bottom: 40px;
+          padding-top: 30px;
+          padding-bottom: 30px;
+          border: 1px solid rgba(0, 0, 0, .1);
+          border-radius: 25px;
+          box-shadow: 1px 2px 3px 0px #ddd;
+        }
+
         .comm__free__board__detail__etc__info>.etc__info__name {
           font-size: medium;
           font-weight: bold;
@@ -34,33 +43,33 @@
           padding: 9px 15px;
           font-size: medium;
           background: none;
-          color: #ffa9a9;
+          color: #faaaaa;
         }
 
         .small-delete-btn:hover {
-          color: #E53637;
+          color: #e53637;
         }
 
         .like-btn {
           padding: 9px 15px;
           font-size: large;
-          color: #ffa9a9;
+          color: #88bdee;
           background: none;
         }
 
         .active-like-btn {
           padding: 9px 15px;
           font-size: large;
-          color: #E53637;
+          color: #3188DB;
           background: none;
         }
 
         .like-btn:hover {
-          color: #E53637;
+          color: #3188DB;
         }
 
         .active-like-btn:hover {
-          color: #ffa9a9;
+          color: #88bdee;
         }
 
         .dislike-btn {
@@ -94,7 +103,8 @@
         .comm__free__reply__sort>li {
           margin-left: 5%;
           margin-top: 4%;
-          font-size: medium;
+          font-size: small;
+          font-weight: 900;
           color: #B7B7B7;
           float: left;
         }
@@ -137,58 +147,62 @@
 
     <body>
       <div class="container col-lg-12">
-        <!--Board Title Bar Start-->
-        <div class="product__details__tab__content__item">
-          <h4 class="col-lg-12" id="boardTitle" style="font-weight: 1000;">${board.boardTitle}</h4>
-          <br>
-          <div class="col-lg-12 comm__free__board__detail__etc__info">
-            <c:if test="${empty board.memberId}">
-              <span class="etc__info__name" id="memberId">탈퇴한 회원</span>
-            </c:if>
-            <c:if test="${not empty board.memberId}">
-              <span class="etc__info__name" id="memberId">${board.memberId}</span>
-            </c:if>
+        <div class="comm__detail__body col-lg-12">
+          <!--Board Title Bar Start-->
+          <div class="product__details__tab__content__item">
+            <h4 class="col-lg-12" id="boardTitle" style="font-weight: 1000;">${board.boardTitle}</h4>
             <br>
-            <span class="etc__info__datehit">작성일&nbsp;&nbsp;${board.boardEnterDate}</span>
-            <span class="etc__info__datehit">
-              <c:if test="${not empty board.boardUpdateDate}">&nbsp;&nbsp;수정일&nbsp;&nbsp;${board.boardUpdateDate}</c:if>
-            </span>
-            <span class="etc__info__datehit">&nbsp;&nbsp;<i class="bi bi-eye"></i>&nbsp;&nbsp;${board.boardHit}</span>
+            <div class="col-lg-12 comm__free__board__detail__etc__info">
+              <c:if test="${empty board.memberId}">
+                <span class="etc__info__name" id="memberId">탈퇴한 회원</span>
+              </c:if>
+              <c:if test="${not empty board.memberId}">
+                <span class="etc__info__name" id="memberId">${board.memberId}</span>
+              </c:if>
+              <br>
+              <span class="etc__info__datehit">작성일&nbsp;&nbsp;${board.boardEnterDate}</span>
+              <span class="etc__info__datehit">
+                <c:if test="${not empty board.boardUpdateDate}">&nbsp;&nbsp;수정일&nbsp;&nbsp;${board.boardUpdateDate}
+                </c:if>
+              </span>
+              <span class="etc__info__datehit">&nbsp;&nbsp;<i class="bi bi-eye"></i>&nbsp;&nbsp;${board.boardHit}</span>
+            </div>
           </div>
-        </div>
-        <!--Board Title Bar End-->
-        <hr>
+          <!--Board Title Bar End-->
+          <hr>
 
-        <!--Board Main Body Start-->
-        <div class="col-lg-12 row" style="margin-top: 5%;">
-          <div class="col-lg-10">
-            <c:if test="${not empty board.boardImg}">
-              <div class="col-lg-10">
-                <img src="client/img/board/${board.boardImg}" alt="게시글 이미지">
-              </div>
-            </c:if>
-            <p class="col-lg-12" id="boardContent" style="white-space:pre;">${board.boardContent}</p>
+          <!--Board Main Body Start-->
+          <div class="col-lg-12 row" style="margin-top: 5%;">
+            <div class="col-lg-10">
+              <c:if test="${not empty board.boardImg}">
+                <div class="col-lg-10">
+                  <img src="client/img/board/${board.boardImg}" alt="게시글 이미지">
+                </div>
+              </c:if>
+              <p class="col-lg-12" id="boardContent" style="white-space:pre;">${board.boardContent}</p>
+            </div>
+            <div class="col-lg-7 comm__free__board__detail__buttons" style="margin-top: 5%;">
+              <button type="button" id="updateBtn" class="site-btn small-update-btn"
+                onclick="location.href='communityfreeupdatepage.do?boardId=${board.boardId}'"><i
+                  class="bi bi-pencil-square" style="font-size: x-large !important;"></i></button>
+              <button type="button" id="deleteBtn" class="site-btn small-delete-btn" onclick="deleteBoard()"><i
+                  class="bi bi-trash" style="font-size: x-large !important;"></i></button>
+              <form id="deleteForm" action="boarddelete.do">
+                <input type="hidden" id="boardId" name="boardId" value="${board.boardId}">
+              </form>
+            </div>
+            <div class="col-lg-5 comm__free__board__detail__like" style="margin-top: 5%;">
+              <button type="button" id="dislikeBtn" class="site-btn dislike-btn" style="float: right;"><i
+                  class="bi bi-hand-thumbs-down-fill"
+                  style="font-size: x-large !important;"></i>&nbsp;${board.boardDislike}</button>
+              <button type="button" id="likeBtn" class="site-btn like-btn" style="float: right;"><i
+                  class="bi bi-hand-thumbs-up-fill"
+                  style="font-size: x-large !important;"></i>&nbsp;${board.boardLike}</button>
+            </div>
           </div>
-          <div class="col-lg-7 comm__free__board__detail__buttons" style="margin-top: 5%;">
-            <button type="button" id="updateBtn" class="site-btn small-update-btn"
-              onclick="location.href='communityfreeupdatepage.do?boardId=${board.boardId}'"><i
-                class="bi bi-pencil-square" style="font-size: x-large !important;"></i></button>
-            <button type="button" id="deleteBtn" class="site-btn small-delete-btn" onclick="deleteBoard()"><i
-                class="bi bi-trash" style="font-size: x-large !important;"></i></button>
-            <form id="deleteForm" action="boarddelete.do">
-              <input type="hidden" id="boardId" name="boardId" value="${board.boardId}">
-            </form>
-          </div>
-          <div class="col-lg-5 comm__free__board__detail__like" style="margin-top: 5%;">
-            <button type="button" id="dislikeBtn" class="site-btn dislike-btn" style="float: right;"><i
-                class="bi bi-hand-thumbs-down"
-                style="font-size: x-large !important;"></i>&nbsp;${board.boardDislike}</button>
-            <button type="button" id="likeBtn" class="site-btn like-btn" style="float: right;"><i
-                class="bi bi-hand-thumbs-up"
-                style="font-size: x-large !important;"></i>&nbsp;${board.boardLike}</button>
-          </div>
+          <!--Board Main Body End-->
         </div>
-        <!--Board Main Body End-->
+
         <hr>
 
         <!--Reply Top Bar Start-->
@@ -196,7 +210,7 @@
           <span class="col-lg-12 reply__info__count" id="replyCount">REPLY : 10</span>
           <br>
           <div class="col-lg-12">
-            <textarea id="replyInput" name="replyInput" placeholder="댓글을 입력하세요..."
+            <textarea id="replyInput" name="replyInput" maxlength="512" placeholder="댓글을 입력하세요..."
               style="height: 70px; margin-top: 10px; color: #333; "></textarea>
           </div>
           <div class="col-lg-12 row">
@@ -404,7 +418,7 @@
             success: function (countJson) {
               let replyCount = countJson.totalCount;
               $('.reply__info__count').empty();
-              $('.reply__info__count').text('REPLY : ' + replyCount);
+              $('.reply__info__count').html('댓글&nbsp;&nbsp;' + replyCount);
             },
             error: function (err) {
               console.log(err);
@@ -446,7 +460,7 @@
                     .html('<i class="bi bi-trash"></i>').val(`\${reply.memberId}`))
                   .append($('<button type="button" class="site-btn reply-btn reply-update-btn">')
                     .html('<i class="bi bi-pencil-square"></i>').val(`\${reply.memberId}`))
-                  .append($('<button type="button" class="site-btn reply-btn reply-update-check-btn" style="background: none; color: #E53637";>')
+                  .append($('<button type="button" class="site-btn reply-btn reply-update-check-btn" style="background: none; color: #3188DB";>')
                     .html('<i class="bi bi-pencil-square"></i>').val(`\${reply.memberId}`).hide())
                   .append($('<br>'))
                   .append(

@@ -152,4 +152,15 @@
 	<select id="questionListBynotsolved" resultType="co.four.study.question.service.QuestionVO">
 		SELECT * FROM QUESTIONS WHERE COURSE_ID IS NULL ORDER BY QUESTION_SOLVE
 	</select>
+	
+	<select id="homeRecentQuestion" resultType="co.four.study.question.service.QuestionVO">
+		<![CDATA[
+		    SELECT * FROM (
+		      SELECT *
+		      FROM questions
+		      ORDER BY question_id desc
+		    )
+		    WHERE ROWNUM <= 5
+	  	]]>
+	</select>
 </mapper>
