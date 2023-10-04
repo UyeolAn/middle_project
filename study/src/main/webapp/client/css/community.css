@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+/* 배너관련 start */
+.breadcrumb__links span {
+	color: #6c757d;
+}
+.breadcrumb-option {
+	background: url(../img/banner/package_banner3.webp) rgba(205, 204, 238, 0.3) no-repeat 78% 72%;
+	background-size: 23%;
+	background-blend-mode: color;
+}
+/* 배너관련 end */
+
+select {
+  padding: 9.5px;
+  color: #5D5D5D;
+  border: 1px solid #e1e1e1 !important;
+  border-radius: 5px;
+}
