@@ -23,7 +23,6 @@
             <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
             <style>
-          
                 .bg-gradient-primary {
                     display: flex;
                     justify-content: center;
@@ -107,21 +106,23 @@
 
                                             <div class="form-group">
                                                 <label class="font-weight-bold">주소</label><br>
-                                                <input type="text" id="sample6_postcode" class="form-control mb-2"
+                                                <input type="text" id="sample6_postcode"
+                                                    class="form-control form-control-user mb-2"
                                                     style="display: inline; width: 50%;" placeholder="우편번호" readonly
                                                     required>
                                                 <input type="button" onclick="sample6_execDaumPostcode()"
                                                     value="우편번호 찾기" class="small btn btn-primary btn-user"><br>
-                                                <input type="text" id="sample6_address" class="form-control mb-2"
+                                                <input type="text" id="sample6_address"
+                                                    class="form-control form-control-user mb-2"
                                                     style="width: 100%; display: inline;" name="address1"
                                                     placeholder="주소" required readonly>
                                                 <div class="row mb-2" style="width: 101%; margin-left: 0;">
                                                     <input type="text" id="sample6_detailAddress"
-                                                        class="form-control col-lg-6"
+                                                        class="form-control form-control-user col-lg-6"
                                                         style="width: 50%; display: inline;" name="address2"
-                                                        placeholder="상세주소" required maxlength="30"><!--
-                                            --><input type="text" id="sample6_extraAddress"
-                                                        class="form-control col-lg-6"
+                                                        placeholder="상세주소" required maxlength="30"><input type="text"
+                                                        id="sample6_extraAddress"
+                                                        class="form-control form-control-user col-lg-6"
                                                         style="width: 50%; display: inline;" name="address3"
                                                         placeholder="참고항목" maxlength="30">
                                                 </div>
