@@ -29,6 +29,7 @@ public class AjaxCourseList extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("ajaxcourselist 들어옴");
 		CourseService dao = new CourseServiceImpl();
 		CourseVO vo = new CourseVO();
 		ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());

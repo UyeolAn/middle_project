@@ -90,6 +90,33 @@
 							</div>
 						</div>
 					</div>
+					<!-- CAREER -->
+					<div class="card">
+						<div class="card-heading">
+							<a data-toggle="collapse" data-target="#collapseOne">CAREER</a>
+						</div>
+						<div id="collapseOne" class="collaps show"
+							data-parent="#accordionExample">
+							<div class="card-body">
+								<div class="shop__sidebar__categories">
+									<ul class="nice-scroll">
+										<li onclick="packageList('career', 'all', this)" data-c="null">
+											<span class="sub_menu">전체보기</span>
+										</li>
+										<li onclick="packageList('career', 'easy', this)" data-c="easy">
+											<span class="sub_menu">입문</span>
+										</li>
+										<li onclick="packageList('career', 'normal', this)" data-c="normal">
+											<span class="sub_menu">초급</span>
+										</li>
+										<li onclick="packageList('career', 'hard', this)" data-c="hard">
+											<span class="sub_menu">중급이상</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

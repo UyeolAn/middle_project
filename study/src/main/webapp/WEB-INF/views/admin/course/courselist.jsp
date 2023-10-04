@@ -12,7 +12,7 @@
 <link href="admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1 class="h3 mb-2 text-gray-800">강의 목록</h1>
+    <h1 class="h3 mb-2 text-gray-800">&#128187;강의 목록&#128187;</h1>
 	<p class="mb-4">
 		강의관리 페이지
 	</p>

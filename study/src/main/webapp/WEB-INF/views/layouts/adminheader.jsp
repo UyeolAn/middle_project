@@ -46,11 +46,14 @@
 
 			<!-- Nav Item - Alerts -->
 
+			<li class="nav-item dropdown no-arrow mx-1">
+			<a class="nav-link dropdown-toggle" href="home.do" target="_blank" style="color:black;"> 
+				<i class="fas fa-home fa-fw"></i>고객 홈</a></li>
 
 			<!-- Nav Item - Messages -->
 			<li class="nav-item dropdown no-arrow mx-1">
-			<a class="nav-link dropdown-toggle" href="https://dashboard.tawk.to/#/inbox/63bd6d55c2f1ac1e202cb159/all" target="_blank"> 
-				<i class="fas fa-envelope fa-fw"></i> </a>
+			<a class="nav-link dropdown-toggle" href="https://dashboard.tawk.to/#/inbox/63bd6d55c2f1ac1e202cb159/all" target="_blank" style="color:black;"> 
+				<i class="fas fa-envelope fa-fw"></i>실시간 문의</a></li>
 
 			<!-- Nav Item - User Information -->
 			<li class="nav-item dropdown no-arrow"><a

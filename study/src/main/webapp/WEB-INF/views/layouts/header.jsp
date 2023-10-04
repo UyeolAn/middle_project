@@ -7,6 +7,7 @@
       <meta charset="UTF-8">
       <title>Insert title here</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     </head>
 
     <body>
@@ -21,22 +22,22 @@
             <div class="col-lg-6 col-md-6">
               <nav class="header__menu mobile-menu">
                 <ul>
-                  <li class="active"><a href="home.do">&#127968;Home</a></li>
-                  <li><a href="courselist.do">&#128187;Course</a>
+                  <li><a href="home.do">&#127968;Home</a></li>
+                  <li name="course"><a href="courselist.do">&#128187;Course</a>
                     <ul class="dropdown">
                       <li><a href="courselist.do?mainCate=it">IT</a></li>
                       <li><a href="courselist.do?mainCate=english">English</a></li>
                       <li><a href="courselist.do?mainCate=career">Career</a></li>
                     </ul>
                   </li>
-                  <li><a href="packagelist.do">&#127873;Package</a>
+                  <li name="package"><a href="packagelist.do">&#127873;Package</a>
                     <!-- <ul class="dropdown">
 											<li><a href="./about.html">초급</a></li>
 											<li><a href="./shop-details.html">중급</a></li>
 											<li><a href="./shopping-cart.html">고급</a></li>
 										</ul> -->
                   </li>
-                  <li><a href="communityqnapage.do">&#128106;Community</a>
+                  <li name="community"><a href="communityqnapage.do">&#128106;Community</a>
                     <ul class="dropdown">
                       <li><a href="communityqnapage.do">질문게시판</a></li>
                       <li><a href="communityfreepage.do">자유게시판</a></li>
@@ -152,6 +153,11 @@
         integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous">
         </script>
       <script>
+        console.log($(`li[name=${menu}]`));
+        $(`li[name=${menu}]`).attr("class","active");
+        
+
+
         Kakao.init('9c1eb3ec967ca14a10ddab8621bdddef');
 
 

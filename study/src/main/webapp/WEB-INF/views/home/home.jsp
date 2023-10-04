@@ -320,8 +320,30 @@ h5, h6 {
 											</h5>
 										</c:otherwise>
 									</c:choose>
+							<hr style="border: 3px solid salmon; margin: 0;">
+							<div class="card-body" style="padding: 20px;">
+								<c:forEach items="${qlist}" var="q">
+									<a href="communityqnadetailpage.do?questionId=${q.questionId}">
+										<div class="mb-3" style="display: flex; justify-content: space-between;">
+											<span style="text-align: left; flex: 2;">${q.questionTitle}</span>
+											<span style="text-align: right; flex: 1;">${q.questionEnterDate}</span>
+										</div>
+									</a>
+								</c:forEach>
+							</div>
+						</div>
+						<div class="card col-lg-5 shadow" style="padding: 0; border: 0;">
+							<div class="card-head" style="padding: 20px;">
+								<div style="display: flex; justify-content: space-between;">
+									<h4
+										style="font-family: 'NanumSquareRound'; text-align: left; line-height: 100%; display: inline-block; flex: 3;">
+										자유게시판</h4>
+									<a href="communityfreepage.do">
+										<h6
+											style="text-align: right; display: inline-block; line-height: 24px; flex: 1;">
+											+더보기</h6>
+									</a>
 								</div>
-
 							</div>
 						</a>
 					</div>
@@ -353,7 +375,7 @@ h5, h6 {
 						<a href="communityqnadetailpage.do?questionId=${q.questionId}">
 							<div class="mb-2"
 								style="display: flex; justify-content: space-between;">
-								<span style="text-align: left; flex: 1;">${q.questionTitle}</span>
+								<span style="text-align: left; flex: 2;">${q.questionTitle}</span>
 								<span style="text-align: right; flex: 1;">${q.questionEnterDate}</span>
 							</div>
 						</a>
@@ -379,7 +401,7 @@ h5, h6 {
 						<a href="communityfreedetailpage.do?boardId=${b.boardId}">
 							<div class="mb-2"
 								style="display: flex; justify-content: space-between;">
-								<span style="text-align: left; flex: 1;">${b.boardTitle}</span>
+								<span style="text-align: left; flex: 2;">${b.boardTitle}</span>
 								<span style="text-align: right; flex: 1;">${b.boardEnterDate}</span>
 							</div>
 						</a>
@@ -388,7 +410,6 @@ h5, h6 {
 			</div>
 		</div>
 	</section>
-
 
 
 	<!-- Footer Section Begin -->
