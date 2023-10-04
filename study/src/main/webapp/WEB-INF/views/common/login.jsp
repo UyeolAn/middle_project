@@ -28,10 +28,7 @@
 					color: #737373;
 				}
 
-				.btn {
-					background-color: #999999;
-					border-color: #999999;
-				}
+				
 
 				.bg-gradient-primary {
 					display: flex;
