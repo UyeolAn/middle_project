@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+		<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 			<!DOCTYPE html>
 			<html>
 
@@ -327,7 +328,17 @@
 								<c:forEach items="${qlist}" var="q">
 									<a href="communityqnadetailpage.do?questionId=${q.questionId}">
 										<div class="mb-3" style="display: flex; justify-content: space-between;">
-											<span style="text-align: left; flex: 2;">${q.questionTitle}</span>
+											<span style="text-align: left; flex: 2;">
+												<c:choose>
+													<c:when test="${fn:length(q.questionTitle) gt 25}">
+														<c:out value="${fn:substring(q.questionTitle, 0, 24)}"/>...
+													</c:when>
+													<c:otherwise>
+														<c:out value="${q.questionTitle}">
+														</c:out>
+													</c:otherwise>
+												</c:choose>
+											</span>
 											<span style="text-align: right; flex: 1;">${q.questionEnterDate}</span>
 										</div>
 									</a>
@@ -351,7 +362,17 @@
 								<c:forEach items="${blist}" var="b">
 									<a href="communityfreedetailpage.do?boardId=${b.boardId}">
 										<div class="mb-3" style="display: flex; justify-content: space-between;">
-											<span style="text-align: left; flex: 2;">${b.boardTitle}</span>
+											<span style="text-align: left; flex: 2;">
+												<c:choose>
+													<c:when test="${fn:length(b.boardTitle) gt 25}">
+														<c:out value="${fn:substring(b.boardTitle, 0, 24)}"/>...
+													</c:when>
+													<c:otherwise>
+														<c:out value="${b.boardTitle}">
+														</c:out>
+													</c:otherwise>
+												</c:choose>
+											</span>
 											<span style="text-align: right; flex: 1;">${b.boardEnterDate}</span>
 										</div>
 									</a>
