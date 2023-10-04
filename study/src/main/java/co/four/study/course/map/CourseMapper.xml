@@ -103,6 +103,9 @@
 	<select id="courseTotalCount" resultType="int">
 		SELECT COUNT(1) FROM COURSES
 		WHERE 1=1
+		<if test="courseMainCategory != null">
+			AND COURSE_MAIN_CATEGORY = LOWER(#{courseMainCategory})
+		</if>
 		<if test="courseSubCategory != null">
 			AND COURSE_SUB_CATEGORY = LOWER(#{courseSubCategory})
 		</if>

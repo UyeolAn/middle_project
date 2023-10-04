@@ -101,6 +101,7 @@ function appendCourseList(result, type) {
 // 페이징 태그 관련 함수
 function appendPaging(result) {
 	let data = result[0].paging;
+	console.log(data);
     
 	$('.all-list-paging').remove(); // 초기 태그 삭제
 	$('.p-result').remove(); // ajax 통신으로 추가된 태그 삭제
