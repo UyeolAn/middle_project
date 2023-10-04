@@ -88,12 +88,13 @@ public class CourseList extends HttpServlet {
 			courses = dao.coursePagingList(vo);
 		}
 		
-		if(courses != null) {
+		if(courses.size() > 0) {
 			request.setAttribute("courses", courses); // 강의 리스트 조회 완료
 			request.setAttribute("tcnt", courses.size()); // 조회된 건수
 			request.setAttribute("cid", mainCate); // 메인카테고리
 		} else {
-			System.out.println("courselist.do 강의 조회에서 오류 발생");
+			request.setAttribute("result", "empty");
+			System.out.println("courselist.do 강의 조회결과 없거나 오류 발생");
 		}
 		
 		// 페이지 포워딩

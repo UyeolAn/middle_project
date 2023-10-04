@@ -109,6 +109,9 @@
 		<if test="courseGrade != null">
 			AND COURSE_GRADE = LOWER(#{courseGrade})
 		</if>
+		<if test="courseName != null">
+			AND COURSE_NAME LIKE '%' || #{courseName} || '%'
+		</if>
 	</select>
 
 	<select id="coursePagingList"
@@ -125,6 +128,9 @@
 		</if>
 		<if test="courseGrade != null">
 			AND COURSE_GRADE = LOWER(#{courseGrade})
+		</if>
+		<if test="courseName != null">
+			AND COURSE_NAME LIKE '%' || #{courseName} || '%'
 		</if>
 		ORDER BY COURSE_ID) A
 		) T

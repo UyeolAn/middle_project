@@ -9,6 +9,18 @@
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="client/css/coursedetail.css" type="text/css">
 	<link rel="stylesheet" href="client/css/course.css" type="text/css">
+	<style>
+		/* 배너관련 start */
+		.breadcrumb__links span {
+			color: #6c757d;
+		}
+		.breadcrumb-option {
+			background: url(client/img/banner/course_banner3.webp) rgba(170, 232, 255, 0.4) no-repeat 0% 70%;
+			background-size: 150%;
+			background-blend-mode: color;
+		}
+		/* 배너관련 end */
+	</style>
 </head>
 
 <body>
@@ -30,16 +42,16 @@
 					</c:otherwise>
 				</c:choose>
 				<div class="course_info_wrap">
-					<div>
-						<p class="breadcrumb__links course_links"><span>${fn:toUpperCase(course.courseMainCategory)}</span>
-							<span>${fn:toUpperCase(course.courseSubCategory)}</span></p>
-						<div class="course_grade_name">
-							<p>
-								<c:if test="${course.courseGrade eq 'easy' }"><span class="course_grade">입문</span></c:if>
-								<c:if test="${course.courseGrade eq 'normal' }"><span class="course_grade">초급</span></c:if>
-								<c:if test="${course.courseGrade eq 'hard' }"><span class="course_grade">중급이상</span></c:if>
-								<span class="course_name">${course.courseName }</span>
-							</p>
+					<div class="course_grade_name">
+						<p>
+							<c:if test="${course.courseGrade eq 'easy' }"><span class="course_grade">입문</span></c:if>
+							<c:if test="${course.courseGrade eq 'normal' }"><span class="course_grade">초급</span></c:if>
+							<c:if test="${course.courseGrade eq 'hard' }"><span class="course_grade">중급이상</span></c:if>
+							<span class="course_name">${course.courseName }</span>
+						</p>
+						<div class="tag">
+							<span># ${fn:toUpperCase(course.courseMainCategory)}</span>
+							<span># ${fn:toUpperCase(course.courseSubCategory)}</span>
 						</div>
 					</div>
 					<div class="course_info_etc">
@@ -60,7 +72,7 @@
 								<i class="fa fa-star-o"></i>
 								<i class="fa fa-star-o"></i>
 							</c:if>
-							<span> - 5 Reviews</span>
+							<span> - ${rcount }개의 수강평</span>
 						</div>
 
 						<!-- 강사 이름 -->

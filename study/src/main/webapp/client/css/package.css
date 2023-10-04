@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+.course-item {
+	/*border: 1px solid #e6e6e6;*/
+	border-radius: 5px;
+	padding: 15px;
+	box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
 .message_wrap {
 	display: flex;
 	justify-content: center;
@@ -21,4 +27,38 @@
 }
 .result_no svg {
 	margin-bottom: 5px;
+}
+
+/* 이미지 위에 할인율 */
+.course-item-pic{position: relative;}
+.course-item-pic .course_discount {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #fff;
+	background-color: #ff3b00;
+	padding: 5px 10px;
+	border-radius: 5px;
+	font-weight: 700;
+	font-size: 13px;
+}
+.course-item-pic .course_discount svg {
+	margin-bottom: 3px;
+	margin-right: 3px;
+}
+
+/* 원가에 취소선 */
+.course-price {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+.course-price span {
+	height: 22px;
+	line-height: 22px;
+}
+.course-wonga {
+	text-decoration: line-through;
+	color: #8f959a;
+	font-size: 15px;
 }

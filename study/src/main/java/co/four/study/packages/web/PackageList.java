@@ -27,17 +27,30 @@ public class PackageList extends HttpServlet {
 		PackageService dao = new PackageServiceImpl();
 		PackageVO vo = new PackageVO();
 		List<PackageVO> packages = new ArrayList<PackageVO>();
+		String grade = request.getParameter("grade");
+		String category = request.getParameter("category");
 		
-		packages = dao.packageSelectList(vo); //vo에 담긴 정보가 없어야함.
+		if(grade != null && category != null) {
+			vo.setPackageGrade(grade);
+			vo.setPackageCategory(category);
+		}
 		
-		// 할인금액 구하기(반복문 돌아야함)
+		packages = dao.packageSelectList(vo); //(전체조회) : vo에 담긴 정보가 없어야함.
+		
+		// 할인금액,원가 구하기(반복문 돌아야함)
 		for(int i=0; i<packages.size(); i++) {
 			vo.setPackageId(packages.get(i).getPackageId()); //패키지아이디 set
 			int salePrice = dao.salePrice(vo); //결과값을 packages.get(i).setSalePrice();해줘야함.
 			packages.get(i).setSalePrice(salePrice);
+			int coursesPrice = dao.coursesPrice(vo);
+			packages.get(i).setCoursesPrice(coursesPrice);
 		}
 		
-		request.setAttribute("packages", packages);
+		if(packages.size() != 0) {
+			request.setAttribute("packages", packages);
+		} else if (packages.size() == 0) {
+			request.setAttribute("result", "empty");
+		}
 		System.out.println(packages);
 		
 		

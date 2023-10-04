@@ -5,6 +5,9 @@
   <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
+
+    <link rel="stylesheet" href="client/css/menu.css">
+
     <style type="text/css">
       .nice-scroll {
         height: 89px !important;
@@ -14,6 +17,7 @@
         margin-top: 0 !important;
       }
     </style>
+
   </head>
 
   <body>

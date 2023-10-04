@@ -44,7 +44,7 @@ public class CourseDetail extends HttpServlet {
 		BucketService bdao = new BucketServiceImpl();
 		CourseVO vo = new CourseVO();
 		MemberCourseVO mvo = new MemberCourseVO();
-		int courseId = Integer.valueOf(request.getParameter("courseId"));
+		int courseId = Integer.valueOf(request.getParameter("courseId")); //강의아이디
 		
 		// 로그인 정보 체크(해당강의 수강 여부를 체크하기 위함)
 		String id = (String) session.getAttribute("loginId");
@@ -101,6 +101,7 @@ public class CourseDetail extends HttpServlet {
 		// 페이지 포워딩
 		String page = "course/courseDetail";
 		request.setAttribute("menu", "course");
+		request.setAttribute("detail", "detail");
 		ViewResolve.foward(request, response, page);
 	}
 
