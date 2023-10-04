@@ -21,26 +21,28 @@
 
         .input__file__btn {
           margin-top: 1%;
-          padding: 6px 25px;
+          margin-right: 1%;
+          padding: 6px 15px;
           color: white;
-          background: #B7B7B7;
+          background: #88bdee;
           cursor: pointer;
+          border-radius: 8px;
         }
 
         .input__file__btn:hover {
-          background: #A7A7A7;
+          background: #3188DB;
         }
 
         .active__input__file__btn {
           margin-top: 1%;
           padding: 6px 25px;
           color: white;
-          background: #E53637;
+          background: #3188DB;
           cursor: pointer;
         }
 
         .active__input__file__btn:hover {
-          background: #ffa9a9;
+          background: #88bdee;
         }
 
         .small-btn {
@@ -59,7 +61,7 @@
           <form id="insertForm" action="questioninsert.do" method="post" enctype="multipart/form-data">
             <div class="row">
               <div class="col-lg-9">
-                <input type="text" id="questionTitle" name="questionTitle" placeholder="제목을 입력하세요.."
+                <input type="text" id="questionTitle" name="questionTitle" maxlength='99' placeholder="제목을 입력하세요.."
                   style="margin-bottom: 1%;">
               </div>
               <div class="col-lg-9">
@@ -76,16 +78,16 @@
               <div class="col-lg-12">
                 <label class="input__file__btn"
                   style="margin-top: 3%; border-radius: 8px; font-size: medium; font-weight: 900;">
-                  IMG
+                  <i class="bi bi-image"></i>&nbsp;IMG
                 </label>
                 <input type="file" id="questionImg" name="questionImg" style="display: none;">
               </div>
               <div class="col-lg-12">
-                <textarea id="questionContent" name="questionContent" placeholder="내용을 입력하세요..."
+                <textarea id="questionContent" name="questionContent" maxlength="4" placeholder="내용을 입력하세요..."
                   style="color: #333;"></textarea>
                 <div class="col-lg-12 row">
                   <button type="reset" class="site-btn"
-                    style="padding: 5px 12px 5px 15px; background: #B7B7B7; border-radius: 8px; font-size: small;"><i
+                    style="padding: 5px 6px 5px 9px; background: #B7B7B7; border-radius: 8px; font-size: small;"><i
                       class="bi bi-arrow-repeat" style="font-size: x-large !important;"></i></button>
                   <button type="button" class="site-btn" onclick="insertQuestion()"
                     style="margin-left: 1%; padding: 9px 15px; background: #333; border-radius: 8px; font-size: small;"><i
@@ -103,10 +105,14 @@
         function insertQuestion() {
           let insertData = convertToObject($("#insertForm").serializeArray());
           console.log(insertData.selectCourse);
-          if (insertData.selectCourse != 'notSelect') {
+          if (insertData.selectCourse != 'notSelect' && insertData.questionTitle != '' && insertData.questionContent != '') {
             $("#insertForm").submit();
-          } else {
+          } else if (insertData.questionTitle == '') {
+            alert('제목을 입력해주세요!!');
+          } else if (insertData.selectCourse == 'notSelect') {
             alert('강의를 선택해주세요!!');
+          } else if (insertData.questionContent == '') {
+            alert('내용을 입력해주세요!!');
           }
         }
 

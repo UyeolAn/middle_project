@@ -7,11 +7,21 @@
     <title>Insert title here</title>
     <style type="text/css">
       /* 해당 페이지 전용 클래스 */
+      .mypage__title {
+        margin-bottom: 27px;
+        font-weight: 900;
+      }
+
+      .toptop__bar__hr {
+        margin-top: 0 !important;
+      }
+
       .mycomm__type>li {
         margin-top: 1%;
-        margin-bottom: 1%;
+        margin-bottom: 0;
         margin-left: 2%;
         margin-right: 2%;
+        padding-bottom: 7px;
         color: #B7B7B7;
         font-weight: 900;
         float: left;
@@ -21,10 +31,12 @@
       .mycomm__type>li:hover {
         color: #333;
         cursor: pointer;
+        border-bottom: 2px solid #3188DB;
       }
 
       .mycomm__type>.type__active {
         color: #333;
+        border-bottom: 2px solid #3188DB;
       }
 
       .comm__qna__board__order>li {
@@ -42,20 +54,20 @@
       .qna__not__solved {
         padding: 0.5% 1%;
         padding-right: 1%;
-        margin-right: 1%;
+        margin-right: 2%;
         color: white;
         font-size: small;
         background-color: #B7B7B7;
-        border-radius: 10%;
+        border-radius: 20px;
       }
 
       .qna__solved {
         padding: 0.5% 1%;
-        margin-right: 1%;
+        margin-right: 2%;
         color: white;
         font-size: small;
-        background-color: #E53637;
-        border-radius: 10%;
+        background-color: #3188DB;
+        border-radius: 20px;
       }
 
       .list__title {
@@ -83,6 +95,7 @@
         margin-left: 5%;
         margin-top: 4%;
         font-size: small;
+        font-weight: bold;
         color: #B7B7B7;
         float: left;
       }
@@ -115,13 +128,17 @@
 
   <body>
     <div class="container">
-      <h5 class="col-lg-12" style="margin-bottom: 2%; font-weight: 900;">나의 커뮤니티</h5>
+      <div class="row col-lg-12">
+        <img src="client/img/icon/mycomm.png" alt="아이콘" style="width: 30px; height: 30px;">
+        <h4 class="mypage__title">&nbsp;&nbsp;나의 커뮤니티</h4>
+      </div>
+      <hr class="toptop__bar__hr">
 
       <!--My Community Top Bar Start-->
       <div class="mypage__mycomm__head"
         style="margin-bottom: 3%; border: 1px solid rgba(0,0,0,.1); border-radius: 5px;">
         <!--IsSolved Bar Start-->
-        <div class="row" style="margin-top: 0.5%; margin-bottom: 0.5%;">
+        <div class="row" style="margin-top: 0.5%; margin-bottom: 0;">
           <div class="col-lg-12">
             <ul class=" col-lg-12 mycomm__type">
               <li class="type__active" id="typeQuestion">질문글</li>
@@ -275,8 +292,10 @@
                         ))
                     )
                     .append($(
-                      `<span class="col-lg-3 list__etc" style="float: right;">` +
-                      `조회수:\${question.questionHit} 답변:\${question.answerCount}</span>`
+                      `<span class="col-lg-3 list__etc" style="font-size: small; font-weight: 900; float: right;">` +
+                      `<i class="bi bi-eye"></i> \${question.questionHit} &nbsp;&nbsp;&nbsp;` +
+                      `<i class="bi bi-reply"></i> \${question.answerCount}` +
+                      `</span>`
                     ))
                 ).on('click', function () {
                   let url = 'communityqnadetailpage.do?questionId=' + question.questionId;
@@ -314,7 +333,7 @@
                 .append(
                   $('<div class="mycomm__qna__info" style="overflow: hidden;"> /')
                     .append($(`<span class="col-lg-10 list__title" style="font-weight: normal;">\${answer.answerContent}</span>`))
-                    .append($(`<span class="col-lg-2 list__etc" style="float: right;">\${answer.answerEnterDate}</span>`))
+                    .append($(`<span class="col-lg-2 list__etc" style="font-size: small; font-weight: 900; float: right;">\${answer.answerEnterDate}</span>`))
                 )
                 .on('click', function () {
                   let url = 'communityqnadetailpage.do?questionId=' + answer.questionId;
@@ -359,8 +378,11 @@
                         ))
                     )
                     .append($(
-                      `<span class="col-lg-4 list__etc" style="float: right;">` +
-                      `조회수:\${board.boardHit} 좋아요:\${board.boardLike} 댓글:\${board.replyCount}</span>`
+                      `<span class="col-lg-3 list__etc" style="font-size: small; font-weight: 900; float: right;">` +
+                      `<i class="bi bi-eye"></i> \${board.boardHit} &nbsp;&nbsp;&nbsp;` +
+                      `<i class="bi bi-hand-thumbs-up"></i> \${board.boardLike} &nbsp;&nbsp;&nbsp;` +
+                      `<i class="bi bi-chat-dots"></i> \${board.replyCount}` +
+                      `</span>`
                     ))
                 ).on('click', function () {
                   let url = 'communityfreedetailpage.do?boardId=' + board.boardId;
@@ -398,7 +420,7 @@
                 .append(
                   $('<div class="mycomm__free__info" style="overflow: hidden;"> /')
                     .append($(`<span class="col-lg-10 list__title" style="font-weight: normal;">\${reply.replyContent}</span>`))
-                    .append($(`<span class="col-lg-2 list__etc" style="float: right;">\${reply.replyEnterDate}</span>`))
+                    .append($(`<span class="col-lg-2 list__etc" style="font-size: small; font-weight: 900; float: right;">\${reply.replyEnterDate}</span>`))
                 )
                 .on('click', function () {
                   let url = 'communityfreedetailpage.do?boardId=' + reply.boardId;

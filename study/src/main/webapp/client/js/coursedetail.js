@@ -7,14 +7,14 @@ $(document).ready(function() {
 	let link = $('#free_iframe_area_1').attr('data_link');
 	
 	$('#free_iframe_area_1').append(
-		'<iframe width="100%" height="328" src="'
+		'<iframe width="100%" height="500" src="'
 		+ link + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
 	);
 });
 
 // 사이드메뉴 강의 클릭시
 function courseList(type, value, nowPage, target) {
-	$('.sub_menu').css('color', '#b7b7b7');
+	$('.sub_menu').css('color', '#4e4e4e');
 	$('.sub_menu_g').removeClass('active');
 
 	let form = document.getElementById("cform");
@@ -28,7 +28,7 @@ function courseList(type, value, nowPage, target) {
 	}
 
 	form.nowPage.value = nowPage;
-	form.cntPerPage.value = 10;
+	form.cntPerPage.value = 9;
 
 	form.submit();
 }
@@ -130,12 +130,13 @@ function addMemberFreeCourse() {
 				
 				const check = confirm('수강신청이 완료되었습니다.\n바로 학습하시겠습니까?');
 				if(check == true) {
-					$('.tab-menu-1').removeClass('active');
+					/*$('.tab-menu-1').removeClass('active');
 					$('.tab-menu-3').removeClass('active');
 					$('#tabs-5').removeClass('active');
 					$('#tabs-7').removeClass('active');
 					$('.tab-menu-2').addClass('active');
-					$('#tabs-6').addClass('active');
+					$('#tabs-6').addClass('active');*/
+					location.reload();
 				} else {
 					return true;
 				}
@@ -306,24 +307,28 @@ function reviewEdit(reviewId) {
 function reviewDelete(target, courseId) {
 	let reviewId = $(target).attr('data-del');
 	
-	$.ajax({
-		url: 'ajaxreviewdelete.do',
-		method: 'post',
-		data: {reviewId: reviewId, courseId: courseId},
-		success: function (result) {
-			let message = result[0].message;
-			let count = result[0].count;
-			
-			if(message == 'success') {
-				$('.review_' + reviewId).remove();
-				alert('리뷰가 정상적으로 삭제되었습니다!');
-			} else {
-				alert('죄송합니다, 리뷰를 삭제하지 못했습니다.\n오류가 계속 된다면 고객센터로 연락바랍니다.');
+	let alert = confirm('정말로 삭제하시겠습니까?');
+	
+	if(alert == true) {
+		$.ajax({
+			url: 'ajaxreviewdelete.do',
+			method: 'post',
+			data: {reviewId: reviewId, courseId: courseId},
+			success: function (result) {
+				let message = result[0].message;
+				let count = result[0].count;
+				
+				if(message == 'success') {
+					$('.review_' + reviewId).remove();
+					alert('리뷰가 정상적으로 삭제되었습니다!');
+				} else {
+					alert('죄송합니다, 리뷰를 삭제하지 못했습니다.\n오류가 계속 된다면 고객센터로 연락바랍니다.');
+				}
+				
+				$('.review_count').text(count);
 			}
-			
-			$('.review_count').text(count);
-		}
-	})
+		})
+	}
 }
 
 function makeReviwTags(data) {

@@ -44,4 +44,9 @@ public class PackageServiceImpl implements PackageService {
 		return map.salePrice(vo);
 	}
 
+	@Override
+	public int coursesPrice(PackageVO vo) {
+		return map.coursesPrice(vo);
+	}
+
 }

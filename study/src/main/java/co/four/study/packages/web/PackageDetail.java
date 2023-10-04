@@ -94,7 +94,11 @@ public class PackageDetail extends HttpServlet {
 		// 할인금액 정보 가져오기
 		int salePrice = pdao.salePrice(pvo);
 		pvo.setSalePrice(salePrice);
+		// 강의정가 정보 가져오기
+		int coursesPrice = pdao.coursesPrice(pvo);
+		pvo.setCoursesPrice(coursesPrice);
 		request.setAttribute("data", pvo);
+		System.out.println(pvo);
 		
 		// 패키지에 포함된 강의 정보 넘기기
 		List<CourseVO> courseList = new ArrayList<CourseVO>();
@@ -111,6 +115,7 @@ public class PackageDetail extends HttpServlet {
 		// 페이지 포워딩
 		String page = "package/packageDetail";
 		request.setAttribute("menu", "package");
+		request.setAttribute("detail", "detail");
 		ViewResolve.foward(request, response, page);
 	}
 

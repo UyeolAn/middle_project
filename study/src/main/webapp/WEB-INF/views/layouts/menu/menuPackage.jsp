@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="client/css/menu.css">
 <style type="text/css">
 .course-all a {
 	color: #111111;
@@ -19,15 +20,6 @@
 .shop__sidebar__categories ul {
 	height: auto;
 }
-.shop__sidebar__categories ul li span {
-	color: #b7b7b7;
-    font-size: 15px;
-    line-height: 32px;
-    -webkit-transition: all, 0.3s;
-    -o-transition: all, 0.3s;
-    transition: all, 0.3s;
-    cursor: pointer;
-}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
@@ -36,20 +28,12 @@
 <body>
 	<div class="col-lg-3">
 		<div class="shop__sidebar">
-			<div class="shop__sidebar__search">
-				<form action="#">
-					<input type="text" placeholder="Search...">
-					<button type="submit">
-						<span class="icon_search"></span>
-					</button>
-				</form>
-			</div>
 			<div class="shop__sidebar__accordion">
 				<div class="accordion" id="accordionExample">
 					<!-- 전체보기 -->
 					<div class="card">
 						<div class="course-all">
-							<a href="packagelist.do">전체보기</a>
+							<a href="packagelist.do">전체 패키지</a>
 						</div>
 					</div>
 					<!-- IT -->
@@ -57,7 +41,7 @@
 						<div class="card-heading">
 							<a data-toggle="collapse" data-target="#collapseOne">IT</a>
 						</div>
-						<div id="collapseOne" class="collapse"
+						<div id="collapseOne" class="collaps show"
 							data-parent="#accordionExample">
 							<div class="card-body">
 								<div class="shop__sidebar__categories">
@@ -84,7 +68,7 @@
 						<div class="card-heading">
 							<a data-toggle="collapse" data-target="#collapseTwo">English</a>
 						</div>
-						<div id="collapseTwo" class="collapse"
+						<div id="collapseTwo" class="collapse show"
 							data-parent="#accordionExample">
 							<div class="card-body">
 								<div class="shop__sidebar__categories">

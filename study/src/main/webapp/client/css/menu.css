@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+.shop__sidebar__accordion .card {
+	margin-bottom: 0;
+}
+.course-all a {
+	padding: 15px 0;
+	padding-left: 5px;
+	border-top: 1px solid #e6e8eb;
+	/*border-bottom: 1px solid #e6e8eb;*/
+}
+.shop__sidebar__accordion .card-heading {
+	padding: 15px 0;
+	padding-left: 5px;
+	border-top: 1px solid #e6e8eb;
+}
+.shop__sidebar__accordion .card:last-child .card-heading {
+	border-bottom: 1px solid #e6e8eb;
+}
+.shop__sidebar__accordion .card-heading a:after, .shop__sidebar__accordion .card-heading>a.active[aria-expanded=false]:after {
+	padding: 15px 0;
+	font-size: 20px !important;
+	padding-right: 5px;
+	color: #707070 !important;
+}
+.shop__sidebar__accordion .card-body {
+	padding-bottom: 10px;
+	padding-left: 5px;
+	border-bottom: none;
+}
+.shop__sidebar__accordion .card:not(:last-child) .card-body {
+	border-top: 1px solid #e6e8eb;
+	
+}
+/* 강의,패키지 메뉴관련 */
+.shop__sidebar__categories ul li span,
+.shop__sidebar__categories ul li a {
+	color: #4e4e4e;
+	font-size: 15px;
+	line-height: 32px;
+	-webkit-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+	cursor: pointer;
+}
+.shop__sidebar__categories ul span:hover,
+.shop__sidebar__categories ul li a:hover {
+	color: #e53637;
+}
+/* 마이페이지 관련 */
+a:hover {
+	text-decoration: none !important;
+}

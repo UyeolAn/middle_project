@@ -52,11 +52,11 @@ public class AjaxCourseList extends HttpServlet {
 		
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
-			cntPerPage = "10";
+			cntPerPage = "9";
 		} else if(nowPage == null) {
 			nowPage = "1";
 		} else if(cntPerPage == null) {
-			cntPerPage = "10";
+			cntPerPage = "9";
 		}
 		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		

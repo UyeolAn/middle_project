@@ -28,13 +28,23 @@
 	padding-bottom: 30px;
 }
 
+/* 강의 디테일페이지 헤더 */
+.product__details__tab .nav-tabs {
+	justify-content: left;
+}
+.product__details__tab .nav-tabs .nav-item {
+	margin-left: 25px;
+	margin-right: 0;
+}
+
 /* 강의사진 */
 .course_pic {
 	width: 50%;
 	height: 100%;
-	border-radius: 15px;
+	border-radius: 10px;
 	z-index: 1;
 	border: 1px solid #f3f2ee;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 }
 
 /* 강의 정보 영역 */
@@ -45,7 +55,7 @@
 	width: 50%;
 	height: 100%;
 	text-align: left;
-	padding-left: 30px;
+	padding: 10px 0 10px 30px;
 }
 
 .course_info_wrap p {
@@ -74,16 +84,19 @@
 	color: #282828;
 	font-weight: 700;
 	font-size: 26px;
-	height: 120px;
-	padding-top: 10px;
+	height: auto;
 }
-
+.tag span {
+	border-radius: 100px;
+    background: #f6ecec;
+    padding: 5px 10px;
+    font-size: 14px;
+}
 .course_grade {
 	display: inline-block;
-	padding: 0px 5px;
-	background-color: #234378;
+	padding: 0px 10px;
+	background-color: #266fb5;
 	font-size: 12px;
-	border-radius: 5px;
 	color: #fff;
 	margin-bottom: 2px;
 	margin-left: 2px;
@@ -93,6 +106,7 @@
 	display: block;
 	line-height: 31px;
 	margin-top: 8px;
+	margin-bottom: 10px
 }
 
 .course_info_etc p {
@@ -118,12 +132,8 @@
 	display: flex;
 	height: 20px;
 	gap: 5px;
-	margin-bottom: 15px;
 }
 
-.course_teacher .infd-icon svg {
-	margin-bottom: 5px;
-}
 
 /* 탭관련 */
 .product__details__tab {
@@ -194,6 +204,7 @@
 	border: 1px solid #e6e6e6;
 	border-radius: 5px;
 	margin-top: 30px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
 .course_price {

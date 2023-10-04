@@ -4,7 +4,7 @@
 
 //서브메뉴 클릭시
 function packageList(category, grade, target) {
-	$('.sub_menu').css('color','#b7b7b7');
+	$('.sub_menu').css('color','#4e4e4e');
 	$('.sub_menu_g').removeClass('active');
 	$(target).children().css('color','#e53637');
 	
@@ -15,10 +15,34 @@ function packageList(category, grade, target) {
 	    success: function (result) {
 	        console.log(result);
 	        
+	        $('.mainCate').remove(); // 헤더쪽 메뉴경로 태그 삭제
+			$('.subCate').remove(); // 헤더쪽 메뉴경로 태그 삭제
+			
+			let mainCate = category;
+			let subCate = grade;
+			
+			if(mainCate == 'it') {
+				mainCate = mainCate.toUpperCase();
+			} else {
+				mainCate = mainCate.substring(0, 1).toUpperCase() + mainCate.substring(1);
+			}
+			
+			if(grade == 'all') {
+				subCate = '전체보기';
+			} else if(grade == 'easy') {
+				subCate = '입문';
+			} else if(grade == 'normal') {
+				subCate = '초급';
+			} else if(grade == 'hard') {
+				subCate = '중급이상';
+			}
+			
+			$('.breadcrumb__links').append('<span class="mainCate">'+ mainCate + '</span>');
+    		$('.breadcrumb__links').append('<span class="subCate">'+ subCate + '</span>');
+	        
 	        appendCourseList(result); // [func] 강의 리스트 태그 생성
 	    }
 	})
-	
 }
 
 function appendCourseList(result) {
@@ -46,7 +70,7 @@ function appendCourseList(result) {
 	        clone.addClass('result');
 	        clone.css('display', 'block');
 	        clone.find('.course-item-pic').css('overflow', 'hidden');
-	        clone.find('.course-item').attr('onclick', 'packageDetail(' + result[i].packageId + ')');
+	        clone.find('.course-item').attr('onclick', 'location.href="packagedetail.do?packageId=' + result[i].packageId + '"');
 	        if(result[i].packageThumbnail == null) {
 	        	clone.find('.course-item-pic').css('background-image', 'url(client/img/product/basic.png)');
 			} else {
