@@ -5,7 +5,7 @@
 
     <head>
       <meta charset="UTF-8">
-      <title>Insert title here</title>
+      <title>STUDY | MyCourse</title>
       <style type="text/css">
         .mypage__title {
           margin-bottom: 27px;
