@@ -26,8 +26,6 @@
                     aria-labelledby="dropdownMenuLink">
                     <div class="dropdown-header">메뉴</div>
                     <div class="dropdown-item" onclick="remove('${e.memberId}')">삭제</div>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </div>
         </div>

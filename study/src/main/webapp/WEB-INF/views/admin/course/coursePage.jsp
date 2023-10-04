@@ -106,7 +106,7 @@
                     </li>
                     <!-- 강의에 달린 질문 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <span class="font-weight-bold"><i class="bi bi-indent fa-lg" style="color: #55acee;"></i> 강의 질문</span>
+                      <span class="font-weight-bold"><i class="fas fa-question fa-lg" style="color: red;"></i> 강의 질문</span>
                       <p class="mb-0">${questions}개</p>
                     </li>
                     <!-- 강의 별점 -->

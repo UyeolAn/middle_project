@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-    <h1 class="h3 mb-2 text-gray-800">패키지 목록</h1>
+    <h1 class="h3 mb-2 text-gray-800">&#127873;패키지 목록&#127873;</h1>
 	<p class="mb-4">
 		패키지관리 페이지
 	</p>
@@ -25,7 +25,7 @@
         <div class="row col-lg-10" style="justify-content: start">
             <c:forEach items="${plist }" var="p">
                 <a href="adminpackagepage.do?pid=${p.packageId}" style="color: black;">
-                    <div class="card col-lg-12 m-1" style="width: 300px; height: 500px; padding: 0.75rem;">
+                    <div class="card col-lg-12 m-1" style="width: 300px; height: 600px; padding: 0.75rem;">
                         <img src="client/img/product/${p.packageThumbnail}" class="card-img-top" alt="..." style="height: 180px;">
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold" style="display: inline-block;">${p.packageTitle}</h5>
