@@ -33,7 +33,7 @@
     <!-- Shop Section Begin -->
     <div class="shop__product__option">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-12 col-md-6 col-sm-6">
                 <div class="shop__product__option__left">
                 	<!-- 검색창.. -->
 	                <div class="shop__sidebar__search hop__product__option__left">
@@ -46,17 +46,6 @@
 							</button>
 						</form>
 					</div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="shop__product__option__right">
-                	<!-- 페이징 옵션 start -->
-                    <select id="cntPerPage" name="sel" onchange="selChange()">
-                        <option value="9" <c:if test="${paging.cntPerPage == 9}">selected</c:if>>9개씩 보기</option>
-                        <option value="12" <c:if test="${paging.cntPerPage == 12}">selected</c:if>>12개씩 보기</option>
-                        <option value="15" <c:if test="${paging.cntPerPage == 15}">selected</c:if>>15개씩 보기</option>
-                    </select>
-                    <!-- 페이징 옵션 end -->
                 </div>
             </div>
         </div>
@@ -204,7 +193,7 @@
 				$('.all-list-paging').remove(); // 초기 태그 삭제
 				$('.p-result').remove(); // ajax 통신으로 추가된 태그 삭제
 			    
-				$('.paging-row').append(`${ajaxpaging }`); // 태그 append
+				$('.paging-row').append(`${pagingTag }`); // 태그 append
 			}
 		}
     </script>

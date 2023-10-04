@@ -73,11 +73,10 @@ public class CourseList extends HttpServlet {
 		}
 		
 		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		//request.setAttribute("paging", pvo); // 페이징 완료
 		
 		//20231004 추가 start
 		if(subCate == null && grade == null && mainCate == null) {
-			request.setAttribute("paging", pvo); // 페이징 완료
+			request.setAttribute("paging", pvo); // 전체조회 페이징 완료
 		} else {
 			String paging = null;
 			if(mainCate != null && !mainCate.trim().equals("")) {
@@ -90,7 +89,7 @@ public class CourseList extends HttpServlet {
 				paging = dao.gradeCoursePagingTag(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), grade);
 			}
 			request.setAttribute("allPaging", "no"); // 전체조회 페이징 여부
-			request.setAttribute("ajaxpaging", paging); // 페이징 태그 넘겨주기
+			request.setAttribute("pagingTag", paging); // 페이징 태그 넘겨주기
 		}
 		//20231004 추가 end...
 		
@@ -110,8 +109,7 @@ public class CourseList extends HttpServlet {
 		
 		if(courses.size() > 0) {
 			request.setAttribute("courses", courses); // 강의 리스트 조회 완료
-			request.setAttribute("tcnt", courses.size()); // 조회된 건수
-			request.setAttribute("cid", mainCate); // 메인카테고리
+			request.setAttribute("mainCate", mainCate); // 메인카테고리
 		} else {
 			request.setAttribute("result", "empty");
 			System.out.println("courselist.do 강의 조회결과 없거나 오류 발생");

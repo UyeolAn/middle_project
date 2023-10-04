@@ -41,8 +41,6 @@ public class AjaxBucketInsert extends HttpServlet {
 		
 		vo.setCourseId(courseId); //0이 들어오면 안됨
 		vo.setMemberId(memberId);
-		System.out.println("ajaxbucketinsert.do 들어옴");
-		System.out.println(vo);
 		
 		// 장바구니에 추가
 		int result = 0;
@@ -53,7 +51,6 @@ public class AjaxBucketInsert extends HttpServlet {
 		PackageBucketVO pbvo = new PackageBucketVO();
 		pbvo.setMemberId(memberId);
 		List<PackageBucketVO> pblist = pbdao.pbucketSelectList(pbvo); //회원의 패키지 장바구니 조회
-		System.out.println("회원의 패키지 장바구니 조회:: " + pblist);
 		
 		if(pblist.size() != 0) {
 			//패키지아이디로 packages_courses 돌면서 포함된 강의에 있는지 확인
