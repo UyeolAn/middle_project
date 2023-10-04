@@ -191,7 +191,7 @@
     
     <!-- 20231004 페이징 관련 추가 -->
     <script>
-    	let data = '${paging_data }';
+    	let data = '${allPaging }';
     	console.log(data);
     	if(data != null && data != '') {
 		    $(window).on('load', function() {
@@ -199,7 +199,7 @@
 			})
     	}
 	    function appendPaging2() {
-			let tag = '${paging_data }';
+			let tag = '${allPaging }';
 			if(tag != null || tag != ''){
 				$('.all-list-paging').remove(); // 초기 태그 삭제
 				$('.p-result').remove(); // ajax 통신으로 추가된 태그 삭제
