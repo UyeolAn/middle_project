@@ -180,7 +180,7 @@
                   <img src="client/img/board/${board.boardImg}" alt="게시글 이미지">
                 </div>
               </c:if>
-              <p class="col-lg-12" id="boardContent" style="white-space:pre;">${board.boardContent}</p>
+              <p class="col-lg-12" id="boardContent" style="white-space:pre-wrap;">${board.boardContent}</p>
             </div>
             <div class="col-lg-7 comm__free__board__detail__buttons" style="margin-top: 5%;">
               <button type="button" id="updateBtn" class="site-btn small-update-btn"
@@ -211,7 +211,7 @@
           <span class="col-lg-12 reply__info__count" id="replyCount">REPLY : 10</span>
           <br>
           <div class="col-lg-12">
-            <textarea id="replyInput" name="replyInput" maxlength="512" placeholder="댓글을 입력하세요..."
+            <textarea id="replyInput" name="replyInput" maxlength="1024" placeholder="댓글을 입력하세요..."
               style="height: 70px; margin-top: 10px; color: #333; "></textarea>
           </div>
           <div class="col-lg-12 row">
@@ -466,7 +466,7 @@
                   .append($('<br>'))
                   .append(
                     $('<div class="reply-content-box" style="margin-top: 1%; margin-bottom: 3%;"> /')
-                      .append($('<p class="reply-content" style="white-space:pre;"> /')
+                      .append($('<p class="reply-content" style="white-space:pre-wrap;"> /')
                         .text(`\${reply.replyContent}`))
                   )
                   .append($('<input type="hidden" class="reply-id-hidden">').val(`\${reply.replyId}`))

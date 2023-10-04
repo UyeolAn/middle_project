@@ -26,11 +26,13 @@
       }
 
       .active__input__file__btn {
-        margin-top: 1%;
-        padding: 6px 25px;
+        margin-top: 0 !important;
+        margin-right: 1%;
+        padding: 6px 15px;
         color: white;
         background: #3188DB;
         cursor: pointer;
+        border-radius: 8px;
       }
 
       .active__input__file__btn:hover {
@@ -61,7 +63,7 @@
               <input type="file" id="boardImg" name="boardImg" style="display: none;">
             </div>
             <div class="col-lg-12">
-              <textarea id="boardContent" name="boardContent" maxlength="511" placeholder="내용을 입력하세요..."
+              <textarea id="boardContent" name="boardContent" maxlength="1024" placeholder="내용을 입력하세요..."
                 style="color: #333;"></textarea>
               <div class="col-lg-12 row">
                 <button type="reset" class="site-btn"
