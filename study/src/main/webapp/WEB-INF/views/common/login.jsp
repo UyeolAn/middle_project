@@ -138,15 +138,15 @@
 
 
 					// 로그인 후 페이지 접근 제한
-					//세션에 id있을시 강제로 로그아웃
+					//세션에 id있을시 홈으로
 					let loginId = `${loginId}`;
 					loginAccess()
 
 					console.log(loginId)
 					function loginAccess() {
 						if (loginId != "") {
-							location.href("logout.do");
-							alert("로그아웃되었습니다")
+							location.href("home.do");
+							alert("이미 로그인 중 입니다.")
 						}
 
 					}
