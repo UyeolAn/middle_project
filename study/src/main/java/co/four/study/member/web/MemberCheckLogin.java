@@ -1,7 +1,6 @@
 package co.four.study.member.web;
 
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,12 +40,13 @@ public class MemberCheckLogin extends HttpServlet {
 		String msg = "";
 		
 		if (vo != null) {
+			
 			session.setAttribute("loginId", vo.getMemberId());
 			session.setAttribute("loginName", vo.getMemberName());
 			session.setAttribute("loginAuthor", vo.getMemberAuthor());	
 			//카카오로그인 회원이 아니란걸 세션에 저장
 			session.setAttribute("isKakaoUser", false);
-			
+			System.out.println(vo);
 			if (session.getAttribute("loginAuthor").equals("admin")) {
 				response.sendRedirect("adminhome.do");// 관리자 페이지 링크
 			} else {
