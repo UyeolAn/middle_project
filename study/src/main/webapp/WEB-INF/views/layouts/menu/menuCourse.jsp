@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="client/css/menu.css">
 <style type="text/css">
 .course-all a {
 	color: #111111;
@@ -27,14 +28,6 @@
 <body>
 	<div class="col-lg-3">
 		<div class="shop__sidebar">
-			<div class="shop__sidebar__search">
-				<form action="#">
-					<input type="text" placeholder="Search...">
-					<button type="submit">
-						<span class="icon_search"></span>
-					</button>
-				</form>
-			</div>
 			<div class="shop__sidebar__accordion">
 				<div class="accordion" id="accordionExample">
 					<div class="card">
@@ -46,7 +39,7 @@
 						<div class="card-heading">
 							<a data-toggle="collapse" data-target="#collapseOne">IT</a>
 						</div>
-						<div id="collapseOne" class="collapse"
+						<div id="collapseOne" class="collapse show"
 							data-parent="#accordionExample">
 							<div class="card-body">
 								<div class="shop__sidebar__categories">
@@ -67,7 +60,7 @@
 						<div class="card-heading">
 							<a data-toggle="collapse" data-target="#collapseTwo">English</a>
 						</div>
-						<div id="collapseTwo" class="collapse"
+						<div id="collapseTwo" class="collapse show"
 							data-parent="#accordionExample">
 							<div class="card-body">
 								<div class="shop__sidebar__categories">
@@ -88,7 +81,7 @@
 						<div class="card-heading">
 							<a data-toggle="collapse" data-target="#collapseThree">Career</a>
 						</div>
-						<div id="collapseThree" class="collapse"
+						<div id="collapseThree" class="collapse show"
 							data-parent="#accordionExample">
 							<div class="card-body">
 								<div class="shop__sidebar__categories">
@@ -109,7 +102,7 @@
 						<div class="card-heading">
 							<a data-toggle="collapse" data-target="#collapseFour">Grade</a>
 						</div>
-						<div id="collapseFour" class="collapse"
+						<div id="collapseFour" class="collapse show"
 							data-parent="#accordionExample">
 							<div class="card-body">
 								<div class="shop__sidebar__tags">

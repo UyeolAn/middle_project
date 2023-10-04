@@ -32,4 +32,7 @@ public interface BoardMapper {
 	
 	//멤버별 게시물 수
 	int countBoardMember(BoardVO vo);
+	
+	//최신 게시글 다섯개
+	List<BoardVO> homeRecentBoard();
 }

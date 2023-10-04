@@ -84,4 +84,9 @@ public class QuestionServiceImpl implements QuestionService{
 		return map.questionListBynotsolved();
 	}
 
+	@Override
+	public List<QuestionVO> homeRecentQuestion() {
+		return map.homeRecentQuestion();
+	}
+
 }

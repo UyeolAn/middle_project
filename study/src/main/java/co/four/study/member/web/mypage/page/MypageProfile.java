@@ -27,6 +27,8 @@ import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
 import co.four.study.question.service.QuestionService;
 import co.four.study.question.service.QuestionVO;
 import co.four.study.question.serviceImpl.QuestionServiceImpl;
+import co.four.study.reply.service.ReplyService;
+import co.four.study.reply.serviceImpl.ReplyServiceImpl;
 import co.four.study.review.service.ReviewService;
 import co.four.study.review.service.ReviewVO;
 import co.four.study.review.serviceImpl.ReviewServiceImpl;
@@ -56,7 +58,8 @@ public class MypageProfile extends HttpServlet {
 		BoardVO bvo = new BoardVO();
 		BoardService bdao = new BoardServiceImpl();
 		QuestionService qdao = new QuestionServiceImpl();
-		ReviewService rdao = new ReviewServiceImpl();
+		ReviewService rvdao = new ReviewServiceImpl();
+		ReplyService rpdao = new ReplyServiceImpl();
 
 		String checkAuthor = (String) session.getAttribute("loginAuthor");
 		if (checkAuthor == "admin") {
@@ -71,10 +74,10 @@ public class MypageProfile extends HttpServlet {
 			// 게시물 수 카운트
 			int cnt = 0;
 			bvo.setMemberId(mvo.getMemberId());
-			cnt = bdao.countBoardMember(bvo) + qdao.countQuestion(mvo) + rdao.countReview(mvo);
+			cnt = bdao.countBoardMember(bvo) + qdao.countQuestion(mvo) + rvdao.countReview(mvo);
 
 			// 댓글 수
-			int rec = rdao.countReview(mvo);
+			int rec = rpdao.countReply(mvo);
 			int compcnt = 0;
 			// 강의 목록 및 진도율
 			List<MemberCourseVO> mcvolist = mcdao.selectMemberCourseListDetail(mvo);

@@ -109,6 +109,9 @@
 		<if test="courseGrade != null">
 			AND COURSE_GRADE = LOWER(#{courseGrade})
 		</if>
+		<if test="courseName != null">
+			AND COURSE_NAME LIKE '%' || #{courseName} || '%'
+		</if>
 	</select>
 
 	<select id="coursePagingList"
@@ -125,6 +128,9 @@
 		</if>
 		<if test="courseGrade != null">
 			AND COURSE_GRADE = LOWER(#{courseGrade})
+		</if>
+		<if test="courseName != null">
+			AND COURSE_NAME LIKE '%' || #{courseName} || '%'
 		</if>
 		ORDER BY COURSE_ID) A
 		) T
@@ -160,6 +166,7 @@
 		AND COURSE_ID NOT IN(
 		SELECT COURSE_ID 
 		FROM PACKAGES_COURSES 
+		WHERE PACKAGES_COURSES.PACKAGE_ID = #{packageId}
 		)
 		ORDER BY COURSE_SUB_CATEGORY
 	</select>
@@ -170,5 +177,39 @@
 		WHERE COURSE_MAIN_CATEGORY='it' 
 		GROUP BY COURSE_SUB_CATEGORY 
 		ORDER BY COUNT(*) DESC
+	</select>
+	
+	<select id="hotCourseList" resultType="co.four.study.course.service.CourseVO">
+		SELECT * FROM
+		(SELECT C.COURSE_ID, C.COURSE_NAME, C.COURSE_PRICE,C.COURSE_IMG
+		FROM MEMBERS_COURSES MC JOIN COURSES C ON C.COURSE_ID = MC.COURSE_ID
+		GROUP BY C.COURSE_ID, C.COURSE_NAME,C.COURSE_PRICE,C.COURSE_IMG
+		ORDER BY COUNT(*) DESC, C.COURSE_ID)
+		WHERE ROWNUM <![CDATA[<=]]> 4
+	</select>
+	
+	<select id="reviewCourseList" resultType="co.four.study.course.service.CourseVO">
+		SELECT * FROM
+		(SELECT C.COURSE_ID, C.COURSE_NAME, C.COURSE_PRICE,C.COURSE_IMG
+		FROM REVIEWS R JOIN COURSES C ON C.COURSE_ID = R.COURSE_ID
+		GROUP BY C.COURSE_ID, C.COURSE_NAME,C.COURSE_PRICE,C.COURSE_IMG
+		ORDER BY COUNT(*) DESC, C.COURSE_ID)
+		WHERE ROWNUM <![CDATA[<=]]> 4
+	</select>
+	
+	<select id="itRandomCourseList" resultType="co.four.study.course.service.CourseVO">
+	  <![CDATA[
+	    SELECT * FROM (
+	      SELECT C.COURSE_ID, C.COURSE_NAME, C.COURSE_PRICE, C.COURSE_IMG
+	      FROM COURSES C
+	      WHERE C.COURSE_MAIN_CATEGORY = 'it'
+	      ORDER BY DBMS_RANDOM.VALUE
+	    )
+	    WHERE ROWNUM <= 4
+	  ]]>
+	</select>
+	
+	<select id="subCategoriesBymain" parameterType="co.four.study.course.service.CourseVO" resultType="String">
+		SELECT DISTINCT COURSE_SUB_CATEGORY FROM COURSES WHERE COURSE_MAIN_CATEGORY=#{courseMainCategory}
 	</select>
 </mapper>

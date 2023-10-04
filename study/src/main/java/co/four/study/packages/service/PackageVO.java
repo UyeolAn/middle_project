@@ -13,4 +13,5 @@ public class PackageVO {
 	private String packageCategory;
 	private String packageGrade;
 	private int salePrice;
+	private int coursesPrice;
 }

@@ -137,10 +137,9 @@ ol {
 	background-position: top center;
 }
 
-/* 전유진 수정 */
 .spad {
-	padding-top: 50px;
-	padding-bottom: 50px;
+	padding-top: 100px;
+	padding-bottom: 100px;
 }
 
 .text-white h1,
@@ -432,7 +431,6 @@ ol {
 	margin-right: 45px;
 	position: relative;
 }
-
 .header__menu ul li.active a:after {
 	-webkit-transform: scale(1);
 	-ms-transform: scale(1);
@@ -1242,8 +1240,9 @@ ol {
 	cursor: pointer;
 }
 
+/* 전유진 수정 color !importatnt*/
 .shop__sidebar__accordion .card-heading a {
-	color: #111111;
+	color: #111111 !important;
 	font-size: 16px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -1897,9 +1896,9 @@ ol {
 	border-bottom: 2px solid transparent;
 }
 
-/* 전유진 수정 */
+/* 전유진 수정 (굵기)*/
 .product__details__tab .nav-tabs .nav-item .nav-link.active {
-	border-bottom: 3px solid #3188db;
+	border-bottom: 2px solid #e53637;
 }
 
 .product__details__tab__content {

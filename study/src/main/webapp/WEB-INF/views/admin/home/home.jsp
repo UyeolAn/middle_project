@@ -48,9 +48,9 @@
 		<!-- Page Heading -->
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
 			<h1 class="h3 mb-0 text-gray-800">&#129390;약과 4조&#129390;</h1>
-			<a href="#"
+			<a href="adminemployeeregister.do"
 				class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-				class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+				class="bi bi-person-add fa-sm text-white-50"></i> 직원등록</a>
 		</div>
 
 		<!-- Content Row -->
@@ -156,15 +156,6 @@
 								aria-haspopup="true" aria-expanded="false"> <i
 								class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
 							</a>
-							<div
-								class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-								aria-labelledby="dropdownMenuLink">
-								<div class="dropdown-header">Dropdown Header:</div>
-								<a class="dropdown-item" href="#">Action</a> <a
-									class="dropdown-item" href="#">Another action</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Something else here</a>
-							</div>
 						</div>
 					</div>
 					<!-- Card Body -->
@@ -182,34 +173,36 @@
 					<!-- Card Header - Dropdown -->
 					<div
 						class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-						<h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-						<div class="dropdown no-arrow">
-							<a class="dropdown-toggle" href="#" role="button"
-								id="dropdownMenuLink" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"> <i
-								class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-							</a>
-							<div
-								class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-								aria-labelledby="dropdownMenuLink">
-								<div class="dropdown-header">Dropdown Header:</div>
-								<a class="dropdown-item" href="#">Action</a> <a
-									class="dropdown-item" href="#">Another action</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Something else here</a>
-							</div>
-						</div>
+						<h6 class="m-0 font-weight-bold">&#128187;IT강의 분포도&#128187;</h6>
 					</div>
 					<!-- Card Body -->
 					<div class="card-body">
-						<h4 class="small font-weight-bold">
-							Server Migration <span class="float-right">임의</span>
-						</h4>
-						<div class="progress mb-4">
-							<div class="progress-bar bg-danger" role="progressbar"
-								style="width: 20%" aria-valuenow="20" aria-valuemin="0"
-								aria-valuemax="100"></div>
-						</div>
+						<c:forEach var="entry" items="${resultIt}" varStatus="loop">
+							<h4 class="small font-weight-bold">
+								${entry.key} <span class="float-right">${entry.value}%</span>
+							</h4>
+							<div class="progress mb-4">
+								<c:set var="bgClass" value="bg-danger" />
+								<c:choose>
+									<c:when test="${loop.index % 4 == 1}">
+										<c:set var="bgClass" value="bg-warning" />
+									</c:when>
+									<c:when test="${loop.index % 4 == 2}">
+										<c:set var="bgClass" value="bg-info" />
+									</c:when>
+									<c:when test="${loop.index % 4 == 3}">
+										<c:set var="bgClass" value="bg-success" />
+									</c:when>
+									<c:when test="${loop.index % 5 == 4}">
+										<c:set var="bgClass" value="" />
+									</c:when>
+								</c:choose>
+								<div class="progress-bar ${bgClass}" role="progressbar"
+									style="width: ${entry.value}%" aria-valuenow="${entry.value}" aria-valuemin="0"
+									aria-valuemax="100"></div>
+							</div>
+						</c:forEach>
+<!-- 
 						<h4 class="small font-weight-bold">
 							Sales Tracking <span class="float-right">40%</span>
 						</h4>
@@ -218,6 +211,7 @@
 								style="width: 40%" aria-valuenow="40" aria-valuemin="0"
 								aria-valuemax="100"></div>
 						</div>
+
 						<h4 class="small font-weight-bold">
 							Customer Database <span class="float-right">60%</span>
 						</h4>
@@ -240,7 +234,7 @@
 							<div class="progress-bar bg-success" role="progressbar"
 								style="width: 100%" aria-valuenow="100" aria-valuemin="0"
 								aria-valuemax="100"></div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>

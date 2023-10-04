@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
     <!DOCTYPE html>
     <html>
 
@@ -267,14 +268,50 @@
                     <h5 class="m-0 mb-2 font-weight-bold text-primary" id="modalTitle">강의 추가</h5>
                     <div class="card-body">
                         <form id="frm2" class="row">
-                            <div class="form-group  col-12">
+                            <!-- <div class="form-group  col-12">
                                 <label id="contlabel" class="font-weight-bold" style="display: block;">${p.packageCategory}</label>
                                     <c:forEach items="${catelist}" var="c">
                                         <label><input type="checkbox" name="course" value="${c.courseId}">${c.courseName} (${c.courseSubCategory})</label>
                                         <br>
                                     </c:forEach>
 
+                            </div> -->
+
+                            <div class="form-group col-12">
+                                <label id="contlabel" class="font-weight-bold" style="display: block;"><h4>[${p.packageCategory}]</h4></label>
+                                <div id="courseList">
+                                    <!-- 서브 카테고리별로 그룹화하여 표시합니다. -->
+                                    <c:forEach items="${sublist}" var="s">
+                                        <h6 class="text-primary font-weight-bold">
+                                        ${fn:toUpperCase(s)}
+                                        </h6>
+                                        <c:forEach items="${catelist}" var="c">
+                                            <c:if test="${s == c.courseSubCategory}">
+                                                <label><input type="checkbox" name="course" value="${c.courseId}">${c.courseName}</label>
+                                                <br>
+                                            </c:if>
+                                        </c:forEach>
+                                        <br>
+                                    </c:forEach>
+                                </div>
                             </div>
+                            
+
+                            <!-- <div class="form-group col-12">
+                                <label id="contlabel" class="font-weight-bold" style="display: block;">${p.packageCategory}</label>
+                                <select id="subCategorySelect">
+                                    <option value="All">All</option>
+                                    <c:forEach items="${catelist}" var="c">
+                                        <option value="${c.courseSubCategory}">${c.courseSubCategory}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="form-group col-12" id="courseList">
+                                <c:forEach items="${catelist}" var="c">
+                                    <label><input type="checkbox" name="course" value="${c.courseId}">${c.courseName} (${c.courseSubCategory})</label>
+                                    <br>
+                                </c:forEach>
+                            </div> -->
         
                         </form>
                         <a class="btn btn-primary btn-icon-split" id="sub-modal">
@@ -301,6 +338,43 @@
         </form> 
         <script src='admin/js/PackageCourse.js'></script>
     <script>
+    //      document.addEventListener("DOMContentLoaded", function () {
+    //     const subCategorySelect = document.getElementById("subCategorySelect");
+    //     const subCategories = Array.from(subCategorySelect.options).map(option => option.value);
+    //     const uniqueSubCategories = Array.from(new Set(subCategories));
+
+    //     subCategorySelect.innerHTML = "";
+    //     uniqueSubCategories.forEach(subCategory => {
+    //         const option = document.createElement("option");
+    //         option.value = subCategory;
+    //         option.text = subCategory;
+    //         subCategorySelect.appendChild(option);
+    //     });
+    // });
+
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     const subCategorySelect = document.getElementById("subCategorySelect");
+    //     const courseList = document.getElementById("courseList");
+    //     const checkboxes = courseList.querySelectorAll('[name="course"]');
+        
+    //     subCategorySelect.addEventListener("change", function () {
+    //         const selectedSubCategory = subCategorySelect.value;
+            
+    //         // 모든 강의를 숨김
+    //         checkboxes.forEach(function (checkbox) {
+    //             checkbox.parentNode.style.display = "none";
+    //         });
+            
+    //         // 선택한 서브 카테고리에 해당하는 강의만 보이도록 함
+    //         checkboxes.forEach(function (checkbox) {
+    //             const courseSubCategory = checkbox.nextElementSibling.textContent.split('(')[1].split(')')[0];
+    //             if (selectedSubCategory === "" || courseSubCategory === selectedSubCategory) {
+    //                 checkbox.parentNode.style.display = "block";
+    //             }
+    //         });
+    //     });
+    // });
+
 
 
         const pc = new PackageCourse();

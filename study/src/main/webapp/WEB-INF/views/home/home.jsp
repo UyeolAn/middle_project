@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 		<!DOCTYPE html>
 		<html>
 
@@ -26,18 +27,28 @@
 			<link rel="stylesheet" href="client/css/style.css" type="text/css">
 			<link rel="stylesheet" href="client/css/course.css">
 			<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+			<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+			<link rel="icon" href="/favicon.ico" type="image/x-icon">
 			<style>
 				.recommend__course__container {
 					margin: 5%;
 				}
 
-				.header__top__hover ul a{
+				.header__top__hover ul a {
 					color: black;
-        }
-				* {
-				font-family: 'NanumSquareRound';
 				}
 
+				
+				h5, h6{
+          font-family: 'NanumSquareRound' !important;
+        }
+
+
+				* {
+					font-family: 'NanumSquareRound';
+
+				}
 			</style>
 		</head>
 
@@ -45,9 +56,10 @@
 			<!-- Page Preloder -->
 			<div id="preloder">
 				<div class="loader"></div>
-			</div>		
+			</div>
 			<!-- Header Section Begin -->
 			<header class="header">
+
 				<div class="header__top"  style="background-color: white;">
 					<div class="container">
 						<div class="row">
@@ -67,7 +79,8 @@
 										<div class="header__top__hover">
 											<span>${loginName} 님 접속중<i class="arrow_carrot-down"></i></span>
 											<ul>
-												<li><a href="logout.do">LOGOUT</a></li>
+												<li onclick="logout()">LOGOUT</li>
+												<!-- <li><a href="logout.do">LOGOUT</a></li> -->
 												<li><a href="mypageprofile.do">MY PAGE</a></li>
 											</ul>
 									</c:if>
@@ -81,7 +94,8 @@
 					<div class="row">
 						<div class="col-lg-3 col-md-3">
 							<div class="header__logo">
-								<a href="home.do"><img src="client/img/product/student.png" style="width: 50px;" alt=""></a>
+								<a href="home.do"><img src="client/img/product/student.png" style="width: 50px;"
+										alt=""></a>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6">
@@ -113,12 +127,23 @@
 							</nav>
 						</div>
 						<div class="col-lg-3 col-md-3">
-							<div class="header__nav__option">
-								<a href="#" class="search-switch"><img src="client/img/icon/search.png" alt=""></a> <a href="#"><img
-										src="client/img/icon/heart.png" alt=""></a> <a href="#"><img src="client/img/icon/cart.png" alt="">
-									<span>0</span></a>
-								<div class="price">$0.00</div>
-							</div>
+							<nav class="header__menu mobile-menu">
+								<ul>
+									<c:if test="${not empty loginId}">
+										<li><a href="mypageprofile.do"><span>${loginName} 님 접속중</span></a>
+											<ul class="dropdown">
+												<li><a href="logout.do">LOGOUT</a></li>
+												<li><a href="mypageprofile.do">MY PAGE</a></li>
+											</ul>
+										</li>
+									</c:if>
+									<c:if test="${empty loginId}">
+										<li>
+											<a href="login.do" style="color: black;">Sign in</a>
+										</li>
+									</c:if>
+								</ul>
+							</nav>
 						</div>
 					</div>
 					<div class="canvas__open">
@@ -129,16 +154,16 @@
 			<!-- Header Section End -->
 
 			<!-- Hero Section Begin -->
-			<div class="hero__slider owl-carousel" style="height: 300px;" >
-				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: pink;" >
+			<div class="hero__slider owl-carousel" style="height: 300px;">
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: pink;">
 					<a href="packagelist.do">
 						<div class="container">
 							<div class="row">
 								<div class="col-lg-7">
 									<div class="hero__text">
-										<h6>SALE COURSE</h6>
+										<h6>SALE PACKAGE</h6>
 										<h2 style="font-family: 'NanumSquareRound';">현재 할인하는 패키지&#128176;</h2>
-										<p style="font-family: 'NanumSquareRound';">다양한 강의들을 할인된 가격으로 만나보세요!</p>
+										<p style="font-family: 'NanumSquareRound'; color: black;">다양한 강의들을 할인된 가격으로 만나보세요!</p>
 										<!-- <a href="#" class="primary-btn">신청하러가기<span class="arrow_right"></span></a> -->
 									</div>
 								</div>
@@ -149,15 +174,17 @@
 						</div>
 					</a>
 				</div>
-				<div class="hero__items set-bg" style="padding: 30px; height: 300px; background-color: #3188DB;" >
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px; background-color: #3188DB;">
 					<a href="courselist.do">
 						<div class="container">
 							<div class="row">
 								<div class="col-lg-7">
 									<div class="hero__text">
-										<h6>SALE COURSE</h6>
+
+										<h6>IT COURSES</h6>
 										<h2 style="font-family: 'NanumSquareRound'; color: white;">IT 강의들 잔뜩&#128218;</h2>
-										<p style="font-family: 'NanumSquareRound';">예비 개발자들을 위한 강의들을 골라 들어보세요</p>
+										<p style="font-family: 'NanumSquareRound'; color: white;">예비 개발자들을 위한 강의들을 골라 들어보세요</p>
+
 									</div>
 								</div>
 								<div class="col-lg-5" style="padding: 30px;">
@@ -167,15 +194,15 @@
 						</div>
 					</a>
 				</div>
-				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: greenyellow;" >
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: greenyellow;">
 					<a href="communityqnapage.do">
 						<div class="container">
 							<div class="row">
 								<div class="col-lg-7">
 									<div class="hero__text">
-										<h6>SALE COURSE</h6>
+										<h6>QUESTION COMMUNITY</h6>
 										<h2 style="font-family: 'NanumSquareRound';">질문이 있다면 바로 &#128587;</h2>
-										<p style="font-family: 'NanumSquareRound';">다양한 사람들과 소통을 하며 궁금증을 해소!</p>
+										<p style="font-family: 'NanumSquareRound'; color: black;">다양한 사람들과 소통을 하며 궁금증을 해소!</p>
 									</div>
 								</div>
 								<div class="col-lg-5" style="padding: 30px;">
@@ -199,409 +226,240 @@
 					<div class="row">
 						<div class="col-lg-12" style="margin: 30px;">
 							<ul class="filter__controls">
-								<li class="active" data-filter="*" style="width: 150px;"><img src="client/img/home/heart.png" style="width: 30px;" title="Best Hot"> HOT</li>
-								<li data-filter=".new-arrivals" style="width: 150px;"><img src="client/img/home/star.png" style="width: 30px;" title="Best Review"> REVIEW</li>
-								<li data-filter=".hot-sales"  style="width: 150px;"><img src="client/img/home/computer.png" style="width: 30px;" title="Best IT"> IT</li>
+								<li class="active" data-filter=".mix" style="width: 150px;"><img src="client/img/home/all.png" style="width: 30px;" title="All"> ALL</li>
+								<li data-filter=".hot" style="width: 150px;"><img src="client/img/home/heart.png" style="width: 30px;" title="Best Hot"> HOT</li>
+								<li data-filter=".review" style="width: 150px;"><img src="client/img/home/star.png" style="width: 30px;" title="Best Review"> REVIEW</li>
+								<li data-filter=".it"  style="width: 150px;"><img src="client/img/home/computer.png" style="width: 30px;" title="Best IT"> IT</li>
+
 							</ul>
 						</div>
 					</div>
 					<div class="row product__filter">
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
-									<span class="label">New</span>
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Piqué Biker Jacket</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
+						<c:forEach items="${reviewList}" var="r">
+							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix review course-col">
+								<a href="coursedetail.do?courseId=${r.courseId}">
+									<div class="product__item course-item">
+										<img src="client/img/product/${r.courseImg}" style="width: 330px; height: 200px;">
+										<div class="product__item__text">
+											<h6>${r.courseName}</h6>
+											<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
+												<c:forEach var = "star1" begin = "1" end = "${r.courseStars}">
+												  <div class="bi-star-fill"></div>
+												</c:forEach>
+												<c:forEach var = "star1" begin = "1" end = "${5 - r.courseStars}">
+												  <div class="bi-star"></div>
+												</c:forEach>
+											</div>
+											<c:choose>
+												<c:when test="${r.coursePrice eq 0}">
+													<h5 class="text-danger">무료</h5>
+												</c:when>
+												<c:otherwise>
+													<h5>
+														<fmt:formatNumber value="${r.coursePrice }" pattern="#,###" />원
+													</h5>
+												</c:otherwise>
+											</c:choose>
+										</div>
+
 									</div>
-									<h5>$67.24</h5>
-									<div class="product__color__select">
-										<label for="pc-1">
-											<input type="radio" id="pc-1">
-										</label>
-										<label class="active black" for="pc-2">
-											<input type="radio" id="pc-2">
-										</label>
-										<label class="grey" for="pc-3">
-											<input type="radio" id="pc-3">
-										</label>
-									</div>
-								</div>
+								</a>
 							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Piqué Biker Jacket</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
+						</c:forEach>
+						<c:forEach items="${hotList}" var="h">
+							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot course-col">
+								<a href="coursedetail.do?courseId=${h.courseId}">
+									<div class="product__item course-item">
+										<img src="client/img/product/${h.courseImg}" style="width: 330px; height: 200px;">
+										<div class="product__item__text">
+											<h6>${h.courseName}</h6>
+											<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
+												<c:forEach var = "star2" begin = "1" end = "${h.courseStars}">
+												  <div class="bi-star-fill"></div>
+												</c:forEach>
+												<c:forEach var = "star2" begin = "1" end = "${5 - h.courseStars}">
+												  <div class="bi-star"></div>
+												</c:forEach>
+											</div>
+											<c:choose>
+												<c:when test="${h.coursePrice eq 0}">
+													<h5 class="text-danger">무료</h5>
+												</c:when>
+												<c:otherwise>
+													<h5>
+														<fmt:formatNumber value="${h.coursePrice }" pattern="#,###" />원
+													</h5>												</c:otherwise>
+											</c:choose>
+										</div>
 									</div>
-									<h5>$67.24</h5>
-									<div class="product__color__select">
-										<label for="pc-4">
-											<input type="radio" id="pc-4">
-										</label>
-										<label class="active black" for="pc-5">
-											<input type="radio" id="pc-5">
-										</label>
-										<label class="grey" for="pc-6">
-											<input type="radio" id="pc-6">
-										</label>
-									</div>
-								</div>
+								</a>
 							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-							<div class="product__item sale">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
-									<span class="label">Sale</span>
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Multi-pocket Chest Bag</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
+						</c:forEach>
+						<c:forEach items="${itList}" var="l">
+							<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix it course-col">
+								<a href="coursedetail.do?courseId=${l.courseId}">
+									<div class="product__item course-item">
+										<img src="client/img/product/${l.courseImg}" style="width: 330px; height: 200px;">
+										<div class="product__item__text">
+											<h6>${l.courseName}</h6>
+											<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
+												<c:forEach var = "star3" begin = "1" end = "${l.courseStars}">
+												  <div class="bi-star-fill"></div>
+												</c:forEach>
+												<c:forEach var = "star3" begin = "1" end = "${5 - l.courseStars}">
+												  <div class="bi-star"></div>
+												</c:forEach>
+											</div>
+											<c:choose>
+												<c:when test="${l.coursePrice eq 0}">
+													<h5 class="text-danger">무료</h5>
+												</c:when>
+												<c:otherwise>
+													<h5>
+														<fmt:formatNumber value="${l.coursePrice }" pattern="#,###" />원
+													</h5>
+												</c:otherwise>
+											</c:choose>
+										</div>
+
 									</div>
-									<h5>$43.48</h5>
-									<div class="product__color__select">
-										<label for="pc-7">
-											<input type="radio" id="pc-7">
-										</label>
-										<label class="active black" for="pc-8">
-											<input type="radio" id="pc-8">
-										</label>
-										<label class="grey" for="pc-9">
-											<input type="radio" id="pc-9">
-										</label>
-									</div>
-								</div>
+								</a>
 							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-4.jpg">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Diagonal Textured Cap</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$60.9</h5>
-									<div class="product__color__select">
-										<label for="pc-10">
-											<input type="radio" id="pc-10">
-										</label>
-										<label class="active black" for="pc-11">
-											<input type="radio" id="pc-11">
-										</label>
-										<label class="grey" for="pc-12">
-											<input type="radio" id="pc-12">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-5.jpg">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Lether Backpack</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$31.37</h5>
-									<div class="product__color__select">
-										<label for="pc-13">
-											<input type="radio" id="pc-13">
-										</label>
-										<label class="active black" for="pc-14">
-											<input type="radio" id="pc-14">
-										</label>
-										<label class="grey" for="pc-15">
-											<input type="radio" id="pc-15">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
-							<div class="product__item sale">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-6.jpg">
-									<span class="label">Sale</span>
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Ankle Boots</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$98.49</h5>
-									<div class="product__color__select">
-										<label for="pc-16">
-											<input type="radio" id="pc-16">
-										</label>
-										<label class="active black" for="pc-17">
-											<input type="radio" id="pc-17">
-										</label>
-										<label class="grey" for="pc-18">
-											<input type="radio" id="pc-18">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>T-shirt Contrast Pocket</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$49.66</h5>
-									<div class="product__color__select">
-										<label for="pc-19">
-											<input type="radio" id="pc-19">
-										</label>
-										<label class="active black" for="pc-20">
-											<input type="radio" id="pc-20">
-										</label>
-										<label class="grey" for="pc-21">
-											<input type="radio" id="pc-21">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" data-setbg="img/product/product-8.jpg">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-										<li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>Basic Flowing Scarf</h6>
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<div class="rating">
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-										<i class="fa fa-star-o"></i>
-									</div>
-									<h5>$26.28</h5>
-									<div class="product__color__select">
-										<label for="pc-22">
-											<input type="radio" id="pc-22">
-										</label>
-										<label class="active black" for="pc-23">
-											<input type="radio" id="pc-23">
-										</label>
-										<label class="grey" for="pc-24">
-											<input type="radio" id="pc-24">
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 			</section>
 			<!-- Hero Section End -->
 
+			<section class="latest spad">
 
-			<!-- Recommend Course Section Start-->
-			<!-- <div class="col-lg-12 recommend__course__container">
-				<h4 style="font-weight: 900;">추천 강의</h4>
-				<br>
-				<div class="col-lg-12 row">
-					<div class="col-lg-2 col-md-4 col-sm-6 course-col">
-						<div class="product__item course-item" onclick="">
-							<div class="product__item__pic set-bg course-item-pic">
-								<ul class="product__hover">
-									<li><a href="#"><img src="client/img/icon/cart.png" alt=""></a></li>
-									<li><a href="#"><img src="client/img/icon/heart.png" alt=""></a></li>
-								</ul>
-							</div>
-							<div class="product__item__text">
-								<h6>강의 이름</h6>
-								<div class="rating">
-									<i class="fa fa-star-o"></i>
-									<i class="fa fa-star-o"></i>
-									<i class="fa fa-star-o"></i>
-									<i class="fa fa-star-o"></i>
-									<i class="fa fa-star-o"></i>
-								</div>
-								<h5 class="course-price">
-									10,000 원
-								</h5>
+				<div class="row" style="justify-content: space-around;">
+					<div class="card col-lg-5 shadow" style="padding: 0; border: 0;">
+						<div class="card-head" style="padding: 20px;" >
+							<div style="display: flex; justify-content: space-between;">
+								<h4 style="font-family: 'NanumSquareRound'; text-align: left; line-height: 100%; display: inline-block; flex: 3;">질문게시판</h4>
+								<a href="communityqnapage.do">
+									<h6 style="text-align: right; display: inline-block; line-height: 24px; flex: 1;">+더보기</h6>
+								</a>
 							</div>
 						</div>
+						<hr style="border: 3px solid salmon; margin: 0;">
+						<div class="card-body" style="padding: 20px;">
+							<c:forEach items="${qlist}" var="q">
+								<a href="communityqnadetailpage.do?questionId=${q.questionId}">
+									<div class="mb-2" style="display: flex; justify-content: space-between;">
+										<span style="text-align: left; flex: 1;">${q.questionTitle}</span>
+										<span style="text-align: right; flex: 1;">${q.questionEnterDate}</span>
+									</div>
+								</a>
+							</c:forEach>
+						</div>
 					</div>
+					<div class="card col-lg-5 shadow" style="padding: 0; border: 0;">
+						<div class="card-head" style="padding: 20px;" >
+							<div style="display: flex; justify-content: space-between;">
+								<h4 style="font-family: 'NanumSquareRound'; text-align: left; line-height: 100%; display: inline-block; flex: 3;">자유게시판</h4>
+								<a href="communityfreepage.do">
+									<h6 style="text-align: right; display: inline-block; line-height: 24px; flex: 1;">+더보기</h6>
+								</a>
+							</div>
+						</div>
+						<hr style="border: 3px solid salmon; margin: 0;">
+						<div class="card-body" style="padding: 20px;">
+							<c:forEach items="${blist}" var="b">
+								<a href="communityfreedetailpage.do?boardId=${b.boardId}">
+									<div class="mb-2" style="display: flex; justify-content: space-between;">
+										<span style="text-align: left; flex: 1;">${b.boardTitle}</span>
+										<span style="text-align: right; flex: 1;">${b.boardEnterDate}</span>
+									</div>
+								</a>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</section>
 
-				</div> -->
-				<!-- Recommend Course Section End-->
+
 
 				<!-- Footer Section Begin -->
-				<footer class="footer">
+				<footer style="padding-top: 70px; background-color: #3188DB;">
 					<div class="container">
 						<div class="row">
 							<div class="col-lg-3 col-md-6 col-sm-6">
 								<div class="footer__about">
 									<div class="footer__logo">
-										<a href="#"><img src="client/img/footer-logo.png" alt=""></a>
+										<a href="#"><img src="client/img/product/student.png" style="width: 100px;" alt=""></a>
 									</div>
-									<p>The customer is at the heart of our unique business model,
-										which includes design.</p>
-									<a href="#"><img src="client/img/payment.png" alt=""></a>
+									<h6 class="font-weight-bold" style="color: white;">&#129293;방문해주셔서 감사합니다!!&#129293;</h6>
 								</div>
+								<p>The customer is at the heart of our unique business model,
+									which includes design.</p>
+								<a href="#"><img src="client/img/payment.png" alt=""></a>
 							</div>
+
 							<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
 								<div class="footer__widget">
-									<h6>Shopping</h6>
+									<h6>약과 4조</h6>
 									<ul>
-										<li><a href="#">Clothing Store</a></li>
-										<li><a href="#">Trending Shoes</a></li>
-										<li><a href="#">Accessories</a></li>
-										<li><a href="#">Sale</a></li>
+										<li>송민주</li>
+										<li>안우열</li>
+										<li>양진우</li>
+										<li>전유진</li>
 									</ul>
 								</div>
-							</div>
-							<div class="col-lg-2 col-md-3 col-sm-6">
-								<div class="footer__widget">
-									<h6>Shopping</h6>
-									<ul>
-										<li><a href="#">Contact Us</a></li>
-										<li><a href="#">Payment Methods</a></li>
-										<li><a href="#">Delivary</a></li>
-										<li><a href="#">Return & Exchanges</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-								<div class="footer__widget">
-									<h6>NewLetter</h6>
-									<div class="footer__newslatter">
-										<p>Be the first to know about new arrivals, look books, sales
-											& promos!</p>
-										<form action="#">
-											<input type="text" placeholder="Your email">
-											<button type="submit">
-												<span class="icon_mail_alt"></span>
-											</button>
-										</form>
-									</div>
-								</div>
+
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-lg-12 text-center">
-								<div class="footer__copyright__text">
-									<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-									<p>
-										Copyright ©
-										<script>
-											document.write(new Date().getFullYear());
-										</script>
-										2020 All rights reserved | This template is made with <i class="fa fa-heart-o"
-											aria-hidden="true"></i>
-										by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-									</p>
-									<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						<div class="col-lg-2 col-md-3 col-sm-6">
+							<div class="footer__widget">
+								<h6>Shopping</h6>
+								<ul>
+									<li><a href="#">Contact Us</a></li>
+									<li><a href="#">Payment Methods</a></li>
+									<li><a href="#">Delivary</a></li>
+									<li><a href="#">Return & Exchanges</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+							<div class="footer__widget">
+								<h6>NewLetter</h6>
+								<div class="footer__newslatter">
+									<p>Be the first to know about new arrivals, look books, sales
+										& promos!</p>
+									<form action="#">
+										<input type="text" placeholder="Your email">
+										<button type="submit">
+											<span class="icon_mail_alt"></span>
+										</button>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-				</footer>
-				<!-- Footer Section End -->
-
-				<!-- Search Begin -->
-				<div class="search-model">
-					<div class="h-100 d-flex align-items-center justify-content-center">
-						<div class="search-close-switch">+</div>
-						<form class="search-model-form">
-							<input type="text" id="search-input" placeholder="Search here.....">
-						</form>
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<div class="footer__copyright__text">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								<p>
+									Copyright ©
+									<script>
+										document.write(new Date().getFullYear());
+									</script>
+									2020 All rights reserved | This template is made with <i class="fa fa-heart-o"
+										aria-hidden="true"></i>
+									by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+								</p>
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</div>
+						</div>
 					</div>
 				</div>
-				<!-- Search End -->
+			</footer>
+			<!-- Footer Section End -->
+
+
+
 				<script>
 					let loginMsg = `${loginmsg}`;
 					if (loginMsg != "") {
@@ -610,11 +468,12 @@
 					}
 
 
-					let logoutMsg = `${altmsg}`;
-					if (logoutMsg != "") {
-						alert(logoutMsg)
-						logoutMsg = "";
-					}
+
+				let logoutMsg = `${msg}`;
+				if (logoutMsg != "") {
+					alert(logoutMsg)
+					logoutMsg = "";
+				}
 
 
 
@@ -630,6 +489,94 @@
 				<script src="client/js/mixitup.min.js"></script>
 				<script src="client/js/owl.carousel.min.js"></script>
 				<script src="client/js/main.js"></script>
-		</body>
+				<!--Start of Tawk.to Script-->
+				<script type="text/javascript">
+				var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+				(function(){
+				var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+				s1.async=true;
+				s1.src='https://embed.tawk.to/63bd6d55c2f1ac1e202cb159/1gmdv669s';
+				s1.charset='UTF-8';
+				s1.setAttribute('crossorigin','*');
+				s0.parentNode.insertBefore(s1,s0);
+				})();
+				</script>
+				<!--End of Tawk.to Script-->
+
+				<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+				<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+				integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous">
+			</script>
+				<script>
+					Kakao.init('9c1eb3ec967ca14a10ddab8621bdddef');
+
+					
+					function logout() {
+						const isKakaoUser = <%= session.getAttribute("isKakaoUser") %>;
+						console.log(isKakaoUser);
+						if (isKakaoUser) {
+							// 카카오 로그아웃 처리 코드
+							if (Kakao.Auth.getAccessToken()) {
+								Kakao.API.request({
+									url: '/v1/user/unlink',
+									success: function (response) {
+										console.log(response)
+									},
+									fail: function (error) {
+									console.log(error)
+									},
+								})
+								Kakao.Auth.setAccessToken(undefined)
+								}
+							// Kakao.Auth.logout()
+							// .then(function(response) {
+							// 	console.log(Kakao.Auth.getAccessToken()); // null
+							// })
+							// .catch(function(error) {
+							// 	console.log('Not logged in.');
+							// });
+							fetch('logout.do', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/x-www-form-urlencoded'
+								}
+							})
+							.then(response => {
+								if (response.ok) {
+									console.log('카카오 로그아웃 성공');
+									window.location.href = 'home.do';
+								} else {
+									console.error('카카오 로그아웃 실패');
+								}
+							})
+							.catch(error => {
+								console.error('로그아웃 오류: ' + error);
+							});
+						} else {
+							// 일반 로그아웃 처리 코드
+							fetch('logout.do', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/x-www-form-urlencoded'
+								}
+							})
+							.then(response => {
+								if (response.ok) {
+									console.log('일반 로그아웃 성공');
+									window.location.href = 'home.do';								
+								} else {
+									console.error('일반 로그아웃 실패');
+								}
+							})
+							.catch(error => {
+								console.error('로그아웃 오류: ' + error);
+							});
+						}
+					}
+
+					
+				</script>
+			</body>
+
 
 		</html>

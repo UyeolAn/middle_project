@@ -5,10 +5,11 @@
 
 // 사이드메뉴 강의 조회 Ajax
 function courseList(type, value, nowPage, target) {
-	$('.sub_menu').css('color','#b7b7b7');
+	$('.sub_menu').css('color','#4e4e4e');
 	$('.sub_menu_g').removeClass('active');
 	$('option[value="12"]').remove();
 	$('option[value="15"]').remove();
+	$('.result_no').css('display', 'none');
 	
 	let sel = $('#cntPerPage').val();
 	let subCateVal = '';
@@ -27,19 +28,23 @@ function courseList(type, value, nowPage, target) {
 	    method: 'post',
 	    data: { subCate: subCateVal, grade: gradeVal, nowPage: nowPage, cntPerPage: sel },
 	    success: function (result) {
-	        appendCourseList(result); // [func] 강의 리스트 태그 생성
+	        appendCourseList(result, type); // [func] 강의 리스트 태그 생성
 	        appendPaging(result); // [func] 페이징 태그 생성
 	    }
 	})
 }
 
-function appendCourseList(result) {
+// 강의 리스트 태그 생성관련 함수
+function appendCourseList(result, type) {
 	$('.all-list').remove(); // 초기 태그 삭제
 	$('.result').remove(); // ajax 통신으로 추가된 태그 삭제
 	
 	let data = result[1];
-	console.log(data);
-	categoryUpdate(data); // [func] 메인카테고리, 서브카테고리 가져오기
+	if(type == 'subCate'){
+		categoryUpdate(data); // [메뉴경로 설정 func] 메인카테고리, 서브카테고리 가져오기
+	} else if(type == 'grade') {
+		gradeUpdate(data); // [메뉴경로 설정func] 메인카테고리, 서브카테고리 가져오기
+	}
  	
     for (let i = 0; i < data.length; i++) {
         let clone = $('.course-col:eq(0)').clone(); // 태그 create
@@ -93,6 +98,7 @@ function appendCourseList(result) {
     }
 }
 
+// 페이징 태그 관련 함수
 function appendPaging(result) {
 	let data = result[0].paging;
     
@@ -102,6 +108,7 @@ function appendPaging(result) {
 	$('.paging-row').append(data); // 태그 append
 }
 
+//메뉴경로설정(서브카테고리) 함수
 function categoryUpdate(data) {
 	$('.mainCate').remove(); // 헤더쪽 메뉴경로 태그 삭제
 	$('.subCate').remove(); // 헤더쪽 메뉴경로 태그 삭제
@@ -120,7 +127,26 @@ function categoryUpdate(data) {
     $('.breadcrumb__links').append('<span class="subCate">'+ subCate + '</span>');
 }
 
-/* 강의 상세조회 */
+//메뉴경로설정(grade) 함수
+function gradeUpdate(data) {
+	$('.mainCate').remove(); // 헤더쪽 메뉴경로 태그 삭제
+	$('.subCate').remove(); // 헤더쪽 메뉴경로 태그 삭제
+	
+	let grade = data[0].courseGrade;
+	
+	if(grade == 'easy') {
+		grade = '입문';
+	} else if(grade == 'normal') {
+		grade = '초급';
+	} else if(grade == 'hard') {
+		grade = '중급이상';
+	}
+	
+	$('.breadcrumb__links').append('<span class="mainCate">난이도</span>');
+    $('.breadcrumb__links').append('<span class="subCate">'+ grade + '</span>');
+}
+
+// 강의상세조회 form 전송
 function courseDetail(id) {
 	let form = document.getElementById("courseform");
 	form.courseId.value = id;
