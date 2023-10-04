@@ -1,6 +1,8 @@
 package co.four.study.member.web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,29 +32,39 @@ public class KakaoLogin extends HttpServlet {
 		MemberService dao = new MemberServiceImpl();
 		MemberVO vo = new MemberVO();
 		HttpSession session = request.getSession();
-		
+		String msg;
 		vo.setMemberId(request.getParameter("id"));
 		
 		vo = dao.memberSelect(vo);
 		System.out.println(vo);
 		System.out.println(request.getParameter("id"));
 		if (vo != null) {
-			session.setAttribute("loginId", vo.getMemberId());
-			session.setAttribute("loginName", vo.getMemberName());
-			session.setAttribute("loginAuthor", "client");
-			session.setAttribute("isKakaoUser", true);
-			
-			
-			if (session.getAttribute("loginAuthor").equals("admin")) {
-				response.sendRedirect("adminhome.do");// 관리자 페이지 링크
-			} else {
-				//msg = vo.getMemberName() + "님 어서오세요";
-				//request.setAttribute("msg", msg);
+			if(vo.getMemberStopDate()!= null) {
+		        msg = "차단당한 회원입니다.";
+		        System.out.println(msg);
+		        session.setAttribute("blockedUser", msg); // 알림 메시지를 세션에 저장
+		        response.sendRedirect("home.do");
+			}
+			else {			
+				System.out.println("차단아님");
+				session.setAttribute("loginId", vo.getMemberId());
+				session.setAttribute("loginName", vo.getMemberName());
+				session.setAttribute("loginAuthor", "client");
+				session.setAttribute("isKakaoUser", true);
+				
+				
+				if (session.getAttribute("loginAuthor").equals("admin")) {
+					response.sendRedirect("adminhome.do");// 관리자 페이지 링크
+				} else {
+					//msg = vo.getMemberName() + "님 어서오세요";
+					//request.setAttribute("msg", msg);
 //				String page = "home/home.jsp";
 //				ViewResolve.foward(request, response, page);
-				response.sendRedirect("home.do");
+					
+					response.sendRedirect("home.do");
+				}
+				
 			}
-			
 			
 		} else {
 			// msg = "아이디 또는 비밀번호가 틀렸습니다.";

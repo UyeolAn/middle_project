@@ -416,7 +416,16 @@
 					</div>
 				</footer>
 				<!-- Footer Section End -->
-
+					<%
+					String blockedUserMessage = (String) session.getAttribute("blockedUser");
+					if (blockedUserMessage != null) {
+					%>
+					    <script>
+					        alert("<%= blockedUserMessage %>");
+					    </script>
+					<%
+					}
+					%>
 
 				<script>
 					let loginMsg = `${loginmsg}`;
@@ -466,6 +475,8 @@
 					integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous">
 					</script>
 				<script>
+				
+				
 					Kakao.init('9c1eb3ec967ca14a10ddab8621bdddef');
 
 
