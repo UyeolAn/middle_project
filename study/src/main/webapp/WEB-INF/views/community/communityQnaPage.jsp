@@ -6,6 +6,7 @@
     <head>
       <meta charset="UTF-8">
       <title>Insert title here</title>
+      <link rel="stylesheet" href="client/css/community.css" type="text/css">
       <style type="text/css">
         input[type=text] {
           height: 40px !important;
@@ -16,7 +17,7 @@
         select {
           padding: 9.5px;
           color: #5D5D5D;
-          border: 1px solid #b7b7b7;
+          border: 1px solid #e1e1e1;
           border-radius: 5px;
         }
 

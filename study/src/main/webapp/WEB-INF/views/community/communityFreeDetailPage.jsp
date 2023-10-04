@@ -6,6 +6,7 @@
     <head>
       <meta charset="UTF-8">
       <title>Insert title here</title>
+      <link rel="stylesheet" href="client/css/community.css" type="text/css">
       <style>
         .comm__detail__body {
           margin-bottom: 40px;
