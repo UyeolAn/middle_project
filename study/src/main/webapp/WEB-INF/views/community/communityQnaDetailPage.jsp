@@ -188,7 +188,7 @@
                   <img src="client/img/question/${question.questionImg}" alt="질문 이미지">
                 </div>
               </c:if>
-              <p class="col-lg-12" id="questionContent" style="white-space:pre;">${question.questionContent}</p>
+              <p class="col-lg-12" id="questionContent" style="white-space:pre-wrap;">${question.questionContent}</p>
             </div>
             <div class="col-lg-7 comm__qna__question__detail__buttons" style="margin-top: 5%;">
               <button type="button" id="updateBtn" class="site-btn small-update-btn"
@@ -211,7 +211,7 @@
           <span class="col-lg-12 answer__info__count" id="answerCount">ANSWER : 10</span>
           <br>
           <div class="col-lg-12">
-            <textarea id="answerInput" name="answerInput" maxlength="512" placeholder="답변을 입력하세요..."
+            <textarea id="answerInput" name="answerInput" maxlength="1024" placeholder="답변을 입력하세요..."
               style="height: 70px; margin-top: 10px; color: #333; "></textarea>
           </div>
           <div class="col-lg-12 row">
@@ -335,7 +335,7 @@
                   .append(
                     (answer.memberAuthor == 'client' ?
                       $('<span class="etc__info__name"> /').text(`\${answer.memberId}`) :
-                      $('<span class="etc__info__name" style="color: #fb7f7f"> /').text(`\${answer.memberId}(관리자)`))
+                      $('<span class="etc__info__name" style="color: #fb7f7f"> /').text(`관리자`))
                   )
                   .append($(
                     `<button type="button" class="site-btn answer-btn ` +
@@ -351,7 +351,7 @@
                   .append($('<br>'))
                   .append(
                     $('<div class="answer-content-box" style="margin-top: 1%; margin-bottom: 3%;"> /')
-                      .append($('<p class="answer-content" style="white-space:pre;"> /')
+                      .append($('<p class="answer-content" style="white-space:pre-wrap;"> /')
                         .text(`\${answer.answerContent}`))
                   )
                   .append($('<input type="hidden" class="answer-id-hidden">').val(`\${answer.answerId}`))

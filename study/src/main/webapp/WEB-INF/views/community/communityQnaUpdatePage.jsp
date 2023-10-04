@@ -65,7 +65,7 @@
               <input type="file" id="questionImg" name="questionImg" style="display: none;">
             </div>
             <div class="col-lg-12">
-              <textarea id="questionContent" name="questionContent" maxlength="511" placeholder="내용을 입력하세요..."
+              <textarea id="questionContent" name="questionContent" maxlength="1024" placeholder="내용을 입력하세요..."
                 style="color: #333;">${question.questionContent}</textarea>
               <div class="row col-lg-12">
                 <button type="reset" class="site-btn"
