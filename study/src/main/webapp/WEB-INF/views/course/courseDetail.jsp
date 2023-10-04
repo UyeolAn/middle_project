@@ -118,7 +118,7 @@
 										</div>
 										<div class="product__details__tab__content__item">
 											<h5><span>🧐</span> 미리보기를 통해 콘텐츠를 확인해보세요.</h5>
-											<div id="free_iframe_area_1" data_link="${subCourses[1].subcourseLink }"></div>
+											<div id="free_iframe_area_1" data_link="${subCourses[0].subcourseLink }"></div>
 										</div>
 									</div>
 								</div>

@@ -27,6 +27,7 @@ public class CourseList extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("courselist 들어옴");
 		CourseService dao = new CourseServiceImpl();
 		CourseVO vo = new CourseVO();
 		
@@ -34,8 +35,8 @@ public class CourseList extends HttpServlet {
 		dao.makeSideMenu(request);
 		
 		// subCategory를 누른건지 grade를 누른건지 구분(상품 디테일 페이지에서 이동할때 사용함)
-		String subCate;
-		String grade;
+		String subCate = null;
+		String grade = null;
 		try {
 			subCate = request.getParameter("subCate");
 			if(!subCate.trim().equals("") && subCate != null) {
@@ -55,6 +56,10 @@ public class CourseList extends HttpServlet {
 			System.out.println("courseList.do::grade is null");
 		}
 		
+		String mainCate = request.getParameter("mainCate"); // 넘어온 메인카테고리
+		if(mainCate != null) {
+			vo.setCourseMainCategory(mainCate);
+		}
 		
 		// 강의 리스트 페이징처리
 		int total = dao.courseTotalCount(vo); // 전체건수
@@ -71,10 +76,26 @@ public class CourseList extends HttpServlet {
 		}
 		
 		PagingVO pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		request.setAttribute("paging", pvo); // 페이징 완료
+		//request.setAttribute("paging", pvo); // 페이징 완료
+		
+		//20231004 추가 start
+		if(subCate == null && grade == null) {
+			request.setAttribute("paging", pvo); // 페이징 완료
+		} else {
+			String paging = null;
+			if(!subCate.trim().equals("") && subCate != null) {
+				paging = dao.subcateCoursePagingTag(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), subCate);
+			}
+			if(!grade.trim().equals("") && grade != null) {
+				paging = dao.gradeCoursePagingTag(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), grade);
+			}
+			System.out.println(paging);
+			request.setAttribute("paging_data", "data");
+			request.setAttribute("ajaxpaging", paging); // 페이징 완료
+		}
+		//20231004 추가 end...
 		
 		// 강의 리스트 가져오기
-		String mainCate = request.getParameter("mainCate"); // 넘어온 메인카테고리
 		List<CourseVO> courses;
 
 		if(mainCate != null) {
