@@ -25,7 +25,14 @@ public class Logout extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		String msg = "로그아웃 되었습니다";
-		request.setAttribute("msg", msg);
+
+		request.setAttribute("altmsg", msg);
+//		String page = "home/home.jsp";
+//		ViewResolve.foward(request, response, page);
+		
+
+		//request.setAttribute("msg", msg);
+
 		response.sendRedirect("home.do");
 		}
 	

@@ -28,4 +28,7 @@ public interface BoardService {
 
 	//멤버별 게시물 개수
 	int countBoardMember(BoardVO vo);
+	
+	//최신 게시글 다섯개
+	List<BoardVO> homeRecentBoard();
 }

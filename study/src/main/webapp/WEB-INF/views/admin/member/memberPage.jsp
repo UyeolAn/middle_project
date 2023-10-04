@@ -150,8 +150,8 @@
                       <p class="mb-4"><span class="text-primary font-weight-bold me-1">강의 별 진도율</span></p>
                       <!-- 서블릿에서 mclist로 담아서 보내줌 -->
                       <c:if test="${empty mclist}">
-                        <div style="width: 100%;">
-                          <span class="font-weight-bold" style="text-align: center;">수강하는 강의가 없습니다.</span>
+                        <div style="width: 100%; text-align: center;">
+                          <span class="font-weight-bold">수강하는 강의가 없습니다.</span>
                         </div>
                       </c:if>
                       <c:if test="${not empty mclist}">
@@ -176,9 +176,14 @@
                 <div class="col-md-6">
                   <div class="card mb-4 h-100">
                     <div class="card-body">
-                      <span class="card-title font-weight-bold">${m.memberName}님의 수강 카테고리</span>
-                      <div class="chart-pie pt-4" style="height: 100px;">
-                        <canvas id="myPieChart" style="height: 100px;"></canvas>
+                      <span class="card-title font-weight-bold text-primary">${m.memberName}님의 수강 카테고리</span>
+                      <div class="chart-pie pt-4" style="height: 100px; text-align: center;">
+                        <c:if test="${empty mclist}">
+                          <span class="font-weight-bold" style="line-height:250px;">수강하는 강의가 없습니다.</span>
+                        </c:if>
+                        <c:if test="${not empty mclist}">
+                          <canvas id="myPieChart" style="height: 100px;"></canvas>
+                        </c:if>
                     </div>
                       <!-- End Pie Chart -->
                     </div>

@@ -1,6 +1,7 @@
 package co.four.study;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,24 +60,29 @@ public class AdminHomeController extends HttpServlet {
 		
 		
 		//it강의 카테고리 분포
-//		List<Map<String, Object>> itList = cdao.itCourse();
-//		Map<String, Integer> resultIt = new HashMap<>();
-//		System.out.println("카테고리별 분포");
-//		System.out.println(itList);
-//		
-//		for(int i = 0; i < itList.size(); i++) {
-////	        Set<String> keySet = itList.get(i).keySet();
-////	        for (String key : keySet) {
-////	            System.out.println(key + " : " + itList.get(i).get(key));
-////	        }
-//			System.out.println(itList.get(i));
-//			System.out.println(itList.get(i).get("sub"));
-//			System.out.println(itList.get(i).get("count"));
-//			int d = (((int)itList.get(i).get("count")/courseCount)*100);
-//			System.out.println();
-//			resultIt.put(((String) itList.get(i).get("sub")).toUpperCase(), d);
-//		}
-//		
+		List<Map<String, Object>> itList = cdao.itCourse();
+		Map<String, Integer> resultIt = new HashMap<>();
+		System.out.println("카테고리별 분포");
+		System.out.println(itList);
+		
+		for(int i = 0; i < itList.size(); i++) {
+		    Set<String> keySet = itList.get(i).keySet();
+		    for (String key : keySet) {
+		        System.out.println(key + " : " + itList.get(i).get(key));
+		    }
+		    System.out.println(itList.get(i));
+		    System.out.println(itList.get(i).get("sub"));
+		    System.out.println(itList.get(i).get("count"));
+		    
+		    // BigDecimal 값을 Double로 변환 후 백분율 계산
+		    BigDecimal countBigDecimal = (BigDecimal) itList.get(i).get("count");
+		    double count = countBigDecimal.doubleValue();
+		    double d = (count / courseCount) * 100;
+		    System.out.println();
+		    resultIt.put(((String) itList.get(i).get("sub")).toUpperCase(),  (int) Math.round(d));
+		}
+		System.out.println(resultIt);
+		
 		
 		
 		//답변안한 질문 리스트
@@ -88,7 +94,7 @@ public class AdminHomeController extends HttpServlet {
 		
 //		System.out.println(submap);
 		
-//		request.setAttribute("itcourse", resultIt);
+		request.setAttribute("resultIt", resultIt);
 		
 		
 		

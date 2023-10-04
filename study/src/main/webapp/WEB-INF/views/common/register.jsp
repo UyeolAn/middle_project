@@ -129,15 +129,15 @@
 
                                             <button type="button" class="btn btn-primary btn-user btn-block"
                                                 onclick="formCheck()">
-                                                Register Account
+                                                회원가입
                                             </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="passwordsearch.do">Forgot Password?</a>
+                                        <a class="small" href="passwordsearch.do">비밀번호 찾기</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="login.do">Already have an account? Login!</a>
+                                        <a class="small" href="login.do">로그인하기</a>
                                     </div>
                                 </div>
                             </div>

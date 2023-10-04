@@ -86,6 +86,14 @@
 											</div>
 											<button type="submit"
 												class="btn btn-primary btn-user btn-block">Login</button>
+												<!-- <a id="kakao-login-btn" href="javascript:kakaoLogin()">
+													<img src="img/kakao_login.png" width="100" margin = "0 auto"
+													  alt="카카오 로그인 버튼" />
+												  </a> -->
+												  <a id="kakao-login-btn" href="javascript:kakaoLogin()">
+													<img src="client/img/icon/kakao_login.png" width="421" height="44" margin = "0 auto"
+													  style="border-radius: 10rem;" alt="카카오 로그인 버튼" />
+												  </a>
 											<hr>
 										</form>
 										<div class="text-center">
@@ -108,6 +116,11 @@
 					</div>
 
 				</div>
+				<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+				integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous">
+			</script>
+			<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 				<script>
 					let loginMsg = `${loginmsg}`;
 					if (loginMsg != "") {
@@ -203,6 +216,149 @@
 						}
 						return unescape(cookieValue);
 					}
+
+					//카카오로그인
+					Kakao.init('9c1eb3ec967ca14a10ddab8621bdddef');
+					console.log(Kakao.isInitialized());
+
+					function kakaoLogin() {
+						Kakao.Auth.login({
+							success: function (response) {
+								Kakao.API.request({
+									url: '/v2/user/me',
+									success: function (response) {
+										console.log(response.kakao_account.email);
+										console.log(response.kakao_account.profile.nickname);
+										let url = 'KakaoLogin.do';
+										let payload = 'id=' + response.kakao_account.email + '&name=' + response.kakao_account.profile.nickname;
+										fetch(url, {
+											method: 'POST',
+											headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+											body: payload
+										})
+										.then(result => {
+											if (result.ok) {
+												// 여기서 로그인 상태 여부를 확인하고 이동할 페이지 결정
+												checkLoginStatus();
+											} else {
+												console.error('서버 응답 오류');
+											}
+										})
+										.catch(error => {
+											console.error('페이지 이동 실패: ' + error);
+										});
+									},
+									fail: function (error) {
+										console.log(error);
+									},
+								});
+							},
+							fail: function (error) {
+								console.log(error);
+							},
+						});
+					}
+
+					function checkLoginStatus() {
+						fetch('checkLoginStatus.do')
+						.then(response => {
+							if (response.ok) {
+								return response.json();
+							} else {
+								console.error('서버 응답 오류');
+							}
+						})
+						.then(data => {
+							if (data.isLoggedIn) {
+								//회원인 경우 홈 페이지로 이동
+								window.location.href = 'home.do';
+							} else {
+								//회원이 아닌 경우 회원가입 페이지로 이동
+								window.location.href = 'kakaoregister.do';
+							}
+						})
+						.catch(error => {
+							console.error('페이지 이동 실패: ' + error);
+						});
+					}
+
+
+					//카카오로그아웃  
+	//				function kakaoLogout() {
+	//					if (Kakao.Auth.getAccessToken()) {
+	//					Kakao.API.request({
+	//						url: '/v1/user/unlink',
+	//						success: function (response) {
+	//							console.log(response)
+	//						},
+	//						fail: function (error) {
+	//						console.log(error)
+	//						},
+	//					})
+	//					Kakao.Auth.setAccessToken(undefined)
+	//					}}
+
+	// 				//카카오
+	// 				function loginWithKakao2 () {
+    // 	window.Kakao.Auth.authorize({
+    // 		redirectUri: 'http://localhost/prj',
+    //         prompt: 'select_account',
+    // 	})
+    // }
+    // function loginWithKakao() {
+        
+        
+    
+        // Kakao.API.request({
+        //     url: '/v2/user/me',
+        //     data: {
+        //             property_keys: ['kakao_account.email'],
+        //         },
+        //     })
+        //     .then(function(response) {
+        //         console.log(response);
+        //     })
+        //     .catch(function(error) {
+        //         console.log(error);
+        //     });
+            
+        //     Kakao.Auth.authorize({
+        //       redirectUri: 'http://127.0.0.1/prj',
+        //       prompt: 'select_account',
+        //     });
+        
+
+    //     window.Kakao.Auth.login({
+    //             scope: 'profile_nickname, account_email, birthday', 
+    //             success: function(response) {
+    //                 console.log(response);
+    //                 console.log(response.access_token);
+    //                 Kakao.Auth.setAccessToken(response.access_token);
+    //               // 로그인 성공하면 받아오는 데이터
+    //                 window.Kakao.API.request({ // 사용자 정보 가져오기 
+    //                     url: '/v2/user/me',
+    //                     success: (res) => {
+    //                         const kakao_account = res.kakao_account;
+    //                         alert(kakao_account.profile.nickname+"님 환영합니다");
+    //                         console.log(kakao_account);
+    //                         console.log(kakao_account.profile.nickname);
+    //                         console.log(kakao_account.birthday);
+    //                         console.log(kakao_account.email);
+	// 						fetch('KakaoLogin.do?mid='+kakao_account.email)
+	// 						.then(resolve=>resolve.json())
+	// 						.then(result=>{
+	// 							console.log("계정 : "+result);
+	// 						});
+    //                     }
+    //                 });
+    //                  //window.location.href='http://localhost/' //리다이렉트 되는 코드
+    //             },
+    //             fail: function(error) {
+    //                 console.log(error);
+    //             }
+    //         });
+    //   }
+	
 				</script>
 
 
