@@ -5,6 +5,15 @@
   <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+      .nice-scroll {
+        height: 89px !important;
+      }
+
+      .toptop__bar__hr {
+        margin-top: 0 !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -13,19 +22,22 @@
         <div class="shop__sidebar__accordion">
           <div class="accordion" id="accordionExample">
             <div class="card">
-              <div class="card-heading">
+              <hr class="toptop__bar__hr">
+              <div class="col-lg-12 card-heading">
                 <a data-toggle="collapse" data-target="#collapseOne">Community</a>
               </div>
-              <div id="collapseOne" class="collapseshow" data-parent="#accordionExample">
+              <hr>
+              <div id="collapseOne" class="col-lg-12 collapseshow" data-parent="#accordionExample">
                 <div class="card-body">
                   <div class="shop__sidebar__categories">
                     <ul class="nice-scroll">
-                      <li><a href="communityqnapage.do">질문게시판</a></li>
-                      <li><a href="communityfreepage.do">자유게시판</a></li>
+                      <li><a href="communityqnapage.do" style="color: #333">질문게시판</a></li>
+                      <li><a href="communityfreepage.do" style="color: #333">자유게시판</a></li>
                     </ul>
                   </div>
                 </div>
               </div>
+              <hr>
             </div>
           </div>
         </div>

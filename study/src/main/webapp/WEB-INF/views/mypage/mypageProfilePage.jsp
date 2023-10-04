@@ -158,7 +158,7 @@
 									<label class="font-weight-bold">가입일</label>
 									<p>${m.memberEnterDate}</p>
 								</div>
-								<a class="btn btn-secondary btn-icon-split modify">
+								<a class="btn btn-primary btn-icon-split">
 									<span class="text" onclick="modalOpen()" style="color: white;">수정</span>
 								</a>
 							</form>

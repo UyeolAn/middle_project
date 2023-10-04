@@ -35,15 +35,19 @@
 					margin: 5%;
 				}
 
-				.header__top__hover ul a{
+				.header__top__hover ul a {
 					color: black;
-        }
-				* {
-				font-family: 'NanumSquareRound';
 				}
+
 				
 				h5, h6{
-				font-family: 'NanumSquareRound' !important;
+          font-family: 'NanumSquareRound' !important;
+        }
+
+
+				* {
+					font-family: 'NanumSquareRound';
+
 				}
 			</style>
 		</head>
@@ -52,9 +56,10 @@
 			<!-- Page Preloder -->
 			<div id="preloder">
 				<div class="loader"></div>
-			</div>		
+			</div>
 			<!-- Header Section Begin -->
 			<header class="header">
+
 				<div class="header__top"  style="background-color: white;">
 					<div class="container">
 						<div class="row">
@@ -89,7 +94,8 @@
 					<div class="row">
 						<div class="col-lg-3 col-md-3">
 							<div class="header__logo">
-								<a href="home.do"><img src="client/img/product/student.png" style="width: 50px;" alt=""></a>
+								<a href="home.do"><img src="client/img/product/student.png" style="width: 50px;"
+										alt=""></a>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6">
@@ -121,12 +127,23 @@
 							</nav>
 						</div>
 						<div class="col-lg-3 col-md-3">
-							<div class="header__nav__option">
-								<a href="#" class="search-switch"><img src="client/img/icon/search.png" alt=""></a> <a href="#"><img
-										src="client/img/icon/heart.png" alt=""></a> <a href="#"><img src="client/img/icon/cart.png" alt="">
-									<span>0</span></a>
-								<div class="price">$0.00</div>
-							</div>
+							<nav class="header__menu mobile-menu">
+								<ul>
+									<c:if test="${not empty loginId}">
+										<li><a href="mypageprofile.do"><span>${loginName} 님 접속중</span></a>
+											<ul class="dropdown">
+												<li><a href="logout.do">LOGOUT</a></li>
+												<li><a href="mypageprofile.do">MY PAGE</a></li>
+											</ul>
+										</li>
+									</c:if>
+									<c:if test="${empty loginId}">
+										<li>
+											<a href="login.do" style="color: black;">Sign in</a>
+										</li>
+									</c:if>
+								</ul>
+							</nav>
 						</div>
 					</div>
 					<div class="canvas__open">
@@ -137,8 +154,8 @@
 			<!-- Header Section End -->
 
 			<!-- Hero Section Begin -->
-			<div class="hero__slider owl-carousel" style="height: 300px;" >
-				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: pink;" >
+			<div class="hero__slider owl-carousel" style="height: 300px;">
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: pink;">
 					<a href="packagelist.do">
 						<div class="container">
 							<div class="row">
@@ -157,15 +174,17 @@
 						</div>
 					</a>
 				</div>
-				<div class="hero__items set-bg" style="padding: 30px; height: 300px; background-color: #3188DB;" >
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px; background-color: #3188DB;">
 					<a href="courselist.do">
 						<div class="container">
 							<div class="row">
 								<div class="col-lg-7">
 									<div class="hero__text">
+
 										<h6>IT COURSES</h6>
 										<h2 style="font-family: 'NanumSquareRound'; color: white;">IT 강의들 잔뜩&#128218;</h2>
 										<p style="font-family: 'NanumSquareRound'; color: white;">예비 개발자들을 위한 강의들을 골라 들어보세요</p>
+
 									</div>
 								</div>
 								<div class="col-lg-5" style="padding: 30px;">
@@ -175,7 +194,7 @@
 						</div>
 					</a>
 				</div>
-				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: greenyellow;" >
+				<div class="hero__items set-bg" style="padding: 30px; height: 300px;  background-color: greenyellow;">
 					<a href="communityqnapage.do">
 						<div class="container">
 							<div class="row">
@@ -211,6 +230,7 @@
 								<li data-filter=".hot" style="width: 150px;"><img src="client/img/home/heart.png" style="width: 30px;" title="Best Hot"> HOT</li>
 								<li data-filter=".review" style="width: 150px;"><img src="client/img/home/star.png" style="width: 30px;" title="Best Review"> REVIEW</li>
 								<li data-filter=".it"  style="width: 150px;"><img src="client/img/home/computer.png" style="width: 30px;" title="Best IT"> IT</li>
+
 							</ul>
 						</div>
 					</div>
@@ -241,6 +261,7 @@
 												</c:otherwise>
 											</c:choose>
 										</div>
+
 									</div>
 								</a>
 							</div>
@@ -300,6 +321,7 @@
 												</c:otherwise>
 											</c:choose>
 										</div>
+
 									</div>
 								</a>
 							</div>
@@ -359,7 +381,6 @@
 
 
 
-
 				<!-- Footer Section Begin -->
 				<footer style="padding-top: 70px; background-color: #3188DB;">
 					<div class="container">
@@ -371,7 +392,11 @@
 									</div>
 									<h6 class="font-weight-bold" style="color: white;">&#129293;방문해주셔서 감사합니다!!&#129293;</h6>
 								</div>
+								<p>The customer is at the heart of our unique business model,
+									which includes design.</p>
+								<a href="#"><img src="client/img/payment.png" alt=""></a>
 							</div>
+
 							<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
 								<div class="footer__widget">
 									<h6>약과 4조</h6>
@@ -382,54 +407,57 @@
 										<li>전유진</li>
 									</ul>
 								</div>
-							</div>
-							<div class="col-lg-2 col-md-3 col-sm-6">
-								<div class="footer__widget">
-									<h6>Shopping</h6>
-									<ul>
-										<li><a href="#">Contact Us</a></li>
-										<li><a href="#">Payment Methods</a></li>
-										<li><a href="#">Delivary</a></li>
-										<li><a href="#">Return & Exchanges</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-								<div class="footer__widget">
-									<h6>NewLetter</h6>
-									<div class="footer__newslatter">
-										<p>Be the first to know about new arrivals, look books, sales
-											& promos!</p>
-										<form action="#">
-											<input type="text" placeholder="Your email">
-											<button type="submit">
-												<span class="icon_mail_alt"></span>
-											</button>
-										</form>
-									</div>
-								</div>
+
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-lg-12 text-center">
-								<div class="footer__copyright__text">
-									<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-									<p>
-										Copyright ©
-										<script>
-											document.write(new Date().getFullYear());
-										</script>
-										2020 All rights reserved | This template is made with <i class="fa fa-heart-o"
-											aria-hidden="true"></i>
-										by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-									</p>
-									<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						<div class="col-lg-2 col-md-3 col-sm-6">
+							<div class="footer__widget">
+								<h6>Shopping</h6>
+								<ul>
+									<li><a href="#">Contact Us</a></li>
+									<li><a href="#">Payment Methods</a></li>
+									<li><a href="#">Delivary</a></li>
+									<li><a href="#">Return & Exchanges</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+							<div class="footer__widget">
+								<h6>NewLetter</h6>
+								<div class="footer__newslatter">
+									<p>Be the first to know about new arrivals, look books, sales
+										& promos!</p>
+									<form action="#">
+										<input type="text" placeholder="Your email">
+										<button type="submit">
+											<span class="icon_mail_alt"></span>
+										</button>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-				</footer>
-				<!-- Footer Section End -->
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<div class="footer__copyright__text">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								<p>
+									Copyright ©
+									<script>
+										document.write(new Date().getFullYear());
+									</script>
+									2020 All rights reserved | This template is made with <i class="fa fa-heart-o"
+										aria-hidden="true"></i>
+									by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+								</p>
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!-- Footer Section End -->
+
 
 
 				<script>
@@ -440,11 +468,12 @@
 					}
 
 
-					let logoutMsg = `${altmsg}`;
-					if (logoutMsg != "") {
-						alert(logoutMsg)
-						logoutMsg = "";
-					}
+
+				let logoutMsg = `${msg}`;
+				if (logoutMsg != "") {
+					alert(logoutMsg)
+					logoutMsg = "";
+				}
 
 
 
@@ -548,5 +577,6 @@
 					
 				</script>
 			</body>
+
 
 		</html>

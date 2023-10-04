@@ -7,17 +7,32 @@
     <title>Insert title here</title>
     <style type="text/css">
       input[type=text] {
+        height: 40px !important;
+        margin-bottom: 15px !important;
         color: #333;
       }
 
       select {
-        padding: 10px;
+        padding: 9.5px;
         color: #5D5D5D;
         border: 1px solid #b7b7b7;
         border-radius: 5px;
       }
 
       /* 해당 페이지 전용 클래스 */
+      .community__title {
+        margin-bottom: 27px;
+        font-weight: 900;
+      }
+
+      .toptop__bar__hr {
+        margin-top: 0 !important;
+      }
+
+      .top__bar__hr {
+        margin-top: 8px !important;
+      }
+
       .comm__free__board__sort>li {
         margin-left: 5%;
         margin-top: 4%;
@@ -72,10 +87,18 @@
 
   <body>
     <div class="container">
+      <!--Community Title Start-->
+      <div class="row col-lg-12">
+        <img src="client/img/icon/free.png" alt="아이콘" style="width: 30px; height: 30px;">
+        <h4 class="community__title">&nbsp;&nbsp;자유게시판</h4>
+      </div>
+      <!--Community Title End-->
+
       <!--Top Bar Start-->
       <div>
+        <hr class="toptop__bar__hr">
         <!--Search Bar Start-->
-        <form id="searchForm" name="searchForm">
+        <form id="searchForm" class="col-lg-12" name="searchForm">
           <div class="row">
             <div class="col-lg-3">
               <div class="checkout__input">
@@ -95,7 +118,7 @@
             <div class="col-lg-2">
               <div class="checkout__input">
                 <button type="button" class="site-btn" onclick="searchBoards()"
-                  style="padding: 14px 20px; background: #E53637; border-radius: 8px;">
+                  style="margin-left: 10%; padding: 9.5px 15px; background: #3188DB; border-radius: 8px;">
                   <i class="bi bi-search" style="font-size: large !important;"></i></button>
               </div>
             </div>
@@ -121,7 +144,7 @@
           </div>
         </div>
         <!--Order/Write Bar End-->
-        <hr>
+        <hr class="top__bar__hr">
       </div>
       <!--Top Bar End-->
 
@@ -197,7 +220,7 @@
                   $('<div class="col-lg-12 comm__free__board__etc__info"> /')
                     .append($('<span class="etc__info__left"> /')
                       .text(
-                        (board.memberId == null ? `[탈퇴 회원] ㆍ ` : `[\${board.memberId}] ㆍ `) +
+                        (board.memberId == null ? `탈퇴 회원 ㆍ ` : `\${board.memberId} ㆍ `) +
                         ` \${board.boardEnterDate}`
                       ))
                     .append($(
@@ -210,7 +233,7 @@
                 )
                 .on('click', function () {
                   let url = 'communityfreedetailpage.do?boardId=' + board.boardId;
-                  location.replace(url);
+                  $(location).attr('href', url);
                 })
             )
             .append($('<hr>'));

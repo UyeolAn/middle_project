@@ -6,11 +6,23 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <style type="text/css">
+      .mypage__title {
+        margin-bottom: 27px;
+        font-weight: 900;
+      }
+
+      .toptop__bar__hr {
+        margin-top: 0 !important;
+      }
+
+      .top__bar__hr {
+        margin-top: 8px !important;
+      }
+
       .payment__sort__type>li {
-        margin-top: 1%;
-        margin-bottom: 1%;
         margin-left: 2%;
         margin-right: 2%;
+        padding-bottom: 6px;
         color: #B7B7B7;
         font-weight: 900;
         float: left;
@@ -20,10 +32,12 @@
       .payment__sort__type>li:hover {
         color: #333;
         cursor: pointer;
+        border-bottom: 2px solid #3188DB;
       }
 
       .payment__sort__type>.type__active {
         color: #333;
+        border-bottom: 2px solid #3188DB;
       }
 
       .payment__etc__info {
@@ -36,23 +50,27 @@
 
   <body>
     <div class="container">
-      <h5 class="col-lg-12" style="margin-bottom: 2%; font-weight: 900;">구매내역</h5>
-      <br>
+      <div class="row col-lg-12">
+        <img src="client/img/icon/payment.png" alt="아이콘" style="width: 30px; height: 30px;">
+        <h4 class="mypage__title">&nbsp;&nbsp;구매내역</h4>
+      </div>
+      <hr class="toptop__bar__hr">
 
       <!--Payment Top Bar Start-->
       <div class="mypage__payment__head">
         <!--Sort Bar Start-->
-        <div class="row" style="margin-top: 0.5%; margin-bottom: 0.5%;">
+        <div class="row" style="margin-top: 0.5%;">
           <div class="col-lg-12">
-            <ul class=" col-lg-12 payment__sort__type">
+            <ul class="payment__sort__type">
               <li class="type__active" id="mostRecent">최신순</li>
               <li id="mostOld">오래된순</li>
             </ul>
           </div>
         </div>
         <!--Sort Bar End-->
+        <hr class="toptop__bar__hr">
       </div>
-      <hr>
+      
       <!--Payment Top Bar End-->
 
       <!--Payment Body Start-->
@@ -93,7 +111,7 @@
 
       setSortBtn();
       loadPayment();
-      
+
       function setSortBtn() {
         $('ul.payment__sort__type>li').on('click', function () {
           console.log('log')
@@ -143,8 +161,8 @@
                 .append($(`<h6 class="col-lg-12 payment__etc__info">STATUS : 결제완료</h6>`))
                 .append($(`<h6 class="col-lg-12 payment__etc__info">PRICE : \${payment.coursePrice} ₩</h6>`))
                 .append($(`<h6 class="col-lg-12 payment__etc__info">DATE : ` +
-                          `\${payment.enterDate[0]}년 \${payment.enterDate[1]}월 \${payment.enterDate[2]}일 - ` + 
-                          `\${payment.enterDate[3]}시\${payment.enterDate[4]}분</h6>`))
+                  `\${payment.enterDate[0]}년 \${payment.enterDate[1]}월 \${payment.enterDate[2]}일 - ` +
+                  `\${payment.enterDate[3]}시\${payment.enterDate[4]}분</h6>`))
             )
             .append('<hr>')
         });
