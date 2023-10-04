@@ -90,8 +90,8 @@ public class CourseList extends HttpServlet {
 				paging = dao.gradeCoursePagingTag(pvo.getStartPage(), pvo.getNowPage(), pvo.getCntPerPage(), pvo.getEndPage(), pvo.getLastPage(), grade);
 			}
 			System.out.println(paging);
-			request.setAttribute("paging_data", "data");
-			request.setAttribute("ajaxpaging", paging); // 페이징 완료
+			request.setAttribute("allPaging", "no"); // 전체조회 페이징 여부
+			request.setAttribute("ajaxpaging", paging); // 페이징 태그 넘겨주기
 		}
 		//20231004 추가 end...
 		
