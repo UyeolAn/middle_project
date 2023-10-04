@@ -11,29 +11,27 @@
       }
 
       .input__file__btn {
-        margin-top: 1%;
-        padding: 6px 25px;
+        margin-top: 0 !important;
+        margin-right: 1%;
+        padding: 6px 15px;
         color: white;
-        background: #B7B7B7;
+        background: #88bdee;
         cursor: pointer;
-        border-radius: 10px;
+        border-radius: 8px;
       }
 
       .input__file__btn:hover {
-        background: #A7A7A7;
+        background: #3188DB;
       }
 
       .delete__file__btn {
-        margin-top: 1%;
-        padding: 6px 25px;
+        margin-top: 0 !important;
+        margin-right: 1%;
+        padding: 6px 15px;
         color: white;
-        background: #B7B7B7;
+        background: #aaa;
         cursor: pointer;
-        border-radius: 10px;
-      }
-
-      .delete__file__btn:hover {
-        background: #A7A7A7;
+        border-radius: 8px;
       }
 
       .small-btn {
@@ -51,26 +49,26 @@
         <form action="boardupdate.do" method="post" enctype="multipart/form-data">
           <div class="row">
             <div class="col-lg-9">
-              <input type="text" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요.."
+              <input type="text" id="boardTitle" name="boardTitle" maxlength='99' placeholder="제목을 입력하세요.."
                 value="${board.boardTitle}">
             </div>
             <div class="col-lg-12">
               <label class="input__file__btn"
                 style="margin-top: 3%; border-radius: 8px; font-size: medium; font-weight: 900;">
-                IMG
+                <i class="bi bi-image"></i>&nbsp;IMG
               </label>
               <label class="delete__file__btn"
                 style="margin-top: 3%; border-radius: 8px; font-size: medium; font-weight: 900;">
-                DEL
+                <i class="bi bi-trash" style="font-size: large !important;"></i>
               </label>
               <input type="file" id="boardImg" name="boardImg" style="display: none;">
             </div>
             <div class="col-lg-12">
-              <textarea id="boardContent" name="boardContent" placeholder="내용을 입력하세요..."
+              <textarea id="boardContent" name="boardContent" maxlength="511" placeholder="내용을 입력하세요..."
                 style="color: #333;">${board.boardContent}</textarea>
               <div class="row col-lg-12">
                 <button type="reset" class="site-btn"
-                  style="padding: 5px 12px 5px 15px; background: #B7B7B7; border-radius: 8px; font-size: small;"><i
+                  style="padding: 5px 6px 5px 9px; background: #B7B7B7; border-radius: 8px; font-size: small;"><i
                     class="bi bi-arrow-repeat" style="font-size: x-large !important;"></i></button>
                 <button type="submit" class="site-btn"
                   style="margin-left: 1%; padding: 9px 15px; background: #333; border-radius: 8px; font-size: small;"><i
