@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     <!DOCTYPE html>
     <html>
 
@@ -140,7 +141,7 @@
                                         <p class="text-muted mb-0">
                                             <c:choose>
                                                 <c:when test="${original eq 0}">
-                                                    FREE
+                                                    무료
                                                 </c:when>
                                                 <c:otherwise>
                                                     ${p.packageDiscount}%
@@ -157,10 +158,14 @@
                                     <div class="col-sm-9">
                                         <c:choose>
                                             <c:when test="${original eq 0}">
-                                                FREE
+                                                무료
                                             </c:when>
                                             <c:otherwise>
-                                                <p class="text-muted mb-0"><del>${original}원</del> => ${sale}원</p>
+                                                <p class="text-muted mb-0"><del>
+                                                <fmt:formatNumber value="${original }" pattern="#,###" />원
+                                                </del>=> 
+                                                <fmt:formatNumber value="${sale }" pattern="#,###" />원
+                                                </p>
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
@@ -230,7 +235,7 @@
                                         <tr value="${c.courseId}">
                                           <td>${c.courseId}</td>
                                           <td>${c.courseName}</td>
-                                          <td>${c.coursePrice}원</td>
+                                          <td><fmt:formatNumber value="${c.coursePrice }" pattern="#,###" />원</td>
                                           <td>${c.courseTeacher}</td>
                                           <td>
                                             <a class="btn btn-danger btn-icon-split deleteSub" onclick="delSub(${c.courseId})">

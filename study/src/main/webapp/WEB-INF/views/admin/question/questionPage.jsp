@@ -75,12 +75,12 @@
                 <br><br>
                 <p>
                     <c:if test="${not empty q.questionImg}">
-                        <img src="client/img/product/${q.questionImg}" style="width: 300px;">
+                        <img src="client/img/question/${q.questionImg}" style="width: 300px;">
                     </c:if>
                 </p>
                 <p>${q.questionContent}</p>
                 <hr>
-                <p class="font-weight-bold text-primary" style="text-align: left;">답변</p>
+                <p class="font-weight-bold text-primary" style="text-align: left;">관리자 답변</p>
                 <c:if test="${empty alist}">
                     <p>답변이 없습니다.</p>
                     <br>
@@ -97,6 +97,7 @@
                                         <br>
                                         <h5 class="font-weight-bold" style="text-align: left;">${a.answerContent}</h5>
                                         <div  style="text-align: left;">
+                                       <!-- <br>작성자 : ${a.memberId } -->
                                             <br>
                                             작성일 : ${a.answerEnterDate}<br>
                                             <c:if test="${not empty a.answerUpdateDate}">
