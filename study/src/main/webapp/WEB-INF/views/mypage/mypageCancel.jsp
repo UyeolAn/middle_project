@@ -35,10 +35,10 @@
         </table>
         <script>
             function memberCancel() {
-                alert("삭제되었습니다");
+                alert("계정이 삭제되었습니다");
 
 
-                location.replace('membercancel.do');
+                location.href="membercancel.do"
             }
         </script>
         <script>

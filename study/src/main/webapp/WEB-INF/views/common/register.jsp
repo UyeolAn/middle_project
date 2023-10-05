@@ -201,8 +201,8 @@
                 //패스워드 불일치 여부 확인
                 function formCheck() {
                     console.log(idCheck1)
-                    let passchck = document.getElementById(memberPassword);
-                    let passchckrepeat = document.getElementById(checkPass);
+                    let passchck = document.getElementById("memberPassword").value;
+                    let passchckrepeat = document.getElementById("checkPass").value;
                     console.log()
                     if (idCheck1 == "No") {
                         alert("아이디 중복체크를 하세요.");
