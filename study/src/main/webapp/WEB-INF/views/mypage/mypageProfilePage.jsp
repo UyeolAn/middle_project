@@ -219,7 +219,7 @@
 						<div class="card-body" style="text-align: center;">
 							<c:if test="${empty mclist}">
 								<span class="font-weight-bold" style="text-align: center;">수강중인 강의가
-											없습니다.</span>
+									없습니다.</span>
 							</c:if>
 							<c:if test="${not empty mclist }">
 								<div class="table-responsive">
@@ -234,10 +234,10 @@
 												<tr>
 													<td>${mc.courseName}</td>
 													<td align="center">
-														<a class="btn btn-secondary btn-icon-split search">
+														<a class="btn btn-primary">
 															<span class="icon text-white-50"
 																onclick="location.href='coursedetail.do?courseId=${mc.courseId}'">
-																<i class="fas" >들어가기</i>
+																<i class="fas">들어가기</i>
 															</span>
 														</a>
 													</td>
@@ -271,7 +271,8 @@
 								</div>
 								<div class="form-group">
 									<label style="display: block;">비밀번호</label>
-									<input  class="form-control form-control-user" id="modalPw" type="password" maxlength="50">
+									<input class="form-control form-control-user" id="modalPw" type="password"
+										maxlength="50">
 								</div>
 								<div class="form-group">
 									<label class="font-weight-bold" style="display: block;">연락처</label>
@@ -295,7 +296,8 @@
 								</div>
 								<div class="form-group">
 									<label style="display: block;">이메일</label>
-									<input class="form-control form-control-user" value="${m.memberEmail}" id="modalEmail" type="email">
+									<input class="form-control form-control-user" value="${m.memberEmail}"
+										id="modalEmail" type="email">
 								</div>
 
 							</form>
@@ -309,7 +311,7 @@
 								<span class="icon text-white-70">
 									❌
 								</span>
-								<span class="text"  style="color: white; font-weight: bold;">취소</span>
+								<span class="text" style="color: white; font-weight: bold;">취소</span>
 							</a>
 						</div>
 					</div>
@@ -422,10 +424,13 @@
 						}
 					}).open();
 				}
-
-
-
-
+			</script>
+			<script>
+				let lgck = `${loginId}`;
+				if (lgck = null) {
+                alert("로그인을 해주세요")
+                location.href = "home.do"
+            }
 			</script>
 		</body>
 

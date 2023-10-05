@@ -1,6 +1,7 @@
 package co.four.study.member.web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +28,7 @@ public class MemberCheckLogin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//로그인 실행
+		// 로그인 실행
 		MemberService dao = new MemberServiceImpl();
 		MemberVO vo = new MemberVO();
 		HttpSession session = request.getSession();
@@ -38,34 +39,41 @@ public class MemberCheckLogin extends HttpServlet {
 		System.out.println(vo);
 		vo = dao.memberSelect(vo);
 		String msg = "";
-		
+
 		if (vo != null) {
-			
+
 			session.setAttribute("loginId", vo.getMemberId());
 			session.setAttribute("loginName", vo.getMemberName());
-			session.setAttribute("loginAuthor", vo.getMemberAuthor());	
-			//카카오로그인 회원이 아니란걸 세션에 저장
+			session.setAttribute("loginAuthor", vo.getMemberAuthor());
+			// 카카오로그인 회원이 아니란걸 세션에 저장
 			session.setAttribute("isKakaoUser", false);
 			System.out.println(vo);
+			if (vo.getMemberStopDate() != null) {
+				session.invalidate();
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('차단된 회원입니다'); location.href='home.do';</script>");
+				out.flush();
+
+			}
+
 			if (session.getAttribute("loginAuthor").equals("admin")) {
 				response.sendRedirect("adminhome.do");// 관리자 페이지 링크
 			} else {
 				msg = vo.getMemberName() + "님 어서오세요";
-				request.setAttribute("msg", msg);
+				request.setAttribute("loginmsg", msg);
 //				String page = "home/home.jsp";
 //				ViewResolve.foward(request, response, page);
 				response.sendRedirect("home.do");
 			}
-			
-			
+
 		} else {
-			 msg = "아이디 또는 비밀번호가 틀렸습니다.";
-			request.setAttribute("loginmsg", msg);
-			String page = "common/login.jsp";
-			ViewResolve.foward(request, response, page);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('아이디 또는 비밀번호가 틀렸습니다.'); location.href='login.do';</script>");
+			out.flush();
 		}
 
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

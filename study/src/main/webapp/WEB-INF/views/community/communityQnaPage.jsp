@@ -293,7 +293,7 @@
                         .text(
                           (question.memberId == null ? `탈퇴 회원 ㆍ ` : `\${question.memberId} ㆍ `) +
                           (question.courseName == null ? '기타/홈페이지 질문' : question.courseName) + 
-                          ` ㆍ \${question.questionEnterDate}`
+                          ` ㆍ \${question.questionEnterDate[0]}-\${question.questionEnterDate[1]}-\${question.questionEnterDate[2]}`
                         )
                       )
                       .append($(

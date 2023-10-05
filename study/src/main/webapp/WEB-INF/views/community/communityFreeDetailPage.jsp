@@ -456,7 +456,7 @@
               .append(
                 $('<div class="col-lg-12 comm__free__board__detail__etc__info" style="margin-top: 3%;"> /')
                   .append($('<span class="etc__info__name"> /').text(`\${reply.memberId}`))
-                  .append($('<span class="etc__info__datehit"> /').text(`ㆍ\${reply.replyEnterDate}`))
+                  .append($('<span class="etc__info__datehit"> /').text(`ㆍ\${reply.replyEnterDate[0]}-\${reply.replyEnterDate[1]}-\${reply.replyEnterDate[2]}`))
                   .append($('<button type="button" class="site-btn reply-btn reply-delete-btn">')
                     .html('<i class="bi bi-trash"></i>').val(`\${reply.memberId}`))
                   .append($('<button type="button" class="site-btn reply-btn reply-update-btn">')

@@ -41,12 +41,6 @@
           border-bottom: 2px solid #3188DB;
         }
 
-        .mycourse__course__title {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
         .product__item {
           box-shadow: 1px 2px 3px 0px #ddd;
           border-radius: 5px !important;
@@ -169,12 +163,6 @@
                           `style="background-image: url(&quot;client/img/product/` +
                           (course.courseImg != null ? `\${course.courseImg}` : 'basic.png') +
                           `&quot;);">`)
-                          .append($(`
-                            <ul class="product__hover">
-                              <li><a href="#"><img src="client/img/icon/cart.png" alt=""></a></li>
-                              <li><a href="#"><img src="client/img/icon/heart.png" alt=""></a></li>
-                            </ul>
-                          `))
                       )
                       .append(
                         $(`<div class="product__item__text"> /`)
@@ -245,6 +233,13 @@
         }
 
       </script>
+      <script>
+				let lgck = `${loginId}`;
+				if (lgck = null) {
+                alert("로그인을 해주세요")
+                location.href = "home.do"
+            }
+			</script>
     </body>
 
     </html>
