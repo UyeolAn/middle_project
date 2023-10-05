@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +55,9 @@
                     <!-- 회원이 수강하는 강의의 가격 합 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <span class="font-weight-bold"><i class="bi bi-coin fa-lg text-warning"></i> 수강 강의 가격 합</span>
-                      <p class="mb-0">${price}원</p>
+                      <p class="mb-0">
+                      	<fmt:formatNumber value="${price }" pattern="#,###" />원
+                      </p>
                     </li>
                     <!-- 회원이 쓴 리뷰 갯수 -->
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
@@ -174,7 +176,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="card mb-4 h-100">
+                  <div class="card mb-4" style="height:380px;">
                     <div class="card-body">
                       <span class="card-title font-weight-bold text-primary">${m.memberName}님의 수강 카테고리</span>
                       <div class="chart-pie pt-4" style="height: 100px; text-align: center;">
