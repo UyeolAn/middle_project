@@ -222,7 +222,7 @@
                     .append($('<span class="etc__info__left"> /')
                       .text(
                         (board.memberId == null ? `탈퇴 회원 ㆍ ` : `\${board.memberId} ㆍ `) +
-                        ` \${board.boardEnterDate}`
+                        ` \${board.boardEnterDate[0]}-\${board.boardEnterDate[1]}-\${board.boardEnterDate[2]}`
                       ))
                     .append($(
                       `<span class="etc__info__right">` +

@@ -71,11 +71,21 @@
       }
 
       .list__title {
-        width: 70%;
+        width: 100%;
         font-size: medium;
         font-weight: bold;
         float: left;
         overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .list__content {
+        width: 80%;
+        font-size: medium;
+        font-weight: bold;
+        float: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
       }
 
@@ -282,21 +292,15 @@
                 .append(
                   $('<div class="mycomm__qna__info" style="overflow: hidden;"> /')
                     .append(
-                      $('<span class="col-lg-9 list__title"> /')
+                      $('<span class="col-lg-12 list__title"> /')
                         .append($(
                           `<span class="` +
                           (question.questionSolve == 'not_solved' ? 'qna__not__solved' : 'qna__solved') + `">` +
                           (question.questionSolve == 'not_solved' ? '미해결' : '해결됨') +
                           `</span>\${question.questionTitle}` +
-                          `<span class="list__date">ㆍ\${question.questionEnterDate}</span>`
+                          `<span class="list__date">ㆍ\${question.questionEnterDate[0]}-\${question.questionEnterDate[1]}-\${question.questionEnterDate[2]}</span>`
                         ))
                     )
-                    .append($(
-                      `<span class="col-lg-3 list__etc" style="font-size: small; font-weight: 900; float: right;">` +
-                      `<i class="bi bi-eye"></i> \${question.questionHit} &nbsp;&nbsp;&nbsp;` +
-                      `<i class="bi bi-reply"></i> \${question.answerCount}` +
-                      `</span>`
-                    ))
                 ).on('click', function () {
                   let url = 'communityqnadetailpage.do?questionId=' + question.questionId;
                   location.replace(url);
@@ -332,8 +336,11 @@
               $('<div class="product__details__tab__content__item"> /')
                 .append(
                   $('<div class="mycomm__qna__info" style="overflow: hidden;"> /')
-                    .append($(`<span class="col-lg-10 list__title" style="font-weight: normal;">\${answer.answerContent}</span>`))
-                    .append($(`<span class="col-lg-2 list__etc" style="font-size: small; font-weight: 900; float: right;">\${answer.answerEnterDate}</span>`))
+                    .append($(`<span class="col-lg-10 list__content" style="font-weight: normal;">\${answer.answerContent}</span>`))
+                    .append($(
+                      `<span class="col-lg-2 list__etc" style="font-size: small; font-weight: 900; float: right;">` +
+                      `\${answer.answerEnterDate[0]}-\${answer.answerEnterDate[1]}-\${answer.answerEnterDate[2]}</span>`
+                    ))
                 )
                 .on('click', function () {
                   let url = 'communityqnadetailpage.do?questionId=' + answer.questionId;
@@ -371,19 +378,12 @@
                 .append(
                   $('<div class="mycomm__free__info" style="overflow: hidden;"> /')
                     .append(
-                      $('<span class="col-lg-8 list__title"> /')
+                      $('<span class="col-lg-12 list__title"> /')
                         .append($(
                           `<span>\${board.boardTitle}</span>` +
-                          `<span class="list__date">ㆍ\${board.boardEnterDate}</span>`
+                          `<span class="list__date">ㆍ\${board.boardEnterDate[0]}-\${board.boardEnterDate[1]}-\${board.boardEnterDate[2]}</span>`
                         ))
                     )
-                    .append($(
-                      `<span class="col-lg-3 list__etc" style="font-size: small; font-weight: 900; float: right;">` +
-                      `<i class="bi bi-eye"></i> \${board.boardHit} &nbsp;&nbsp;&nbsp;` +
-                      `<i class="bi bi-hand-thumbs-up"></i> \${board.boardLike} &nbsp;&nbsp;&nbsp;` +
-                      `<i class="bi bi-chat-dots"></i> \${board.replyCount}` +
-                      `</span>`
-                    ))
                 ).on('click', function () {
                   let url = 'communityfreedetailpage.do?boardId=' + board.boardId;
                   location.replace(url);
@@ -419,8 +419,11 @@
               $('<div class="product__details__tab__content__item"> /')
                 .append(
                   $('<div class="mycomm__free__info" style="overflow: hidden;"> /')
-                    .append($(`<span class="col-lg-10 list__title" style="font-weight: normal;">\${reply.replyContent}</span>`))
-                    .append($(`<span class="col-lg-2 list__etc" style="font-size: small; font-weight: 900; float: right;">\${reply.replyEnterDate}</span>`))
+                    .append($(`<span class="col-lg-10 list__content" style="font-weight: normal;">\${reply.replyContent}</span>`))
+                    .append($(
+                      `<span class="col-lg-2 list__etc" style="font-size: small; font-weight: 900; float: right;">` +
+                      `\${reply.replyEnterDate[0]}-\${reply.replyEnterDate[1]}-\${reply.replyEnterDate[2]}</span>`
+                    ))
                 )
                 .on('click', function () {
                   let url = 'communityfreedetailpage.do?boardId=' + reply.boardId;
