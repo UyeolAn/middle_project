@@ -135,10 +135,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="passwordsearch.do">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="login.do">Already have an account? Login!</a>
+                                        <a class="small" href="home.do" style="font-size: 50%;">HOME</a>
                                     </div>
                                 </div>
                             </div>
@@ -162,8 +159,8 @@
             <script type="text/javascript">
 
 
-                let idCheck = "NO"
-
+                let idCheck1 = "NO";
+                let idCheck2 = "";
                 //중복체크 버튼 클릭시 서블릿에 id체크
                 $('#doubleCheck').click(function () {
 
@@ -172,8 +169,8 @@
                         method: 'post',
                         data: { memberId: document.getElementById("memberId").value },
                         success: function (data) {
-                            var idCheck = JSON.parse(data);
-                            var str = idCheck.str;
+                            var idCheck1 = JSON.parse(data);
+                            var str = idCheck1.str;
                             console.log(str)
 
 
@@ -183,7 +180,8 @@
                                 document.getElementById("doubleCheck").value = "Yes";
                                 document.getElementById("doubleCheck").disabled = true;
                                 console.log(str);
-                                idCheck = "YES";
+                                idCheck1 = "YES";
+                                idCheck2 = document.getElementById("memberId").value
                             } else if (str == "NO") {
                                 alert("이미 사용중인 아이디입니다");
                                 document.getElementById("memberId").value = "";
@@ -202,11 +200,11 @@
                 //submit 버튼 작동시 중복체크 실행 여부 
                 //패스워드 불일치 여부 확인
                 function formCheck() {
-                    console.log(idCheck)
+                    console.log(idCheck1)
                     let passchck = document.getElementById(memberPassword);
                     let passchckrepeat = document.getElementById(checkPass);
                     console.log()
-                    if (idCheck == "No") {
+                    if (idCheck1 == "No") {
                         alert("아이디 중복체크를 하세요.");
                         return false;
                     }
@@ -217,11 +215,19 @@
                         passchck.focus();
                         return false;
                     }
+                    console.log(document.getElementById("memberId").value)
+                    if(idCheck2 != document.getElementById("memberId").value){
+                        alert("아이디 중복체크를 다시 해주세요");
+                        document.getElementById("doubleCheck").disabled = false;
+                        return false;
+                    }
 
                     $('#frm').submit();
                     alert("성공")
 
                 }
+
+            //중복체크후 해당 id유지중인지 확인
 
                 function regist(trigger) {
                     if (trigger = true) {

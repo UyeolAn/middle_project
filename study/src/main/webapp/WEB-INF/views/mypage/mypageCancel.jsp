@@ -40,7 +40,13 @@
 
                 location.replace('membercancel.do');
             }
-
+        </script>
+        <script>
+            let lgck = `${loginId}`;
+            if (lgck = null) {
+                alert("로그인을 해주세요")
+                location.href = "home.do"
+            }
         </script>
     </body>
 
