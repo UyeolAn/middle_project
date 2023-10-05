@@ -90,16 +90,20 @@
 														ID 저장 </label>
 												</div>
 											</div>
-											<button type="submit"
-												class="btn btn-primary btn-user btn-block" style="font-size: 15px;">로그인</button>
-												<!-- <a id="kakao-login-btn" href="javascript:kakaoLogin()">
-													<img src="img/kakao_login.png" width="100" margin = "0 auto"
-													  alt="카카오 로그인 버튼" />
-												  </a> -->
-												  <a id="kakao-login-btn" href="javascript:kakaoLogin()">
-													<img src="client/img/icon/kakao_login.png" width="421" height="44" margin = "0 auto"
-													  style="border-radius: 10rem;" alt="카카오 로그인 버튼" />
-												  </a>
+											<div class="form-group" style="display: flex; height: 45px;">
+
+												<button type="submit"
+													class="btn btn-primary btn-user btn-block">Login</button>
+													<!-- <a id="kakao-login-btn" href="javascript:kakaoLogin()">
+														<img src="img/kakao_login.png" width="100" margin = "0 auto"
+														  alt="카카오 로그인 버튼" />
+													  </a> -->
+													  <a id="kakao-login-btn" href="javascript:kakaoLogin()" class="btn btn-warning btn-user btn-block" style="margin: 0;">
+														<img src="client/img/icon/kakaologo.png" width="30" style="  vertical-align: middle; "
+														   alt="카카오 로그인 버튼" />
+														 
+													  </a>
+											</div>
 											<hr>
 										</form>
 										<div class="text-center">
@@ -274,16 +278,27 @@
 							}
 						})
 						.then(data => {
+							console.log(data);
 							if (data.isLoggedIn) {
 								//회원인 경우 홈 페이지로 이동
+								alert("로그인 되었습니다.");
 								window.location.href = 'home.do';
 							} else {
 								//회원이 아닌 경우 회원가입 페이지로 이동
-								window.location.href = 'kakaoregister.do';
+								if (data.block) {
+									alert("차단당한 회원입니다.");
+									window.location.href = 'home.do';
+								}
+								else {
+									alert("회원가입을 진행해주세요.");
+									window.location.href = 'kakaoregister.do';
+								}
+								// window.location.href = 'kakaoregister.do';
 							}
 						})
 						.catch(error => {
-							console.error('페이지 이동 실패: ' + error);
+							console.error('페이지 이동 실패');
+							console.log(error);
 						});
 					}
 

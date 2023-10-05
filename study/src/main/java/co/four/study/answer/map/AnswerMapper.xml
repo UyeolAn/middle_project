@@ -8,8 +8,10 @@
 	</select>
 	
 	<select id="answerSelectListbyQ" resultType="co.four.study.answer.service.AnswerVO">
-		SELECT	*
-		FROM	ANSWERS WHERE QUESTION_ID = #{questionId} ORDER BY ANSWER_ID
+		SELECT A.*
+        FROM ANSWERS A JOIN MEMBERS M ON A.MEMBER_ID = M.MEMBER_ID
+        WHERE A.QUESTION_ID = #{questionId}
+        AND M.MEMBER_AUTHOR = 'admin'
 	</select>
 	
 	<select id="answerSelect" resultType="co.four.study.answer.service.AnswerVO">

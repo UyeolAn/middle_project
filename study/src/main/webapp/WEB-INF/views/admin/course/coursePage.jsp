@@ -73,7 +73,7 @@
                             <img src="client/img/product/basic.png" style="width: 200px;">
                         </c:when>
                         <c:otherwise>
-                            <img src="client/img/product/${c.courseImg}" style="width: 200px;">
+                            <img src="client/img/product/${c.courseImg}" style="width: 300px;">
                         </c:otherwise>
                     </c:choose>
                   <h6 class="my-3 font-weight-bold">${c.courseName}</h6>
@@ -165,10 +165,10 @@
                       <p class="text-muted mb-0">
                         <c:choose>
                             <c:when test="${c.coursePrice eq 0}">
-                                FREE
+                                무료
                             </c:when>
                             <c:otherwise>
-                                ${c.coursePrice}원
+                                <fmt:formatNumber value="${c.coursePrice }" pattern="#,###" />원
                             </c:otherwise>
                         </c:choose>
                     </p>
