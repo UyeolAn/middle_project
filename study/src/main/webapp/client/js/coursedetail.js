@@ -243,6 +243,7 @@ function reviewInsert() {
 	    success: function (result) {
 			let message = result[0].message;
 			let count = result[0].count;
+			alert(count);
 			
 			if(message == 'success') {
 				makeReviwTags(result[1]); //작성한 리뷰 추가해서 보여주기
@@ -256,9 +257,6 @@ function reviewInsert() {
 			$('#reviewStars').val(5).prop("selected", true); //리뷰별점 5로 고정하기
 	    }
 	})//ajax end
-	console.log($('.col_7').length);
-	$('.review_count').text($('.col_7').length);
-	
 }
 
 /* 리뷰수정 클릭 */

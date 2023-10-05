@@ -482,7 +482,7 @@
             method: 'get',
             success: function (countJson) {
               totalCount = countJson.totalCount;
-              let totalPage = Math.ceil(totalCount / 5);
+              let totalPage = Math.ceil(totalCount / 10);
 
               let endPage = totalPage < Math.ceil(currentPage / 10) * 10 ? totalPage : Math.ceil(currentPage / 10) * 10;
               let startPage = Math.floor(currentPage / 10) * 10 + 1;
