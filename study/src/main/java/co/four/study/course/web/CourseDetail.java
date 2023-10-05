@@ -53,7 +53,7 @@ public class CourseDetail extends HttpServlet {
 		}
 		mvo.setMemberId(id);
 		mvo.setCourseId(courseId);
-		int result = mdao.memberCourseStatus(mvo);
+		int result = mdao.memberCourseStatus(mvo); //현재 접속회원의 수강여부..
 		if(result > 0) {
 			// 수강중이면
 			request.setAttribute("message", "possible");
@@ -79,7 +79,7 @@ public class CourseDetail extends HttpServlet {
 		
 		// 강의 상세정보 조회
 		vo.setCourseId(courseId);
-		vo = dao.courseReviewSelect(vo);
+		vo = dao.courseReviewSelect(vo); //리뷰포함한 강의 단건조회..
 		request.setAttribute("course", vo);
 		
 		// 서브강의 리스트 조회
@@ -93,15 +93,15 @@ public class CourseDetail extends HttpServlet {
 		// 강의별 리뷰 조회
 		String rcount = rdao.courseReviewCount(vo);
 		List<ReviewVO> reviews = rdao.courseReviewSortedList(vo);
-		request.setAttribute("rcount", Integer.valueOf(rcount));
-		request.setAttribute("reviews", reviews);
+		request.setAttribute("rcount", Integer.valueOf(rcount)); //리뷰개수..
+		request.setAttribute("reviews", reviews); //리뷰조회
 		
 		// 강의 페이지 사이드 메뉴 만들기
 		dao.makeSideMenu(request);
 		// 페이지 포워딩
 		String page = "course/courseDetail";
 		request.setAttribute("menu", "course");
-		request.setAttribute("detail", "detail");
+		request.setAttribute("detail", "detail"); //상세조회여부(헤더 메뉴경로에 사용)
 		ViewResolve.foward(request, response, page);
 	}
 

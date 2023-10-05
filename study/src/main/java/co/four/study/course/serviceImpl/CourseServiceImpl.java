@@ -185,5 +185,31 @@ public class CourseServiceImpl implements CourseService {
 		return map.subCategoriesBymain(vo);
 	}
 
+	@Override
+	public String maincateCoursePagingTag(int startPage, int nowPage, int cntPerPage, int endPage, int lastPage,
+			String mainCate) {
+		String tags = "";
+		tags += "<div class='col-lg-12 col-paging'>";
+		tags += "<div class='product__pagination p-result'>";
+		if(startPage != 1) {
+			tags += "<a class='active beforeBtn' href=\"courselist.do?mainCate=" + mainCate + "&nowPage=" + (startPage-1) + "&cntPerPage=" + cntPerPage + "\">&lt;</a>";
+		}
+		for(int i=startPage; i<=endPage; i++) {
+			if(nowPage == i) {
+				tags += "<a class='active'>" + i + "</a>";    
+			}
+			if(nowPage != i) {
+				tags += "<a href=\"courselist.do?mainCate=" + mainCate + "&nowPage="+ i + "&cntPerPage="+ cntPerPage +"\">" + i + "</a>";
+			}
+		}
+		if(endPage != lastPage) {
+			tags += "<a class='active afterBtn' href=\"courselist.do?mainCate=" + mainCate + "&nowPage=" + (endPage + 1) + "&cntPerPage=" + cntPerPage +"\">&gt;</a>";
+		}
+		tags += "</div>";    
+		tags += "</div>";    
+
+		return tags;
+	}
+
 
 }
