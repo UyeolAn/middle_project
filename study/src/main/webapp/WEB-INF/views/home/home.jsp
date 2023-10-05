@@ -224,7 +224,7 @@
 								<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix review course-col">
 									<a href="coursedetail.do?courseId=${r.courseId}">
 										<div class="product__item course-item">
-											<img src="client/img/product/${r.courseImg}" style="width: 330px; height: 200px;">
+											<img src="client/img/product/${r.courseImg}" style="width: 330px; height: 150px;">
 											<div class="product__item__text">
 												<h6>${r.courseName}</h6>
 												<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
@@ -255,7 +255,7 @@
 								<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot course-col">
 									<a href="coursedetail.do?courseId=${h.courseId}">
 										<div class="product__item course-item">
-											<img src="client/img/product/${h.courseImg}" style="width: 330px; height: 200px;">
+											<img src="client/img/product/${h.courseImg}" style="width: 330px; height: 150px;">
 											<div class="product__item__text">
 												<h6>${h.courseName}</h6>
 												<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
@@ -285,7 +285,7 @@
 								<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix it course-col">
 									<a href="coursedetail.do?courseId=${l.courseId}">
 										<div class="product__item course-item">
-											<img src="client/img/product/${l.courseImg}" style="width: 330px; height: 200px;">
+											<img src="client/img/product/${l.courseImg}" style="width: 330px; height: 150px;">
 											<div class="product__item__text">
 												<h6>${l.courseName}</h6>
 												<div class="d-flex justify-content-space-between small text-warning mb-2" class="stars">
@@ -320,11 +320,12 @@
 				<section class="latest">
 
 					<div class="row" style="justify-content: space-around;">
-						<div class="card col-lg-5 shadow" style="padding: 0; border: 0;">
+						<div class="card shadow" style="width:560px; padding: 0; border: 0;">
 							<div class="card-head" style="padding: 20px;">
 								<div style="display: flex; justify-content: space-between;">
 									<h4
 										style="font-family: 'NanumSquareRound'; text-align: left; line-height: 100%; display: inline-block; flex: 3;">
+										<img src="client/img/icon/qna.png" alt="아이콘" style="width: 30px; height: 30px;">
 										질문게시판</h4>
 									<a href="communityqnapage.do">
 										<h6 style="text-align: right; display: inline-block; line-height: 24px; flex: 1;">
@@ -332,7 +333,7 @@
 									</a>
 								</div>
 							</div>
-							<hr style="border: 3px solid salmon; margin: 0;">
+							<hr style="border: 2px solid salmon; margin: 0;">
 							<div class="card-body" style="padding: 20px;">
 								<c:forEach items="${qlist}" var="q">
 									<a href="communityqnadetailpage.do?questionId=${q.questionId}">
@@ -354,11 +355,12 @@
 								</c:forEach>
 							</div>
 						</div>
-						<div class="card col-lg-5 shadow" style="padding: 0; border: 0;">
+						<div class="card shadow" style="width:560px; padding: 0; border: 0;">
 							<div class="card-head" style="padding: 20px;">
 								<div style="display: flex; justify-content: space-between;">
 									<h4
 										style="font-family: 'NanumSquareRound'; text-align: left; line-height: 100%; display: inline-block; flex: 3;">
+										<img src="client/img/icon/free.png" alt="아이콘" style="width: 30px; height: 30px;">
 										자유게시판</h4>
 									<a href="communityfreepage.do">
 										<h6 style="text-align: right; display: inline-block; line-height: 24px; flex: 1;">
@@ -366,7 +368,7 @@
 									</a>
 								</div>
 							</div>
-							<hr style="border: 3px solid salmon; margin: 0;">
+							<hr style="border: 2px solid salmon; margin: 0;">
 							<div class="card-body" style="padding: 20px;">
 								<c:forEach items="${blist}" var="b">
 									<a href="communityfreedetailpage.do?boardId=${b.boardId}">
@@ -414,7 +416,16 @@
 					</div>
 				</footer>
 				<!-- Footer Section End -->
-
+					<%
+					String blockedUserMessage = (String) session.getAttribute("blockedUser");
+					if (blockedUserMessage != null) {
+					%>
+					    <script>
+					        alert("<%= blockedUserMessage %>");
+					    </script>
+					<%
+					}
+					%>
 
 				<script>
 					let loginMsg = `${loginmsg}`;
@@ -464,6 +475,8 @@
 					integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous">
 					</script>
 				<script>
+				
+				
 					Kakao.init('9c1eb3ec967ca14a10ddab8621bdddef');
 
 
