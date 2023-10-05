@@ -48,12 +48,7 @@
     				margin-bottom: 20px;
 					width: 200px;
 				}
-				.fontsize10{
-					font: size 10px;
-				}
-				.fontsize8{
-					font-size: 8px;
-				}
+				
 			</style>
 		</head>
 
@@ -108,14 +103,13 @@
 											<hr>
 										</form>
 										<div class="text-center">
-											<a class="small font-size10" href="passwordsearch.do" >Forgot
-												Password?</a>
+											<a class="small" href="passwordsearch.do" style="font-size: 50%;">PASSWORD RESET</a>
 										</div>
 										<div class="text-center">
-											<a class="small font-size10" href="register.do">Create an Account!</a>
+											<a class="small" href="register.do" style="font-size: 50%;">REGIST</a>
 										</div>
 										<div class="text-center">
-											<a class="small font-size8" href="home.do">Back Home!</a>
+											<a class="small" href="home.do" style="font-size: 50%;">HOME</a>
 										</div>
 
 									</div>
