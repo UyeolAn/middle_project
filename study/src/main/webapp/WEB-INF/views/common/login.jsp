@@ -79,7 +79,7 @@
 											<div class="form-group">
 												<input type="text" class="form-control form-control-user" id="memberId"
 													name="memberId" aria-describedby="INPUT ID" placeholder="Enter ID"
-													maxlength="20">
+													maxlength="20" spellcheck="false">
 											</div>
 											<div class="form-group">
 												<input type="password" class="form-control form-control-user"

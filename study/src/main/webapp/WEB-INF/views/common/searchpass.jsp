@@ -21,9 +21,9 @@
 				rel="stylesheet">
 
 			<!-- Custom styles for this template-->
-
+			<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
 			<link rel="stylesheet" href="admin/css/sb-admin-2.min.css">
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
 			<style>
 				.bg-gradient-primary {
 					display: flex;
@@ -32,6 +32,10 @@
 					min-height: 100dvh;
 					background-color: #f1f0ff;
 					background-image: none;
+				}
+
+				body {
+					font-family: 'NanumSquareRound' !important;
 				}
 			</style>
 		</head>
@@ -58,7 +62,7 @@
 									<div class="col-lg-6" style="margin: 0 auto; margin-top: 10%; margin-bottom: 10%;">
 										<div class="p-5">
 											<div class="text-center">
-												<h1 class="h4 text-gray-900 mb-4">RESET Password!</h1>
+												<h1 class="h4 text-gray-900 mb-4" style="font-weight: bold;">비밀번호 재설정</h1>
 											</div>
 											<c:if test="${empty searchId}">
 												<form class="user">
@@ -73,7 +77,7 @@
 															placeholder="Email Address" maxlength="70">
 													</div>
 													<button type="button" class="btn btn-primary btn-user btn-block"
-														id="IdEmailCheck" maxlength="50">password reset</button>
+														id="IdEmailCheck" maxlength="50">NEXT</button>
 												</form>
 											</c:if>
 
@@ -190,6 +194,7 @@
 
 
 			<!-- Bootstrap core JavaScript-->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 			<script src="admin/vendor/jquery/jquery.min.js"></script>
 			<script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
