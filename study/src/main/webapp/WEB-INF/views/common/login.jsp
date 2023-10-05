@@ -23,6 +23,7 @@
 			<!-- Custom styles for this template-->
 
 			<link rel="stylesheet" href="admin/css/sb-admin-2.min.css">
+			<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
 			<style>
 				.small {
 					color: #737373;
@@ -48,7 +49,10 @@
     				margin-bottom: 20px;
 					width: 200px;
 				}
-				
+				body{
+					font-family: 'NanumSquareRound' !important;
+				}
+
 			</style>
 		</head>
 
@@ -107,13 +111,13 @@
 											<hr>
 										</form>
 										<div class="text-center">
-											<a class="small" href="passwordsearch.do" style="font-size: 50%;">PASSWORD RESET</a>
+											<a class="small" href="passwordsearch.do" style="font-size: 50%; font-weight: bold;">비밀번호 재설정</a>
 										</div>
 										<div class="text-center">
-											<a class="small" href="register.do" style="font-size: 50%;">REGIST</a>
+											<a class="small" href="register.do" style="font-size: 50%; font-weight: bold;">회원가입</a>
 										</div>
 										<div class="text-center">
-											<a class="small" href="home.do" style="font-size: 50%;">HOME</a>
+											<a class="small" href="home.do" style="font-size: 50%; font-weight: bold;">메인 페이지</a>
 										</div>
 
 									</div>
@@ -140,7 +144,7 @@
 					//뒤로가기 방지
 					//로그인페이지에서 뒤로가기 방지
 
-					history.pushState(null, null, location.href);
+					history.pushState(null, null, location.href("login.do"));
 					window.onpopstate = function (event) {
 						history.go(1);
 					};

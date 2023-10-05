@@ -32,9 +32,7 @@ public class MemberCancel extends HttpServlet {
 		vo.setMemberId((String) session.getAttribute("loginId"));
 		dao.memberDelete(vo);
 		session.invalidate();
-		String page = "home/home.jsp";
-
-		ViewResolve.foward(request, response, page);
+		response.sendRedirect("home.do");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
