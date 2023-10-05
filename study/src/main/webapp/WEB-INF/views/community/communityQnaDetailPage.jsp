@@ -284,7 +284,7 @@
           }
         }
 
-        // 댓글수를 불러오는 함수
+        // 답변수를 불러오는 함수
         function loadAnswerCount() {
           $.ajax({
             url: 'answercount.do?questionId=' + questionId,
@@ -324,7 +324,7 @@
 
 
 
-        // 댓글 목록을 보여주는 함수
+        // 답변 목록을 보여주는 함수
         function showAnswers(answersJson) {
           $('div.comm__qna__answer').empty();
           answersJson.forEach(answer => {
@@ -337,6 +337,7 @@
                       $('<span class="etc__info__name"> /').text(`\${answer.memberId}`) :
                       $('<span class="etc__info__name" style="color: #fb7f7f"> /').text(`관리자`))
                   )
+                  .append($('<span class="etc__info__datehit"> /').text(`ㆍ\${answer.answerEnterDate[0]}-\${answer.answerEnterDate[1]}-\${answer.answerEnterDate[2]}`))
                   .append($(
                     `<button type="button" class="site-btn answer-btn ` +
                     (answer.answerSolve == 'not_solved' ? 'answer-solve-btn' : 'active-answer-solve-btn') +
@@ -360,7 +361,7 @@
           });
         }
 
-        // 댓글 페이지 바 생성 함수
+        // 답변 페이지 바 생성 함수
         function showPageList() {
           $.ajax({
             url: 'answercount.do?questionId=' + questionId,
@@ -431,7 +432,7 @@
           });
         }
 
-        // 댓글 등록 함수
+        // 답변 등록 함수
         function insertAnswer() {
           if (loginMemberId != 'null') {
             let answerContent = $('#answerInput').val();
@@ -459,7 +460,7 @@
           }
         }
 
-        // 댓글 수정/삭제 버튼 관련 함수
+        // 답변 수정/삭제 버튼 관련 함수
         function setAnswerUpdDelBtn() {
           $('.answer-update-btn').each(function () {
             if ($(this).val() != loginMemberId) {
@@ -521,7 +522,7 @@
           });
         }
 
-        // 해결여부 버튼 관련 함수
+        // 해결체크 버튼 관련 함수
         function setSolveBtn() {
           $('.answer-solve-btn').each(function () {
             if ('${question.memberId}' != loginMemberId) {
