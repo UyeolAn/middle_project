@@ -54,6 +54,9 @@
                       <ul class="dropdown">
                         <li><a href="#" onclick="logout()">LOGOUT</a></li>
                         <li><a href="mypageprofile.do">MY PAGE</a></li>
+                        <c:if test="${loginAuthor eq 'admin'}">
+                          <li><a href="adminhome.do">ADMIN PAGE</a></li>
+                        </c:if>
                       </ul>
                     </li>
                   </c:if>
@@ -158,8 +161,8 @@
         </script>
       <script>
         console.log($(`li[name=${menu}]`));
-        $(`li[name=${menu}]`).attr("class","active");
-        
+        $(`li[name=${menu}]`).attr("class", "active");
+
 
 
         Kakao.init('9c1eb3ec967ca14a10ddab8621bdddef');
@@ -230,7 +233,7 @@
 
 
       </script>
-  
+
     </body>
 
     </html>

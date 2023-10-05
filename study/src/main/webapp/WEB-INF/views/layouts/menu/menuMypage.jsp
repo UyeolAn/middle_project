@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
   <!DOCTYPE html>
   <html>
 
@@ -22,7 +21,7 @@
           <div class="accordion" id="accordionExample">
             <div class="card">
               <div class="card-heading">
-                <span data-toggle="collapse" data-target="#collapseOne" style = "font-weight: bold;">MY PAGE</span>
+                <span data-toggle="collapse" data-target="#collapseOne" style="font-weight: bold;">MY PAGE</span>
               </div>
               <div class="card-body">
                 <div class="shop__sidebar__categories">
@@ -32,7 +31,6 @@
                     <li><a href="mypagemycoursepage.do">수강 강좌</a></li>
                     <li><a href="mypagepaymentpage.do">구매내역</a></li>
                     <li><a href="mypagemycommunitypage.do">나의 커뮤니티</a></li>
-                    <hr>
                     <li><a href="mypagecancel.do" style="font-size: 8px;">회원탈퇴</a></li>
                   </ul>
                 </div>

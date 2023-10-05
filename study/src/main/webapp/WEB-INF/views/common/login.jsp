@@ -44,6 +44,16 @@
 					font-size: 2rem;
 					border-radius: 1rem;
 				}
+				.loginlogo{
+    				margin-bottom: 20px;
+					width: 200px;
+				}
+				.fontsize10{
+					font: size 10px;
+				}
+				.fontsize8{
+					font-size: 8px;
+				}
 			</style>
 		</head>
 
@@ -63,7 +73,8 @@
 
 									<div class="col-lg-6 col-md-6" style="margin: 0 auto;">
 										<div class="text-center">
-											<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+											<img src="client/img/logo.png"
+												alt="" class ="loginlogo">
 										</div>
 										<form class="user" action="memberchecklogin.do" method="post">
 											<div class="form-group">
@@ -85,7 +96,7 @@
 												</div>
 											</div>
 											<button type="submit"
-												class="btn btn-primary btn-user btn-block">Login</button>
+												class="btn btn-primary btn-user btn-block" style="font-size: 15px;">로그인</button>
 												<!-- <a id="kakao-login-btn" href="javascript:kakaoLogin()">
 													<img src="img/kakao_login.png" width="100" margin = "0 auto"
 													  alt="카카오 로그인 버튼" />
@@ -97,14 +108,14 @@
 											<hr>
 										</form>
 										<div class="text-center">
-											<a class="small" href="passwordsearch.do">Forgot
+											<a class="small font-size10" href="passwordsearch.do" >Forgot
 												Password?</a>
 										</div>
 										<div class="text-center">
-											<a class="small" href="register.do">Create an Account!</a>
+											<a class="small font-size10" href="register.do">Create an Account!</a>
 										</div>
 										<div class="text-center">
-											<a class="small" href="home.do">Back Home!</a>
+											<a class="small font-size8" href="home.do">Back Home!</a>
 										</div>
 
 									</div>
