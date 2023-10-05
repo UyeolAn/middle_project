@@ -64,19 +64,20 @@
                                         <h1 class="h4 text-gray-900 mb-4">회원가입!</h1>
                                     </div>
 
-                                    <form class="user" method="post" action="memberRegist.do" id="frm">
+                                    <form class="user" method="post" action="memberRegist.do" id="frm"
+                                        >
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0 ">
                                                 <input type="text" class="form-control form-control-user btmagin4"
                                                     id="memberId" name="memberId" placeholder="ID" maxlength="20"
-                                                    spellcheck="false">
+                                                    spellcheck="false" required>
                                                 <button type="button" class="small btn btn-primary btn-user"
                                                     id="doubleCheck" value="No" style="float: right;">중복확인</button>
                                             </div>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control form-control-user"
                                                     id="memberName" name="memberName" placeholder="Name" maxlength="10"
-                                                    spellcheck="false">
+                                                    spellcheck="false" required>
                                             </div>
                                         </div>
 
@@ -84,23 +85,24 @@
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <input type="password" class="form-control form-control-user"
                                                     name="memberPassword" id="memberPassword" placeholder="Password"
-                                                    maxlength="50">
+                                                    maxlength="50" required>
                                             </div>
                                             <div class="col-sm-6">
                                                 <input type="password" class="form-control form-control-user"
-                                                    id="checkPass" placeholder="Repeat Password" maxlength="50">
+                                                    id="checkPass" placeholder="Repeat Password" maxlength="50"
+                                                    required>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" name="memberEmail" placeholder="Email Address"
-                                                maxlength="70">
+                                                maxlength="70" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="number" class="form-control form-control-user"
                                                 id="exampleInputEmail" name="memberTel" placeholder="Phon Number"
-                                                maxlength="20">
+                                                maxlength="20" required>
                                         </div>
                                         <div class="form-group">
 
@@ -128,8 +130,7 @@
                                                 </div>
                                             </div>
 
-                                            <button type="button" class="btn btn-primary btn-user btn-block"
-                                                onclick="formCheck()">
+                                            <button type="button" class="btn btn-primary btn-user btn-block" onclick="return formCheck()">
                                                 Register Account
                                             </button>
                                     </form>
@@ -203,20 +204,17 @@
                     console.log(idCheck1)
                     let passchck = document.getElementById("memberPassword").value;
                     let passchckrepeat = document.getElementById("checkPass").value;
-                    console.log()
+                    console.log(passchck)
                     if (idCheck1 == "No") {
                         alert("아이디 중복체크를 하세요.");
                         return false;
-                    }
-                    if (passchck != passchckrepeat) {
+                    } else if (passchck != passchckrepeat) {
                         alert("입력한 패스워드가 일치하지 않습니다.");
                         passchckrepeat = '';
                         passchck = '';
                         passchck.focus();
                         return false;
-                    }
-                    console.log(document.getElementById("memberId").value)
-                    if(idCheck2 != document.getElementById("memberId").value){
+                    } else if (idCheck2 != document.getElementById("memberId").value) {
                         alert("아이디 중복체크를 다시 해주세요");
                         document.getElementById("doubleCheck").disabled = false;
                         return false;
@@ -227,7 +225,7 @@
 
                 }
 
-            //중복체크후 해당 id유지중인지 확인
+                //중복체크후 해당 id유지중인지 확인
 
                 function regist(trigger) {
                     if (trigger = true) {

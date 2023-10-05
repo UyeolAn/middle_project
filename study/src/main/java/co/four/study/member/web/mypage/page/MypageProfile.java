@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import co.four.study.board.service.BoardService;
 import co.four.study.board.service.BoardVO;
-import co.four.study.board.service.etcvo.BoardSearchVO;
 import co.four.study.board.serviceImpl.BoardServiceImpl;
 import co.four.study.common.ViewResolve;
 import co.four.study.course.service.CourseService;
@@ -25,12 +24,10 @@ import co.four.study.memberCourse.service.MemberCourseService;
 import co.four.study.memberCourse.service.MemberCourseVO;
 import co.four.study.memberCourse.serviceImpl.MemberCourseServiceImpl;
 import co.four.study.question.service.QuestionService;
-import co.four.study.question.service.QuestionVO;
 import co.four.study.question.serviceImpl.QuestionServiceImpl;
 import co.four.study.reply.service.ReplyService;
 import co.four.study.reply.serviceImpl.ReplyServiceImpl;
 import co.four.study.review.service.ReviewService;
-import co.four.study.review.service.ReviewVO;
 import co.four.study.review.serviceImpl.ReviewServiceImpl;
 
 @WebServlet("/mypageprofile.do")
@@ -69,8 +66,7 @@ public class MypageProfile extends HttpServlet {
 
 			mvo.setMemberId((String) session.getAttribute("loginId"));
 			mvo = mdao.memberSelect(mvo);
-
-			// System.out.println(mvo.getMemberId());
+						// System.out.println(mvo.getMemberId());
 			// 게시물 수 카운트
 			int cnt = 0;
 			bvo.setMemberId(mvo.getMemberId());
