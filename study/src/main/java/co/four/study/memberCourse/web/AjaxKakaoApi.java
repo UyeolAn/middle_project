@@ -36,9 +36,9 @@ public class AjaxKakaoApi extends HttpServlet {
 			connection.setDoOutput(true); //연결을 통해 서버에게 전해줄것이 있는 지 여부..(true:내보낼것이 있다)
 			String param = "cid=TC0ONETIME&partner_order_id=323&partner_user_id=jyj&"
 					+ "item_name=인터넷강의&quantity=1&total_amount=100&vat_amount=10&tax_free_amount=0&"
-					+ "approval_url=http://localhost/study/membercoursekakaopay.do?memberId=" + memberId + "&"
-					+ "fail_url=http://localhost/study/bucketlist.do?memberId="+ memberId +"&"
-					+ "cancel_url=http://localhost/study/bucketlist.do?memberId="+ memberId;
+					+ "approval_url=http://192.168.0.4/study/membercoursekakaopay.do?memberId=" + memberId + "&"
+					+ "fail_url=http://192.168.0.4/study/bucketlist.do?memberId="+ memberId +"&"
+					+ "cancel_url=http://192.168.0.4/study/bucketlist.do?memberId="+ memberId;
 			OutputStream outputStream = connection.getOutputStream();
 			DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 			dataOutputStream.writeBytes(param);

@@ -117,9 +117,9 @@ public class MemberCourseKakaoPay extends HttpServlet {
 		}
 		
 		if(messageMap.get("message") == "success" || messageMap.get("pbmessage") == "success"){
-			response.sendRedirect("mypagemycoursepage.do"); //결제 성공하면 마이페이지 수강화면으로.
+			response.sendRedirect("http://192.168.0.4/study/mypagemycoursepage.do"); //결제 성공하면 마이페이지 수강화면으로.
 		} else {
-			response.sendRedirect("bucketlist.do");
+			response.sendRedirect("http://192.168.0.4/study/bucketlist.do");
 		}
 		
 		System.out.println(messageMap);
