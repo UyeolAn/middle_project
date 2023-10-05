@@ -29,18 +29,22 @@ public class CheckLoginStatus extends HttpServlet {
 		// 세션에서 로그인 정보를 확인
         HttpSession session = request.getSession();
         boolean isLoggedIn = (session.getAttribute("loginId") != null);
-
+        boolean block =  (boolean)session.getAttribute("block");
+        System.out.println(block);
 
         // JSON 응답 생성
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Boolean> responseData = new HashMap<>();
         responseData.put("isLoggedIn", isLoggedIn);
+        responseData.put("block", block);
         String json = objectMapper.writeValueAsString(responseData);
+
 
         // JSON 응답
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
+
 	}
 
 
