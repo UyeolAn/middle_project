@@ -21,7 +21,8 @@
 
             <!-- Custom styles for this template-->
             <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+            <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
+
             <style>
                 .bg-gradient-primary {
                     display: flex;
@@ -47,6 +48,11 @@
                     -webkit-appearance: none;
                     margin: 0;
                 }
+
+                body {
+                    font-family: 'NanumSquareRound' !important;
+                    font-weight: bold !important;
+                }
             </style>
 
         <body class="bg-gradient-primary">
@@ -61,11 +67,10 @@
                             <div class="col-lg-7">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">회원가입!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4" style="font-weight: bold;">회원가입</h1>
                                     </div>
 
-                                    <form class="user" method="post" action="memberRegist.do" id="frm"
-                                        >
+                                    <form class="user" method="post" action="memberRegist.do" id="frm">
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0 ">
                                                 <input type="text" class="form-control form-control-user btmagin4"
@@ -130,13 +135,14 @@
                                                 </div>
                                             </div>
 
-                                            <button type="button" class="btn btn-primary btn-user btn-block" onclick="return formCheck()">
+                                            <button type="button" class="btn btn-primary btn-user btn-block"
+                                                onclick="return formCheck()" style="font-weight: bold;">
                                                 Register Account
                                             </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="home.do" style="font-size: 50%;">HOME</a>
+                                        <a class="small" href="home.do" style="font-size: 90%; font-weight: bold;">HOME</a>
                                     </div>
                                 </div>
                             </div>
@@ -147,6 +153,7 @@
             </div>
 
             <!-- Bootstrap core JavaScript-->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
             <script src="admin/vendor/jquery/jquery.min.js"></script>
             <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
             <script src="client/js/jquery-3.3.1.min.js"></script>
