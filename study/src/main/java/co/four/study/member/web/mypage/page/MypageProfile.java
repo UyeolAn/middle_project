@@ -70,7 +70,7 @@ public class MypageProfile extends HttpServlet {
 			// 게시물 수 카운트
 			int cnt = 0;
 			bvo.setMemberId(mvo.getMemberId());
-			cnt = bdao.countBoardMember(bvo) + qdao.countQuestion(mvo) + rvdao.countReview(mvo);
+			cnt = bdao.countBoardMember(bvo);
 
 			// 댓글 수
 			int rec = rpdao.countReply(mvo);
