@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.four.study.common.ViewResolve;
+import co.four.study.course.service.CourseService;
+import co.four.study.course.service.CourseVO;
+import co.four.study.course.serviceImpl.CourseServiceImpl;
 import co.four.study.question.service.QuestionService;
 import co.four.study.question.service.QuestionVO;
 import co.four.study.question.serviceImpl.QuestionServiceImpl;
@@ -23,15 +26,23 @@ public class CommunityQnaDetailPage extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		QuestionService dao = new QuestionServiceImpl();
+		QuestionService questionDao = new QuestionServiceImpl();
+		CourseService courseDao = new CourseServiceImpl();
 		
 		int questionId = Integer.parseInt(request.getParameter("questionId"));
 		
-		QuestionVO dto = new QuestionVO();
-		dto.setQuestionId(questionId);
+		QuestionVO questionDto = new QuestionVO();
+		questionDto.setQuestionId(questionId);
 		
-		QuestionVO selectedVO = dao.questionSelect(dto);
+		QuestionVO selectedVO = questionDao.questionSelect(questionDto);
+
 		if (selectedVO != null) {
+			CourseVO courseDto = new CourseVO();
+			courseDto.setCourseId(selectedVO.getCourseId());
+			
+			CourseVO cnameVO = courseDao.courseSelect(courseDto);
+			selectedVO.setCourseName(cnameVO.getCourseName());
+			
 			request.setAttribute("menu", "community");
 			request.setAttribute("cid", "question");
 			request.setAttribute("question", selectedVO);

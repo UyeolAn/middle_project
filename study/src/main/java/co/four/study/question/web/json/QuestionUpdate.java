@@ -38,8 +38,15 @@ public class QuestionUpdate extends HttpServlet {
 		updateVO.setQuestionTitle(multi.getParameter("questionTitle"));
 		updateVO.setQuestionContent(multi.getParameter("questionContent"));
 		
-		String realImg = multi.getFilesystemName("questionImg"); //저장되는 파일명
-		updateVO.setQuestionImg(realImg); //이미지 파일 명을 저장한다.
+		String updateImg = multi.getFilesystemName("questionImg"); //수정되는 파일명
+		String currentImg = multi.getParameter("currentImg"); //현재 파일명
+		if (updateImg != null) {
+			updateVO.setQuestionImg(updateImg); //수정 이미지가 있을 경우
+		} else if (currentImg != null) {
+			updateVO.setQuestionImg(currentImg); //수정 이미지가 없을 경우
+		} else {
+			updateVO.setQuestionImg(null); //이미지 삭제를 요청한 경우
+		}
 
 		System.out.println(updateVO);
 		int numUpd = dao.questionUpdate(updateVO);

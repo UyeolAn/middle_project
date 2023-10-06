@@ -39,8 +39,15 @@ public class BoardUpdate extends HttpServlet {
 		updateVO.setBoardTitle(multi.getParameter("boardTitle"));
 		updateVO.setBoardContent(multi.getParameter("boardContent"));
 		
-		String realImg = multi.getFilesystemName("boardImg"); //저장되는 파일명
-		updateVO.setBoardImg(realImg); //이미지 파일 명을 저장한다.
+		String updateImg = multi.getFilesystemName("boardImg"); //수정되는 파일명
+		String currentImg = multi.getParameter("currentImg"); //현재 파일명
+		if (updateImg != null) {
+			updateVO.setBoardImg(updateImg); //수정 이미지가 있을 경우
+		} else if (currentImg != null) {
+			updateVO.setBoardImg(currentImg); //수정 이미지가 없을 경우
+		} else {
+			updateVO.setBoardImg(null); //이미지 삭제를 요청한 경우
+		}
 		
 		int numUpd = dao.boardUpdate(updateVO);
 		if (numUpd != 0) {

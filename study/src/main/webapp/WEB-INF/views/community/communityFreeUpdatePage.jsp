@@ -77,6 +77,7 @@
               </div>
             </div>
             <input type="hidden" id="boardId" name="boardId" value="${board.boardId}">
+            <input type="hidden" id="currentImg" name="currentImg" value="${board.boardImg}">
           </div>
         </form>
       </div>
@@ -94,7 +95,7 @@
       function setDeteleFileBtn() {
         $('.delete__file__btn').on('click', function () {
           alert('이미지를 삭제하였습니다');
-          $('#boardImg').val('');
+          $('#currentImg').val('');
         });
       }
     </script>

@@ -155,7 +155,7 @@
             <br>
             <div class="col-lg-12 comm__free__board__detail__etc__info">
               <c:if test="${empty board.memberId}">
-                <span class="etc__info__name" id="memberId">탈퇴한 회원</span>
+                <span class="etc__info__name" id="memberId">탈퇴 회원</span>
               </c:if>
               <c:if test="${not empty board.memberId}">
                 <span class="etc__info__name" id="memberId">${board.memberId}</span>
@@ -455,7 +455,7 @@
             $('div.comm__free__reply')
               .append(
                 $('<div class="col-lg-12 comm__free__board__detail__etc__info" style="margin-top: 3%;"> /')
-                  .append($('<span class="etc__info__name"> /').text(`\${reply.memberId}`))
+                  .append($('<span class="etc__info__name"> /').text((reply.memberId == null ? `탈퇴 회원` : `\${reply.memberId}`)))
                   .append($('<span class="etc__info__datehit"> /').text(`ㆍ\${reply.replyEnterDate[0]}-\${reply.replyEnterDate[1]}-\${reply.replyEnterDate[2]}`))
                   .append($('<button type="button" class="site-btn reply-btn reply-delete-btn">')
                     .html('<i class="bi bi-trash"></i>').val(`\${reply.memberId}`))
