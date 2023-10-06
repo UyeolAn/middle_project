@@ -114,7 +114,7 @@
 								<div class="col mr-2">
 									<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
 										작성한 댓글 수</div>
-									<div class="h5 mb-0 font-weight-bold text-gray-800">${countrec } </div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800">${countrec}개</div>
 								</div>
 							</div>
 						</div>
