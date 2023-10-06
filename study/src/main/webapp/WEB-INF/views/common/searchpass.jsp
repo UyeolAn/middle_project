@@ -12,7 +12,7 @@
 			<meta name="description" content="">
 			<meta name="author" content="">
 
-			<title>forgot pass</title>
+			<title>TOCO - RESETPASS</title>
 
 			<!-- Custom fonts for this template-->
 			<link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -147,7 +147,7 @@
 						},
 						success: function (data) {
 
-
+data.
 							alert("변경할 비밀번호를 입력해 주세요")
 							location.replace("passwordsearch.do")
 
