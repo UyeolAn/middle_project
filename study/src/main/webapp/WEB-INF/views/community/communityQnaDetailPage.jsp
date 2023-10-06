@@ -333,7 +333,7 @@
                 $('<div class="col-lg-12 comm__qna__question__detail__etc__info" style="margin-top: 3%;"> /')
                   .append()
                   .append(
-                    (answer.memberId == null ? `탈퇴 회원` :
+                    (answer.memberId == null ? $('<span class="etc__info__name"> /').text(`탈퇴 회원`) :
                       (answer.memberAuthor == 'client' ?
                         $('<span class="etc__info__name"> /').text(`\${answer.memberId}`) :
                         $('<span class="etc__info__name" style="color: #fb7f7f"> /').text(`관리자`)))
