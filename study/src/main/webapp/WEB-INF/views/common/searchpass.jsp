@@ -23,7 +23,7 @@
 			<!-- Custom styles for this template-->
 			<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
 			<link rel="stylesheet" href="admin/css/sb-admin-2.min.css">
-
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 			<style>
 				.bg-gradient-primary {
 					display: flex;
@@ -62,7 +62,8 @@
 									<div class="col-lg-6" style="margin: 0 auto; margin-top: 10%; margin-bottom: 10%;">
 										<div class="p-5">
 											<div class="text-center">
-												<h1 class="h4 text-gray-900 mb-4" style="font-weight: bold;">비밀번호 재설정</h1>
+												<h1 class="h4 text-gray-900 mb-4" style="font-weight: bold;">비밀번호 재설정
+												</h1>
 											</div>
 											<c:if test="${empty searchId}">
 												<form class="user">
@@ -147,7 +148,7 @@
 						success: function (data) {
 
 
-							alert("next")
+							alert("변경할 비밀번호를 입력해 주세요")
 							location.replace("passwordsearch.do")
 
 
@@ -194,7 +195,7 @@
 
 
 			<!-- Bootstrap core JavaScript-->
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+			
 			<script src="admin/vendor/jquery/jquery.min.js"></script>
 			<script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
