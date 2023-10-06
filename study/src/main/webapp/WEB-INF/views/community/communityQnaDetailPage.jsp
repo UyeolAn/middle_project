@@ -156,7 +156,7 @@
             <br>
             <div class="col-lg-12 comm__qna__question__detail__etc__info">
               <c:if test="${empty question.memberId}">
-                <span class="etc__info__name" id="memberId">탈퇴한 회원</span>
+                <span class="etc__info__name" id="memberId">탈퇴 회원</span>
               </c:if>
               <c:if test="${not empty question.memberId}">
                 <span class="etc__info__name" id="memberId">${question.memberId}</span>
@@ -333,9 +333,10 @@
                 $('<div class="col-lg-12 comm__qna__question__detail__etc__info" style="margin-top: 3%;"> /')
                   .append()
                   .append(
-                    (answer.memberAuthor == 'client' ?
-                      $('<span class="etc__info__name"> /').text(`\${answer.memberId}`) :
-                      $('<span class="etc__info__name" style="color: #fb7f7f"> /').text(`관리자`))
+                    (answer.memberId == null ? `탈퇴 회원` :
+                      (answer.memberAuthor == 'client' ?
+                        $('<span class="etc__info__name"> /').text(`\${answer.memberId}`) :
+                        $('<span class="etc__info__name" style="color: #fb7f7f"> /').text(`관리자`)))
                   )
                   .append($('<span class="etc__info__datehit"> /').text(`ㆍ\${answer.answerEnterDate[0]}-\${answer.answerEnterDate[1]}-\${answer.answerEnterDate[2]}`))
                   .append($(
