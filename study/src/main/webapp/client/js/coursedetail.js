@@ -243,7 +243,6 @@ function reviewInsert() {
 	    success: function (result) {
 			let message = result[0].message;
 			let count = result[0].count;
-			alert(count);
 			
 			if(message == 'success') {
 				makeReviwTags(result[1]); //작성한 리뷰 추가해서 보여주기
