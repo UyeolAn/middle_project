@@ -38,10 +38,14 @@ public class CommunityQnaDetailPage extends HttpServlet {
 
 		if (selectedVO != null) {
 			CourseVO courseDto = new CourseVO();
-			courseDto.setCourseId(selectedVO.getCourseId());
-			
-			CourseVO cnameVO = courseDao.courseSelect(courseDto);
-			selectedVO.setCourseName(cnameVO.getCourseName());
+			if (selectedVO.getCourseId() == null) {
+				selectedVO.setCourseName("기타/홈페이지 질문");
+			} else {
+				courseDto.setCourseId(selectedVO.getCourseId());
+				
+				CourseVO cnameVO = courseDao.courseSelect(courseDto);
+				selectedVO.setCourseName(cnameVO.getCourseName());
+			}
 			
 			request.setAttribute("menu", "community");
 			request.setAttribute("cid", "question");
